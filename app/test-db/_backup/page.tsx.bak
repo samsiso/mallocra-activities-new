@@ -1,0 +1,70 @@
+import { supabase } from "@/lib/supabase"
+
+export default async function TestDatabasePage() {
+  console.log("🔍 Testing Supabase client connection...")
+
+  try {
+    // Test Supabase client connection
+    const { data: activities, error } = await supabase
+      .from("activities")
+      .select("id, title, category, status")
+      .eq("status", "active")
+      .limit(5)
+
+    console.log("🗄️ Supabase result:", { data: activities, error })
+
+    const result = {
+      isSuccess: !error,
+      message: error ? error.message : "Activities retrieved successfully",
+      data: activities || []
+    }
+
+    return (
+      <div className="container mx-auto p-8">
+        <h1 className="mb-6 text-3xl font-bold">Supabase Client Test</h1>
+
+        <div className="rounded-lg bg-gray-100 p-4">
+          <h2 className="mb-4 text-xl font-semibold">Result:</h2>
+          <pre className="overflow-auto rounded bg-black p-4 text-green-400">
+            {JSON.stringify(result, null, 2)}
+          </pre>
+        </div>
+
+        {result.isSuccess && (
+          <div className="mt-6">
+            <h2 className="mb-4 text-xl font-semibold">
+              Found {result.data.length} activities:
+            </h2>
+            <div className="grid gap-4">
+              {result.data.map((activity: any) => (
+                <div key={activity.id} className="rounded border p-4">
+                  <h3 className="font-bold">{activity.title}</h3>
+                  <p className="text-gray-600">{activity.category}</p>
+                  <p className="text-sm">Status: {activity.status}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!result.isSuccess && (
+          <div className="mt-6 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700">
+            <strong>Error:</strong> {result.message}
+          </div>
+        )}
+      </div>
+    )
+  } catch (error: any) {
+    console.error("🚨 Test error:", error)
+
+    return (
+      <div className="container mx-auto p-8">
+        <h1 className="mb-6 text-3xl font-bold">Supabase Client Test</h1>
+
+        <div className="mt-6 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700">
+          <strong>Unexpected Error:</strong> {error.message || "Unknown error"}
+        </div>
+      </div>
+    )
+  }
+}

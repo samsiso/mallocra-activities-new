@@ -1,0 +1,693 @@
+// Force dynamic rendering to avoid build-time Supabase dependency
+export const dynamic = "force-dynamic"
+export const runtime = "nodejs"
+
+/*
+<ai_context>
+Enhanced Activity Detail Page - Complete Redesign with Dark Glassmorphism Theme
+Features condensed layout, improved visual hierarchy, and brand-consistent design.
+Optimized for conversion with prominent booking flow and clear information architecture.
+Phase 1: Theme & Layout Transformation - Modern dark theme with rose/amber gradients.
+Now includes header navigation and enhanced back navigation.
+</ai_context>
+*/
+
+import { Suspense } from "react"
+import { notFound } from "next/navigation"
+import ActivityImageGallery from "./_components/activity-image-gallery"
+import ActivityDescription from "./_components/activity-description"
+import BookingWidget from "./_components/booking-widget"
+import ReviewsSection from "./_components/reviews-section"
+import SimilarActivities from "./_components/similar-activities"
+import ActivityLocationMap from "./_components/activity-location-map"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  MapPin,
+  Clock,
+  Users,
+  Star,
+  Calendar,
+  CheckCircle,
+  ArrowLeft,
+  Heart,
+  Share2,
+  Sparkles,
+  Camera,
+  Play,
+  Navigation,
+  Award,
+  Shield,
+  Globe,
+  Menu
+} from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+
+// Import database actions
+import {
+  getActivityBySlugSupabaseAction as getActivityBySlugAction,
+  ActivityWithDetails
+} from "@/actions/db/activities-actions"
+
+// Import Footer
+import Footer from "@/components/footer"
+
+// Activity detail page props
+interface ActivityDetailPageProps {
+  params: Promise<{ id: string }>
+}
+
+// Enhanced glassmorphism card component
+function GlassmorphismCard({
+  children,
+  className = ""
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      className={`rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-sm ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
+
+// Header component for activity detail page
+function ActivityDetailHeader() {
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/20 backdrop-blur-md">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="rounded-lg bg-gradient-to-r from-yellow-400 to-amber-500 p-2">
+              <Sparkles className="size-5 text-black" />
+            </div>
+            <span className="text-xl font-bold text-white">
+              Mallorca Activities
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex md:items-center md:space-x-8">
+            <Link
+              href="/"
+              className="text-sm font-medium text-white/70 transition-colors hover:text-yellow-400"
+            >
+              Home
+            </Link>
+            <Link
+              href="/activities"
+              className="text-sm font-medium text-white/70 transition-colors hover:text-yellow-400"
+            >
+              Activities
+            </Link>
+            <Link
+              href="/about"
+              className="text-sm font-medium text-white/70 transition-colors hover:text-yellow-400"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className="text-sm font-medium text-white/70 transition-colors hover:text-yellow-400"
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex md:items-center md:space-x-4">
+            <Button
+              variant="ghost"
+              className="text-white hover:bg-white/10 hover:text-yellow-400"
+            >
+              Sign In
+            </Button>
+            <Button className="bg-gradient-to-r from-yellow-400 to-amber-500 font-medium text-black hover:from-yellow-500 hover:to-amber-600">
+              Sign Up
+            </Button>
+          </div>
+
+          {/* Mobile Menu */}
+          <Sheet>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon" className="text-white">
+                <Menu className="size-5" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="w-full border-white/10 bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800 sm:max-w-sm"
+            >
+              <nav className="mt-8 flex flex-col space-y-6">
+                <Link
+                  href="/"
+                  className="text-lg font-medium text-white/80 transition-colors hover:text-yellow-400"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/activities"
+                  className="text-lg font-medium text-white/80 transition-colors hover:text-yellow-400"
+                >
+                  Activities
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-lg font-medium text-white/80 transition-colors hover:text-yellow-400"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-lg font-medium text-white/80 transition-colors hover:text-yellow-400"
+                >
+                  Contact
+                </Link>
+
+                <div className="mt-8 flex flex-col space-y-4">
+                  <Button
+                    variant="ghost"
+                    className="text-white hover:bg-white/10"
+                  >
+                    Sign In
+                  </Button>
+                  <Button className="bg-gradient-to-r from-yellow-400 to-amber-500 font-medium text-black">
+                    Sign Up
+                  </Button>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
+  )
+}
+
+// Quick info bar component
+function QuickInfoBar({ activity }: { activity: ActivityWithDetails }) {
+  const adultPricing = activity.pricing?.find(p => p.priceType === "adult")
+  const price = adultPricing ? parseFloat(adultPricing.basePrice) : 0
+
+  return (
+    <div className="relative z-40 border-b border-white/10 bg-black/20 backdrop-blur-sm">
+      <div className="mx-auto max-w-7xl p-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 text-sm">
+          <div className="flex flex-wrap items-center gap-6">
+            <div className="flex items-center gap-2 text-white">
+              <span className="text-2xl font-bold text-yellow-400">
+                €{price}
+              </span>
+              <span className="text-white/70">per person</span>
+            </div>
+            <div className="flex items-center gap-1 text-white/80">
+              <Clock className="size-4" />
+              <span>{Math.floor(activity.durationMinutes / 60)}h duration</span>
+            </div>
+            <div className="flex items-center gap-1 text-white/80">
+              <Star className="size-4 fill-yellow-400 text-yellow-400" />
+              <span className="font-medium text-white">
+                {activity.avgRating}
+              </span>
+              <span className="text-white/60">
+                ({activity.totalReviews} reviews)
+              </span>
+            </div>
+            <div className="flex items-center gap-1 text-white/80">
+              <Users className="size-4" />
+              <span>Max {activity.maxParticipants} people</span>
+            </div>
+            {activity.availableToday && (
+              <Badge className="border-green-500/30 bg-green-500/20 text-green-400">
+                <Calendar className="mr-1 size-3" />
+                Available Today
+              </Badge>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-white/30 bg-white/10 text-white hover:bg-white/20"
+            >
+              <Heart className="mr-1 size-4" />
+              Wishlist
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-white/30 bg-white/10 text-white hover:bg-white/20"
+            >
+              <Share2 className="mr-1 size-4" />
+              Share
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default async function ActivityDetailPage({
+  params
+}: ActivityDetailPageProps) {
+  const { id: slug } = await params
+
+  // Fetch activity from database using slug
+  const result = await getActivityBySlugAction(slug)
+
+  if (!result.isSuccess || !result.data) {
+    notFound()
+  }
+
+  const activity = result.data
+
+  // Get primary image for hero
+  const primaryImage =
+    activity.images?.find(img => img.isPrimary) || activity.images?.[0]
+  const heroImageUrl =
+    primaryImage?.imageUrl ||
+    "https://images.unsplash.com/photo-1556469559-7c67fdc47b81?w=1200&h=800&fit=crop&crop=center&q=85"
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800">
+      {/* HEADER NAVIGATION */}
+      <ActivityDetailHeader />
+
+      <Suspense fallback={<ActivityDetailSkeleton />}>
+        {/* HERO SECTION - Redesigned with Better Visual Hierarchy */}
+        <section className="relative h-[70vh] overflow-hidden">
+          {/* Hero Background Image */}
+          <Image
+            src={heroImageUrl}
+            alt={primaryImage?.altText || activity.title}
+            fill
+            className="object-cover"
+            priority
+          />
+
+          {/* Enhanced Gradient Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
+
+          {/* Enhanced Breadcrumb Navigation */}
+          <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
+            <Link
+              href="/activities"
+              className="flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20"
+            >
+              <ArrowLeft className="size-4" />
+              <span className="font-medium">Back to Activities</span>
+            </Link>
+            <span className="text-white/60">•</span>
+            <span className="font-medium text-white/80">
+              {activity.category
+                .replace("_", " ")
+                .replace(/\b\w/g, l => l.toUpperCase())}
+            </span>
+          </div>
+
+          {/* Centered Hero Content - Much Better Layout */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="mx-auto max-w-5xl px-6 text-center">
+              {/* Category Badge */}
+              <div className="mb-6 flex justify-center">
+                <Badge className="border-white/30 bg-white/20 px-4 py-2 text-sm text-white backdrop-blur-sm">
+                  {activity.category
+                    .replace("_", " ")
+                    .replace(/\b\w/g, l => l.toUpperCase())}
+                </Badge>
+                {activity.featured && (
+                  <Badge className="ml-2 bg-gradient-to-r from-yellow-400 to-amber-500 px-4 py-2 font-bold text-black">
+                    <Sparkles className="mr-1 size-3" />
+                    Featured
+                  </Badge>
+                )}
+              </div>
+
+              {/* Main Title - Centered and Prominent */}
+              <h1 className="mb-6 text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
+                {activity.title}
+              </h1>
+
+              {/* Enhanced Description */}
+              <p className="mx-auto mb-8 max-w-3xl text-xl leading-relaxed text-white/90 md:text-2xl">
+                {activity.shortDescription}
+              </p>
+
+              {/* Key Info Row */}
+              <div className="flex flex-wrap items-center justify-center gap-6 text-lg text-white/90">
+                <div className="flex items-center gap-2">
+                  <MapPin className="size-5" />
+                  <span>{activity.location}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="size-5" />
+                  <span>
+                    {Math.floor(activity.durationMinutes / 60)}h duration
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="size-5" />
+                  <span>Max {activity.maxParticipants} people</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Star className="size-5 fill-yellow-400 text-yellow-400" />
+                  <span>
+                    {activity.avgRating} ({activity.totalReviews} reviews)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Photo Count Indicator */}
+          <div className="absolute bottom-6 right-6">
+            <div className="flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-white backdrop-blur-sm">
+              <Camera className="size-4" />
+              <span className="text-sm font-medium">
+                {activity.images?.length || 0} photos
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* QUICK INFO BAR */}
+        <QuickInfoBar activity={activity} />
+
+        {/* DEDICATED IMAGE GALLERY SECTION */}
+        <section className="border-b border-white/10 bg-black/10 py-8">
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white">Photo Gallery</h2>
+              <div className="flex items-center gap-2 text-white/70">
+                <Camera className="size-4" />
+                <span className="text-sm">
+                  {activity.images?.length || 0} photos
+                </span>
+              </div>
+            </div>
+            <div className="overflow-hidden rounded-xl">
+              <ActivityImageGallery activity={activity} />
+            </div>
+          </div>
+        </section>
+
+        {/* MAIN CONTENT GRID */}
+        <main className="mx-auto max-w-7xl px-4 py-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+            {/* LEFT COLUMN - Main Content (60%) */}
+            <div className="space-y-8 lg:col-span-2">
+              {/* What's Included Section */}
+              <GlassmorphismCard>
+                <h2 className="mb-6 text-2xl font-bold text-white">
+                  What's Included
+                </h2>
+                <div className="grid gap-6 md:grid-cols-2">
+                  {/* Included Items */}
+                  <div>
+                    <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-green-400">
+                      <CheckCircle className="size-5" />
+                      What's Included ({activity.includedItems?.length || 5})
+                    </h3>
+                    <ul className="space-y-3">
+                      {activity.includedItems?.map((item, index) => (
+                        <li
+                          key={index}
+                          className="flex items-center gap-3 text-white/80"
+                        >
+                          <div className="flex size-6 items-center justify-center rounded-full bg-green-500/20">
+                            <CheckCircle className="size-4 text-green-400" />
+                          </div>
+                          {item}
+                        </li>
+                      )) ||
+                        [
+                          "Skip-the-line cathedral tickets",
+                          "Expert art historian guide",
+                          "Audio headset system",
+                          "Historic quarter walking tour",
+                          "Digital map and recommendations"
+                        ].map((item, index) => (
+                          <li
+                            key={index}
+                            className="flex items-center gap-3 text-white/80"
+                          >
+                            <div className="flex size-6 items-center justify-center rounded-full bg-green-500/20">
+                              <CheckCircle className="size-4 text-green-400" />
+                            </div>
+                            {item}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+
+                  {/* Not Included Items */}
+                  <div>
+                    <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-red-400">
+                      <span className="flex size-5 items-center justify-center rounded-full border-2 border-red-400 text-red-400">
+                        ✕
+                      </span>
+                      What's Not Included ({activity.excludedItems?.length || 3}
+                      )
+                    </h3>
+                    <ul className="space-y-3">
+                      {activity.excludedItems?.map((item, index) => (
+                        <li
+                          key={index}
+                          className="flex items-center gap-3 text-white/60"
+                        >
+                          <div className="flex size-6 items-center justify-center rounded-full bg-red-500/20">
+                            <span className="text-red-400">✕</span>
+                          </div>
+                          {item}
+                        </li>
+                      )) ||
+                        [
+                          "Food and drinks",
+                          "Hotel pickup/drop-off",
+                          "Personal expenses"
+                        ].map((item, index) => (
+                          <li
+                            key={index}
+                            className="flex items-center gap-3 text-white/60"
+                          >
+                            <div className="flex size-6 items-center justify-center rounded-full bg-red-500/20">
+                              <span className="text-red-400">✕</span>
+                            </div>
+                            {item}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                </div>
+              </GlassmorphismCard>
+
+              {/* Enhanced Description */}
+              <ActivityDescription activity={activity} />
+
+              {/* Meeting Point Details - Moved from sidebar */}
+              <GlassmorphismCard>
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+                  <Navigation className="size-5 text-yellow-400" />
+                  Meeting Point & Logistics
+                </h3>
+                <div className="space-y-4">
+                  <div className="rounded-lg bg-black/20 p-4">
+                    <p className="text-sm font-medium text-white">
+                      {activity.meetingPoint || "Plaça de la Seu, 07001 Palma"}
+                    </p>
+                    <p className="text-xs text-white/70">
+                      (Activity meeting location)
+                    </p>
+                  </div>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/70">Duration</span>
+                      <span className="font-medium text-white">
+                        {Math.floor(activity.durationMinutes / 60)}h{" "}
+                        {activity.durationMinutes % 60}m
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/70">Group size</span>
+                      <span className="font-medium text-white">
+                        Max {activity.maxParticipants} people
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/70">Min age</span>
+                      <span className="font-medium text-white">
+                        {activity.minAge || "No limit"}+
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/70">Cancellation</span>
+                      <span className="font-medium text-green-400">
+                        Free up to 24h
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-white/80">
+                    📍 {activity.meetingPoint || "Meet at the main entrance"}
+                  </p>
+                  <p className="text-sm font-medium text-yellow-400">
+                    ⏰ Please arrive 15 minutes early
+                  </p>
+                  <Button className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 font-medium text-black hover:from-yellow-500 hover:to-amber-600">
+                    <Navigation className="mr-2 size-4" />
+                    Get Directions
+                  </Button>
+                </div>
+              </GlassmorphismCard>
+
+              {/* Activity Operator - Moved from sidebar */}
+              <GlassmorphismCard>
+                <h3 className="mb-4 text-lg font-semibold text-white">
+                  Activity Operator
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-12 items-center justify-center rounded-full bg-gradient-to-r from-yellow-400 to-amber-500">
+                      <span className="text-lg font-bold text-black">
+                        {activity.title.slice(0, 2).toUpperCase()}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-white">
+                        Professional Tour Operator
+                      </h4>
+                      <div className="flex items-center gap-1 text-sm">
+                        <Star className="size-4 fill-yellow-400 text-yellow-400" />
+                        <span className="font-medium text-yellow-400">
+                          {activity.avgRating}
+                        </span>
+                        <span className="text-white/60">
+                          {activity.totalReviews} reviews
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-sm text-white/70">
+                    Professional activity operator with years of experience
+                    providing exceptional tours and activities in Mallorca.
+                  </p>
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <div className="flex items-center gap-2">
+                      <Shield className="size-4 text-green-400" />
+                      <span className="text-xs text-green-400">
+                        Instant confirmation
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Globe className="size-4 text-blue-400" />
+                      <span className="text-xs text-blue-400">
+                        Mobile tickets accepted
+                      </span>
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="w-full border-white/30 bg-white/10 text-white hover:bg-white/20"
+                  >
+                    View Operator Profile
+                  </Button>
+                </div>
+              </GlassmorphismCard>
+
+              {/* Location & Meeting Point Map */}
+              <ActivityLocationMap activity={activity} />
+
+              {/* Reviews Section */}
+              <ReviewsSection activity={activity} />
+            </div>
+
+            {/* RIGHT COLUMN - Simplified Sidebar (40%) */}
+            <div className="lg:col-span-1">
+              {/* Booking Widget - Now the only sidebar item */}
+              <div className="sticky top-8">
+                <BookingWidget activity={activity} />
+              </div>
+            </div>
+          </div>
+        </main>
+
+        {/* ENHANCED RELATED ACTIVITIES SECTION */}
+        <section className="border-t border-white/10 bg-black/20 py-16">
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="mb-12 text-center">
+              <h2 className="mb-4 text-3xl font-bold text-white">
+                You Might Also Like
+              </h2>
+              <p className="text-lg text-white/70">
+                Discover more amazing experiences in Mallorca
+              </p>
+            </div>
+
+            <SimilarActivities activity={activity} />
+
+            <div className="mt-12 text-center">
+              <Link href="/activities">
+                <Button className="bg-gradient-to-r from-yellow-400 to-amber-500 px-8 py-3 text-lg font-bold text-black hover:from-yellow-500 hover:to-amber-600">
+                  <Sparkles className="mr-2 size-5" />
+                  View All Activities
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <Footer />
+      </Suspense>
+    </div>
+  )
+}
+
+function ActivityDetailSkeleton() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800">
+      <div className="animate-pulse">
+        {/* Header Skeleton */}
+        <div className="h-16 border-b border-white/10 bg-black/20" />
+
+        {/* Hero Skeleton */}
+        <div className="h-[70vh] bg-gradient-to-br from-gray-700 to-gray-800" />
+
+        {/* Quick Info Bar Skeleton */}
+        <div className="border-b border-white/10 bg-black/20 p-4">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex gap-6">
+              <div className="h-6 w-24 rounded bg-white/20" />
+              <div className="h-6 w-20 rounded bg-white/20" />
+              <div className="h-6 w-32 rounded bg-white/20" />
+              <div className="h-6 w-28 rounded bg-white/20" />
+            </div>
+          </div>
+        </div>
+
+        {/* Content Skeleton */}
+        <div className="mx-auto max-w-7xl px-4 py-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+            <div className="space-y-8 lg:col-span-2">
+              <div className="h-64 rounded-xl bg-white/10" />
+              <div className="h-48 rounded-xl bg-white/10" />
+              <div className="h-32 rounded-xl bg-white/10" />
+            </div>
+            <div className="space-y-6 lg:col-span-1">
+              <div className="h-80 rounded-xl bg-white/10" />
+              <div className="h-48 rounded-xl bg-white/10" />
+              <div className="h-32 rounded-xl bg-white/10" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
