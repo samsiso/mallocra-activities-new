@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# security - tokens and secrets
+**/github_token.txt
+**/token.txt
+**/*token*
+**/*secret*
