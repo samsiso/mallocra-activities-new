@@ -144,7 +144,7 @@ export default function EnhancedCategoriesSection() {
 
   return (
     <section
-      className="relative overflow-hidden py-24"
+      className="relative overflow-hidden py-12 sm:py-16 lg:py-24"
       style={{
         background: `linear-gradient(135deg, #4a1a3d, #ff1dce, #2d0a1f)`
       }}
@@ -175,18 +175,18 @@ export default function EnhancedCategoriesSection() {
         style={{ backgroundColor: "rgba(255, 245, 70, 0.15)" }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-4">
+      <div className="relative mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
         {/* Enhanced Header */}
-        <AnimatedSection className="mb-20 text-center">
+        <AnimatedSection className="mb-8 text-center sm:mb-12 lg:mb-20">
           <div className="relative inline-block">
             <Badge
-              className="mb-6 px-6 py-3 text-base font-bold text-white shadow-2xl"
+              className="mb-4 px-3 py-2 text-sm font-bold text-white shadow-2xl sm:mb-6 sm:px-4 sm:py-2 sm:text-base lg:mb-6 lg:px-6 lg:py-3"
               style={{
                 background: `linear-gradient(to right, #ff1dce, #dc2626)`,
                 boxShadow: "0 20px 25px -5px rgba(255, 29, 206, 0.4)"
               }}
             >
-              <Activity className="mr-2 size-5" />
+              <Activity className="mr-1 size-4 sm:mr-2 sm:size-5" />
               Popular Categories
             </Badge>
           </div>
@@ -195,7 +195,7 @@ export default function EnhancedCategoriesSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8 text-5xl font-bold text-white sm:text-6xl lg:text-7xl"
+            className="mb-4 text-3xl font-bold text-white sm:mb-6 sm:text-4xl md:text-5xl lg:mb-8 lg:text-6xl xl:text-7xl"
           >
             Explore by{" "}
             <span

@@ -454,13 +454,13 @@ function EnhancedSearchComponent() {
 
   return (
     <div
-      className="rounded-xl border p-8 shadow-2xl backdrop-blur-md"
+      className="rounded-xl border p-4 shadow-2xl backdrop-blur-md sm:p-6 lg:p-8"
       style={{
         borderColor: "rgba(250, 5, 124, 0.3)",
         backgroundColor: "rgba(250, 5, 124, 0.15)"
       }}
     >
-      <h3 id="search-heading" className="mb-6 text-2xl font-bold text-white">
+      <h3 id="search-heading" className="mb-4 text-xl font-bold text-white sm:mb-6 sm:text-2xl">
         Find Your Perfect Activity
       </h3>
 
@@ -478,13 +478,13 @@ function EnhancedSearchComponent() {
             <Input
               id="activity-search"
               type="text"
-              placeholder="Try 'boat tours', 'hiking', or 'Palma'..."
+              placeholder="Try 'boat tours', 'hiking'..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               onFocus={() => {
                 if (suggestions.length > 0) setShowSuggestions(true)
               }}
-              className="h-12 border-white/30 bg-white/20 text-white backdrop-blur-sm transition-all placeholder:text-white/70 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/50 sm:h-14"
+              className="h-10 border-white/30 bg-white/20 text-sm text-white backdrop-blur-sm transition-all placeholder:text-white/70 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/50 sm:h-12 sm:text-base lg:h-14 lg:text-lg"
               aria-describedby="search-help"
               autoComplete="off"
             />
@@ -519,14 +519,14 @@ function EnhancedSearchComponent() {
 
           <Button
             type="submit"
-            className="h-12 w-full text-base font-semibold text-black shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 sm:h-14 sm:text-lg"
+            className="h-10 w-full text-sm font-semibold text-black shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 sm:h-12 sm:text-base lg:h-14 lg:text-lg"
             style={{
               background: `#fff546`
             }}
             aria-describedby="search-button-help"
           >
             <Search
-              className="mr-2 size-4 sm:mr-3 sm:size-5"
+              className="mr-1 size-3 sm:mr-2 sm:size-4 lg:mr-3 lg:size-5"
               aria-hidden="true"
             />
             <span className="hidden sm:inline">Search Activities</span>
@@ -710,6 +710,9 @@ export default function LandingPage() {
   const [videoLoadStates, setVideoLoadStates] = useState<boolean[]>(
     new Array(heroVideos.length).fill(false)
   )
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   // Image slideshow timer - Working immediately!
   useEffect(() => {
@@ -1190,6 +1193,20 @@ export default function LandingPage() {
     }
   ]
 
+  const handleVideoError = () => {
+    console.error("🚨 Video failed to load:", videoRef.current?.src)
+    console.log("🔄 Attempting fallback video...")
+    // Automatically try fallback video
+    if (
+      heroVideos[currentVideoIndex]?.fallbackSrc &&
+      videoRef.current?.src !== heroVideos[currentVideoIndex]?.fallbackSrc
+    ) {
+      videoRef.current.src = heroVideos[currentVideoIndex]?.fallbackSrc
+    }
+    setIsVideoLoaded(false)
+    setIsVideoPlaying(false)
+  }
+
   return (
     <div
       className="relative"
@@ -1204,9 +1221,9 @@ export default function LandingPage() {
           overflowAnchor: "none"
         }}
       >
-        {/* Hero Section with Full Screen Image & Slideshow */}
+        {/* Hero Section with Full Screen Image & Slideshow - MOBILE OPTIMIZED */}
         <section
-          className="relative min-h-screen overflow-hidden"
+          className="relative min-h-[100svh] overflow-hidden"
           aria-label="Hero video carousel"
           role="banner"
           style={{
@@ -1224,170 +1241,72 @@ export default function LandingPage() {
               backfaceVisibility: "hidden"
             }}
           >
-            {loadedVideos.map((media, index) => {
-              // Only render current video and adjacent ones for performance
-              const shouldRender =
-                index === currentVideoIndex ||
-                index === (currentVideoIndex + 1) % loadedVideos.length ||
-                index ===
-                  (currentVideoIndex - 1 + loadedVideos.length) %
-                    loadedVideos.length
-
-              if (!shouldRender) return null
-
-              return (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
-                    index === currentVideoIndex ? "opacity-100" : "opacity-0"
-                  }`}
-                  style={{
-                    willChange: "opacity",
-                    transform: "translate3d(0, 0, 0)"
-                  }}
-                >
-                  {media.type === "video" ? (
-                    <video
-                      src={
-                        media.cloudinaryId
-                          ? getVideoUrl(media.cloudinaryId, media.fallbackSrc)
-                          : media.src
-                      }
-                      poster={media.poster}
-                      autoPlay={index === currentVideoIndex}
-                      muted
-                      loop
-                      playsInline
-                      className="size-full object-cover"
-                      preload={index === currentVideoIndex ? "auto" : "none"}
-                      style={{
-                        willChange: "transform",
-                        transform: "translate3d(0, 0, 0)"
-                      }}
-                      onError={e => {
-                        console.error(
-                          "🚨 Video failed to load:",
-                          e.currentTarget.src
-                        )
-                        console.log("🔄 Attempting fallback video...")
-                        // Automatically try fallback video
-                        if (
-                          media.fallbackSrc &&
-                          e.currentTarget.src !== media.fallbackSrc
-                        ) {
-                          e.currentTarget.src = media.fallbackSrc
-                        }
-                      }}
-                      onLoadStart={() => {
-                        console.log(
-                          "✅ Video loading:",
-                          media.cloudinaryId || "fallback"
-                        )
-                        setVideoLoadStates(prev => {
-                          const newStates = [...prev]
-                          newStates[index] = true
-                          return newStates
-                        })
-                      }}
-                      onCanPlay={() => {
-                        console.log(
-                          "🎬 Video ready to play:",
-                          media.cloudinaryId || "fallback"
-                        )
-                      }}
-                    />
-                  ) : (
-                    // Optimized image with lazy loading
-                    <Image
-                      src={media.src}
-                      alt={media.alt}
-                      fill
-                      className="object-cover"
-                      priority={index === 0}
-                      loading={index === 0 ? "eager" : "lazy"}
-                    />
-                  )}
-                </div>
-              )
-            })}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/70 via-purple-900/50 to-orange-900/70"></div>
-
-            {/* Video Loading Indicator */}
-            {!videoLoadStates[currentVideoIndex] && (
-              <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50">
-                <div className="rounded-lg bg-white/10 p-4 backdrop-blur-sm">
-                  <div className="flex items-center gap-3 text-white">
-                    <div className="size-6 animate-spin rounded-full border-2 border-white/30 border-t-white"></div>
-                    <span className="text-sm font-medium">
-                      Loading experience...
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Slideshow Controls */}
-          <div className="absolute inset-x-4 top-1/2 z-10 flex -translate-y-1/2 justify-between sm:inset-x-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prevVideo}
-              className="size-12 border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 sm:size-10"
-              aria-label="Previous video"
-              aria-describedby="video-carousel-help"
-            >
-              <ChevronLeft className="size-5 sm:size-4" />
-              <span className="sr-only">Go to previous video in carousel</span>
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={nextVideo}
-              className="size-12 border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 sm:size-10"
-              aria-label="Next video"
-              aria-describedby="video-carousel-help"
-            >
-              <ChevronRight className="size-5 sm:size-4" />
-              <span className="sr-only">Go to next video in carousel</span>
-            </Button>
-          </div>
-
-          {/* Slideshow Indicators */}
-          <div
-            className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 space-x-2"
-            role="tablist"
-            aria-label="Video carousel indicators"
-          >
-            {loadedVideos.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentVideoIndex(index)}
-                className={`h-3 w-8 touch-manipulation rounded-full transition-colors focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 sm:h-2 ${
-                  index === currentVideoIndex ? "bg-white" : "bg-white/40"
-                }`}
-                aria-label={`Go to video ${index + 1} of ${loadedVideos.length}`}
-                aria-selected={index === currentVideoIndex}
-                role="tab"
-                tabIndex={index === currentVideoIndex ? 0 : -1}
+            {/* Dynamic Video/Image Background with Optimized Loading */}
+            {isVideoLoaded ? (
+              <video
+                key={currentVideoIndex}
+                ref={videoRef}
+                className="size-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={heroVideos[currentVideoIndex]?.poster}
+                onLoadedData={() => setIsVideoPlaying(true)}
+                onError={handleVideoError}
+                style={{
+                  willChange: "transform",
+                  transform: "scale(1.05)",
+                  filter: "brightness(0.7) contrast(1.2) saturate(1.1)"
+                }}
+              >
+                <source
+                  src={
+                    heroVideos[currentVideoIndex]?.src ||
+                    `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/video/upload/q_auto,f_auto,w_1920,h_1080/${heroVideos[currentVideoIndex]?.cloudinaryId}.mp4`
+                  }
+                  type="video/mp4"
+                />
+                <source
+                  src={heroVideos[currentVideoIndex]?.fallbackSrc}
+                  type="video/mp4"
+                />
+              </video>
+            ) : (
+              <Image
+                src={heroVideos[currentVideoIndex]?.poster || ""}
+                alt={heroVideos[currentVideoIndex]?.alt || "Hero image"}
+                fill
+                className="object-cover"
+                priority
+                sizes="100vw"
+                style={{
+                  filter: "brightness(0.7) contrast(1.2) saturate(1.1)"
+                }}
               />
-            ))}
+            )}
+
+            {/* Enhanced Multi-Layer Gradient Overlay for Mobile Readability */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `
+                  linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(255,29,206,0.2) 50%, rgba(0,0,0,0.6) 100%),
+                  linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%)
+                `
+              }}
+            />
           </div>
 
-          {/* Screen reader helper text */}
-          <div id="video-carousel-help" className="sr-only">
-            Use arrow keys to navigate between videos, or click the indicators
-            below the video
-          </div>
-
-          {/* Content Overlay */}
-          <div className="relative z-20 flex min-h-screen items-center justify-center px-4">
-            <div className="mx-auto max-w-6xl">
-              <div className="grid items-center gap-12 lg:grid-cols-2">
-                {/* Left side - Main Content */}
-                <div className="text-center lg:text-left">
+          {/* Mobile-First Content Layout */}
+          <div className="relative z-20 flex min-h-[100svh] items-center justify-center px-3 sm:px-4 lg:px-6">
+            <div className="mx-auto w-full max-w-7xl">
+              <div className="grid items-center gap-8 lg:grid-cols-2">
+                {/* Left side - Main Content - MOBILE OPTIMIZED */}
+                <div className="order-2 text-center lg:order-1 lg:text-left">
                   <Badge
-                    className="mb-8 inline-flex border px-6 py-3 text-black shadow-2xl ring-1 backdrop-blur-lg transition-all duration-300 hover:shadow-2xl"
+                    className="mb-4 inline-flex border px-3 py-2 text-xs font-semibold text-black shadow-xl ring-1 backdrop-blur-lg transition-all duration-300 hover:shadow-2xl sm:mb-6 sm:px-4 sm:py-2 sm:text-sm lg:mb-8 lg:px-6 lg:py-3 lg:text-base"
                     style={{
                       willChange: "transform",
                       transform: "translateZ(0)",
@@ -1396,7 +1315,7 @@ export default function LandingPage() {
                     }}
                   >
                     <Sparkles
-                      className="mr-3 size-5 drop-shadow-lg"
+                      className="mr-1 size-3 drop-shadow-lg sm:mr-2 sm:size-4 lg:mr-3 lg:size-5"
                       style={{ color: "#fff546" }}
                     />
                     <span className="font-semibold text-white drop-shadow-sm">
@@ -1404,39 +1323,39 @@ export default function LandingPage() {
                     </span>
                   </Badge>
 
-                  <h1 className="mb-6 text-4xl font-bold leading-tight sm:text-6xl lg:text-7xl">
-                    <span className="font-black tracking-wide text-black drop-shadow-lg">
+                  {/* Mobile-Optimized Heading */}
+                  <h1 className="mb-4 text-3xl font-bold leading-tight sm:mb-5 sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl xl:text-7xl">
+                    <span className="block font-black tracking-wide text-black drop-shadow-lg">
                       Discover
-                    </span>{" "}
-                    <br />
-                    <span className="text-yellow-400 drop-shadow-sm">
+                    </span>
+                    <span className="block text-yellow-400 drop-shadow-sm">
                       Mallorca's
-                    </span>{" "}
-                    <br />
-                    <span className="text-white drop-shadow-md">
+                    </span>
+                    <span className="block text-white drop-shadow-md">
                       Best Activities
                     </span>
                   </h1>
 
-                  <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-white/95 drop-shadow-sm sm:text-xl lg:mx-0">
+                  {/* Mobile-Optimized Description */}
+                  <p className="mx-auto mb-6 max-w-xl text-base leading-relaxed text-white/95 drop-shadow-sm sm:mb-8 sm:text-lg lg:mx-0 lg:mb-10 lg:max-w-2xl lg:text-xl">
                     From thrilling water sports to cultural experiences. Book
                     authentic local activities with instant confirmation.
                   </p>
 
-                  {/* Stats */}
-                  <div className="mb-10 flex flex-wrap justify-center gap-3 text-sm text-white/95 sm:gap-8 sm:text-base lg:justify-start">
-                    <div className="flex items-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
+                  {/* Mobile-Optimized Stats */}
+                  <div className="mb-6 flex flex-col gap-2 text-sm text-white/95 sm:mb-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3 lg:mb-10 lg:justify-start lg:gap-4 lg:text-base">
+                    <div className="flex items-center justify-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
                       <Star className="size-4 fill-yellow-400 text-yellow-400 drop-shadow-sm sm:size-5" />
                       <span className="font-medium">4.8/5 rating</span>
                     </div>
-                    <div className="flex items-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
+                    <div className="flex items-center justify-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
                       <Users
                         className="size-4 drop-shadow-sm sm:size-5"
                         style={{ color: "#fa057c" }}
                       />
                       <span className="font-medium">50k+ customers</span>
                     </div>
-                    <div className="flex items-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
+                    <div className="flex items-center justify-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
                       <MapPin
                         className="size-4 drop-shadow-sm sm:size-5"
                         style={{ color: "#fa057c" }}
@@ -1446,8 +1365,8 @@ export default function LandingPage() {
                   </div>
                 </div>
 
-                {/* Right side - Enhanced Search */}
-                <div className="lg:pl-8">
+                {/* Right side - Enhanced Search - MOBILE OPTIMIZED */}
+                <div className="order-1 lg:order-2 lg:pl-8">
                   <EnhancedSearchComponent />
                 </div>
               </div>
@@ -1458,9 +1377,9 @@ export default function LandingPage() {
         {/* Enhanced Activity Categories Section - Horizontal Scroll */}
         <EnhancedCategoriesSection />
 
-        {/* Enhanced Featured Activities Section - Real Database-Driven */}
+        {/* Enhanced Featured Activities Section - Real Database-Driven - MOBILE OPTIMIZED */}
         <section
-          className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-black py-24"
+          className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-black py-12 sm:py-16 lg:py-24"
           style={{
             contain: "layout style paint",
             willChange: "transform"
@@ -1470,8 +1389,8 @@ export default function LandingPage() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-500/10 via-yellow-500/5 to-transparent"></div>
           <div className="bg-grid-white/[0.02] absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,_transparent_20%,_black)]"></div>
 
-          <div className="relative mx-auto max-w-7xl px-4">
-            <AnimatedSection className="mb-20 text-center">
+          <div className="relative mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
+            <AnimatedSection className="mb-8 text-center sm:mb-12 lg:mb-20">
               <div className="animate-in zoom-in-75 fade-in relative inline-block duration-700 ease-out">
                 <Badge
                   className="mb-6 px-6 py-3 text-base font-bold text-white shadow-2xl"
@@ -1484,7 +1403,7 @@ export default function LandingPage() {
                 </Badge>
               </div>
 
-              <h2 className="animate-in slide-in-from-bottom-4 fade-in mb-6 text-5xl font-bold text-white delay-200 duration-700 sm:text-6xl lg:text-7xl">
+              <h2 className="animate-in slide-in-from-bottom-4 fade-in mb-4 text-3xl font-bold text-white delay-200 duration-700 sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Featured{" "}
                 <span
                   className="bg-gradient-to-r bg-clip-text text-transparent"
@@ -1498,7 +1417,7 @@ export default function LandingPage() {
                 </span>
               </h2>
 
-              <p className="animate-in slide-in-from-bottom-4 fade-in mx-auto max-w-4xl text-xl leading-relaxed text-gray-300 delay-500 duration-700 sm:text-2xl">
+              <p className="animate-in slide-in-from-bottom-4 fade-in mx-auto max-w-4xl text-base leading-relaxed text-gray-300 delay-500 duration-700 sm:text-lg md:text-xl lg:text-2xl">
                 Hand-picked experiences that showcase the very best of what
                 Mallorca has to offer. Each activity is carefully curated for
                 unforgettable memories.
@@ -1577,29 +1496,33 @@ export default function LandingPage() {
                     ))}
               </div>
 
-              {/* Enhanced scroll indicator with stats */}
-              <div className="animate-in fade-in slide-in-from-bottom-4 mt-8 flex flex-col items-center gap-4 delay-700 duration-500 sm:flex-row sm:justify-between">
+              {/* Enhanced scroll indicator with stats - MOBILE OPTIMIZED */}
+              <div className="animate-in fade-in slide-in-from-bottom-4 mt-6 flex flex-col items-center gap-3 delay-700 duration-500 sm:mt-8 sm:flex-row sm:justify-between lg:gap-4">
                 <div className="flex items-center gap-2 text-gray-400">
-                  <Palette className="size-4" />
-                  <span className="text-sm">
+                  <Palette className="size-3 sm:size-4" />
+                  <span className="text-xs sm:text-sm">
                     {featuredActivities.length > 0
                       ? `${featuredActivities.length} featured experiences available`
                       : "Loading featured experiences..."}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-6 text-sm text-gray-500">
+                <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-gray-500 sm:gap-4 sm:text-sm lg:gap-6">
                   <div className="flex items-center gap-1">
-                    <Star className="size-4 text-yellow-400" />
+                    <Star className="size-3 text-yellow-400 sm:size-4" />
                     <span>Avg 4.8★ rating</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Users className="size-4 text-blue-400" />
+                    <Users className="size-3 text-blue-400 sm:size-4" />
                     <span>1000+ bookings</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <CheckCircle className="size-4 text-green-400" />
+                  <div className="hidden items-center gap-1 sm:flex">
+                    <CheckCircle className="size-3 text-green-400 sm:size-4" />
                     <span>Instant confirmation</span>
+                  </div>
+                  <div className="flex items-center gap-1 sm:hidden">
+                    <ArrowRight className="size-3 text-orange-400" />
+                    <span>Swipe to explore →</span>
                   </div>
                 </div>
               </div>
@@ -1678,18 +1601,18 @@ export default function LandingPage() {
         </section>
         */}
 
-        {/* Enhanced Testimonials Section - Moved to just above CTA */}
-        <section className="bg-gradient-to-br from-purple-50 via-white to-blue-50 py-20">
-          <div className="mx-auto max-w-7xl px-4">
-            <AnimatedSection className="mb-16 text-center">
-              <Badge className="mb-4 bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-2 text-white">
-                <Heart className="mr-2 size-4" />
+        {/* Enhanced Testimonials Section - MOBILE OPTIMIZED */}
+        <section className="bg-gradient-to-br from-purple-50 via-white to-blue-50 py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
+            <AnimatedSection className="mb-8 text-center sm:mb-12 lg:mb-16">
+              <Badge className="mb-3 bg-gradient-to-r from-purple-600 to-blue-600 px-3 py-2 text-sm font-bold text-white sm:mb-4 sm:px-4 sm:text-base">
+                <Heart className="mr-1 size-3 sm:mr-2 sm:size-4" />
                 Customer Stories
               </Badge>
-              <h2 className="mb-4 text-4xl font-bold text-gray-900">
+              <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
                 What Our Guests Say
               </h2>
-              <p className="mx-auto max-w-3xl text-xl text-gray-600">
+              <p className="mx-auto max-w-3xl text-base leading-relaxed text-gray-600 sm:text-lg md:text-xl">
                 Real experiences from travelers who have discovered the magic of
                 Mallorca with us
               </p>
@@ -1729,11 +1652,11 @@ export default function LandingPage() {
 
               <div
                 id="reviews-carousel"
-                className="scrollbar-hide flex gap-6 overflow-x-auto px-1 pb-6"
+                className="scrollbar-hide flex gap-3 overflow-x-auto px-1 pb-6 sm:gap-4 lg:gap-6"
                 style={{
                   scrollSnapType: "x mandatory",
                   scrollBehavior: "smooth",
-                  scrollPadding: "0 24px",
+                  scrollPadding: "0 16px",
                   willChange: "scroll-position",
                   transform: "translate3d(0, 0, 0)",
                   contain: "layout style paint"
@@ -1797,7 +1720,7 @@ export default function LandingPage() {
                 ].map((testimonial, index) => (
                   <div
                     key={testimonial.name}
-                    className="animate-in fade-in slide-in-from-right-12 w-[350px] min-w-[350px] shrink-0 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] sm:w-[380px] sm:min-w-[380px] md:w-[400px] md:min-w-[400px]"
+                    className="animate-in fade-in slide-in-from-right-12 w-[280px] min-w-[280px] shrink-0 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] sm:w-[320px] sm:min-w-[320px] md:w-[350px] md:min-w-[350px] lg:w-[380px] lg:min-w-[380px] xl:w-[400px] xl:min-w-[400px]"
                     style={{
                       scrollSnapAlign: "start",
                       animationDelay: `${index * 100}ms`
@@ -1843,23 +1766,27 @@ export default function LandingPage() {
                 ))}
               </div>
 
-              {/* Enhanced scroll indicator */}
-              <div className="animate-in fade-in slide-in-from-bottom-4 mt-8 flex flex-col items-center gap-4 delay-700 duration-500 sm:flex-row sm:justify-between">
+              {/* Enhanced scroll indicator - MOBILE OPTIMIZED */}
+              <div className="animate-in fade-in slide-in-from-bottom-4 mt-6 flex flex-col items-center gap-3 delay-700 duration-500 sm:mt-8 sm:flex-row sm:justify-between lg:gap-4">
                 <div className="flex items-center gap-2 text-gray-500">
-                  <Users className="size-4" />
-                  <span className="text-sm">
+                  <Users className="size-3 sm:size-4" />
+                  <span className="text-xs sm:text-sm">
                     6 customer testimonials from real experiences
                   </span>
                 </div>
 
-                <div className="flex items-center gap-6 text-sm text-gray-600">
+                <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-gray-600 sm:gap-4 sm:text-sm lg:gap-6">
                   <div className="flex items-center gap-1">
-                    <Star className="size-4 text-yellow-400" />
+                    <Star className="size-3 text-yellow-400 sm:size-4" />
                     <span>All 5★ reviews</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <CheckCircle className="size-4 text-green-400" />
+                    <CheckCircle className="size-3 text-green-400 sm:size-4" />
                     <span>Verified bookings</span>
+                  </div>
+                  <div className="flex items-center gap-1 sm:hidden">
+                    <ArrowRight className="size-3 text-blue-400" />
+                    <span>Swipe for more →</span>
                   </div>
                   <div className="hidden items-center gap-1 sm:flex">
                     <ArrowRight className="size-4 text-blue-400" />
