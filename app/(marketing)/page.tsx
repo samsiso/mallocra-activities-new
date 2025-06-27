@@ -357,8 +357,8 @@ function ActivityCardSkeleton() {
             <div className="size-9 rounded bg-gray-600"></div>
           </div>
           <div className="absolute inset-x-4 bottom-4 flex items-center justify-between">
-            <div className="h-8 w-20 rounded bg-gray-600"></div>
-            <div className="h-8 w-16 rounded bg-gray-600"></div>
+            <div className="h-8 w-20 rounded bg-gray-700"></div>
+            <div className="h-8 w-16 rounded bg-gray-700"></div>
           </div>
         </div>
 
@@ -454,13 +454,16 @@ function EnhancedSearchComponent() {
 
   return (
     <div
-      className="rounded-xl border p-8 shadow-2xl backdrop-blur-md"
+      className="rounded-xl border p-4 shadow-2xl backdrop-blur-md lg:p-8"
       style={{
         borderColor: "rgba(250, 5, 124, 0.3)",
         backgroundColor: "rgba(250, 5, 124, 0.15)"
       }}
     >
-      <h3 id="search-heading" className="mb-6 text-2xl font-bold text-white">
+      <h3
+        id="search-heading"
+        className="mb-6 hidden text-2xl font-bold text-white lg:block"
+      >
         Find Your Perfect Activity
       </h3>
 
@@ -1404,17 +1407,15 @@ export default function LandingPage() {
                     </span>
                   </Badge>
 
-                  <h1 className="mb-6 text-4xl font-bold leading-tight sm:text-6xl lg:text-7xl">
-                    <span className="font-black tracking-wide text-black drop-shadow-lg">
-                      Discover
-                    </span>{" "}
-                    <br />
-                    <span className="text-yellow-400 drop-shadow-sm">
-                      Mallorca's
-                    </span>{" "}
-                    <br />
-                    <span className="text-white drop-shadow-md">
-                      Best Activities
+                  <h1 className="mb-6 text-5xl font-black uppercase leading-none tracking-tighter sm:text-7xl lg:text-8xl">
+                    <span className="block">
+                      <span className="text-white drop-shadow-lg">WE </span>
+                      <span className="text-yellow-400 drop-shadow-lg">
+                        ARE
+                      </span>
+                    </span>
+                    <span className="block text-black drop-shadow-lg">
+                      EXCURSIONS
                     </span>
                   </h1>
 
@@ -1641,42 +1642,6 @@ export default function LandingPage() {
 
         {/* Enhanced Activity Locations Map Section */}
         <EnhancedActivitiesMapSection />
-
-        {/* Enhanced Newsletter Section - COMMENTED OUT */}
-        {/* 
-        <section className="bg-gradient-to-br from-emerald-50 to-teal-50 py-20">
-          <div className="mx-auto max-w-4xl px-4 text-center">
-            <AnimatedSection>
-              <Badge className="mb-6 bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-2 text-white">
-                <Gift className="mr-2 size-4" />
-                Exclusive Offers
-              </Badge>
-
-              <h2 className="mb-6 text-3xl font-bold text-gray-900 sm:text-4xl">
-                Get 15% Off Your First Adventure
-              </h2>
-              <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-                Join our newsletter and be the first to discover new activities,
-                exclusive deals, and insider tips.
-              </p>
-
-              <GlassmorphismCard className="mx-auto max-w-md p-6">
-                <div className="space-y-4">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email address"
-                    className="w-full"
-                  />
-                  <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700">
-                    <Gift className="mr-2 size-4" />
-                    Claim 15% Discount
-                  </Button>
-                </div>
-              </GlassmorphismCard>
-            </AnimatedSection>
-          </div>
-        </section>
-        */}
 
         {/* Enhanced Testimonials Section - Moved to just above CTA */}
         <section className="bg-gradient-to-br from-purple-50 via-white to-blue-50 py-20">
