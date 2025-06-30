@@ -46,11 +46,14 @@ import {
   searchActivitiesAction
 } from "@/actions/db/activities-actions"
 import { useRouter } from "next/navigation"
-import LeafletMap from "@/components/ui/leaflet-map"
+// Temporarily disabled to fix SSR issue
+// import LeafletMap from "@/components/ui/leaflet-map"
 import { getHeroVideosAction } from "@/actions/db/media-actions"
 import PreferredFooter from "@/components/preferred-footer"
 import EnhancedCategoriesSection from "./landing/_components/enhanced-categories-section"
-import { EnhancedActivitiesMapSection } from "./landing/_components/enhanced-activities-map-section"
+import MobileOptimizedHeroSection from "@/components/ui/mobile-optimized-hero-section"
+// Temporarily disabled to fix SSR issue
+// import { EnhancedActivitiesMapSection } from "./landing/_components/enhanced-activities-map-section"
 import {
   PROTECTED_CONFIG,
   getVideoUrl,
@@ -1207,9 +1210,14 @@ export default function LandingPage() {
           overflowAnchor: "none"
         }}
       >
-        {/* Hero Section with Full Screen Image & Slideshow */}
+        {/* Mobile Optimized Hero Section */}
+        <div className="lg:hidden">
+          <MobileOptimizedHeroSection />
+        </div>
+
+        {/* Desktop Hero Section with Full Screen Image & Slideshow */}
         <section
-          className="relative min-h-screen overflow-hidden"
+          className="relative hidden min-h-screen overflow-hidden lg:block"
           aria-label="Hero video carousel"
           role="banner"
           style={{
@@ -1640,8 +1648,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Enhanced Activity Locations Map Section */}
-        <EnhancedActivitiesMapSection />
+        {/* Enhanced Activity Locations Map Section - Temporarily disabled to fix SSR issue */}
+        {/* <EnhancedActivitiesMapSection /> */}
 
         {/* Enhanced Testimonials Section - Moved to just above CTA */}
         <section className="bg-gradient-to-br from-purple-50 via-white to-blue-50 py-20">

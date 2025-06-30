@@ -5,8 +5,8 @@ import { motion } from "framer-motion"
 import { Activity } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { categoriesData } from "../_data/categories-data"
-import { CategoryData } from "./enhanced-category-card"
-import EnhancedCategoryCard from "./enhanced-category-card"
+import { CategoryData } from "./premium-category-card"
+import PremiumCategoryCard from "./premium-category-card"
 import CategoryCardSkeleton from "./category-card-skeleton"
 import { getActivitiesSupabaseAction } from "@/actions/db/activities-actions"
 
@@ -146,33 +146,33 @@ export default function EnhancedCategoriesSection() {
     <section
       className="relative overflow-hidden py-24"
       style={{
-        background: `linear-gradient(135deg, #4a1a3d, #ff1dce, #2d0a1f)`
+        background: `linear-gradient(135deg, #fce4ec, #f8bbd0, #fce4ec)`
       }}
       aria-label="Activity categories"
     >
-      {/* Enhanced Background Effects */}
+      {/* Subtle Background Effects */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse at top, rgba(255, 29, 206, 0.3), rgba(255, 245, 70, 0.15), transparent)`
+          background: `radial-gradient(ellipse at top left, rgba(248, 187, 208, 0.5), transparent)`
         }}
       />
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse at bottom right, rgba(255, 29, 206, 0.2), transparent, transparent)`
+          background: `radial-gradient(ellipse at bottom right, rgba(252, 228, 236, 0.5), transparent)`
         }}
       />
-      <div className="bg-grid-white/[0.02] absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,_transparent_20%,_black)]" />
+      <div className="bg-grid-white/[0.05] absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,_transparent_20%,_black)]" />
 
-      {/* Floating orbs for ambient lighting */}
+      {/* Subtle floating orbs */}
       <div
         className="absolute left-1/4 top-20 size-96 rounded-full blur-3xl"
-        style={{ backgroundColor: "rgba(255, 29, 206, 0.2)" }}
+        style={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
       />
       <div
         className="absolute bottom-20 right-1/4 size-96 rounded-full blur-3xl"
-        style={{ backgroundColor: "rgba(255, 245, 70, 0.15)" }}
+        style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
       />
 
       <div className="relative mx-auto max-w-7xl px-4">
@@ -195,15 +195,17 @@ export default function EnhancedCategoriesSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8 text-5xl font-bold text-white sm:text-6xl lg:text-7xl"
+            className="mb-8 text-5xl font-bold text-gray-900 sm:text-6xl lg:text-7xl"
           >
             Explore by{" "}
             <span
-              className="bg-gradient-to-r bg-clip-text text-transparent"
+              className="inline-block"
               style={{
-                background: `linear-gradient(to right, #ff1dce, #fff546)`,
+                background: "linear-gradient(to right, #db2777, #ec4899)",
                 WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent"
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                color: "transparent"
               }}
             >
               Category
@@ -214,15 +216,12 @@ export default function EnhancedCategoriesSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-300 sm:text-2xl"
+            className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-600 sm:text-2xl"
           >
             Discover amazing activities across Mallorca's most exciting
             categories.
             {!isUpdating && totalActivities > 0 && (
-              <span
-                className="mt-2 block text-lg font-semibold"
-                style={{ color: "#fff546" }}
-              >
+              <span className="mt-2 block text-lg font-semibold text-pink-600">
                 {totalActivities} premium experiences await you
               </span>
             )}
@@ -236,17 +235,17 @@ export default function EnhancedCategoriesSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/10"
+              className="flex size-12 items-center justify-center rounded-full border-2 border-white bg-white/90 text-gray-800 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white hover:shadow-2xl"
               style={
                 {
                   "--hover-border-color": "rgba(255, 29, 206, 0.6)"
                 } as React.CSSProperties
               }
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 29, 206, 0.6)"
+                e.currentTarget.style.borderColor = "rgba(236, 72, 153, 1)"
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)"
+                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 1)"
               }}
               onClick={() => {
                 const container = document.getElementById("categories-carousel")
@@ -271,17 +270,17 @@ export default function EnhancedCategoriesSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/10"
+              className="flex size-12 items-center justify-center rounded-full border-2 border-white bg-white/90 text-gray-800 shadow-xl backdrop-blur-sm transition-all duration-300 hover:bg-white hover:shadow-2xl"
               style={
                 {
                   "--hover-border-color": "rgba(255, 29, 206, 0.6)"
                 } as React.CSSProperties
               }
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 29, 206, 0.6)"
+                e.currentTarget.style.borderColor = "rgba(236, 72, 153, 1)"
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)"
+                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 1)"
               }}
               onClick={() => {
                 const container = document.getElementById("categories-carousel")
@@ -329,16 +328,16 @@ export default function EnhancedCategoriesSection() {
                   scrollSnapAlign: "start"
                 }}
               >
-                <EnhancedCategoryCard category={category} index={index} />
+                <PremiumCategoryCard category={category} index={index} />
               </div>
             ))}
           </div>
 
           {/* Scroll Indicator */}
           <div className="mt-6 flex justify-center lg:hidden">
-            <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 backdrop-blur-sm">
+            <div className="flex items-center gap-2 rounded-full border-2 border-white bg-white/90 px-4 py-2 shadow-lg backdrop-blur-sm">
               <svg
-                className="size-4 text-white/60"
+                className="size-4 text-gray-700"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -350,11 +349,11 @@ export default function EnhancedCategoriesSection() {
                   d="M7 16l-4-4m0 0l4-4m-4 4h18"
                 />
               </svg>
-              <span className="text-sm text-white/70">
+              <span className="text-sm font-medium text-gray-700">
                 Scroll to explore categories
               </span>
               <svg
-                className="size-4 text-white/60"
+                className="size-4 text-gray-700"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -373,28 +372,14 @@ export default function EnhancedCategoriesSection() {
         {/* Enhanced Call to Action */}
         <AnimatedSection delay={1.2} className="mt-20 text-center">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <p className="mb-4 text-lg text-gray-400">
+            <p className="mb-4 text-lg text-gray-600">
               Can't decide? Browse all our amazing experiences
             </p>
             <motion.a
               href="/activities"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-white backdrop-blur-sm transition-all duration-300"
-              style={
-                {
-                  background: `linear-gradient(to right, rgba(255, 29, 206, 0.2), rgba(255, 245, 70, 0.2))`,
-                  "--hover-border-color": "#ff1dce",
-                  "--hover-bg": `linear-gradient(to right, rgba(255, 29, 206, 0.3), rgba(255, 245, 70, 0.3))`
-                } as React.CSSProperties
-              }
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 29, 206, 0.6)"
-                e.currentTarget.style.background = `linear-gradient(to right, rgba(255, 29, 206, 0.3), rgba(255, 245, 70, 0.3))`
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)"
-                e.currentTarget.style.background = `linear-gradient(to right, rgba(255, 29, 206, 0.2), rgba(255, 245, 70, 0.2))`
-              }}
-              whileHover={{ y: -2 }}
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-pink-600 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:shadow-xl"
+              whileHover={{ y: -2, scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Activity className="size-5" />
               View All Activities

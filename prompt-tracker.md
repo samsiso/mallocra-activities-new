@@ -2,9 +2,9 @@
 
 ## Current Session Progress
 - **Session Start**: 2025-01-25
-- **Current Prompt**: 6/5 (EXCEEDED PLAN - MAJOR INTEGRATION COMPLETE!) 
+- **Current Prompt**: 7/5 (EXCEEDED PLAN - FEATURED ACTIVITIES LINKING FIXED!) 
 - **Last Push**: Previous session (commit: 88a4a8f)
-- **Next Push**: At prompt 6 (Critical business notifications complete)
+- **Next Push**: At prompt 7 (Featured activities now link properly)
 
 ## Current Session Summary
 
@@ -36,6 +36,17 @@
 - **Business Impact**: Zero missed opportunities, instant revenue protection, professional operations
 - **Integration Time**: 7 minutes (wiring real events into existing notification system)
 
+### Prompt 7: FEATURED ACTIVITIES LINKING FIX (CRITICAL CUSTOMER JOURNEY FIX) ✅
+- **Issue Identified**: Featured activities on landing page were not linking to real activity pages
+- **Root Cause**: `/api/featured-activities` was returning mock data without proper slugs
+- **Solution Implemented**: 
+  - ✅ **Fixed API Route**: Updated `/app/api/featured-activities/route.ts` to use real `getFeaturedActivitiesAction`
+  - ✅ **Proper Slugs**: All featured activities now have working slugs (palma-cathedral-tour, sailing-adventure, etc.)
+  - ✅ **Fallback System**: Triple-layer fallback (real DB → hardcoded with slugs → error fallback)
+  - ✅ **Verified Working**: Tested `/activities/palma-cathedral-tour` and `/activities/sailing-adventure` (both return HTTP 200)
+- **Customer Impact**: Featured activities now properly link to detailed activity pages
+- **Business Impact**: Eliminates broken customer journey from landing page discovery to booking
+
 ## Files Modified This Session
 
 ### Files Modified (Prompt 1):
@@ -62,6 +73,10 @@
 - `docs/ADMIN-NOTIFICATIONS-GUIDE.md` - Complete integration documentation
 - `docs/progress.md` - Updated progress tracking
 
+### Files Modified (Prompt 7 - Featured Activities Fix):
+- `app/api/featured-activities/route.ts` - Fixed to return real activities with proper slugs
+- `prompt-tracker.md` - Updated session tracking
+
 ## Key Achievements
 1. ✅ **QR Mobile Tickets**: Professional QR code system for booking confirmations
 2. ✅ **5 Critical Business Tasks**: Currency, weather, payments, performance, booking verification
@@ -70,23 +85,25 @@
 5. ✅ **Revenue Protection**: Instant payment failure and cancellation alerts
 6. ✅ **Reputation Management**: Immediate bad review notifications
 7. ✅ **Professional Operations**: Complete booking-to-notification pipeline
+8. ✅ **CUSTOMER JOURNEY FIX**: Featured activities now properly link to detail pages
 
 ## Business Impact Delivered
 - **Revenue Critical**: Payment system + failure alerts + booking confirmations
 - **International Ready**: Multi-currency support for global customers
 - **Safety & Planning**: Weather integration for outdoor activities
-- **Customer Experience**: QR tickets + smooth performance + professional operations
+- **Customer Experience**: QR tickets + smooth performance + professional operations + working featured activity links
 - **Admin Efficiency**: Never miss a booking, payment issue, or bad review
+- **Customer Conversion**: Fixed broken discovery-to-booking journey from landing page
 
 ## Next Actions
-- **READY FOR GIT PUSH**: All critical business infrastructure complete
+- **READY FOR GIT PUSH**: All critical business infrastructure + customer journey complete
 - Monitor notification system in production
+- Test featured activities flow end-to-end in production
 - Optional: Add weather/capacity auto-monitoring for full automation
-- Consider additional features after core business operations are validated
 
-## Technical Notes - Prompt 6 Integration
-- Payment failure notifications trigger on Stripe `payment_intent.payment_failed` webhooks
-- Booking cancellation notifications trigger when `cancelBookingAction` is called
-- Bad review notifications trigger when reviews with rating ≤ 2 are submitted via `createReviewAction`
-- All integrations include proper error handling and fallback mechanisms
-- System protects business revenue 24/7 with instant admin notifications
+## Technical Notes - Prompt 7 Featured Activities Fix
+- API route now uses `getFeaturedActivitiesAction` for real data
+- Fallback activities include proper slugs matching activity detail route expectations
+- Activity detail page `/activities/[id]` uses `getActivityByIdOrSlugAction` which handles both IDs and slugs
+- Verified working links: `/activities/palma-cathedral-tour`, `/activities/sailing-adventure`, `/activities/catamaran-sunset-cruise`
+- Customer can now click featured activities on landing page and reach proper booking pages

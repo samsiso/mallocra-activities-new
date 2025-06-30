@@ -9,7 +9,7 @@ import {
   Car,
   LucideIcon
 } from "lucide-react"
-import { CategoryData } from "../_components/enhanced-category-card"
+import { CategoryData } from "../_components/premium-category-card"
 
 export const categoriesData: CategoryData[] = [
   {
