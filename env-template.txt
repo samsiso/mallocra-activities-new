@@ -1,0 +1,60 @@
+# ========================================
+# MALLORCA ACTIVITIES - REAL PROJECT CONFIG
+# COPY THIS INTO YOUR .env.local FILE
+# ========================================
+
+# Clerk Authentication (REAL WORKING KEYS)
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_ZXF1aXBwZWQtcmVkZmlzaC04OS5jbGVyay5hY2NvdW50cy5kZXYk
+CLERK_SECRET_KEY=sk_test_YR9UhNTK6qdxnYUCKD4Aa4sJmX6hcNZXoRyJELlUN1
+
+# Supabase (REAL WORKING CONFIGURATION)
+NEXT_PUBLIC_SUPABASE_URL=https://tskawjnjmiltzoypdnsl.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRza2F3am5qbWlsdHpveXBkbnNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkwNDEwNDAsImV4cCI6MjA2NDYxNzA0MH0.3KAR1QM0ZGX6hB9lXE2hZ-5y9xdWIYYNgAo6GCbWlSk
+
+# Database URL for Drizzle (REAL WORKING DATABASE URL)
+DATABASE_URL=postgresql://postgres:Million2025%40SISO@db.tskawjnjmiltzoypdnsl.supabase.co:5432/postgres
+
+# Google Maps API (REAL WORKING KEY)
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyBOti4mM-6x9WDnZIjIeyPU21O87LYFhJ8
+
+# App Configuration
+NEXT_PUBLIC_APP_NAME="Mallorca Activities"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+
+# Cloudinary Media Service (WORKING CONFIG)
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="dfqvslgiy"
+CLOUDINARY_CLOUD_NAME="dfqvslgiy"
+
+# ========================================
+# OPTIONAL SERVICES (ADD WHEN AVAILABLE)
+# ========================================
+
+# Cloudinary API (for uploads)
+# CLOUDINARY_API_KEY="your_api_key_here"
+# CLOUDINARY_API_SECRET="your_api_secret_here"
+
+# Clerk Authentication
+# CLERK_SECRET_KEY="your_clerk_secret_here"
+# NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_public_key_here"
+
+# Stripe Payments
+# STRIPE_SECRET_KEY="sk_test_your_stripe_secret_here"
+# STRIPE_WEBHOOK_SECRET="whsec_your_webhook_secret_here"
+
+# Email Service (Resend)
+# RESEND_API_KEY="re_your_resend_api_key_here"
+# RESEND_FROM_EMAIL="bookings@your-domain.com"
+
+# Weather API
+# OPENWEATHERMAP_API_KEY="your_weather_api_key_here"
+
+# Notification Services
+# TELEGRAM_BOT_TOKEN="your_telegram_bot_token_here"
+# TELEGRAM_ADMIN_CHAT_ID="your_chat_id_here"
+
+# Twilio SMS/WhatsApp
+# TWILIO_ACCOUNT_SID="your_twilio_sid_here"
+# TWILIO_AUTH_TOKEN="your_twilio_token_here"
+# TWILIO_PHONE_NUMBER="+1234567890"
+# TWILIO_WHATSAPP_SANDBOX="whatsapp:+14155238886" 
