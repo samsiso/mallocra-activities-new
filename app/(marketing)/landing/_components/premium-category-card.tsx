@@ -3,10 +3,18 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { ArrowRight, LucideIcon, Sparkles } from "lucide-react"
+import {
+  ArrowRight,
+  LucideIcon,
+  Sparkles,
+  Clock,
+  Users,
+  TrendingUp,
+  Star
+} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export interface CategoryData {
   id: string
@@ -37,43 +45,92 @@ export default function PremiumCategoryCard({
 }: PremiumCategoryCardProps) {
   const [imageError, setImageError] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const [isExiting, setIsExiting] = useState(false)
 
   const fallbackImageUrl = `https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop`
 
   const Icon = category.icon
 
+  // Detect when card is leaving viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          setIsExiting(true)
+        } else if (entry.isIntersecting) {
+          setIsExiting(false)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    const cardElement = document.getElementById(`category-card-${category.id}`)
+    if (cardElement) {
+      observer.observe(cardElement)
+    }
+
+    return () => {
+      if (cardElement) {
+        observer.unobserve(cardElement)
+      }
+    }
+  }, [category.id])
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, scale: 0.9 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      id={`category-card-${category.id}`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.7,
-        delay: index * 0.15,
-        ease: [0.23, 1, 0.32, 1]
+        duration: 0.3,
+        delay: index * 0.05,
+        ease: "easeOut"
+      }}
+      animate={{
+        opacity: isExiting ? 0.3 : 1,
+        scale: isExiting ? 0.95 : 1,
+        rotateX: isExiting ? -5 : 0,
+        y: isExiting ? -20 : 0
       }}
       whileHover={{
-        y: -12,
+        y: -8,
         transition: {
-          duration: 0.4,
-          ease: [0.23, 1, 0.32, 1]
+          duration: 0.2,
+          ease: "easeOut"
         }
       }}
       className="group cursor-pointer"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      style={{
+        transformStyle: "preserve-3d",
+        perspective: 1000
+      }}
     >
       <Link href={category.href}>
         <div className="relative h-full overflow-hidden rounded-3xl bg-white shadow-[0_10px_40px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(236,72,153,0.25)]">
           {/* Enhanced Image Section with overlay */}
           <div className="relative h-64 overflow-hidden">
+            {/* Blur placeholder */}
+            <div
+              className={`absolute inset-0 bg-gradient-to-br from-pink-100 to-pink-200 transition-opacity duration-700 ${
+                imageLoaded ? "opacity-0" : "opacity-100"
+              }`}
+            />
+
             <Image
               src={imageError ? fallbackImageUrl : category.imageUrl}
               alt={category.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              className={`object-cover transition-all duration-700 ${
+                imageLoaded ? "scale-100 opacity-100" : "scale-105 opacity-0"
+              } group-hover:scale-110`}
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               onError={() => setImageError(true)}
+              onLoadingComplete={() => setImageLoaded(true)}
               priority={index < 2}
+              loading={index < 2 ? "eager" : "lazy"}
             />
 
             {/* Beautiful gradient overlay */}
@@ -104,19 +161,34 @@ export default function PremiumCategoryCard({
                 <Icon className="size-7 text-gray-900" />
               </motion.div>
 
-              {/* Activity Count */}
-              {category.activityCount && (
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.15 + 0.3 }}
-                >
-                  <Badge className="rounded-full bg-white/95 px-4 py-1.5 font-bold text-gray-900 shadow-lg backdrop-blur-sm">
-                    <Sparkles className="mr-1.5 size-3.5 text-pink-600" />
-                    {category.activityCount} experiences
-                  </Badge>
-                </motion.div>
-              )}
+              {/* Activity Count & Most Popular Badge */}
+              <div className="flex items-center gap-2">
+                {category.id === "water_sports" && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.15 + 0.2 }}
+                  >
+                    <Badge className="rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 px-3 py-1 font-bold text-black shadow-lg">
+                      <TrendingUp className="mr-1 size-3" />
+                      Most Popular
+                    </Badge>
+                  </motion.div>
+                )}
+
+                {category.activityCount && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.15 + 0.3 }}
+                  >
+                    <Badge className="rounded-full bg-white/95 px-4 py-1.5 font-bold text-gray-900 shadow-lg backdrop-blur-sm">
+                      <Sparkles className="mr-1.5 size-3.5 text-pink-600" />
+                      {category.activityCount} experiences
+                    </Badge>
+                  </motion.div>
+                )}
+              </div>
             </div>
 
             {/* Bottom Title Overlay */}
@@ -138,31 +210,71 @@ export default function PremiumCategoryCard({
 
           {/* Premium Content Section */}
           <div className="p-6">
-            {/* Description */}
-            <p className="mb-5 text-base leading-relaxed text-gray-700">
-              {category.description}
-            </p>
+            {/* Rating Stars */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.15 + 0.4 }}
+              className="mb-4 flex items-center gap-2"
+            >
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`size-5 ${
+                      i < 4
+                        ? "fill-yellow-400 text-yellow-400"
+                        : "fill-gray-200 text-gray-200"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-sm font-semibold text-gray-700">4.8</span>
+              <span className="text-sm text-gray-500">
+                ({Math.floor(Math.random() * 200) + 100} reviews)
+              </span>
+            </motion.div>
 
-            {/* Features List */}
-            <div className="mb-6 space-y-2.5">
-              {category.features.slice(0, 3).map((feature, featureIndex) => (
-                <motion.div
-                  key={feature}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: index * 0.15 + 0.5 + featureIndex * 0.1
-                  }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="flex size-5 items-center justify-center rounded-full bg-pink-100">
-                    <div className="size-2 rounded-full bg-pink-600" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-700">
-                    {feature}
-                  </span>
-                </motion.div>
-              ))}
+            {/* Quick Stats */}
+            <div className="mb-6 grid grid-cols-3 gap-3">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.15 + 0.5 }}
+                className="flex flex-col items-center rounded-lg bg-pink-50 p-3"
+              >
+                <Clock className="mb-1 size-5 text-pink-600" />
+                <span className="text-xs font-medium text-gray-600">
+                  Duration
+                </span>
+                <span className="text-sm font-bold text-gray-900">2-8 hrs</span>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.15 + 0.6 }}
+                className="flex flex-col items-center rounded-lg bg-pink-50 p-3"
+              >
+                <Users className="mb-1 size-5 text-pink-600" />
+                <span className="whitespace-nowrap text-xs font-medium text-gray-600">
+                  Group Size
+                </span>
+                <span className="text-sm font-bold text-gray-900">2-15</span>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.15 + 0.7 }}
+                className="flex flex-col items-center rounded-lg bg-pink-50 p-3"
+              >
+                <TrendingUp className="mb-1 size-5 text-pink-600" />
+                <span className="text-xs font-medium text-gray-600">
+                  Difficulty
+                </span>
+                <span className="text-sm font-bold text-gray-900">Easy</span>
+              </motion.div>
             </div>
 
             {/* Bottom Section */}

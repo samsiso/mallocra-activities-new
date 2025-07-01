@@ -5,11 +5,9 @@ Updated to include Footer component for consistent navigation across all marketi
 </ai_context>
 */
 
-"use server"
-
 import Header from "@/components/header"
 
-export default async function MarketingLayout({
+export default function MarketingLayout({
   children
 }: {
   children: React.ReactNode

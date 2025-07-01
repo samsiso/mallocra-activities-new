@@ -31,10 +31,17 @@ export default function WhatsAppButton({
   return (
     <Button
       onClick={handleWhatsAppClick}
-      className={`fixed bottom-6 right-6 z-50 size-14 rounded-full bg-green-500 p-0 shadow-lg transition-all duration-300 hover:scale-110 hover:bg-green-600 hover:shadow-xl ${className}`}
+      className={`fixed bottom-6 right-6 z-[9999] size-14 rounded-full bg-green-500 p-0 shadow-lg transition-all duration-300 hover:scale-110 hover:bg-green-600 hover:shadow-xl md:size-16 ${className}`}
+      style={{
+        position: "fixed",
+        bottom: "24px",
+        right: "24px",
+        WebkitTransform: "translate3d(0, 0, 0)", // Force GPU acceleration
+        transform: "translate3d(0, 0, 0)"
+      }}
       aria-label="Contact us on WhatsApp"
     >
-      <MessageCircle className="size-7 text-white" />
+      <MessageCircle className="size-7 text-white md:size-8" />
     </Button>
   )
 }

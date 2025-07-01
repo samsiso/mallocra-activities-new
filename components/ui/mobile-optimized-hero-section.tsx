@@ -12,11 +12,16 @@ import {
   MapPin,
   Play,
   Calendar,
-  ChevronDown
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import Image from "next/image"
+import { getVideoUrl, PROTECTED_CONFIG } from "@/lib/video-protection"
 
 interface MobileOptimizedHeroSectionProps {
   className?: string
@@ -64,17 +69,59 @@ function MobileCategoryCard({
   )
 }
 
+// Fallback video URLs - optimized for mobile
+const FALLBACK_VIDEOS = [
+  "https://player.vimeo.com/progressive/external/425878252.hd.mp4?s=5ad53fd73c3ea9d13af2c4b7d88b1b8e46ed0bbf",
+  "https://player.vimeo.com/external/396879338.hd.mp4?s=2dd53044e6e34f0bb5c69e84e3d3414ffbc31e1c",
+  // Additional public domain video fallbacks
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+]
+
 export default function MobileOptimizedHeroSection({
   className
 }: MobileOptimizedHeroSectionProps) {
-  const [showSearch, setShowSearch] = useState(false)
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [videosLoaded, setVideosLoaded] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+    false
+  ])
+  const [videoError, setVideoError] = useState<string | null>(null)
 
+  // Mobile images - beach, boats, jet skis, water activities
   const videos = [
     {
-      src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200&auto=format&fit=crop",
       poster:
-        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200&auto=format&fit=crop"
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200&auto=format&fit=crop",
+      alt: "Jet ski adventure in crystal clear Mallorca waters"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1200&auto=format&fit=crop",
+      poster:
+        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1200&auto=format&fit=crop",
+      alt: "Luxury yacht sailing in Mallorca bay"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1519452575417-564c1401ecc0?q=80&w=1200&auto=format&fit=crop",
+      poster:
+        "https://images.unsplash.com/photo-1519452575417-564c1401ecc0?q=80&w=1200&auto=format&fit=crop",
+      alt: "Beautiful beach and turquoise waters in Mallorca"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=1200&auto=format&fit=crop",
+      poster:
+        "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=1200&auto=format&fit=crop",
+      alt: "Speedboat tour along Mallorca coastline"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1499244571948-7ccddb3583f1?q=80&w=1200&auto=format&fit=crop",
+      poster:
+        "https://images.unsplash.com/photo-1499244571948-7ccddb3583f1?q=80&w=1200&auto=format&fit=crop",
+      alt: "Catamaran sailing at sunset in Mallorca"
     }
   ]
 
@@ -113,199 +160,214 @@ export default function MobileOptimizedHeroSection({
     }
   ]
 
+  // Auto-rotate videos every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentVideoIndex(prev => (prev + 1) % videos.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [videos.length])
+
+  const nextVideo = () => {
+    setCurrentVideoIndex(prev => (prev + 1) % videos.length)
+  }
+
+  const prevVideo = () => {
+    setCurrentVideoIndex(prev => (prev - 1 + videos.length) % videos.length)
+  }
+
   return (
-    <section className={cn("relative min-h-screen overflow-hidden", className)}>
-      {/* Video Background with Overlay */}
+    <section className={cn("relative h-screen overflow-hidden", className)}>
+      {/* Video/Image Background Carousel */}
       <div className="absolute inset-0">
-        <video
-          className="size-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={videos[currentVideoIndex].poster}
-        >
-          <source src={videos[currentVideoIndex].src} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
+        {videos.map((media, index) => {
+          const shouldRender =
+            index === currentVideoIndex ||
+            index === (currentVideoIndex + 1) % videos.length ||
+            index === (currentVideoIndex - 1 + videos.length) % videos.length
+
+          if (!shouldRender) return null
+
+          return (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentVideoIndex ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {/* Using images instead of videos for better mobile compatibility */}
+              <Image
+                src={media.src}
+                alt={media.alt}
+                fill
+                className="object-cover"
+                priority={index === currentVideoIndex}
+                quality={90}
+              />
+            </div>
+          )
+        })}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/70 via-purple-900/50 to-orange-900/70" />
       </div>
 
+      {/* Video Indicators */}
+      <div className="absolute bottom-20 left-1/2 z-10 flex -translate-x-1/2 space-x-2">
+        {videos.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setCurrentVideoIndex(index)
+              setVideoError(null) // Reset error when changing videos
+            }}
+            className={`h-2 w-6 rounded-full transition-colors ${
+              index === currentVideoIndex ? "bg-white" : "bg-white/40"
+            }`}
+            aria-label={`Go to video ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Debug info - remove after testing */}
+      {videoError && (
+        <div className="absolute left-4 top-4 z-20 rounded bg-red-500/80 p-2 text-xs text-white">
+          {videoError}
+        </div>
+      )}
+
       {/* Main Content */}
-      <div className="relative z-10 flex min-h-screen flex-col">
+      <div className="relative z-10 flex h-full flex-col">
         {/* Hero Content */}
-        <div className="flex flex-1 flex-col justify-center px-4 py-16">
+        <div className="flex flex-1 flex-col justify-center px-4 py-12">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-4"
+            className="mb-6"
           >
-            <Badge className="border-none bg-gradient-to-r from-pink-600 to-pink-500 px-3 py-1.5 text-xs font-medium text-white shadow-lg">
-              🏆 #1 Rated in Mallorca
+            <Badge
+              className="inline-flex border px-4 py-2 text-xs font-semibold text-black shadow-lg backdrop-blur-lg"
+              style={{
+                borderColor: "rgba(255, 29, 206, 0.2)",
+                backgroundColor: "rgba(255, 29, 206, 0.1)"
+              }}
+            >
+              <Sparkles
+                className="mr-2 size-4 drop-shadow-lg"
+                style={{ color: "#fff546" }}
+              />
+              <span className="text-white drop-shadow-sm">
+                #1 Activity Platform in Mallorca
+              </span>
             </Badge>
           </motion.div>
 
-          {/* Title */}
+          {/* Title - Matching Desktop */}
           <motion.h1
-            className="mb-4 text-4xl font-bold leading-tight"
+            className="mb-6 text-5xl font-black uppercase leading-none tracking-tighter"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <span className="block text-black drop-shadow-lg">Discover</span>
-            <span className="block text-yellow-400 drop-shadow-lg">
-              Mallorca's
+            <span className="block">
+              <span className="text-white drop-shadow-lg">WE </span>
+              <span className="text-yellow-400 drop-shadow-lg">ARE</span>
             </span>
-            <span className="block text-white drop-shadow-lg">
-              Best Activities
-            </span>
+            <span className="block text-black drop-shadow-lg">EXCURSIONS</span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
-            className="mb-6 text-base leading-relaxed text-white/90"
+            className="mb-6 text-base leading-relaxed text-white/95 drop-shadow-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Book instantly with local experts and create unforgettable memories
+            From thrilling water sports to cultural experiences. Book authentic
+            local activities with instant confirmation.
           </motion.p>
 
-          {/* Key Benefits */}
+          {/* Stats - Matching Desktop */}
           <motion.div
-            className="mb-8 grid grid-cols-2 gap-3"
+            className="mb-8 flex flex-wrap gap-2 text-xs text-white/95"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            {[
-              { icon: Zap, text: "Instant Booking", color: "text-yellow-400" },
-              { icon: MapPin, text: "Local Experts", color: "text-pink-400" },
-              { icon: Award, text: "Best Price", color: "text-yellow-400" },
-              { icon: Users, text: "Small Groups", color: "text-pink-400" }
-            ].map((benefit, index) => (
-              <div
-                key={benefit.text}
-                className="flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 p-3 backdrop-blur-sm"
-              >
-                <benefit.icon className={cn("size-4", benefit.color)} />
-                <span className="text-xs font-medium text-white">
-                  {benefit.text}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Quick Search Toggle */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mb-6"
-          >
-            <button
-              onClick={() => setShowSearch(!showSearch)}
-              className="flex w-full items-center justify-between rounded-xl border border-pink-500/40 bg-pink-500/20 p-4 backdrop-blur-md transition-all"
-            >
-              <div className="flex items-center gap-3">
-                <Search className="size-5 text-white" />
-                <span className="font-medium text-white">Quick Search</span>
-              </div>
-              <ChevronDown
-                className={cn(
-                  "size-5 text-white transition-transform",
-                  showSearch && "rotate-180"
-                )}
+            <div className="flex items-center gap-1 rounded-lg bg-black/20 px-2 py-1.5 backdrop-blur-sm">
+              <Star className="size-3 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+              <span className="font-medium">4.8/5 rating</span>
+            </div>
+            <div className="flex items-center gap-1 rounded-lg bg-black/20 px-2 py-1.5 backdrop-blur-sm">
+              <Users
+                className="size-3 drop-shadow-sm"
+                style={{ color: "#fa057c" }}
               />
-            </button>
-
-            {/* Expandable Search Form */}
-            {showSearch && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="mt-3 space-y-3 overflow-hidden"
-              >
-                <select className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white backdrop-blur-sm">
-                  <option>All Activities</option>
-                  <option>Water Sports</option>
-                  <option>Cultural Tours</option>
-                  <option>Adventures</option>
-                </select>
-                <input
-                  type="date"
-                  className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white backdrop-blur-sm"
-                />
-                <select className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white backdrop-blur-sm">
-                  <option>Number of Guests</option>
-                  <option>1 Person</option>
-                  <option>2 People</option>
-                  <option>3-4 People</option>
-                  <option>5+ People</option>
-                </select>
-                <Button className="w-full bg-gradient-to-r from-pink-600 to-pink-500 py-6 text-base font-semibold text-white shadow-lg">
-                  Search Activities
-                </Button>
-              </motion.div>
-            )}
+              <span className="font-medium">50k+ customers</span>
+            </div>
+            <div className="flex items-center gap-1 rounded-lg bg-black/20 px-2 py-1.5 backdrop-blur-sm">
+              <MapPin
+                className="size-3 drop-shadow-sm"
+                style={{ color: "#fa057c" }}
+              />
+              <span className="font-medium">Island-wide</span>
+            </div>
           </motion.div>
 
-          {/* Action Buttons */}
+          {/* Quick Search Form - Redesigned */}
           <motion.div
-            className="space-y-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
+            className="mb-6"
           >
             <Link href="/activities" className="block">
-              <Button className="w-full bg-gradient-to-r from-pink-600 to-pink-500 py-6 text-base font-semibold text-white shadow-lg">
-                Browse All Activities
-              </Button>
+              <div
+                className="rounded-2xl border-2 p-5 shadow-xl backdrop-blur-lg transition-all duration-300 active:scale-95"
+                style={{
+                  borderColor: "rgba(255, 245, 70, 0.5)",
+                  backgroundColor: "rgba(0, 0, 0, 0.4)"
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex size-12 items-center justify-center rounded-full"
+                      style={{ backgroundColor: "#fff546" }}
+                    >
+                      <Search className="size-6 text-black" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">
+                        Find Your Perfect Activity
+                      </h3>
+                      <p className="text-sm text-white/80">
+                        Explore 100+ amazing experiences
+                      </p>
+                    </div>
+                  </div>
+                  <ChevronRight className="size-6 text-yellow-400" />
+                </div>
+              </div>
             </Link>
-            <Button
-              variant="outline"
-              className="w-full border-white/30 bg-white/10 py-6 text-base font-semibold text-white backdrop-blur-sm"
-            >
-              <Play className="mr-2 size-5" />
-              Watch Video Tour
-            </Button>
           </motion.div>
         </div>
-
-        {/* Categories Section */}
-        <div className="border-t border-white/10 bg-black/30 px-4 py-6 backdrop-blur-md">
-          <motion.h3
-            className="mb-4 text-lg font-bold text-white"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            Popular Categories
-          </motion.h3>
-          <div className="grid grid-cols-2 gap-3">
-            {categories.map(category => (
-              <MobileCategoryCard key={category.title} {...category} />
-            ))}
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-4 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="flex h-6 w-4 items-start justify-center rounded-full border border-white/30 p-1">
-            <motion.div
-              className="size-0.5 rounded-full bg-white"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <div className="flex h-6 w-4 items-start justify-center rounded-full border border-white/30 p-1">
+          <motion.div
+            className="size-0.5 rounded-full bg-white"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+        </div>
+      </motion.div>
     </section>
   )
 }

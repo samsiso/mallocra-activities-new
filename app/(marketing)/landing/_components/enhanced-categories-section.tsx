@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { Activity } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { categoriesData } from "../_data/categories-data"
@@ -21,10 +21,10 @@ function AnimatedSection({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.4, delay }}
       className={className}
     >
       {children}
@@ -42,6 +42,20 @@ export default function EnhancedCategoriesSection() {
     }))
   )
   const [isUpdating, setIsUpdating] = useState(false)
+  const [currentCard, setCurrentCard] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  // Scroll-based exit animations
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+
+  // Transform values for exit animations
+  const exitScale = useTransform(scrollYProgress, [0.7, 1], [1, 0.9])
+  const exitOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0])
+  const exitY = useTransform(scrollYProgress, [0.7, 1], [0, -50])
 
   useEffect(() => {
     async function fetchActivityCounts() {
@@ -128,6 +142,22 @@ export default function EnhancedCategoriesSection() {
     return () => clearTimeout(timeoutId)
   }, [])
 
+  // Handle scroll to detect current card
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft
+      const cardWidth = container.offsetWidth
+      const newIndex = Math.round(scrollLeft / cardWidth)
+      setCurrentCard(newIndex)
+    }
+
+    container.addEventListener("scroll", handleScroll)
+    return () => container.removeEventListener("scroll", handleScroll)
+  }, [])
+
   const totalActivities = categoriesWithCounts.reduce(
     (sum, cat) => sum + (cat.activityCount || 0),
     0
@@ -143,10 +173,14 @@ export default function EnhancedCategoriesSection() {
   })
 
   return (
-    <section
-      className="relative overflow-hidden py-24"
+    <motion.section
+      ref={sectionRef}
+      className="relative overflow-hidden py-12 md:py-24"
       style={{
-        background: `linear-gradient(135deg, #fce4ec, #f8bbd0, #fce4ec)`
+        background: `linear-gradient(135deg, #fb067d, #ec4899, #fb067d)`,
+        scale: exitScale,
+        opacity: exitOpacity,
+        y: exitY
       }}
       aria-label="Activity categories"
     >
@@ -177,16 +211,17 @@ export default function EnhancedCategoriesSection() {
 
       <div className="relative mx-auto max-w-7xl px-4">
         {/* Enhanced Header */}
-        <AnimatedSection className="mb-20 text-center">
+        <AnimatedSection className="mb-8 text-center md:mb-20">
           <div className="relative inline-block">
             <Badge
-              className="mb-6 px-6 py-3 text-base font-bold text-white shadow-2xl"
+              className="mb-4 px-5 py-2 text-sm font-bold text-white shadow-2xl md:mb-6 md:px-6 md:py-3 md:text-base"
               style={{
-                background: `linear-gradient(to right, #ff1dce, #dc2626)`,
-                boxShadow: "0 20px 25px -5px rgba(255, 29, 206, 0.4)"
+                background: `rgba(255, 255, 255, 0.2)`,
+                backdropFilter: "blur(10px)",
+                boxShadow: "0 10px 20px -5px rgba(0, 0, 0, 0.3)"
               }}
             >
-              <Activity className="mr-2 size-5" />
+              <Activity className="mr-2 size-4 md:size-5" />
               Popular Categories
             </Badge>
           </div>
@@ -195,17 +230,13 @@ export default function EnhancedCategoriesSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8 text-5xl font-bold text-gray-900 sm:text-6xl lg:text-7xl"
+            className="mb-4 text-3xl font-bold text-white sm:text-4xl md:mb-8 md:text-5xl lg:text-7xl"
           >
             Explore by{" "}
             <span
               className="inline-block"
               style={{
-                background: "linear-gradient(to right, #db2777, #ec4899)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                color: "transparent"
+                color: "#fff546"
               }}
             >
               Category
@@ -216,12 +247,12 @@ export default function EnhancedCategoriesSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-600 sm:text-2xl"
+            className="mx-auto max-w-3xl text-base leading-relaxed text-white/90 sm:text-lg md:text-xl"
           >
             Discover amazing activities across Mallorca's most exciting
             categories.
             {!isUpdating && totalActivities > 0 && (
-              <span className="mt-2 block text-lg font-semibold text-pink-600">
+              <span className="mt-2 block text-sm font-semibold text-yellow-300 md:text-lg">
                 {totalActivities} premium experiences await you
               </span>
             )}
@@ -306,88 +337,113 @@ export default function EnhancedCategoriesSection() {
 
           {/* Horizontal Scrolling Container */}
           <div
+            ref={containerRef}
             id="categories-carousel"
-            className="scrollbar-hide flex gap-6 overflow-x-auto pb-6 lg:gap-8"
+            className="scrollbar-hide flex overflow-x-auto pb-4 md:gap-6 md:px-4 md:pb-6 lg:gap-8"
             style={{
               scrollSnapType: "x mandatory",
               scrollBehavior: "smooth",
-              scrollPadding: "0 24px",
+              scrollPadding: "0",
               willChange: "scroll-position",
               transform: "translate3d(0, 0, 0)",
               contain: "layout style paint"
             }}
           >
-            {/* Always show actual category cards with data */}
-            {categoriesWithCounts.map((category, index) => (
-              <div
-                key={category.id}
-                className="flex-none"
-                style={{
-                  width: "350px",
-                  minWidth: "350px",
-                  scrollSnapAlign: "start"
-                }}
-              >
-                <PremiumCategoryCard category={category} index={index} />
-              </div>
-            ))}
+            {/* Show skeleton while loading, then actual category cards */}
+            {isUpdating
+              ? // Show skeleton cards while loading
+                [...Array(4)].map((_, index) => (
+                  <div
+                    key={`skeleton-${index}`}
+                    className="w-full flex-none px-4 md:w-[350px] md:px-0"
+                    style={{
+                      scrollSnapAlign: "start"
+                    }}
+                  >
+                    <CategoryCardSkeleton index={index} />
+                  </div>
+                ))
+              : // Show actual category cards with data
+                categoriesWithCounts.map((category, index) => (
+                  <div
+                    key={category.id}
+                    className="w-full flex-none px-4 md:w-[350px] md:px-0"
+                    style={{
+                      scrollSnapAlign: "start"
+                    }}
+                  >
+                    <PremiumCategoryCard category={category} index={index} />
+                  </div>
+                ))}
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="mt-6 flex justify-center lg:hidden">
-            <div className="flex items-center gap-2 rounded-full border-2 border-white bg-white/90 px-4 py-2 shadow-lg backdrop-blur-sm">
-              <svg
-                className="size-4 text-gray-700"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M7 16l-4-4m0 0l4-4m-4 4h18"
+          {/* Swipe Indicators and Progress Bar - Mobile Only */}
+          <div className="mt-6 space-y-3 px-4 lg:hidden">
+            {/* Progress Bar */}
+            <div className="relative h-1 w-full overflow-hidden rounded-full bg-white/20">
+              <motion.div
+                className="absolute left-0 top-0 h-full bg-yellow-400"
+                initial={{ width: "0%" }}
+                animate={{
+                  width: `${((currentCard + 1) / categoriesWithCounts.length) * 100}%`
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              />
+            </div>
+
+            {/* Dot Indicators */}
+            <div className="flex justify-center gap-2">
+              {categoriesWithCounts.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    const container = containerRef.current
+                    if (container) {
+                      const cardWidth = container.offsetWidth
+                      container.scrollTo({
+                        left: index * cardWidth,
+                        behavior: "smooth"
+                      })
+                    }
+                  }}
+                  className={`transition-all duration-300 ${
+                    index === currentCard
+                      ? "h-2 w-8 bg-white"
+                      : "size-2 bg-white/40 hover:bg-white/60"
+                  } rounded-full`}
+                  aria-label={`Go to category ${index + 1}`}
                 />
-              </svg>
-              <span className="text-sm font-medium text-gray-700">
-                Scroll to explore categories
+              ))}
+            </div>
+
+            {/* Card Counter */}
+            <div className="text-center">
+              <span className="text-sm font-medium text-white/80">
+                {currentCard + 1} of {categoriesWithCounts.length} categories
               </span>
-              <svg
-                className="size-4 text-gray-700"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
             </div>
           </div>
         </AnimatedSection>
 
         {/* Enhanced Call to Action */}
-        <AnimatedSection delay={1.2} className="mt-20 text-center">
+        <AnimatedSection delay={0.6} className="mt-12 text-center md:mt-20">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <p className="mb-4 text-lg text-gray-600">
+            <p className="mb-4 text-base text-white/90 md:text-lg">
               Can't decide? Browse all our amazing experiences
             </p>
             <motion.a
               href="/activities"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-pink-600 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:shadow-xl"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-pink-600 shadow-lg transition-all duration-300 hover:bg-yellow-400 hover:text-black hover:shadow-xl md:px-8 md:py-4"
               whileHover={{ y: -2, scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Activity className="size-5" />
+              <Activity className="size-4 md:size-5" />
               View All Activities
-              <span className="ml-2 text-lg">→</span>
+              <span className="ml-2 text-base md:text-lg">→</span>
             </motion.a>
           </motion.div>
         </AnimatedSection>
       </div>
-    </section>
+    </motion.section>
   )
 }

@@ -1433,24 +1433,30 @@ export default function LandingPage() {
                   </p>
 
                   {/* Stats */}
-                  <div className="mb-10 flex flex-wrap justify-center gap-3 text-sm text-white/95 sm:gap-8 sm:text-base lg:justify-start">
-                    <div className="flex items-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
-                      <Star className="size-4 fill-yellow-400 text-yellow-400 drop-shadow-sm sm:size-5" />
-                      <span className="font-medium">4.8/5 rating</span>
+                  <div className="mb-10 flex justify-center gap-2 text-sm text-white/95 sm:gap-4 sm:text-base lg:justify-start">
+                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
+                      <Star className="size-4 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+                      <span className="whitespace-nowrap font-medium">
+                        4.8/5 rating
+                      </span>
                     </div>
-                    <div className="flex items-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
+                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
                       <Users
-                        className="size-4 drop-shadow-sm sm:size-5"
+                        className="size-4 drop-shadow-sm"
                         style={{ color: "#fa057c" }}
                       />
-                      <span className="font-medium">50k+ customers</span>
+                      <span className="whitespace-nowrap font-medium">
+                        50k+ customers
+                      </span>
                     </div>
-                    <div className="flex items-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
+                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
                       <MapPin
-                        className="size-4 drop-shadow-sm sm:size-5"
+                        className="size-4 drop-shadow-sm"
                         style={{ color: "#fa057c" }}
                       />
-                      <span className="font-medium">Island-wide</span>
+                      <span className="whitespace-nowrap font-medium">
+                        Island-wide
+                      </span>
                     </div>
                   </div>
                 </div>
