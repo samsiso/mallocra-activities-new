@@ -136,7 +136,7 @@ export default function PreferredFooter() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="inline-block text-gray-300 transition-all duration-200 hover:translate-x-2 hover:text-yellow-400"
+                        className="inline-block text-xs text-gray-300 transition-all duration-200 hover:translate-x-2 hover:text-yellow-400 sm:text-sm lg:text-base"
                       >
                         {link.label}
                       </Link>
@@ -163,7 +163,7 @@ export default function PreferredFooter() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="inline-block text-gray-300 transition-all duration-200 hover:translate-x-2 hover:text-yellow-400"
+                        className="inline-block text-xs text-gray-300 transition-all duration-200 hover:translate-x-2 hover:text-yellow-400 sm:text-sm lg:text-base"
                       >
                         {link.label}
                       </Link>

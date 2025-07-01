@@ -24,7 +24,7 @@ function AnimatedSection({
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay }}
+      transition={{ duration: 0.4, delay }}
       className={className}
     >
       {children}
@@ -149,14 +149,20 @@ export default function EnhancedCategoriesSection() {
 
     const handleScroll = () => {
       const scrollLeft = container.scrollLeft
-      const cardWidth = container.offsetWidth
-      const newIndex = Math.round(scrollLeft / cardWidth)
-      setCurrentCard(newIndex)
+      const containerWidth = container.offsetWidth
+      // Account for padding and actual card width
+      const cardElements = container.querySelectorAll(".category-card")
+      if (cardElements.length > 0) {
+        const firstCard = cardElements[0] as HTMLElement
+        const cardWidth = firstCard.offsetWidth + 32 // card width + gap
+        const newIndex = Math.round(scrollLeft / cardWidth)
+        setCurrentCard(Math.min(newIndex, categoriesWithCounts.length - 1))
+      }
     }
 
     container.addEventListener("scroll", handleScroll)
     return () => container.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [categoriesWithCounts.length])
 
   const totalActivities = categoriesWithCounts.reduce(
     (sum, cat) => sum + (cat.activityCount || 0),
@@ -175,52 +181,30 @@ export default function EnhancedCategoriesSection() {
   return (
     <motion.section
       ref={sectionRef}
-      className="relative overflow-hidden py-12 md:py-24"
+      className="relative overflow-hidden py-8 md:py-16 lg:py-24"
       style={{
-        background: `linear-gradient(135deg, #fb067d, #ec4899, #fb067d)`,
+        background: "linear-gradient(135deg, #fb067d 0%, #ff2d8a 100%)",
         scale: exitScale,
         opacity: exitOpacity,
         y: exitY
       }}
       aria-label="Activity categories"
     >
-      {/* Enhanced Background Effects */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse at top, rgba(255, 29, 206, 0.3), rgba(255, 245, 70, 0.15), transparent)`
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse at bottom right, rgba(255, 29, 206, 0.2), transparent, transparent)`
-        }}
-      />
-      <div className="bg-grid-white/[0.02] absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,_transparent_20%,_black)]" />
-
-      {/* Floating orbs for ambient lighting */}
-      <div
-        className="absolute left-1/4 top-20 size-96 rounded-full blur-3xl"
-        style={{ backgroundColor: "rgba(255, 29, 206, 0.2)" }}
-      />
-      <div
-        className="absolute bottom-20 right-1/4 size-96 rounded-full blur-3xl"
-        style={{ backgroundColor: "rgba(255, 245, 70, 0.15)" }}
-      />
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/15" />
 
       <div className="relative mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
         {/* Enhanced Header */}
-        <AnimatedSection className="mb-8 text-center sm:mb-12 lg:mb-20">
+        <AnimatedSection className="mb-6 text-center sm:mb-8 lg:mb-12">
           <div className="relative inline-block">
             <Badge
-              className="mb-4 px-3 py-2 text-sm font-bold text-white shadow-2xl sm:mb-6 sm:px-4 sm:py-2 sm:text-base lg:mb-6 lg:px-6 lg:py-3"
+              className="mb-3 px-3 py-1.5 text-xs font-bold text-black shadow-lg sm:mb-4 sm:px-4 sm:py-2 sm:text-sm lg:mb-6 lg:px-6 lg:py-3 lg:text-base"
               style={{
-                background: `linear-gradient(to right, #ff1dce, #dc2626)`,
-                boxShadow: "0 20px 25px -5px rgba(255, 29, 206, 0.4)"
+                backgroundColor: "#fff546",
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)"
               }}
             >
-              <Activity className="mr-1 size-4 sm:mr-2 sm:size-5" />
+              <Activity className="mr-1 size-3 sm:mr-2 sm:size-4 lg:size-5" />
               Popular Categories
             </Badge>
           </div>
@@ -228,33 +212,24 @@ export default function EnhancedCategoriesSection() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-4 text-3xl font-bold text-white sm:mb-6 sm:text-4xl md:text-5xl lg:mb-8 lg:text-6xl xl:text-7xl"
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="mb-3 text-3xl font-bold sm:mb-4 sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl xl:text-7xl"
           >
-            Explore by{" "}
-            <span
-              className="bg-gradient-to-r bg-clip-text text-transparent"
-              style={{
-                background: `linear-gradient(to right, #ff1dce, #fff546)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent"
-              }}
-            >
-              Category
-            </span>
+            <span className="text-white">Explore by </span>
+            <span className="text-yellow-400">Category</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-300 sm:text-2xl"
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="mx-auto max-w-3xl text-base leading-relaxed text-white/90 sm:text-lg lg:text-xl"
           >
             Discover amazing activities across Mallorca's most exciting
             categories.
             {!isUpdating && totalActivities > 0 && (
               <span
-                className="mt-2 block text-lg font-semibold"
+                className="mt-2 block text-sm font-semibold sm:text-base"
                 style={{ color: "#fff546" }}
               >
                 {totalActivities} premium experiences await you
@@ -264,13 +239,13 @@ export default function EnhancedCategoriesSection() {
         </AnimatedSection>
 
         {/* Enhanced Categories Horizontal Scroll */}
-        <AnimatedSection delay={0.6} className="relative">
+        <AnimatedSection delay={0.3} className="relative">
           {/* Navigation buttons */}
           <div className="absolute -top-20 right-0 z-10 hidden gap-2 lg:flex">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/10"
+              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-150 hover:bg-white/10"
               style={
                 {
                   "--hover-border-color": "rgba(255, 29, 206, 0.6)"
@@ -305,7 +280,7 @@ export default function EnhancedCategoriesSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/10"
+              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-150 hover:bg-white/10"
               style={
                 {
                   "--hover-border-color": "rgba(255, 29, 206, 0.6)"
@@ -359,7 +334,7 @@ export default function EnhancedCategoriesSection() {
                 [...Array(4)].map((_, index) => (
                   <div
                     key={`skeleton-${index}`}
-                    className="w-full flex-none px-4 md:w-[350px] md:px-0"
+                    className="category-card w-full flex-none px-4 md:w-[350px] md:px-0"
                     style={{
                       scrollSnapAlign: "start"
                     }}
@@ -371,7 +346,7 @@ export default function EnhancedCategoriesSection() {
                 categoriesWithCounts.map((category, index) => (
                   <div
                     key={category.id}
-                    className="w-full flex-none px-4 md:w-[350px] md:px-0"
+                    className="category-card w-full flex-none px-4 md:w-[350px] md:px-0"
                     style={{
                       scrollSnapAlign: "start"
                     }}
@@ -391,7 +366,7 @@ export default function EnhancedCategoriesSection() {
                 animate={{
                   width: `${((currentCard + 1) / categoriesWithCounts.length) * 100}%`
                 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.15, ease: "easeOut" }}
               />
             </div>
 
@@ -403,11 +378,15 @@ export default function EnhancedCategoriesSection() {
                   onClick={() => {
                     const container = containerRef.current
                     if (container) {
-                      const cardWidth = container.offsetWidth
-                      container.scrollTo({
-                        left: index * cardWidth,
-                        behavior: "smooth"
-                      })
+                      const cardElements =
+                        container.querySelectorAll(".category-card")
+                      if (cardElements.length > index) {
+                        const targetCard = cardElements[index] as HTMLElement
+                        container.scrollTo({
+                          left: targetCard.offsetLeft - 16, // Account for padding
+                          behavior: "smooth"
+                        })
+                      }
                     }
                   }}
                   className={`transition-all duration-300 ${
@@ -430,34 +409,22 @@ export default function EnhancedCategoriesSection() {
         </AnimatedSection>
 
         {/* Enhanced Call to Action */}
-        <AnimatedSection delay={1.2} className="mt-20 text-center">
+        <AnimatedSection
+          delay={0.6}
+          className="mt-10 text-center sm:mt-12 lg:mt-16"
+        >
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <p className="mb-4 text-lg text-gray-400">
+            <p className="mb-3 text-sm text-white/80 sm:text-base">
               Can't decide? Browse all our amazing experiences
             </p>
             <motion.a
               href="/activities"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-white backdrop-blur-sm transition-all duration-300"
-              style={
-                {
-                  background: `linear-gradient(to right, rgba(255, 29, 206, 0.2), rgba(255, 245, 70, 0.2))`,
-                  "--hover-border-color": "#ff1dce",
-                  "--hover-bg": `linear-gradient(to right, rgba(255, 29, 206, 0.3), rgba(255, 245, 70, 0.3))`
-                } as React.CSSProperties
-              }
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 29, 206, 0.6)"
-                e.currentTarget.style.background = `linear-gradient(to right, rgba(255, 29, 206, 0.3), rgba(255, 245, 70, 0.3))`
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)"
-                e.currentTarget.style.background = `linear-gradient(to right, rgba(255, 29, 206, 0.2), rgba(255, 245, 70, 0.2))`
-              }}
+              className="inline-flex items-center gap-2 rounded-full bg-yellow-400 px-6 py-3 font-semibold text-black shadow-lg transition-all duration-150 hover:bg-yellow-300 hover:shadow-xl sm:px-8 sm:py-4"
               whileHover={{ y: -2 }}
             >
-              <Activity className="size-5" />
+              <Activity className="size-4 sm:size-5" />
               View All Activities
-              <span className="ml-2 text-lg">→</span>
+              <span className="ml-1 text-base sm:text-lg">→</span>
             </motion.a>
           </motion.div>
         </AnimatedSection>

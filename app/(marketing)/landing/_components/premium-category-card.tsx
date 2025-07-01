@@ -83,8 +83,8 @@ export default function PremiumCategoryCard({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.3,
-        delay: index * 0.05,
+        duration: 0.15,
+        delay: index * 0.025,
         ease: "easeOut"
       }}
       animate={{
@@ -96,7 +96,7 @@ export default function PremiumCategoryCard({
       whileHover={{
         y: -8,
         transition: {
-          duration: 0.2,
+          duration: 0.1,
           ease: "easeOut"
         }
       }}
@@ -109,12 +109,12 @@ export default function PremiumCategoryCard({
       }}
     >
       <Link href={category.href}>
-        <div className="relative h-full overflow-hidden rounded-3xl bg-white shadow-[0_10px_40px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(236,72,153,0.25)]">
+        <div className="duration-250 relative h-full overflow-hidden rounded-3xl bg-white shadow-[0_10px_40px_rgba(0,0,0,0.1)] transition-all hover:shadow-[0_20px_60px_rgba(236,72,153,0.25)]">
           {/* Enhanced Image Section with overlay */}
           <div className="relative h-64 overflow-hidden">
             {/* Blur placeholder */}
             <div
-              className={`absolute inset-0 bg-gradient-to-br from-pink-100 to-pink-200 transition-opacity duration-700 ${
+              className={`duration-350 absolute inset-0 bg-gradient-to-br from-pink-100 to-pink-200 transition-opacity ${
                 imageLoaded ? "opacity-0" : "opacity-100"
               }`}
             />
@@ -123,7 +123,7 @@ export default function PremiumCategoryCard({
               src={imageError ? fallbackImageUrl : category.imageUrl}
               alt={category.title}
               fill
-              className={`object-cover transition-all duration-700 ${
+              className={`duration-350 object-cover transition-all ${
                 imageLoaded ? "scale-100 opacity-100" : "scale-105 opacity-0"
               } group-hover:scale-110`}
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -146,49 +146,20 @@ export default function PremiumCategoryCard({
               }}
             />
 
-            {/* Top Elements */}
+            {/* Top Elements - Clean, no badges */}
             <div className="absolute inset-x-6 top-6 flex items-start justify-between">
-              {/* Premium Icon Badge */}
+              {/* Premium Icon Only */}
               <motion.div
                 initial={{ scale: 1, rotate: 0 }}
                 whileHover={{
                   scale: 1.1,
                   rotate: 5,
-                  transition: { duration: 0.3 }
+                  transition: { duration: 0.15 }
                 }}
                 className="rounded-2xl bg-white p-3 shadow-xl"
               >
                 <Icon className="size-7 text-gray-900" />
               </motion.div>
-
-              {/* Activity Count & Most Popular Badge */}
-              <div className="flex items-center gap-2">
-                {category.id === "water_sports" && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.15 + 0.2 }}
-                  >
-                    <Badge className="rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 px-3 py-1 font-bold text-black shadow-lg">
-                      <TrendingUp className="mr-1 size-3" />
-                      Most Popular
-                    </Badge>
-                  </motion.div>
-                )}
-
-                {category.activityCount && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.15 + 0.3 }}
-                  >
-                    <Badge className="rounded-full bg-white/95 px-4 py-1.5 font-bold text-gray-900 shadow-lg backdrop-blur-sm">
-                      <Sparkles className="mr-1.5 size-3.5 text-pink-600" />
-                      {category.activityCount} experiences
-                    </Badge>
-                  </motion.div>
-                )}
-              </div>
             </div>
 
             {/* Bottom Title Overlay */}
@@ -196,7 +167,7 @@ export default function PremiumCategoryCard({
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15 + 0.4 }}
+                transition={{ delay: index * 0.075 + 0.2 }}
               >
                 <h3 className="mb-1.5 text-3xl font-bold text-white drop-shadow-lg">
                   {category.title}
@@ -240,7 +211,7 @@ export default function PremiumCategoryCard({
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.15 + 0.5 }}
+                transition={{ delay: index * 0.075 + 0.25 }}
                 className="flex flex-col items-center rounded-lg bg-pink-50 p-3"
               >
                 <Clock className="mb-1 size-5 text-pink-600" />
@@ -253,7 +224,7 @@ export default function PremiumCategoryCard({
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.15 + 0.6 }}
+                transition={{ delay: index * 0.075 + 0.3 }}
                 className="flex flex-col items-center rounded-lg bg-pink-50 p-3"
               >
                 <Users className="mb-1 size-5 text-pink-600" />
@@ -266,7 +237,7 @@ export default function PremiumCategoryCard({
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.15 + 0.7 }}
+                transition={{ delay: index * 0.075 + 0.35 }}
                 className="flex flex-col items-center rounded-lg bg-pink-50 p-3"
               >
                 <TrendingUp className="mb-1 size-5 text-pink-600" />
@@ -299,9 +270,9 @@ export default function PremiumCategoryCard({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="group/btn rounded-full bg-gradient-to-r from-pink-600 to-pink-500 px-6 py-2.5 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl">
+                <Button className="group/btn rounded-full bg-gradient-to-r from-pink-600 to-pink-500 px-6 py-2.5 font-semibold text-white shadow-lg transition-all duration-150 hover:shadow-xl">
                   Explore
-                  <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                  <ArrowRight className="ml-2 size-4 transition-transform duration-150 group-hover/btn:translate-x-1" />
                 </Button>
               </motion.div>
             </div>
@@ -314,7 +285,7 @@ export default function PremiumCategoryCard({
               x: isHovered ? "100%" : "-100%",
               opacity: isHovered ? 1 : 0
             }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
             style={{ pointerEvents: "none" }}
           />

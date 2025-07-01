@@ -29,8 +29,17 @@ import {
   getActivitiesSupabaseAction,
   ActivityWithDetails
 } from "@/actions/db/activities-actions"
-import { EnhancedLeafletMap } from "./enhanced-leaflet-map"
+import dynamic from "next/dynamic"
 import { MapLocationSkeleton } from "./map-location-skeleton"
+
+// Dynamic import to avoid SSR issues with Leaflet
+const EnhancedLeafletMap = dynamic(
+  () => import("./enhanced-leaflet-map").then(mod => mod.EnhancedLeafletMap),
+  {
+    ssr: false,
+    loading: () => <MapLocationSkeleton />
+  }
+)
 
 interface EnhancedActivitiesMapSectionProps {
   className?: string
@@ -427,253 +436,245 @@ export function EnhancedActivitiesMapSection({
 
   return (
     <motion.section
-      className={`relative overflow-hidden py-20 ${className}`}
+      className={`relative overflow-hidden py-12 sm:py-16 lg:py-20 ${className}`}
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
     >
-      {/* Premium Background with Glassmorphism */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
+      {/* Deep Pink Brand Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-600 via-pink-500 to-pink-600" />
 
       {/* Ambient Lighting Effects */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute left-1/4 top-1/4 size-96 rounded-full bg-red-600/20 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 size-96 rounded-full bg-amber-500/20 blur-3xl" />
-        <div className="absolute left-1/2 top-1/2 size-96 rounded-full bg-red-800/10 blur-3xl" />
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute left-1/4 top-0 size-72 rounded-full bg-yellow-400/10 blur-3xl sm:size-96" />
+        <div className="absolute bottom-0 right-1/4 size-72 rounded-full bg-pink-300/10 blur-3xl sm:size-96" />
       </div>
 
-      {/* Noise Texture Overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-        }}
-      />
+      {/* Pattern Overlay - removed to fix syntax error */}
 
-      <div className="relative mx-auto max-w-7xl px-4">
+      <div className="relative mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
         {/* Header Section */}
-        <motion.div className="mb-16 text-center" variants={itemVariants}>
-          <Badge className="mb-4 border-red-600/30 bg-red-600/15 px-4 py-2 text-red-400 backdrop-blur-xl">
-            <MapPin className="mr-2 size-4" />
+        <motion.div
+          className="mb-6 text-center sm:mb-8"
+          variants={itemVariants}
+        >
+          <Badge className="mb-3 bg-gradient-to-r from-yellow-400 to-amber-500 px-3 py-1.5 text-xs font-bold text-black shadow-lg sm:mb-4 sm:px-4 sm:py-2 sm:text-sm">
+            <MapPin className="mr-1 size-3 sm:mr-2 sm:size-4" />
             Explore Locations
           </Badge>
 
-          <h2 className="mb-4 text-4xl font-bold text-white lg:text-5xl">
+          <h2 className="mb-3 text-2xl font-bold text-white sm:mb-4 sm:text-3xl lg:text-5xl">
             Activities Across{" "}
-            <span className="bg-gradient-to-r from-red-500 to-amber-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
               Mallorca
             </span>
           </h2>
 
-          <p className="mx-auto max-w-3xl text-xl text-gray-200">
-            From pristine beaches to historic sites, discover amazing activities
-            spread across the beautiful island of Mallorca.
+          <p className="mx-auto max-w-3xl text-sm text-white/90 sm:text-base lg:text-xl">
+            Discover amazing activities across the beautiful island
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          {/* Enhanced Interactive Map */}
-          <motion.div variants={itemVariants}>
+        {/* Map Section - Now directly below title */}
+        <motion.div variants={itemVariants} className="mb-8 sm:mb-12">
+          <div className="h-[300px] sm:h-[400px] lg:h-[500px]">
             {isUpdating ? (
               <MapLocationSkeleton />
             ) : (
               <EnhancedLeafletMap
                 activities={activities}
-                height="500px"
+                height="100%"
                 className="w-full"
                 showLegend={true}
               />
             )}
-          </motion.div>
+          </div>
+        </motion.div>
 
-          {/* Enhanced Location Highlights */}
-          <motion.div variants={itemVariants}>
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-white">
-                Featured Locations ({activities.length} activities)
-              </h3>
+        {/* Enhanced Location Highlights - Now below map */}
+        <motion.div variants={itemVariants}>
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-lg font-bold text-white sm:text-xl lg:text-2xl">
+              Featured Locations ({activities.length} activities)
+            </h3>
 
-              {isUpdating ? (
-                <div className="space-y-4">
-                  {[...Array(3)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="animate-pulse rounded-lg border border-gray-800 bg-gray-800/50 p-4"
-                    >
-                      <div className="mb-2 h-6 w-3/4 rounded bg-gray-700" />
-                      <div className="h-4 w-full rounded bg-gray-700" />
-                    </div>
-                  ))}
-                </div>
-              ) : activities.length > 0 ? (
-                <div className="space-y-4">
-                  {/* Scrollable Featured Activity Cards Container */}
-                  <div className="relative">
-                    <motion.div
-                      className="scrollbar-thin scrollbar-track-gray-800/20 scrollbar-thumb-red-600/50 hover:scrollbar-thumb-red-600/70 h-[400px] space-y-4 overflow-y-auto pr-2"
-                      variants={containerVariants}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      {/* Featured Activity Cards - Show all activities */}
-                      {activities.map((activity, index) => {
-                        const categoryConfig = locationCategories.find(
-                          cat => cat.id === activity.category
-                        )
-                        return (
-                          <motion.div
-                            key={activity.id}
-                            className="group relative overflow-hidden rounded-lg border border-white/10 bg-black/30 backdrop-blur-xl transition-all duration-300 hover:border-red-500/40 hover:bg-black/40"
-                            variants={cardVariants}
-                            whileHover="hover"
-                          >
-                            <div className="relative p-4">
-                              {/* Activity Header */}
-                              <div className="mb-3 flex items-start justify-between">
-                                <div className="flex items-center gap-3">
-                                  <div
-                                    className={`flex size-12 items-center justify-center rounded-full bg-gradient-to-br ${categoryConfig?.gradient || "from-red-600 to-amber-500"}`}
-                                  >
-                                    <span className="text-xl">
-                                      {categoryConfig?.emoji || "🎯"}
-                                    </span>
-                                  </div>
-                                  <div className="flex-1">
-                                    <h4 className="font-bold leading-tight text-white">
-                                      {activity.title}
-                                    </h4>
-                                    <p className="mt-1 flex items-center gap-1 text-sm text-gray-300">
-                                      <MapPin className="size-3" />
-                                      {activity.location}
-                                    </p>
-                                  </div>
+            {isUpdating ? (
+              <div className="space-y-4">
+                {[...Array(3)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="animate-pulse rounded-lg border border-gray-800 bg-gray-800/50 p-4"
+                  >
+                    <div className="mb-2 h-6 w-3/4 rounded bg-gray-700" />
+                    <div className="h-4 w-full rounded bg-gray-700" />
+                  </div>
+                ))}
+              </div>
+            ) : activities.length > 0 ? (
+              <div className="space-y-4">
+                {/* Scrollable Featured Activity Cards Container */}
+                <div className="relative">
+                  <motion.div
+                    className="scrollbar-thin scrollbar-track-gray-800/20 scrollbar-thumb-red-600/50 hover:scrollbar-thumb-red-600/70 h-[250px] space-y-3 overflow-y-auto pr-2 sm:h-[350px] lg:h-[400px] lg:space-y-4"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {/* Featured Activity Cards - Show all activities */}
+                    {activities.map((activity, index) => {
+                      const categoryConfig = locationCategories.find(
+                        cat => cat.id === activity.category
+                      )
+                      return (
+                        <motion.div
+                          key={activity.id}
+                          className="group relative overflow-hidden rounded-lg border border-white/20 bg-white/10 backdrop-blur-xl transition-all duration-300 hover:border-white/30 hover:bg-white/15"
+                          variants={cardVariants}
+                          whileHover="hover"
+                        >
+                          <div className="relative p-3 sm:p-4">
+                            {/* Activity Header */}
+                            <div className="mb-2 flex items-start justify-between sm:mb-3">
+                              <div className="flex items-center gap-2 sm:gap-3">
+                                <div
+                                  className={`flex size-10 items-center justify-center rounded-full bg-gradient-to-br sm:size-12 ${categoryConfig?.gradient || "from-red-600 to-amber-500"}`}
+                                >
+                                  <span className="text-lg sm:text-xl">
+                                    {categoryConfig?.emoji || "🎯"}
+                                  </span>
                                 </div>
-                                <ArrowRight className="size-4 text-red-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                              </div>
-
-                              {/* Activity Details */}
-                              <p className="mb-3 line-clamp-2 text-sm text-gray-200">
-                                {activity.shortDescription ||
-                                  activity.description}
-                              </p>
-
-                              {/* Activity Stats */}
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-4 text-xs text-gray-400">
-                                  <div className="flex items-center gap-1">
-                                    <Clock className="size-3" />
-                                    <span>
-                                      {Math.floor(
-                                        activity.durationMinutes / 60
-                                      )}
-                                      h {activity.durationMinutes % 60}m
-                                    </span>
-                                  </div>
-                                  <div className="flex items-center gap-1">
-                                    <Users className="size-3" />
-                                    <span>
-                                      Up to {activity.maxParticipants}
-                                    </span>
-                                  </div>
-                                  <div className="flex items-center gap-1">
-                                    <Star className="size-3 text-amber-400" />
-                                    <span>{activity.avgRating}★</span>
-                                  </div>
+                                <div className="flex-1">
+                                  <h4 className="text-sm font-bold leading-tight text-white sm:text-base">
+                                    {activity.title}
+                                  </h4>
+                                  <p className="mt-0.5 flex items-center gap-1 text-xs text-white/70 sm:mt-1 sm:text-sm">
+                                    <MapPin className="size-3" />
+                                    {activity.location}
+                                  </p>
                                 </div>
                               </div>
-
-                              {/* Featured Badge */}
-                              {activity.featured && (
-                                <div className="absolute right-2 top-2">
-                                  <Badge className="border-red-500/30 bg-red-600/20 px-2 py-1 text-xs text-red-400">
-                                    Featured
-                                  </Badge>
-                                </div>
-                              )}
+                              <ArrowRight className="size-4 text-yellow-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                             </div>
 
-                            {/* Hover Glow Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-amber-500 opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
-                          </motion.div>
-                        )
-                      })}
-                    </motion.div>
+                            {/* Activity Details */}
+                            <p className="mb-2 line-clamp-2 text-xs text-white/80 sm:mb-3 sm:text-sm">
+                              {activity.shortDescription ||
+                                activity.description}
+                            </p>
 
-                    {/* Fade indicator for scrollable content */}
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black to-transparent" />
+                            {/* Activity Stats */}
+                            <div className="flex items-center justify-between">
+                              <div className="flex flex-wrap items-center gap-2 text-xs text-white/60 sm:gap-4">
+                                <div className="flex items-center gap-1">
+                                  <Clock className="size-3" />
+                                  <span>
+                                    {Math.floor(activity.durationMinutes / 60)}h
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <Users className="size-3" />
+                                  <span>{activity.maxParticipants}</span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <Star className="size-3 text-amber-400" />
+                                  <span>{activity.avgRating}</span>
+                                </div>
+                              </div>
+                            </div>
 
-                    {/* Scroll indicator */}
-                    <div className="absolute bottom-2 right-4 flex items-center gap-1 text-xs text-gray-400">
-                      <div className="flex flex-col gap-px">
-                        <div
-                          className="size-1 animate-bounce rounded-full bg-red-500/50"
-                          style={{ animationDelay: "0ms" }}
-                        />
-                        <div
-                          className="size-1 animate-bounce rounded-full bg-red-500/30"
-                          style={{ animationDelay: "150ms" }}
-                        />
-                        <div
-                          className="size-1 animate-bounce rounded-full bg-red-500/20"
-                          style={{ animationDelay: "300ms" }}
-                        />
-                      </div>
-                      <span>Scroll</span>
+                            {/* Featured Badge */}
+                            {activity.featured && (
+                              <div className="absolute right-2 top-2">
+                                <Badge className="border-yellow-400/30 bg-yellow-400/20 px-2 py-1 text-xs text-yellow-400">
+                                  Featured
+                                </Badge>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Hover Glow Effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
+                        </motion.div>
+                      )
+                    })}
+                  </motion.div>
+
+                  {/* Fade indicator for scrollable content */}
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-pink-600 to-transparent" />
+
+                  {/* Scroll indicator */}
+                  <div className="absolute bottom-2 right-2 flex items-center gap-1 text-xs text-white/60 sm:right-4">
+                    <div className="flex flex-col gap-px">
+                      <div
+                        className="size-1 animate-bounce rounded-full bg-yellow-400/70"
+                        style={{ animationDelay: "0ms" }}
+                      />
+                      <div
+                        className="size-1 animate-bounce rounded-full bg-yellow-400/50"
+                        style={{ animationDelay: "150ms" }}
+                      />
+                      <div
+                        className="size-1 animate-bounce rounded-full bg-yellow-400/30"
+                        style={{ animationDelay: "300ms" }}
+                      />
                     </div>
+                    <span className="text-[10px] sm:text-xs">Scroll</span>
                   </div>
-
-                  {/* Show More Button */}
-                  <motion.button
-                    className="group mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-white/20 bg-red-600/10 p-3 text-white transition-all duration-300 hover:border-red-500/40 hover:bg-red-600/20"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    variants={itemVariants}
-                  >
-                    <span>View All Activities</span>
-                    <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </motion.button>
                 </div>
-              ) : (
-                <div className="py-8 text-center">
-                  <p className="text-gray-400">No activities available</p>
-                </div>
-              )}
 
-              {/* Enhanced Booking Information */}
-              <motion.div
-                className="mt-6 overflow-hidden rounded-lg border border-red-600/30 bg-gradient-to-r from-red-600/15 to-amber-500/15 p-4 backdrop-blur-xl"
-                variants={itemVariants}
-              >
-                <div className="mb-3 flex items-center gap-2">
-                  <MapPin className="size-5 text-red-400" />
-                  <span className="font-semibold text-white">
-                    Instant Booking Available
+                {/* Show More Button */}
+                <motion.button
+                  className="group mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-yellow-400 to-amber-500 p-2.5 text-sm font-bold text-black shadow-lg transition-all duration-150 hover:scale-105 hover:shadow-xl sm:mt-4 sm:p-3 sm:text-base"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  variants={itemVariants}
+                >
+                  <span>View All Activities</span>
+                  <ArrowRight className="size-4 transition-transform duration-150 group-hover:translate-x-1" />
+                </motion.button>
+              </div>
+            ) : (
+              <div className="py-8 text-center">
+                <p className="text-white/60">No activities available</p>
+              </div>
+            )}
+
+            {/* Enhanced Booking Information */}
+            <motion.div
+              className="mt-4 overflow-hidden rounded-lg border border-white/20 bg-white/10 p-3 backdrop-blur-xl sm:mt-6 sm:p-4"
+              variants={itemVariants}
+            >
+              <div className="mb-2 flex items-center gap-2 sm:mb-3">
+                <MapPin className="size-4 text-yellow-400 sm:size-5" />
+                <span className="text-sm font-semibold text-white sm:text-base">
+                  Instant Booking Available
+                </span>
+              </div>
+              <p className="mb-2 text-xs text-white/80 sm:mb-3 sm:text-sm">
+                Click any location marker to see detailed activity information,
+                pricing, and availability. Book your perfect Mallorca adventure
+                with just a few clicks!
+              </p>
+              <div className="flex flex-wrap items-center gap-3 text-xs text-white/70 sm:gap-4">
+                <div className="flex items-center gap-1">
+                  <CheckCircle className="size-3 text-yellow-400" />
+                  <span className="whitespace-nowrap">
+                    Instant confirmation
                   </span>
                 </div>
-                <p className="mb-3 text-sm text-gray-200">
-                  Click any location marker to see detailed activity
-                  information, pricing, and availability. Book your perfect
-                  Mallorca adventure with just a few clicks!
-                </p>
-                <div className="flex items-center gap-4 text-xs text-gray-300">
-                  <div className="flex items-center gap-1">
-                    <CheckCircle className="size-3 text-green-400" />
-                    <span>Instant confirmation</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Shield className="size-3 text-blue-400" />
-                    <span>Secure payment</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Heart className="size-3 text-red-400" />
-                    <span>Local experts</span>
-                  </div>
+                <div className="flex items-center gap-1">
+                  <Shield className="size-3 text-yellow-400" />
+                  <span className="whitespace-nowrap">Secure payment</span>
                 </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
+                <div className="flex items-center gap-1">
+                  <Heart className="size-3 text-yellow-400" />
+                  <span className="whitespace-nowrap">Local experts</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </motion.section>
   )

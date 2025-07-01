@@ -76,7 +76,7 @@ export default function DesktopHeroSection({
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex(prev => (prev + 1) % videos.length)
-    }, 8000)
+    }, 4000)
     return () => clearInterval(interval)
   }, [videos.length])
 
@@ -87,18 +87,23 @@ export default function DesktopHeroSection({
         {videos.map((video, index) => (
           <video
             key={index}
-            className={`absolute inset-0 size-full object-cover transition-opacity duration-1000 ${
+            className={`absolute inset-0 size-full object-cover transition-opacity duration-500 ${
               index === currentVideoIndex ? "opacity-100" : "opacity-0"
             }`}
+            src={video.src}
             autoPlay
             muted
             loop
             playsInline
             poster={video.poster}
+            onLoadedData={() => {
+              console.log(`✅ Video ${video.cloudinaryId} loaded successfully`)
+            }}
             onError={e => {
               console.error(
-                `Video ${video.cloudinaryId} failed to load, trying fallback`
+                `❌ Video ${video.cloudinaryId} failed to load from ${video.src}`
               )
+              console.log(`🔄 Trying fallback: ${video.fallbackSrc}`)
               const videoElement = e.currentTarget
               if (videoElement.src !== video.fallbackSrc) {
                 videoElement.src = video.fallbackSrc
@@ -120,7 +125,7 @@ export default function DesktopHeroSection({
           <button
             key={index}
             onClick={() => setCurrentVideoIndex(index)}
-            className={`h-2 w-12 rounded-full transition-all ${
+            className={`h-2 w-12 rounded-full transition-all duration-150 ${
               index === currentVideoIndex ? "bg-white" : "bg-white/40"
             }`}
             aria-label={`Go to video ${index + 1}`}
@@ -136,14 +141,14 @@ export default function DesktopHeroSection({
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.4 }}
               className="text-center lg:text-left"
             >
               {/* Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.25 }}
               >
                 <Badge
                   className="mb-8 inline-flex border px-6 py-3 text-base font-semibold text-black shadow-xl backdrop-blur-lg"
@@ -167,7 +172,7 @@ export default function DesktopHeroSection({
                 className="mb-8 text-6xl font-black uppercase leading-none tracking-tighter lg:text-8xl"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.25, delay: 0.05 }}
               >
                 <span className="block">
                   <span className="text-white drop-shadow-lg">WE </span>
@@ -183,7 +188,7 @@ export default function DesktopHeroSection({
                 className="mb-8 text-xl leading-relaxed text-white/95 drop-shadow-sm lg:text-2xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.25, delay: 0.1 }}
               >
                 From thrilling water sports to cultural experiences. Book
                 authentic local activities with instant confirmation.
@@ -194,7 +199,7 @@ export default function DesktopHeroSection({
                 className="mb-10 flex flex-wrap gap-4 text-white/95"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                transition={{ duration: 0.25, delay: 0.15 }}
               >
                 <div className="flex items-center gap-2 rounded-lg bg-black/20 px-4 py-2 backdrop-blur-sm">
                   <Star className="size-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
@@ -220,13 +225,13 @@ export default function DesktopHeroSection({
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{ duration: 0.25, delay: 0.2 }}
                 className="flex flex-wrap gap-4"
               >
                 <Link href="/activities">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-yellow-400 to-amber-500 px-8 py-6 text-lg font-bold text-black shadow-xl transition-all hover:scale-105 hover:from-yellow-500 hover:to-amber-600 hover:shadow-2xl"
+                    className="bg-gradient-to-r from-yellow-400 to-amber-500 px-8 py-6 text-lg font-bold text-black shadow-xl transition-all duration-150 hover:scale-105 hover:from-yellow-500 hover:to-amber-600 hover:shadow-2xl"
                   >
                     <Search className="mr-2 size-5" />
                     Browse Activities
@@ -236,7 +241,7 @@ export default function DesktopHeroSection({
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-white bg-white/10 px-8 py-6 text-lg font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                    className="border-2 border-white bg-white/10 px-8 py-6 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-150 hover:bg-white/20"
                   >
                     Learn More
                   </Button>
@@ -248,7 +253,7 @@ export default function DesktopHeroSection({
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
               className="hidden lg:block"
             >
               <div
@@ -294,7 +299,7 @@ export default function DesktopHeroSection({
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="cursor-pointer rounded-xl border border-white/30 bg-white/10 p-4 text-center backdrop-blur-md transition-all hover:bg-white/20"
+                        className="cursor-pointer rounded-xl border border-white/30 bg-white/10 p-4 text-center backdrop-blur-md transition-all duration-150 hover:bg-white/20"
                       >
                         <div className="mb-2 text-3xl">{category.icon}</div>
                         <h4 className="font-semibold text-white">

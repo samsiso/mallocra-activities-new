@@ -145,10 +145,12 @@ function MapLegend({
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
-      className="absolute left-4 top-16 z-20 w-72 overflow-hidden rounded-lg border border-gray-700/50 bg-black/80 p-4 backdrop-blur-xl"
+      className="absolute left-2 top-14 z-20 w-60 overflow-hidden rounded-lg border border-gray-700/50 bg-black/80 p-3 backdrop-blur-xl sm:left-4 sm:top-16 sm:w-72 sm:p-4"
     >
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="font-semibold text-white">Activity Categories</h3>
+      <div className="mb-2 flex items-center justify-between sm:mb-3">
+        <h3 className="text-sm font-semibold text-white sm:text-base">
+          Activity Categories
+        </h3>
         <Button
           size="sm"
           variant="ghost"
@@ -170,26 +172,30 @@ function MapLegend({
             <button
               key={key}
               onClick={() => onCategoryToggle(key)}
-              className={`w-full rounded-lg border p-3 text-left transition-all duration-200 ${
+              className={`w-full rounded-lg border p-2 text-left transition-all duration-200 sm:p-3 ${
                 isVisible
                   ? `${info.borderColor} ${info.bgColor} opacity-100`
                   : "border-gray-700 bg-gray-800/50 opacity-60"
               }`}
             >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                   <div
-                    className="size-3 rounded-full"
+                    className="size-2.5 rounded-full sm:size-3"
                     style={{ backgroundColor: info.color }}
                   />
                   <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm">{info.emoji}</span>
-                      <span className={`text-sm font-medium ${info.textColor}`}>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="text-xs sm:text-sm">{info.emoji}</span>
+                      <span
+                        className={`text-xs font-medium sm:text-sm ${info.textColor}`}
+                      >
                         {info.name}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-400">{count} activities</p>
+                    <p className="text-[10px] text-gray-400 sm:text-xs">
+                      {count} activities
+                    </p>
                   </div>
                 </div>
                 <div className={`text-xs ${info.textColor}`}>
@@ -323,7 +329,7 @@ export function EnhancedLeafletMap({
   try {
     return (
       <div
-        className={`relative overflow-hidden rounded-lg border border-gray-700/50 shadow-2xl ${className}`}
+        className={`relative overflow-hidden rounded-lg border-2 border-pink-300 shadow-2xl ${className}`}
         style={{ height }}
       >
         <MapContainer
@@ -355,10 +361,10 @@ export function EnhancedLeafletMap({
                 icon={icon}
               >
                 <Popup className="custom-popup">
-                  <div className="w-64 overflow-hidden rounded-lg border border-gray-700/50 bg-black/90 backdrop-blur-xl">
+                  <div className="w-56 overflow-hidden rounded-lg border border-gray-700/50 bg-black/90 backdrop-blur-xl sm:w-64">
                     {/* Activity Image */}
                     {activity.images[0]?.imageUrl && (
-                      <div className="relative h-32 overflow-hidden">
+                      <div className="relative h-28 overflow-hidden sm:h-32">
                         <img
                           src={activity.images[0].imageUrl}
                           alt={activity.title}
@@ -368,13 +374,13 @@ export function EnhancedLeafletMap({
                       </div>
                     )}
 
-                    <div className="p-4">
-                      <div className="mb-2 flex items-start justify-between">
-                        <h3 className="text-sm font-semibold leading-tight text-white">
+                    <div className="p-3 sm:p-4">
+                      <div className="mb-1.5 flex items-start justify-between sm:mb-2">
+                        <h3 className="text-xs font-semibold leading-tight text-white sm:text-sm">
                           {activity.title}
                         </h3>
                         <Badge
-                          className={`ml-2 ${categoryInfo[activity.category as keyof typeof categoryInfo]?.bgColor} ${categoryInfo[activity.category as keyof typeof categoryInfo]?.textColor} border-0`}
+                          className={`ml-2 px-1.5 py-0.5 text-xs ${categoryInfo[activity.category as keyof typeof categoryInfo]?.bgColor} ${categoryInfo[activity.category as keyof typeof categoryInfo]?.textColor} border-0`}
                         >
                           {
                             categoryInfo[
@@ -384,11 +390,11 @@ export function EnhancedLeafletMap({
                         </Badge>
                       </div>
 
-                      <p className="mb-3 line-clamp-2 text-xs text-gray-300">
+                      <p className="mb-2 line-clamp-2 text-xs text-gray-300 sm:mb-3">
                         {activity.shortDescription}
                       </p>
 
-                      <div className="mb-3 flex items-center gap-4 text-xs text-gray-400">
+                      <div className="mb-2 flex items-center gap-3 text-xs text-gray-400 sm:mb-3 sm:gap-4">
                         <div className="flex items-center gap-1">
                           <Clock className="size-3" />
                           <span>
@@ -408,17 +414,17 @@ export function EnhancedLeafletMap({
                       <div className="flex items-center justify-between">
                         <div>
                           {activity.pricing[0] && (
-                            <p className="text-sm font-semibold text-orange-400">
+                            <p className="text-xs font-semibold text-orange-400 sm:text-sm">
                               €{activity.pricing[0].basePrice}
                             </p>
                           )}
-                          <p className="text-xs text-gray-400">
+                          <p className="text-[10px] text-gray-400 sm:text-xs">
                             {activity.location}
                           </p>
                         </div>
                         <Button
                           size="sm"
-                          className="bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:from-orange-600 hover:to-amber-600"
+                          className="h-7 bg-gradient-to-r from-orange-500 to-amber-500 px-2 text-xs text-white hover:from-orange-600 hover:to-amber-600 sm:h-8 sm:px-3 sm:text-sm"
                           onClick={() =>
                             window.open(
                               `/activities/${activity.slug}`,
@@ -438,15 +444,15 @@ export function EnhancedLeafletMap({
         </MapContainer>
 
         {/* Map Controls */}
-        <div className="absolute left-4 top-4 z-10 flex flex-col gap-2">
+        <div className="absolute left-2 top-2 z-10 flex flex-col gap-2 sm:left-4 sm:top-4">
           {showLegend && (
             <Button
               size="sm"
               onClick={toggleLegend}
-              className="border-gray-600/50 bg-black/80 text-gray-300 backdrop-blur-xl hover:bg-black/90 hover:text-white"
+              className="h-8 border-gray-600/50 bg-black/80 px-2 text-xs text-gray-300 backdrop-blur-xl hover:bg-black/90 hover:text-white sm:h-9 sm:px-3 sm:text-sm"
               variant="outline"
             >
-              <Filter className="mr-1 size-4" />
+              <Filter className="mr-1 size-3 sm:size-4" />
               {showLegendPanel ? "Hide" : "Show"} Filters
             </Button>
           )}
@@ -464,8 +470,8 @@ export function EnhancedLeafletMap({
         )}
 
         {/* Activity Count Badge */}
-        <div className="absolute bottom-4 right-4 z-10">
-          <Badge className="border-gray-600/50 bg-black/80 text-gray-300 backdrop-blur-xl">
+        <div className="absolute bottom-2 right-2 z-10 sm:bottom-4 sm:right-4">
+          <Badge className="border-gray-600/50 bg-black/80 px-2 py-1 text-xs text-gray-300 backdrop-blur-xl sm:px-3 sm:py-1.5 sm:text-sm">
             {visibleActivities.length} activities
           </Badge>
         </div>

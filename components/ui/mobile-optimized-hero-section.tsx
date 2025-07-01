@@ -52,10 +52,10 @@ function MobileCategoryCard({
       ref={cardRef}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      transition={{ duration: 0.25, delay: delay * 0.5, ease: "easeOut" }}
     >
       <Link href={href} className="block">
-        <div className="rounded-xl border border-pink-500/30 bg-pink-500/15 p-4 backdrop-blur-md transition-all duration-300 active:scale-95">
+        <div className="rounded-xl border border-pink-500/30 bg-pink-500/15 p-4 backdrop-blur-md transition-all duration-150 active:scale-95">
           <div className="flex items-center gap-3">
             <span className="text-2xl">{icon}</span>
             <div className="flex-1">
@@ -164,7 +164,7 @@ export default function MobileOptimizedHeroSection({
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex(prev => (prev + 1) % videos.length)
-    }, 5000)
+    }, 2500)
     return () => clearInterval(interval)
   }, [videos.length])
 
@@ -191,7 +191,7 @@ export default function MobileOptimizedHeroSection({
           return (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
+              className={`absolute inset-0 transition-opacity duration-500 ${
                 index === currentVideoIndex ? "opacity-100" : "opacity-0"
               }`}
             >
@@ -219,7 +219,7 @@ export default function MobileOptimizedHeroSection({
               setCurrentVideoIndex(index)
               setVideoError(null) // Reset error when changing videos
             }}
-            className={`h-2 w-6 rounded-full transition-colors ${
+            className={`h-2 w-6 rounded-full transition-colors duration-150 ${
               index === currentVideoIndex ? "bg-white" : "bg-white/40"
             }`}
             aria-label={`Go to video ${index + 1}`}
@@ -242,7 +242,7 @@ export default function MobileOptimizedHeroSection({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.25 }}
             className="mb-6"
           >
             <Badge
@@ -267,7 +267,7 @@ export default function MobileOptimizedHeroSection({
             className="mb-6 text-5xl font-black uppercase leading-none tracking-tighter"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.25, delay: 0.05 }}
           >
             <span className="block">
               <span className="text-white drop-shadow-lg">WE </span>
@@ -281,7 +281,7 @@ export default function MobileOptimizedHeroSection({
             className="mb-6 text-base leading-relaxed text-white/95 drop-shadow-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.25, delay: 0.1 }}
           >
             From thrilling water sports to cultural experiences. Book authentic
             local activities with instant confirmation.
@@ -292,7 +292,7 @@ export default function MobileOptimizedHeroSection({
             className="mb-8 flex flex-wrap gap-2 text-xs text-white/95"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.25, delay: 0.15 }}
           >
             <div className="flex items-center gap-1 rounded-lg bg-black/20 px-2 py-1.5 backdrop-blur-sm">
               <Star className="size-3 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
@@ -318,12 +318,12 @@ export default function MobileOptimizedHeroSection({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.25, delay: 0.25 }}
             className="mb-6"
           >
             <Link href="/activities" className="block">
               <div
-                className="rounded-2xl border-2 p-5 shadow-xl backdrop-blur-lg transition-all duration-300 active:scale-95"
+                className="rounded-2xl border-2 p-5 shadow-xl backdrop-blur-lg transition-all duration-150 active:scale-95"
                 style={{
                   borderColor: "rgba(255, 245, 70, 0.5)",
                   backgroundColor: "rgba(0, 0, 0, 0.4)"
@@ -358,13 +358,13 @@ export default function MobileOptimizedHeroSection({
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        transition={{ duration: 1, repeat: Infinity }}
       >
         <div className="flex h-6 w-4 items-start justify-center rounded-full border border-white/30 p-1">
           <motion.div
             className="size-0.5 rounded-full bg-white"
             animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            transition={{ duration: 1, repeat: Infinity }}
           />
         </div>
       </motion.div>

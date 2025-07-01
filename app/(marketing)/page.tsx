@@ -163,7 +163,7 @@ function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
     <LightActivityCard className="">
       <Link href={`/activities/${activity.slug}`}>
         <div
-          className="hover:shadow-3xl w-full overflow-hidden rounded-xl border border-white/10 bg-black/20 shadow-2xl shadow-black/10 backdrop-blur-xl transition-all duration-300 hover:border-orange-400/50 hover:shadow-orange-500/30"
+          className="hover:shadow-3xl w-full overflow-hidden rounded-xl border border-white/10 bg-black/20 shadow-2xl shadow-black/10 backdrop-blur-xl transition-all duration-150 hover:border-orange-400/50 hover:shadow-orange-500/30"
           style={{
             backdropFilter: "blur(20px) saturate(180%)",
             WebkitBackdropFilter: "blur(20px) saturate(180%)"
@@ -175,7 +175,7 @@ function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
               src={imageError ? fallbackImageUrl : imageUrl}
               alt={primaryImage?.altText || activity.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               onError={() => setImageError(true)}
               placeholder="blur"
@@ -185,30 +185,8 @@ function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
-            {/* Top badges */}
-            <div className="absolute inset-x-4 top-4 flex items-start justify-between">
-              <div className="flex flex-col gap-2">
-                {activity.featured && (
-                  <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 font-bold text-white shadow-xl">
-                    <Sparkles className="mr-1 size-3" />
-                    Featured
-                  </Badge>
-                )}
-                {activity.availableToday && (
-                  <Badge className="bg-green-500 font-bold text-white shadow-lg">
-                    <Zap className="mr-1 size-3" />
-                    Available Today
-                  </Badge>
-                )}
-                {activity.spotsLeft && activity.spotsLeft <= 5 && (
-                  <Badge className="bg-orange-500 font-bold text-white shadow-lg">
-                    <TrendingUp className="mr-1 size-3" />
-                    Only {activity.spotsLeft} spots left
-                  </Badge>
-                )}
-              </div>
-
-              {/* Wishlist button */}
+            {/* Only Wishlist button - no badges */}
+            <div className="absolute right-4 top-4">
               <Button
                 variant="ghost"
                 size="sm"
@@ -219,7 +197,7 @@ function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
                 }
               >
                 <Heart
-                  className={`size-5 transition-colors sm:size-4 ${isWishlisted ? "fill-rose-400 text-rose-400" : "text-white"}`}
+                  className={`size-5 transition-colors duration-150 sm:size-4 ${isWishlisted ? "fill-rose-400 text-rose-400" : "text-white"}`}
                 />
               </Button>
             </div>
@@ -261,7 +239,7 @@ function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
               </div>
             </div>
 
-            <h3 className="mb-2 line-clamp-2 text-lg font-bold text-white transition-colors group-hover:text-orange-400">
+            <h3 className="mb-2 line-clamp-2 text-lg font-bold text-white transition-colors duration-150 group-hover:text-orange-400">
               {activity.title}
             </h3>
 
@@ -287,7 +265,7 @@ function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
               >
                 <Button
                   size="sm"
-                  className="h-9 bg-gradient-to-r from-pink-500 to-yellow-500 px-4 text-white hover:from-pink-600 hover:to-yellow-600 sm:h-8 sm:px-3"
+                  className="h-9 bg-gradient-to-r from-pink-500 to-yellow-500 px-4 text-white transition-all duration-150 hover:from-pink-600 hover:to-yellow-600 sm:h-8 sm:px-3"
                 >
                   <span className="hidden sm:inline">Book Now</span>
                   <span className="sm:hidden">Book</span>
@@ -417,7 +395,7 @@ function EnhancedSearchComponent() {
         setSuggestions([])
         setShowSuggestions(false)
       }
-    }, 300)
+    }, 150)
 
     return () => clearTimeout(delayedSearch)
   }, [searchTerm])
@@ -514,7 +492,7 @@ function EnhancedSearchComponent() {
                   key={query}
                   type="button"
                   onClick={() => handleQuickSearch(query)}
-                  className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-sm text-white/80 transition-all hover:border-yellow-400 hover:bg-white/20 hover:text-white"
+                  className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-sm text-white/80 transition-all duration-150 hover:border-yellow-400 hover:bg-white/20 hover:text-white"
                 >
                   {query}
                 </button>
@@ -524,7 +502,7 @@ function EnhancedSearchComponent() {
 
           <Button
             type="submit"
-            className="h-10 w-full text-sm font-semibold text-black shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 sm:h-12 sm:text-base lg:h-14 lg:text-lg"
+            className="h-10 w-full text-sm font-semibold text-black shadow-lg transition-all duration-150 hover:scale-[1.02] hover:shadow-xl focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 sm:h-12 sm:text-base lg:h-14 lg:text-lg"
             style={{
               background: `#fff546`
             }}
@@ -544,7 +522,7 @@ function EnhancedSearchComponent() {
 
         {/* Enhanced Autocomplete dropdown with expanded cards */}
         {showSuggestions && suggestions.length > 0 && (
-          <div className="animate-in fade-in slide-in-from-top-2 absolute inset-x-0 top-full z-50 mt-2 rounded-xl border border-white/20 bg-black/90 shadow-2xl backdrop-blur-xl duration-200">
+          <div className="animate-in fade-in slide-in-from-top-2 absolute inset-x-0 top-full z-50 mt-2 rounded-xl border border-white/20 bg-black/90 shadow-2xl backdrop-blur-xl duration-100">
             <div className="p-3">
               <div className="mb-3 flex items-center justify-between">
                 <span className="text-xs font-semibold uppercase tracking-wide text-white/60">
@@ -560,7 +538,7 @@ function EnhancedSearchComponent() {
                   <button
                     key={activity.id}
                     onClick={() => handleSuggestionClick(activity)}
-                    className="group relative w-full overflow-hidden rounded-lg border border-white/10 bg-white/5 text-left transition-all duration-200 hover:scale-[1.02] hover:bg-white/10 active:scale-[0.98]"
+                    className="group relative w-full overflow-hidden rounded-lg border border-white/10 bg-white/5 text-left transition-all duration-100 hover:scale-[1.02] hover:bg-white/10 active:scale-[0.98]"
                     style={{
                       "--hover-border-color": "#fa057c"
                     }}
@@ -581,7 +559,7 @@ function EnhancedSearchComponent() {
                             src={activity.images[0].imageUrl}
                             alt={activity.images[0].altText || activity.title}
                             fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-110"
+                            className="object-cover transition-transform duration-150 group-hover:scale-110"
                             sizes="80px"
                           />
                           {activity.featured && (
@@ -669,7 +647,7 @@ function EnhancedSearchComponent() {
                       </div>
 
                       {/* Hover Action */}
-                      <div className="flex items-center opacity-0 transition-opacity group-hover:opacity-100">
+                      <div className="flex items-center opacity-0 transition-opacity duration-150 group-hover:opacity-100">
                         <ArrowRight
                           className="size-5"
                           style={{ color: "#fa057c" }}
@@ -684,7 +662,7 @@ function EnhancedSearchComponent() {
               <div className="mt-3 border-t border-white/10 pt-3">
                 <button
                   onClick={handleSearch}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg p-3 text-sm font-semibold text-black transition-all hover:shadow-lg"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg p-3 text-sm font-semibold text-black transition-all duration-150 hover:shadow-lg"
                   style={{
                     background: `linear-gradient(to right, #fff546, #fa057c)`
                   }}
@@ -718,14 +696,40 @@ export default function LandingPage() {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [currentFeaturedCard, setCurrentFeaturedCard] = useState(0)
+  const featuredContainerRef = useRef<HTMLDivElement>(null)
 
   // Image slideshow timer - Working immediately!
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex(prev => (prev + 1) % loadedVideos.length)
-    }, 5000) // 5 second intervals for smooth slideshow
+    }, 2500) // 2.5 second intervals for faster slideshow
     return () => clearInterval(interval)
   }, [loadedVideos.length])
+
+  // Handle scroll to detect current featured activity card
+  useEffect(() => {
+    const container = featuredContainerRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft
+      const containerWidth = container.offsetWidth
+      // Account for padding and actual card width
+      const cardElements = container.querySelectorAll(".featured-activity-card")
+      if (cardElements.length > 0) {
+        const firstCard = cardElements[0] as HTMLElement
+        const cardWidth = firstCard.offsetWidth + 32 // card width + gap
+        const newIndex = Math.round(scrollLeft / cardWidth)
+        setCurrentFeaturedCard(
+          Math.min(newIndex, featuredActivities.length - 1)
+        )
+      }
+    }
+
+    container.addEventListener("scroll", handleScroll)
+    return () => container.removeEventListener("scroll", handleScroll)
+  }, [featuredActivities.length])
 
   // Fetch featured activities
   useEffect(() => {
@@ -1253,7 +1257,7 @@ export default function LandingPage() {
 
           <div className="relative mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
             <AnimatedSection className="mb-8 text-center sm:mb-12 lg:mb-20">
-              <div className="animate-in zoom-in-75 fade-in relative inline-block duration-700 ease-out">
+              <div className="animate-in zoom-in-75 fade-in duration-350 relative inline-block ease-out">
                 <Badge
                   className="mb-6 px-6 py-3 text-base font-bold text-white shadow-2xl"
                   style={{
@@ -1265,7 +1269,7 @@ export default function LandingPage() {
                 </Badge>
               </div>
 
-              <h2 className="animate-in slide-in-from-bottom-4 fade-in mb-4 text-3xl font-bold text-white delay-200 duration-700 sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+              <h2 className="animate-in slide-in-from-bottom-4 fade-in duration-350 mb-4 text-3xl font-bold text-white delay-100 sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Featured{" "}
                 <span
                   className="bg-gradient-to-r bg-clip-text text-transparent"
@@ -1278,12 +1282,6 @@ export default function LandingPage() {
                   Activities
                 </span>
               </h2>
-
-              <p className="animate-in slide-in-from-bottom-4 fade-in mx-auto max-w-4xl text-base leading-relaxed text-gray-300 delay-500 duration-700 sm:text-lg md:text-xl lg:text-2xl">
-                Hand-picked experiences that showcase the very best of what
-                Mallorca has to offer. Each activity is carefully curated for
-                unforgettable memories.
-              </p>
             </AnimatedSection>
 
             {/* Enhanced Horizontal Scrolling Carousel with Navigation */}
@@ -1319,12 +1317,13 @@ export default function LandingPage() {
               </div>
 
               <div
+                ref={featuredContainerRef}
                 id="featured-carousel"
-                className="scrollbar-hide flex gap-4 overflow-x-auto px-1 pb-6"
+                className="scrollbar-hide flex overflow-x-auto pb-4 md:gap-6 md:px-4 md:pb-6 lg:gap-8"
                 style={{
                   scrollSnapType: "x mandatory",
                   scrollBehavior: "smooth",
-                  scrollPadding: "0 24px",
+                  scrollPadding: "0",
                   willChange: "scroll-position",
                   transform: "translate3d(0, 0, 0)",
                   contain: "layout style paint"
@@ -1334,10 +1333,10 @@ export default function LandingPage() {
                   ? featuredActivities.map((activity, index) => (
                       <div
                         key={activity.id}
-                        className="animate-in fade-in slide-in-from-right-12 w-[280px] min-w-[280px] shrink-0 duration-500 sm:w-[320px] sm:min-w-[320px] md:w-[350px] md:min-w-[350px] lg:w-[380px] lg:min-w-[380px] xl:w-[400px] xl:min-w-[400px]"
+                        className="featured-activity-card animate-in fade-in slide-in-from-right-12 duration-250 w-full flex-none px-4 md:w-[350px] md:px-0"
                         style={{
                           scrollSnapAlign: "start",
-                          animationDelay: `${index * 100}ms`
+                          animationDelay: `${index * 50}ms`
                         }}
                       >
                         <EnhancedActivityCard activity={activity} />
@@ -1347,10 +1346,10 @@ export default function LandingPage() {
                     Array.from({ length: 6 }).map((_, index) => (
                       <div
                         key={`loading-${index}`}
-                        className="animate-in fade-in slide-in-from-right-12 w-[280px] min-w-[280px] shrink-0 duration-500 sm:w-[320px] sm:min-w-[320px] md:w-[350px] md:min-w-[350px] lg:w-[380px] lg:min-w-[380px] xl:w-[400px] xl:min-w-[400px]"
+                        className="featured-activity-card animate-in fade-in slide-in-from-right-12 duration-250 w-full flex-none px-4 md:w-[350px] md:px-0"
                         style={{
                           scrollSnapAlign: "start",
-                          animationDelay: `${index * 100}ms`
+                          animationDelay: `${index * 50}ms`
                         }}
                       >
                         <ActivityCardSkeleton />
@@ -1358,8 +1357,63 @@ export default function LandingPage() {
                     ))}
               </div>
 
+              {/* Swipe Indicators and Progress Bar - Mobile Only */}
+              <div className="mt-6 space-y-3 px-4 lg:hidden">
+                {/* Progress Bar */}
+                <div className="relative h-1 w-full overflow-hidden rounded-full bg-white/20">
+                  <motion.div
+                    className="absolute left-0 top-0 h-full bg-yellow-400"
+                    initial={{ width: "0%" }}
+                    animate={{
+                      width: `${((currentFeaturedCard + 1) / featuredActivities.length) * 100}%`
+                    }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                  />
+                </div>
+
+                {/* Dot Indicators */}
+                <div className="flex justify-center gap-2">
+                  {featuredActivities.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        const container = featuredContainerRef.current
+                        if (container) {
+                          const cardElements = container.querySelectorAll(
+                            ".featured-activity-card"
+                          )
+                          if (cardElements.length > index) {
+                            const targetCard = cardElements[
+                              index
+                            ] as HTMLElement
+                            container.scrollTo({
+                              left: targetCard.offsetLeft - 16, // Account for padding
+                              behavior: "smooth"
+                            })
+                          }
+                        }
+                      }}
+                      className={`transition-all duration-150 ${
+                        index === currentFeaturedCard
+                          ? "h-2 w-8 bg-white"
+                          : "size-2 bg-white/40 hover:bg-white/60"
+                      } rounded-full`}
+                      aria-label={`Go to activity ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Card Counter */}
+                <div className="text-center">
+                  <span className="text-sm font-medium text-white/80">
+                    {currentFeaturedCard + 1} of {featuredActivities.length}{" "}
+                    activities
+                  </span>
+                </div>
+              </div>
+
               {/* Enhanced scroll indicator with stats - MOBILE OPTIMIZED */}
-              <div className="animate-in fade-in slide-in-from-bottom-4 mt-6 flex flex-col items-center gap-3 delay-700 duration-500 sm:mt-8 sm:flex-row sm:justify-between lg:gap-4">
+              <div className="animate-in fade-in slide-in-from-bottom-4 delay-350 duration-250 mt-6 flex flex-col items-center gap-3 sm:mt-8 sm:flex-row sm:justify-between lg:gap-4">
                 <div className="flex items-center gap-2 text-gray-400">
                   <Palette className="size-3 sm:size-4" />
                   <span className="text-xs sm:text-sm">
@@ -1382,20 +1436,19 @@ export default function LandingPage() {
                     <CheckCircle className="size-3 text-green-400 sm:size-4" />
                     <span>Instant confirmation</span>
                   </div>
-                  <div className="flex items-center gap-1 sm:hidden">
-                    <ArrowRight className="size-3 text-orange-400" />
-                    <span>Swipe to explore →</span>
-                  </div>
                 </div>
               </div>
             </div>
 
-            <AnimatedSection className="mt-16 text-center" delay={0.8}>
-              <div className="transition-all duration-300 hover:scale-105 active:scale-95">
+            <AnimatedSection
+              className="mt-16 hidden text-center sm:block"
+              delay={0.4}
+            >
+              <div className="transition-all duration-150 hover:scale-105 active:scale-95">
                 <Link href="/activities">
                   <Button
                     size="lg"
-                    className="hover:shadow-3xl group relative overflow-hidden px-8 py-4 text-lg font-bold text-white shadow-2xl transition-all duration-300"
+                    className="hover:shadow-3xl group relative overflow-hidden px-8 py-4 text-lg font-bold text-white shadow-2xl transition-all duration-150"
                     style={{
                       background: "linear-gradient(to right, #ff1dce, #dc2626)",
                       boxShadow: "0 25px 50px -12px rgba(255, 29, 206, 0.25)"
@@ -1404,10 +1457,10 @@ export default function LandingPage() {
                     <span className="relative z-10 flex items-center">
                       <Activity className="mr-3 size-6" />
                       Explore All Activities
-                      <ArrowRight className="ml-3 size-6 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="ml-3 size-6 transition-transform duration-150 group-hover:translate-x-1" />
                     </span>
                     <div
-                      className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      className="absolute inset-0 opacity-0 transition-opacity duration-150 group-hover:opacity-100"
                       style={{
                         background:
                           "linear-gradient(to right, #e91e63, #b91c1c)"
@@ -1417,7 +1470,7 @@ export default function LandingPage() {
                 </Link>
               </div>
 
-              <p className="animate-in fade-in mt-4 text-gray-400 delay-1000 duration-500">
+              <p className="animate-in fade-in duration-250 mt-4 text-gray-400 delay-500">
                 Browse 50+ amazing activities across Mallorca
               </p>
             </AnimatedSection>
@@ -1463,31 +1516,56 @@ export default function LandingPage() {
         </section>
         */}
 
-        {/* Enhanced Testimonials Section - MOBILE OPTIMIZED */}
-        <section className="bg-gradient-to-br from-purple-50 via-white to-blue-50 py-12 sm:py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
-            <AnimatedSection className="mb-8 text-center sm:mb-12 lg:mb-16">
-              <Badge className="mb-3 bg-gradient-to-r from-purple-600 to-blue-600 px-3 py-2 text-sm font-bold text-white sm:mb-4 sm:px-4 sm:text-base">
-                <Heart className="mr-1 size-3 sm:mr-2 sm:size-4" />
-                Customer Stories
+        {/* Premium Reviews Section */}
+        <section className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 py-12 sm:py-16 lg:py-20">
+          {/* Background Effects */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-600/5 to-yellow-400/5" />
+            <div className="absolute left-1/4 top-1/4 size-96 rounded-full bg-pink-600/10 blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/4 size-96 rounded-full bg-yellow-400/10 blur-3xl" />
+          </div>
+
+          <div className="relative mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
+            <AnimatedSection className="mb-8 text-center sm:mb-12">
+              <Badge className="mb-4 bg-gradient-to-r from-yellow-400 to-amber-500 px-4 py-1.5 text-xs font-bold text-black shadow-lg sm:px-6 sm:py-2 sm:text-sm">
+                <Star className="mr-1.5 size-3 sm:mr-2 sm:size-4" />
+                Trusted by Thousands
               </Badge>
-              <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
-                What Our Guests Say
+              <h2 className="mb-3 text-2xl font-bold text-white sm:text-4xl lg:text-5xl">
+                What Our{" "}
+                <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                  Adventurers Say
+                </span>
               </h2>
-              <p className="mx-auto max-w-3xl text-base leading-relaxed text-gray-600 sm:text-lg md:text-xl">
-                Real experiences from travelers who have discovered the magic of
-                Mallorca with us
+              <p className="mx-auto max-w-3xl text-sm text-gray-300 sm:text-base lg:text-lg">
+                Real stories from travelers who discovered the magic of Mallorca
+                with us
               </p>
+
+              {/* Overall Rating */}
+              <div className="mt-6 flex flex-col items-center gap-2">
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="size-5 fill-yellow-400 text-yellow-400 sm:size-6"
+                    />
+                  ))}
+                </div>
+                <p className="text-lg font-bold text-white sm:text-xl">
+                  4.9 out of 5 · 10,237 reviews
+                </p>
+              </div>
             </AnimatedSection>
 
-            {/* Enhanced Horizontal Scrolling Reviews Carousel with Navigation */}
+            {/* Premium Reviews Carousel */}
             <div className="relative">
-              {/* Navigation buttons */}
-              <div className="absolute -top-20 right-0 z-10 hidden gap-2 lg:flex">
+              {/* Navigation Buttons for Desktop */}
+              <div className="absolute -top-24 right-0 z-10 hidden gap-2 lg:flex">
                 <Button
                   variant="outline"
                   size="icon"
-                  className="size-12 border-gray-300/40 bg-white/70 text-gray-700 backdrop-blur-xl hover:border-purple-400/50 hover:bg-white/90"
+                  className="size-12 border-white/20 bg-white/10 text-white backdrop-blur-xl hover:border-yellow-400/50 hover:bg-white/20"
                   onClick={() => {
                     const container =
                       document.getElementById("reviews-carousel")
@@ -1500,7 +1578,7 @@ export default function LandingPage() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="size-12 border-gray-300/40 bg-white/70 text-gray-700 backdrop-blur-xl hover:border-purple-400/50 hover:bg-white/90"
+                  className="size-12 border-white/20 bg-white/10 text-white backdrop-blur-xl hover:border-yellow-400/50 hover:bg-white/20"
                   onClick={() => {
                     const container =
                       document.getElementById("reviews-carousel")
@@ -1514,14 +1592,11 @@ export default function LandingPage() {
 
               <div
                 id="reviews-carousel"
-                className="scrollbar-hide flex gap-3 overflow-x-auto px-1 pb-6 sm:gap-4 lg:gap-6"
+                className="scrollbar-hide flex gap-3 overflow-x-auto px-3 pb-4 sm:gap-4 sm:px-0 sm:pb-6"
                 style={{
                   scrollSnapType: "x mandatory",
                   scrollBehavior: "smooth",
-                  scrollPadding: "0 16px",
-                  willChange: "scroll-position",
-                  transform: "translate3d(0, 0, 0)",
-                  contain: "layout style paint"
+                  scrollPadding: "0 12px"
                 }}
               >
                 {[
@@ -1582,102 +1657,124 @@ export default function LandingPage() {
                 ].map((testimonial, index) => (
                   <div
                     key={testimonial.name}
-                    className="animate-in fade-in slide-in-from-right-12 w-[280px] min-w-[280px] shrink-0 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] sm:w-[320px] sm:min-w-[320px] md:w-[350px] md:min-w-[350px] lg:w-[380px] lg:min-w-[380px] xl:w-[400px] xl:min-w-[400px]"
-                    style={{
-                      scrollSnapAlign: "start",
-                      animationDelay: `${index * 100}ms`
-                    }}
+                    className="group w-[85vw] max-w-[340px] shrink-0 snap-start sm:w-[380px] sm:min-w-[380px] lg:w-[420px] lg:min-w-[420px]"
                   >
-                    <GlassmorphismCard className="h-full p-8">
-                      <div className="mb-6 flex items-center gap-4">
+                    <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10 p-4 shadow-xl backdrop-blur-sm transition-all duration-150 hover:border-white/20 hover:bg-white/15 hover:shadow-2xl hover:shadow-pink-500/10 sm:p-8">
+                      {/* Floating Quote Icon */}
+                      <div className="absolute -right-2 -top-2 size-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 opacity-10 blur-2xl" />
+                      <div className="absolute right-2 top-2 text-2xl text-yellow-400/20 sm:right-4 sm:top-4 sm:text-4xl">
+                        ❝
+                      </div>
+
+                      {/* Review Header */}
+                      <div className="mb-3 flex items-start gap-3 sm:mb-4 sm:gap-4">
                         <img
                           src={testimonial.image}
                           alt={testimonial.name}
-                          className="size-16 rounded-full object-cover transition-transform duration-300 hover:scale-110"
+                          className="size-10 shrink-0 rounded-full border-2 border-yellow-400/30 object-cover sm:size-14"
                         />
-                        <div>
-                          <h4 className="font-bold text-gray-900">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-sm font-bold text-white sm:text-base">
                             {testimonial.name}
-                          </h4>
-                          <p className="text-sm text-gray-600">
+                          </h3>
+                          <p className="flex items-center gap-1 text-xs text-gray-400">
+                            <MapPin className="size-3" />
                             {testimonial.location}
                           </p>
-                          <div className="mt-1 flex gap-1">
-                            {[...Array(testimonial.rating)].map((_, i) => (
+                          <div className="mt-1 flex gap-0.5">
+                            {[...Array(5)].map((_, i) => (
                               <Star
                                 key={i}
-                                className="size-4 fill-yellow-400 text-yellow-400"
+                                className="size-3 fill-yellow-400 text-yellow-400 sm:size-4"
                               />
                             ))}
                           </div>
                         </div>
+                        <Badge className="hidden shrink-0 border-green-400/30 bg-green-400/20 px-2 py-1 text-xs text-green-400 sm:flex">
+                          <CheckCircle className="mr-1 size-3" />
+                          Verified
+                        </Badge>
                       </div>
 
-                      <blockquote className="mb-4 leading-relaxed text-gray-700">
+                      {/* Review Text */}
+                      <p className="mb-3 line-clamp-4 flex-1 text-xs leading-relaxed text-gray-200 sm:mb-4 sm:line-clamp-none sm:text-base">
                         "{testimonial.text}"
-                      </blockquote>
+                      </p>
 
-                      <Badge
-                        variant="outline"
-                        className="border-blue-200 bg-blue-50 text-xs text-blue-700"
-                      >
-                        {testimonial.activity}
-                      </Badge>
-                    </GlassmorphismCard>
+                      {/* Activity Badge */}
+                      <div className="mt-auto flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                        <Badge className="w-fit border-pink-400/30 bg-pink-400/10 px-2 py-1 text-[10px] text-pink-300 sm:px-3 sm:py-1.5 sm:text-xs">
+                          <Activity className="mr-1 size-3" />
+                          {testimonial.activity}
+                        </Badge>
+                        <p className="text-[10px] text-gray-500 sm:text-xs">
+                          2 weeks ago
+                        </p>
+                      </div>
+
+                      {/* Hover Glow */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 opacity-0 transition-opacity duration-150 group-hover:opacity-5" />
+                    </div>
                   </div>
                 ))}
               </div>
 
-              {/* Enhanced scroll indicator - MOBILE OPTIMIZED */}
-              <div className="animate-in fade-in slide-in-from-bottom-4 mt-6 flex flex-col items-center gap-3 delay-700 duration-500 sm:mt-8 sm:flex-row sm:justify-between lg:gap-4">
-                <div className="flex items-center gap-2 text-gray-500">
-                  <Users className="size-3 sm:size-4" />
-                  <span className="text-xs sm:text-sm">
-                    6 customer testimonials from real experiences
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-gray-600 sm:gap-4 sm:text-sm lg:gap-6">
-                  <div className="flex items-center gap-1">
-                    <Star className="size-3 text-yellow-400 sm:size-4" />
-                    <span>All 5★ reviews</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <CheckCircle className="size-3 text-green-400 sm:size-4" />
-                    <span>Verified bookings</span>
-                  </div>
-                  <div className="flex items-center gap-1 sm:hidden">
-                    <ArrowRight className="size-3 text-blue-400" />
-                    <span>Swipe for more →</span>
-                  </div>
-                  <div className="hidden items-center gap-1 sm:flex">
-                    <ArrowRight className="size-4 text-blue-400" />
-                    <span>Drag to explore →</span>
-                  </div>
-                </div>
+              {/* Mobile Scroll Indicator */}
+              <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-400 sm:hidden">
+                <ChevronLeft className="size-3 animate-pulse" />
+                <span>Swipe to see more reviews</span>
+                <ChevronRight className="size-3 animate-pulse" />
               </div>
 
-              {/* Recognized by Leading Travel Publications - No Background */}
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-600 delay-800 mt-16 text-center">
-                <p className="mb-8 text-sm font-medium text-gray-600">
-                  Recognized by Leading Travel Publications
-                </p>
-                <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-                  {[
-                    "TripAdvisor Excellence",
-                    "Lonely Planet Recommended",
-                    "Travel + Leisure Top Pick",
-                    "Conde Nast Traveler Award"
-                  ].map((publication, index) => (
-                    <div
-                      key={publication}
-                      className="animate-in fade-in slide-in-from-bottom-2 duration-400 flex items-center gap-2 text-gray-700"
-                      style={{ animationDelay: `${800 + index * 100}ms` }}
-                    >
-                      <Award className="size-5 text-amber-500" />
-                      <span className="text-sm font-medium">{publication}</span>
+              {/* Enhanced Trust Section */}
+              <div className="mt-8 sm:mt-12">
+                <div className="mx-auto max-w-4xl rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8">
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+                    <div className="text-center">
+                      <div className="mb-2 flex justify-center">
+                        <CheckCircle className="size-8 text-green-400 sm:size-10" />
+                      </div>
+                      <p className="text-xl font-bold text-white sm:text-2xl">
+                        100%
+                      </p>
+                      <p className="text-xs text-gray-400 sm:text-sm">
+                        Verified Reviews
+                      </p>
                     </div>
-                  ))}
+                    <div className="text-center">
+                      <div className="mb-2 flex justify-center">
+                        <Award className="size-8 text-yellow-400 sm:size-10" />
+                      </div>
+                      <p className="text-xl font-bold text-white sm:text-2xl">
+                        4.9/5
+                      </p>
+                      <p className="text-xs text-gray-400 sm:text-sm">
+                        Average Rating
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <div className="mb-2 flex justify-center">
+                        <Heart className="size-8 text-pink-400 sm:size-10" />
+                      </div>
+                      <p className="text-xl font-bold text-white sm:text-2xl">
+                        10k+
+                      </p>
+                      <p className="text-xs text-gray-400 sm:text-sm">
+                        Happy Customers
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <div className="mb-2 flex justify-center">
+                        <TrendingUp className="size-8 text-blue-400 sm:size-10" />
+                      </div>
+                      <p className="text-xl font-bold text-white sm:text-2xl">
+                        98%
+                      </p>
+                      <p className="text-xs text-gray-400 sm:text-sm">
+                        Would Recommend
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1685,29 +1782,29 @@ export default function LandingPage() {
         </section>
 
         {/* Enhanced Final CTA */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-rose-900 via-rose-800 to-rose-900 py-20">
+        <section className="relative overflow-hidden bg-gradient-to-br from-pink-600 via-pink-500 to-pink-600 py-12 sm:py-16 lg:py-20">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-amber-500/20"></div>
-            <div className="absolute left-1/4 top-0 size-96 rounded-full bg-yellow-400/10 blur-3xl"></div>
-            <div className="absolute bottom-0 right-1/4 size-96 rounded-full bg-rose-400/10 blur-3xl"></div>
+            <div className="absolute left-1/4 top-0 size-72 rounded-full bg-yellow-400/10 blur-3xl sm:size-96"></div>
+            <div className="absolute bottom-0 right-1/4 size-72 rounded-full bg-pink-300/10 blur-3xl sm:size-96"></div>
           </div>
 
-          <div className="relative mx-auto max-w-6xl px-4">
+          <div className="relative mx-auto max-w-6xl px-3 sm:px-4">
             <AnimatedSection>
               {/* Glassmorphism Container */}
               <div className="mx-auto max-w-4xl">
-                <div className="rounded-3xl border border-white/20 bg-white/10 p-12 shadow-2xl shadow-rose-500/20 backdrop-blur-sm">
+                <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-2xl shadow-pink-500/20 backdrop-blur-sm sm:rounded-3xl sm:p-8 lg:p-12">
                   {/* Badge */}
-                  <div className="mb-6 flex justify-center">
-                    <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 px-6 py-2 font-bold text-black shadow-lg">
-                      <Sparkles className="mr-2 size-4" />
+                  <div className="mb-4 flex justify-center sm:mb-6">
+                    <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 px-4 py-1.5 text-sm font-bold text-black shadow-lg sm:px-6 sm:py-2 sm:text-base">
+                      <Sparkles className="mr-1.5 size-3 sm:mr-2 sm:size-4" />
                       Ready for Adventure?
                     </Badge>
                   </div>
 
                   {/* Headline */}
-                  <h2 className="mb-6 text-center text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+                  <h2 className="mb-3 text-center text-2xl font-bold text-white sm:mb-6 sm:text-4xl lg:text-5xl xl:text-6xl">
                     Start Your{" "}
                     <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
                       Mallorca Journey
@@ -1716,35 +1813,35 @@ export default function LandingPage() {
                   </h2>
 
                   {/* Subtext */}
-                  <p className="mx-auto mb-10 max-w-2xl text-center text-lg leading-relaxed text-white/90">
+                  <p className="mx-auto mb-6 max-w-2xl text-center text-sm leading-relaxed text-white/90 sm:mb-8 sm:text-base lg:mb-10 lg:text-lg">
                     Join thousands of satisfied travelers who have discovered
                     the magic of Mallorca with us. Book your perfect adventure
                     now and create memories that will last a lifetime.
                   </p>
 
                   {/* CTA Buttons */}
-                  <div className="flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-6">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4 lg:gap-6">
                     <Link href="/activities">
                       <Button
                         size="lg"
-                        className="group relative overflow-hidden px-8 py-4 text-lg font-bold text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                        className="group relative h-auto w-full overflow-hidden px-6 py-3 text-base font-bold text-white shadow-xl transition-all duration-150 hover:scale-105 hover:shadow-2xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
                         style={{
                           background:
-                            "linear-gradient(to right, #ff1dce, #dc2626)",
-                          boxShadow: "0 20px 25px -5px rgba(255, 29, 206, 0.4)"
+                            "linear-gradient(to right, #ec4899, #db2777)",
+                          boxShadow: "0 20px 25px -5px rgba(236, 72, 153, 0.4)"
                         }}
                       >
                         <div
-                          className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                          className="absolute inset-0 opacity-0 transition-opacity duration-150 group-hover:opacity-100"
                           style={{
                             background:
-                              "linear-gradient(to right, #e91e63, #b91c1c)"
+                              "linear-gradient(to right, #db2777, #be185d)"
                           }}
                         ></div>
-                        <span className="relative flex items-center">
-                          <Sparkles className="mr-2 size-5" />
+                        <span className="relative flex items-center justify-center">
+                          <Sparkles className="mr-1.5 size-4 sm:mr-2 sm:size-5" />
                           Book Your Adventure
-                          <ArrowRight className="ml-2 size-5 transition-transform duration-300 group-hover:translate-x-1" />
+                          <ArrowRight className="ml-1.5 size-4 transition-transform duration-150 group-hover:translate-x-1 sm:ml-2 sm:size-5" />
                         </span>
                       </Button>
                     </Link>
@@ -1753,11 +1850,11 @@ export default function LandingPage() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="group border-2 border-pink-400 bg-transparent px-8 py-4 text-lg font-bold text-pink-400 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-pink-400 hover:text-white hover:shadow-xl"
+                        className="group h-auto w-full border-2 border-pink-200 bg-transparent px-6 py-3 text-base font-bold text-pink-200 shadow-lg transition-all duration-150 hover:scale-105 hover:bg-pink-200 hover:text-pink-700 hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
                       >
-                        <span className="flex items-center">
+                        <span className="flex items-center justify-center">
                           🎫 Try QR Tickets
-                          <ArrowRight className="ml-2 size-5 transition-transform duration-300 group-hover:translate-x-1" />
+                          <ArrowRight className="ml-1.5 size-4 transition-transform duration-150 group-hover:translate-x-1 sm:ml-2 sm:size-5" />
                         </span>
                       </Button>
                     </Link>
@@ -1766,34 +1863,34 @@ export default function LandingPage() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="group border-2 border-yellow-400 bg-transparent px-8 py-4 text-lg font-bold text-yellow-400 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-yellow-400 hover:text-rose-900 hover:shadow-xl"
+                        className="group h-auto w-full border-2 border-yellow-400 bg-transparent px-6 py-3 text-base font-bold text-yellow-400 shadow-lg transition-all duration-150 hover:scale-105 hover:bg-yellow-400 hover:text-pink-700 hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
                       >
-                        <span className="flex items-center">
+                        <span className="flex items-center justify-center">
                           Get in Touch
-                          <ArrowRight className="ml-2 size-5 transition-transform duration-300 group-hover:translate-x-1" />
+                          <ArrowRight className="ml-1.5 size-4 transition-transform duration-150 group-hover:translate-x-1 sm:ml-2 sm:size-5" />
                         </span>
                       </Button>
                     </Link>
                   </div>
 
                   {/* Trust Elements */}
-                  <div className="mt-12 border-t border-white/20 pt-8">
-                    <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-white/70">
-                      <div className="flex items-center gap-2">
-                        <Shield className="size-4 text-yellow-400" />
-                        <span>Secure Booking</span>
+                  <div className="mt-6 border-t border-white/20 pt-4 sm:mt-8 sm:pt-6 lg:mt-12 lg:pt-8">
+                    <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-white/70 sm:gap-6 sm:text-sm lg:gap-8">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <Shield className="size-3 text-yellow-400 sm:size-4" />
+                        <span>Secure</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="size-4 text-yellow-400" />
-                        <span>Instant Confirmation</span>
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <CheckCircle className="size-3 text-yellow-400 sm:size-4" />
+                        <span>Instant</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Heart className="size-4 text-yellow-400" />
-                        <span>5-Star Rated</span>
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <Heart className="size-3 text-yellow-400 sm:size-4" />
+                        <span>5-Star</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="size-4 text-yellow-400" />
-                        <span>10,000+ Happy Travelers</span>
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <Users className="size-3 text-yellow-400 sm:size-4" />
+                        <span>10,000+</span>
                       </div>
                     </div>
                   </div>

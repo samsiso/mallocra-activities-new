@@ -54,19 +54,19 @@ export function LightAnimatedSection({
   }, [isInView, delay])
 
   const animationClasses = {
-    "fade-up": `transition-all duration-700 ease-out ${
+    "fade-up": `transition-all duration-350 ease-out ${
       shouldAnimate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     }`,
-    "fade-in": `transition-opacity duration-700 ease-out ${
+    "fade-in": `transition-opacity duration-350 ease-out ${
       shouldAnimate ? "opacity-100" : "opacity-0"
     }`,
-    scale: `transition-all duration-700 ease-out ${
+    scale: `transition-all duration-350 ease-out ${
       shouldAnimate ? "opacity-100 scale-100" : "opacity-0 scale-95"
     }`,
-    "slide-left": `transition-all duration-700 ease-out ${
+    "slide-left": `transition-all duration-350 ease-out ${
       shouldAnimate ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
     }`,
-    "slide-right": `transition-all duration-700 ease-out ${
+    "slide-right": `transition-all duration-350 ease-out ${
       shouldAnimate ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
     }`
   }
@@ -89,9 +89,9 @@ export function LightHoverCard({
   hoverEffect?: "lift" | "scale" | "glow" | "none"
 }) {
   const hoverClasses = {
-    lift: "transition-transform duration-300 hover:-translate-y-2",
-    scale: "transition-transform duration-300 hover:scale-105",
-    glow: "transition-shadow duration-300 hover:shadow-2xl hover:shadow-orange-500/20",
+    lift: "transition-transform duration-150 hover:-translate-y-2",
+    scale: "transition-transform duration-150 hover:scale-105",
+    glow: "transition-shadow duration-150 hover:shadow-2xl hover:shadow-orange-500/20",
     none: ""
   }
 
@@ -123,8 +123,8 @@ export function LightActivityCard({
     <div
       ref={ref}
       className={`
-        group cursor-pointer
-        transition-all duration-700 ease-out
+        duration-350 group
+        cursor-pointer transition-all ease-out
         ${
           shouldAnimate
             ? "translate-y-0 scale-100 opacity-100"
@@ -166,7 +166,7 @@ export function ScrollReveal({
       style={{
         transform: isInView ? "translate(0)" : directionMap[direction],
         opacity: isInView ? 1 : 0,
-        transition: "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)"
+        transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)"
       }}
       className={className}
     >
