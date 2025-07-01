@@ -301,14 +301,14 @@ export default function MobileOptimizedHeroSection({
             <div className="flex items-center gap-1 rounded-lg bg-black/20 px-2 py-1.5 backdrop-blur-sm">
               <Users
                 className="size-3 drop-shadow-sm"
-                style={{ color: "#fa057c" }}
+                style={{ color: "#fb067d" }}
               />
               <span className="font-medium">50k+ customers</span>
             </div>
             <div className="flex items-center gap-1 rounded-lg bg-black/20 px-2 py-1.5 backdrop-blur-sm">
               <MapPin
                 className="size-3 drop-shadow-sm"
-                style={{ color: "#fa057c" }}
+                style={{ color: "#fb067d" }}
               />
               <span className="font-medium">Island-wide</span>
             </div>

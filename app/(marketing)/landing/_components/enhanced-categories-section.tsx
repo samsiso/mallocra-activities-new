@@ -1,12 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { Activity } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { categoriesData } from "../_data/categories-data"
-import { CategoryData } from "./enhanced-category-card"
-import EnhancedCategoryCard from "./enhanced-category-card"
+import { CategoryData } from "./premium-category-card"
+import PremiumCategoryCard from "./premium-category-card"
 import CategoryCardSkeleton from "./category-card-skeleton"
 import { getActivitiesSupabaseAction } from "@/actions/db/activities-actions"
 
@@ -42,6 +42,20 @@ export default function EnhancedCategoriesSection() {
     }))
   )
   const [isUpdating, setIsUpdating] = useState(false)
+  const [currentCard, setCurrentCard] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  // Scroll-based exit animations
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+
+  // Transform values for exit animations
+  const exitScale = useTransform(scrollYProgress, [0.7, 1], [1, 0.9])
+  const exitOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0])
+  const exitY = useTransform(scrollYProgress, [0.7, 1], [0, -50])
 
   useEffect(() => {
     async function fetchActivityCounts() {
@@ -128,6 +142,22 @@ export default function EnhancedCategoriesSection() {
     return () => clearTimeout(timeoutId)
   }, [])
 
+  // Handle scroll to detect current card
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft
+      const cardWidth = container.offsetWidth
+      const newIndex = Math.round(scrollLeft / cardWidth)
+      setCurrentCard(newIndex)
+    }
+
+    container.addEventListener("scroll", handleScroll)
+    return () => container.removeEventListener("scroll", handleScroll)
+  }, [])
+
   const totalActivities = categoriesWithCounts.reduce(
     (sum, cat) => sum + (cat.activityCount || 0),
     0
@@ -143,10 +173,14 @@ export default function EnhancedCategoriesSection() {
   })
 
   return (
-    <section
-      className="relative overflow-hidden py-12 sm:py-16 lg:py-24"
+    <motion.section
+      ref={sectionRef}
+      className="relative overflow-hidden py-12 md:py-24"
       style={{
-        background: `linear-gradient(135deg, #4a1a3d, #ff1dce, #2d0a1f)`
+        background: `linear-gradient(135deg, #fb067d, #ec4899, #fb067d)`,
+        scale: exitScale,
+        opacity: exitOpacity,
+        y: exitY
       }}
       aria-label="Activity categories"
     >
@@ -307,65 +341,90 @@ export default function EnhancedCategoriesSection() {
 
           {/* Horizontal Scrolling Container */}
           <div
+            ref={containerRef}
             id="categories-carousel"
-            className="scrollbar-hide flex gap-6 overflow-x-auto pb-6 lg:gap-8"
+            className="scrollbar-hide flex overflow-x-auto pb-4 md:gap-6 md:px-4 md:pb-6 lg:gap-8"
             style={{
               scrollSnapType: "x mandatory",
               scrollBehavior: "smooth",
-              scrollPadding: "0 24px",
+              scrollPadding: "0",
               willChange: "scroll-position",
               transform: "translate3d(0, 0, 0)",
               contain: "layout style paint"
             }}
           >
-            {/* Always show actual category cards with data */}
-            {categoriesWithCounts.map((category, index) => (
-              <div
-                key={category.id}
-                className="flex-none"
-                style={{
-                  width: "350px",
-                  minWidth: "350px",
-                  scrollSnapAlign: "start"
-                }}
-              >
-                <EnhancedCategoryCard category={category} index={index} />
-              </div>
-            ))}
+            {/* Show skeleton while loading, then actual category cards */}
+            {isUpdating
+              ? // Show skeleton cards while loading
+                [...Array(4)].map((_, index) => (
+                  <div
+                    key={`skeleton-${index}`}
+                    className="w-full flex-none px-4 md:w-[350px] md:px-0"
+                    style={{
+                      scrollSnapAlign: "start"
+                    }}
+                  >
+                    <CategoryCardSkeleton index={index} />
+                  </div>
+                ))
+              : // Show actual category cards with data
+                categoriesWithCounts.map((category, index) => (
+                  <div
+                    key={category.id}
+                    className="w-full flex-none px-4 md:w-[350px] md:px-0"
+                    style={{
+                      scrollSnapAlign: "start"
+                    }}
+                  >
+                    <PremiumCategoryCard category={category} index={index} />
+                  </div>
+                ))}
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="mt-6 flex justify-center lg:hidden">
-            <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 backdrop-blur-sm">
-              <svg
-                className="size-4 text-white/60"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M7 16l-4-4m0 0l4-4m-4 4h18"
+          {/* Swipe Indicators and Progress Bar - Mobile Only */}
+          <div className="mt-6 space-y-3 px-4 lg:hidden">
+            {/* Progress Bar */}
+            <div className="relative h-1 w-full overflow-hidden rounded-full bg-white/20">
+              <motion.div
+                className="absolute left-0 top-0 h-full bg-yellow-400"
+                initial={{ width: "0%" }}
+                animate={{
+                  width: `${((currentCard + 1) / categoriesWithCounts.length) * 100}%`
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              />
+            </div>
+
+            {/* Dot Indicators */}
+            <div className="flex justify-center gap-2">
+              {categoriesWithCounts.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    const container = containerRef.current
+                    if (container) {
+                      const cardWidth = container.offsetWidth
+                      container.scrollTo({
+                        left: index * cardWidth,
+                        behavior: "smooth"
+                      })
+                    }
+                  }}
+                  className={`transition-all duration-300 ${
+                    index === currentCard
+                      ? "h-2 w-8 bg-white"
+                      : "size-2 bg-white/40 hover:bg-white/60"
+                  } rounded-full`}
+                  aria-label={`Go to category ${index + 1}`}
                 />
-              </svg>
-              <span className="text-sm text-white/70">
-                Scroll to explore categories
+              ))}
+            </div>
+
+            {/* Card Counter */}
+            <div className="text-center">
+              <span className="text-sm font-medium text-white/80">
+                {currentCard + 1} of {categoriesWithCounts.length} categories
               </span>
-              <svg
-                className="size-4 text-white/60"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
             </div>
           </div>
         </AnimatedSection>
@@ -403,6 +462,6 @@ export default function EnhancedCategoriesSection() {
           </motion.div>
         </AnimatedSection>
       </div>
-    </section>
+    </motion.section>
   )
 }
