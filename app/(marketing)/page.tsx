@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
+import { debugLog } from "@/lib/debug"
 import {
   Star,
   MapPin,
@@ -130,8 +131,8 @@ const heroVideos = [
 
 // 🛡️ Environment validation - prevent silent failures
 if (typeof window !== "undefined" && !CLOUDINARY_CLOUD_NAME) {
-  console.error("🚨 CRITICAL: NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME is missing!")
-  console.log(
+  debugLog("🚨 CRITICAL: NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME is missing!")
+  debugLog(
     "💡 Add this to .env.local: NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dfqvslgiy"
   )
 }
@@ -387,7 +388,7 @@ function EnhancedSearchComponent() {
             setShowSuggestions(true)
           }
         } catch (error) {
-          console.error("Search error:", error)
+          debugLog("Search error:", error)
         } finally {
           setIsLoading(false)
         }
@@ -734,20 +735,18 @@ export default function LandingPage() {
   // Fetch featured activities
   useEffect(() => {
     const fetchFeaturedActivities = async () => {
-      console.log("🔍 Starting to fetch featured activities...")
+      debugLog("🔍 Starting to fetch featured activities...")
       try {
         const response = await fetch("/api/featured-activities")
         const result = await response.json()
 
-        console.log("📊 Featured activities API response:", result)
+        debugLog("📊 Featured activities API response:", result)
 
         if (result.success && result.data && result.data.length > 0) {
-          console.log("✅ Successfully fetched activities:", result.data.length)
+          debugLog("✅ Successfully fetched activities:", result.data.length)
           setFeaturedActivities(result.data.slice(0, 6)) // Limit to 6 activities
         } else {
-          console.log(
-            "⚠️ API returned no activities, using fallback strategy..."
-          )
+          debugLog("⚠️ API returned no activities, using fallback strategy...")
 
           // Try to fetch from database actions directly as fallback
           try {
@@ -761,23 +760,21 @@ export default function LandingPage() {
               fallbackResult.data &&
               fallbackResult.data.length > 0
             ) {
-              console.log(
+              debugLog(
                 "✅ Fallback successful, loaded:",
                 fallbackResult.data.length,
                 "activities"
               )
               setFeaturedActivities(fallbackResult.data.slice(0, 6))
             } else {
-              console.log(
-                "❌ Both API and fallback failed, no activities loaded"
-              )
+              debugLog("❌ Both API and fallback failed, no activities loaded")
             }
           } catch (fallbackError) {
-            console.error("💥 Fallback strategy failed:", fallbackError)
+            debugLog("💥 Fallback strategy failed:", fallbackError)
           }
         }
       } catch (error) {
-        console.error("💥 Error fetching featured activities:", error)
+        debugLog("💥 Error fetching featured activities:", error)
 
         // Try fallback strategy on network error
         try {
@@ -791,7 +788,7 @@ export default function LandingPage() {
             fallbackResult.data &&
             fallbackResult.data.length > 0
           ) {
-            console.log(
+            debugLog(
               "✅ Network error fallback successful:",
               fallbackResult.data.length,
               "activities"
@@ -799,7 +796,7 @@ export default function LandingPage() {
             setFeaturedActivities(fallbackResult.data.slice(0, 6))
           }
         } catch (fallbackError) {
-          console.error("💥 Network error fallback failed:", fallbackError)
+          debugLog("💥 Network error fallback failed:", fallbackError)
         }
       }
     }
@@ -808,7 +805,7 @@ export default function LandingPage() {
     fetchFeaturedActivities()
   }, [])
 
-  console.log(
+  debugLog(
     "🎯 Current featuredActivities state:",
     featuredActivities.length,
     featuredActivities
@@ -1203,8 +1200,8 @@ export default function LandingPage() {
   ]
 
   const handleVideoError = () => {
-    console.error("🚨 Video failed to load:", videoRef.current?.src)
-    console.log("🔄 Attempting fallback video...")
+    debugLog("🚨 Video failed to load:", videoRef.current?.src)
+    debugLog("🔄 Attempting fallback video...")
     // Automatically try fallback video
     if (
       heroVideos[currentVideoIndex]?.fallbackSrc &&

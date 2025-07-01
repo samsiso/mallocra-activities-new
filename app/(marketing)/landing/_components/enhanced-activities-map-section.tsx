@@ -10,6 +10,7 @@ Replaces the basic light-themed section with sophisticated dark premium styling.
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import { debugLog } from "@/lib/debug"
 import {
   MapPin,
   ChevronLeft,
@@ -325,7 +326,7 @@ export function EnhancedActivitiesMapSection({
 
   // Fetch activities data
   useEffect(() => {
-    console.log("🗺️ Map component mounted. Initial state:", {
+    debugLog("🗺️ Map component mounted. Initial state:", {
       activitiesLength: activities.length,
       isUpdating,
       fallbackActivitiesLength: fallbackActivities.length,
@@ -334,21 +335,21 @@ export function EnhancedActivitiesMapSection({
 
     const fetchActivities = async () => {
       setIsUpdating(true)
-      console.log("🗺️ Starting to fetch activities for map...")
+      debugLog("🗺️ Starting to fetch activities for map...")
       try {
         const result = await getActivitiesSupabaseAction({
           limit: 50,
           sortBy: "popular"
         })
 
-        console.log("🗺️ Map fetch result:", {
+        debugLog("🗺️ Map fetch result:", {
           isSuccess: result.isSuccess,
           dataLength: result.data?.length || 0,
           message: result.message
         })
 
         if (result.isSuccess && result.data && result.data.length > 0) {
-          console.log("✅ Map: Got real activities:", result.data.length)
+          debugLog("✅ Map: Got real activities:", result.data.length)
           // Convert Supabase data to ActivityWithDetails format
           const formattedActivities: ActivityWithDetails[] = result.data.map(
             activity => ({
@@ -369,18 +370,18 @@ export function EnhancedActivitiesMapSection({
           )
           setCategoryStats(stats)
         } else {
-          console.log("📝 Map: No real activities found, keeping fallback data")
-          console.log(
+          debugLog("📝 Map: No real activities found, keeping fallback data")
+          debugLog(
             "📝 Current fallback activities:",
             fallbackActivities.map(a => a.title)
           )
         }
       } catch (err) {
-        console.error("❌ Map: Error fetching activities:", err)
-        console.log("📝 Keeping fallback data due to error")
+        debugLog("❌ Map: Error fetching activities:", err)
+        debugLog("📝 Keeping fallback data due to error")
       } finally {
         setIsUpdating(false)
-        console.log("🏁 Map: Fetch complete, isUpdating set to false")
+        debugLog("🏁 Map: Fetch complete, isUpdating set to false")
       }
     }
 

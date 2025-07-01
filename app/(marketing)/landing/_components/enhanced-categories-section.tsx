@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+import { debugLog } from "@/lib/debug"
 import { Activity } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { categoriesData } from "../_data/categories-data"
@@ -61,13 +62,13 @@ export default function EnhancedCategoriesSection() {
     async function fetchActivityCounts() {
       setIsUpdating(true)
       try {
-        console.log("🔄 Starting to fetch activity counts for categories...")
+        debugLog("🔄 Starting to fetch activity counts for categories...")
 
         // First, let's test if we can get ANY activities at all
         const testResult = await getActivitiesSupabaseAction({
           limit: 10
         })
-        console.log("🧪 Test fetch ALL activities:", {
+        debugLog("🧪 Test fetch ALL activities:", {
           isSuccess: testResult.isSuccess,
           dataLength: testResult.data?.length || 0,
           message: testResult.message,
@@ -82,7 +83,7 @@ export default function EnhancedCategoriesSection() {
                 category: category.id.toLowerCase()
               })
 
-              console.log(`📊 Category "${category.id}" results:`, {
+              debugLog(`📊 Category "${category.id}" results:`, {
                 isSuccess: result.isSuccess,
                 count: result.data?.length || 0,
                 message: result.message
@@ -95,7 +96,7 @@ export default function EnhancedCategoriesSection() {
                   : Math.floor(Math.random() * 15) + 5
               }
             } catch (error) {
-              console.error(`❌ Error fetching ${category.id}:`, error)
+              debugLog(`❌ Error fetching ${category.id}:`, error)
               return {
                 ...category,
                 activityCount: Math.floor(Math.random() * 15) + 5 // Fallback count
@@ -104,7 +105,7 @@ export default function EnhancedCategoriesSection() {
           })
         )
 
-        console.log(
+        debugLog(
           "✅ Final categories with counts:",
           updatedCategories.map(cat => ({
             id: cat.id,
@@ -117,7 +118,7 @@ export default function EnhancedCategoriesSection() {
           testResult.data &&
           testResult.data.length > 0
         ) {
-          console.log(
+          debugLog(
             "📈 Updating categories with real data:",
             updatedCategories.map(cat => ({
               id: cat.id,
@@ -127,10 +128,10 @@ export default function EnhancedCategoriesSection() {
 
           setCategoriesWithCounts(updatedCategories)
         } else {
-          console.log("📝 No activities found, keeping fallback data")
+          debugLog("📝 No activities found, keeping fallback data")
         }
       } catch (error) {
-        console.error("❌ Error fetching activity counts:", error)
+        debugLog("❌ Error fetching activity counts:", error)
         // Keep the initial fallback data we set in useState
       } finally {
         setIsUpdating(false)
@@ -169,7 +170,7 @@ export default function EnhancedCategoriesSection() {
     0
   )
 
-  console.log("🎯 Component render state:", {
+  debugLog("🎯 Component render state:", {
     isUpdating,
     totalActivities,
     categoriesCount: categoriesWithCounts.length,

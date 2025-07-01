@@ -11,6 +11,7 @@ Integrates with real activity data instead of hard-coded locations.
 import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
+import { debugLog } from "@/lib/debug"
 import {
   MapPin,
   Star,
@@ -236,7 +237,7 @@ function createCustomIcon(category: string) {
       popupAnchor: [0, -32]
     })
   } catch (error) {
-    console.error("Error creating custom icon:", error)
+    debugLog("Error creating custom icon:", error)
     return null
   }
 }
@@ -478,7 +479,7 @@ export function EnhancedLeafletMap({
       </div>
     )
   } catch (error) {
-    console.error("Error rendering map:", error)
+    debugLog("Error rendering map:", error)
     return (
       <div
         className={`flex items-center justify-center rounded-lg border border-gray-700/50 bg-gray-800/50 ${className}`}

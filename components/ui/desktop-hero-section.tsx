@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { Search, Star, Users, Award, Zap, MapPin, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { debugLog } from "@/lib/debug"
 import Link from "next/link"
 import Image from "next/image"
 import { getVideoUrl, PROTECTED_CONFIG } from "@/lib/video-protection"
@@ -97,13 +98,13 @@ export default function DesktopHeroSection({
             playsInline
             poster={video.poster}
             onLoadedData={() => {
-              console.log(`✅ Video ${video.cloudinaryId} loaded successfully`)
+              debugLog(`✅ Video ${video.cloudinaryId} loaded successfully`)
             }}
             onError={e => {
-              console.error(
+              debugLog(
                 `❌ Video ${video.cloudinaryId} failed to load from ${video.src}`
               )
-              console.log(`🔄 Trying fallback: ${video.fallbackSrc}`)
+              debugLog(`🔄 Trying fallback: ${video.fallbackSrc}`)
               const videoElement = e.currentTarget
               if (videoElement.src !== video.fallbackSrc) {
                 videoElement.src = video.fallbackSrc
