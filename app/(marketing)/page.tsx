@@ -1345,25 +1345,31 @@ export default function LandingPage() {
                     authentic local activities with instant confirmation.
                   </p>
 
-                  {/* Mobile-Optimized Stats */}
-                  <div className="mb-6 flex flex-col gap-2 text-sm text-white/95 sm:mb-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3 lg:mb-10 lg:justify-start lg:gap-4 lg:text-base">
-                    <div className="flex items-center justify-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
-                      <Star className="size-4 fill-yellow-400 text-yellow-400 drop-shadow-sm sm:size-5" />
-                      <span className="font-medium">4.8/5 rating</span>
+                  {/* Stats - Single Line Layout */}
+                  <div className="mb-10 flex justify-center gap-2 text-sm text-white/95 sm:gap-4 sm:text-base lg:justify-start">
+                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
+                      <Star className="size-4 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+                      <span className="whitespace-nowrap font-medium">
+                        4.8/5 rating
+                      </span>
                     </div>
-                    <div className="flex items-center justify-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
+                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
                       <Users
-                        className="size-4 drop-shadow-sm sm:size-5"
+                        className="size-4 drop-shadow-sm"
                         style={{ color: "#fa057c" }}
                       />
-                      <span className="font-medium">50k+ customers</span>
+                      <span className="whitespace-nowrap font-medium">
+                        50k+ customers
+                      </span>
                     </div>
-                    <div className="flex items-center justify-center gap-2 rounded-lg bg-black/20 px-3 py-2 backdrop-blur-sm sm:gap-3 sm:px-4">
+                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
                       <MapPin
-                        className="size-4 drop-shadow-sm sm:size-5"
+                        className="size-4 drop-shadow-sm"
                         style={{ color: "#fa057c" }}
                       />
-                      <span className="font-medium">Island-wide</span>
+                      <span className="whitespace-nowrap font-medium">
+                        Island-wide
+                      </span>
                     </div>
                   </div>
                 </div>
