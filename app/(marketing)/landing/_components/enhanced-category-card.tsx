@@ -64,13 +64,7 @@ export default function EnhancedCategoryCard({
       onHoverEnd={() => setIsHovered(false)}
     >
       <Link href={category.href}>
-        <div
-          className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-black/40 via-black/20 to-transparent shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-500 hover:border-orange-400/30 hover:shadow-orange-500/20"
-          style={{
-            backdropFilter: "blur(24px) saturate(180%)",
-            WebkitBackdropFilter: "blur(24px) saturate(180%)"
-          }}
-        >
+        <div className="relative h-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl transition-all duration-500 hover:border-pink-400/50 hover:shadow-2xl hover:shadow-pink-500/10">
           {/* Enhanced Image Section */}
           <div className="relative h-72 overflow-hidden">
             <Image
@@ -102,9 +96,9 @@ export default function EnhancedCategoryCard({
                 rotate: 10,
                 transition: { duration: 0.3 }
               }}
-              className="absolute left-6 top-6 rounded-full border border-white/20 bg-white/10 p-3 backdrop-blur-sm"
+              className="absolute left-6 top-6 rounded-full border-2 border-white bg-white p-3 shadow-xl"
             >
-              <Icon className="size-6 text-white drop-shadow-lg" />
+              <Icon className="size-6 text-pink-600" />
             </motion.div>
 
             {/* Activity Count Badge */}
@@ -159,9 +153,9 @@ export default function EnhancedCategoryCard({
                     transition={{
                       delay: index * 0.15 + 0.5 + featureIndex * 0.1
                     }}
-                    className="flex items-center gap-2 text-sm text-gray-400"
+                    className="flex items-center gap-2 text-sm text-gray-500"
                   >
-                    <div className="size-1.5 rounded-full bg-orange-400" />
+                    <div className="size-1.5 rounded-full bg-pink-500" />
                     <span>{feature}</span>
                   </motion.div>
                 ))}

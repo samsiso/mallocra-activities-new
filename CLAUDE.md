@@ -72,7 +72,7 @@ npm run analyze:browser # Analyze browser bundle
 
 ### Styling Guidelines
 1. **Primary Brand Colors**: 
-   - Pink: `#fa057c` (primary brand color)
+   - Pink: `#fb067d` (primary brand color - OFFICIAL)
    - Yellow: `#fff546` (accent color)
    - White, Black (supporting colors)
 2. **Glass Effects**: Use pink transparency (`bg-pink-500/15`, `bg-pink-500/20`)
@@ -208,7 +208,7 @@ Execute within each response:
 ## Brand Guidelines (Critical)
 Based on prompt-tracker.md, maintain strict brand consistency:
 - Hero title: "Discover" (black), "Mallorca's" (yellow), "Best Activities" (white)
-- All UI elements use pink (#fa057c) and yellow (#fff546) theme
+- All UI elements use pink (#fb067d) and yellow (#fff546) theme
 - Glass effects with pink transparency
 - No gradients in text - use solid colors
 - Navigation uses enhanced glass background (bg-white/20)

@@ -460,7 +460,10 @@ function EnhancedSearchComponent() {
         backgroundColor: "rgba(250, 5, 124, 0.15)"
       }}
     >
-      <h3 id="search-heading" className="mb-4 text-xl font-bold text-white sm:mb-6 sm:text-2xl">
+      <h3
+        id="search-heading"
+        className="mb-4 text-xl font-bold text-white sm:mb-6 sm:text-2xl"
+      >
         Find Your Perfect Activity
       </h3>
 
