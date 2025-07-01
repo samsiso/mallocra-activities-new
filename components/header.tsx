@@ -248,15 +248,19 @@ export default function Header() {
     <header className="circular-nav-header sticky left-1/2 top-0 z-[9999] hidden w-full max-w-5xl -translate-x-1/2 px-6 pt-6 lg:block">
       {/* Glassy Navigation Container - Hidden on mobile */}
       <div
-        className={`relative mx-auto hidden items-center justify-between rounded-full border border-white/30 px-6 py-3 shadow-lg transition-all duration-500 lg:flex ${
-          isScrolled ? "bg-white/25 shadow-xl" : "bg-white/20"
+        className={`relative mx-auto hidden items-center justify-between rounded-full border px-6 py-3 shadow-lg transition-all duration-500 lg:flex ${
+          isScrolled ? "shadow-xl" : ""
         }`}
         style={{
+          borderColor: "rgba(251, 6, 125, 0.3)",
+          backgroundColor: isScrolled
+            ? "rgba(251, 6, 125, 0.15)"
+            : "rgba(251, 6, 125, 0.1)",
           backdropFilter: "blur(20px) saturate(150%)",
           WebkitBackdropFilter: "blur(20px) saturate(150%)",
           boxShadow: isScrolled
-            ? "0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2)"
-            : "0 4px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+            ? "0 8px 32px rgba(251, 6, 125, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)"
+            : "0 4px 24px rgba(251, 6, 125, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
         }}
       >
         {/* Subtle inner glow - REMOVED TO FIX BLACK BAR */}
@@ -291,7 +295,7 @@ export default function Header() {
                           <DropdownMenuTrigger asChild>
                             <Button
                               variant="ghost"
-                              className="flex items-center gap-2 border border-transparent px-4 py-2 text-white/90 backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg"
+                              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/90 transition-all duration-200 hover:text-white"
                             >
                               <IconComponent className="size-4" />
                               {link.label}
@@ -345,9 +349,9 @@ export default function Header() {
                       ) : (
                         <Link
                           href={link.href}
-                          className="flex items-center gap-1 rounded-full border border-transparent px-3 py-1.5 text-sm text-white/80 backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/15 hover:text-white"
+                          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/90 transition-all duration-200 hover:text-white"
                         >
-                          <IconComponent className="size-3" />
+                          <IconComponent className="size-4" />
                           {link.label}
                         </Link>
                       )}
@@ -362,9 +366,9 @@ export default function Header() {
                       <NavigationMenuItem key={link.href}>
                         <Link
                           href={link.href}
-                          className="flex items-center gap-1 rounded-full border border-transparent px-3 py-1.5 text-sm text-white/80 backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/15 hover:text-white"
+                          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/90 transition-all duration-200 hover:text-white"
                         >
-                          <IconComponent className="size-3" />
+                          <IconComponent className="size-4" />
                           {link.label}
                         </Link>
                       </NavigationMenuItem>

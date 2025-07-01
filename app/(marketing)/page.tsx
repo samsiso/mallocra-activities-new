@@ -51,6 +51,8 @@ import { getHeroVideosAction } from "@/actions/db/media-actions"
 import PreferredFooter from "@/components/preferred-footer"
 import EnhancedCategoriesSection from "./landing/_components/enhanced-categories-section"
 import { EnhancedActivitiesMapSection } from "./landing/_components/enhanced-activities-map-section"
+import MobileOptimizedHeroSection from "@/components/ui/mobile-optimized-hero-section"
+import DesktopHeroSection from "@/components/ui/desktop-hero-section"
 import {
   PROTECTED_CONFIG,
   getVideoUrl,
@@ -1224,164 +1226,15 @@ export default function LandingPage() {
           overflowAnchor: "none"
         }}
       >
-        {/* Hero Section with Full Screen Image & Slideshow - MOBILE OPTIMIZED */}
-        <section
-          className="relative min-h-[100svh] overflow-hidden"
-          aria-label="Hero video carousel"
-          role="banner"
-          style={{
-            willChange: "transform",
-            transform: "translateZ(0)",
-            contain: "layout style paint"
-          }}
-        >
-          {/* Background Video/Image Slideshow - Performance Optimized */}
-          <div
-            className="absolute inset-0"
-            style={{
-              willChange: "transform",
-              transform: "translate3d(0, 0, 0)",
-              backfaceVisibility: "hidden"
-            }}
-          >
-            {/* Dynamic Video/Image Background with Optimized Loading */}
-            {isVideoLoaded ? (
-              <video
-                key={currentVideoIndex}
-                ref={videoRef}
-                className="size-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={heroVideos[currentVideoIndex]?.poster}
-                onLoadedData={() => setIsVideoPlaying(true)}
-                onError={handleVideoError}
-                style={{
-                  willChange: "transform",
-                  transform: "scale(1.05)",
-                  filter: "brightness(0.7) contrast(1.2) saturate(1.1)"
-                }}
-              >
-                <source
-                  src={
-                    heroVideos[currentVideoIndex]?.src ||
-                    `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/video/upload/q_auto,f_auto,w_1920,h_1080/${heroVideos[currentVideoIndex]?.cloudinaryId}.mp4`
-                  }
-                  type="video/mp4"
-                />
-                <source
-                  src={heroVideos[currentVideoIndex]?.fallbackSrc}
-                  type="video/mp4"
-                />
-              </video>
-            ) : (
-              <Image
-                src={heroVideos[currentVideoIndex]?.poster || ""}
-                alt={heroVideos[currentVideoIndex]?.alt || "Hero image"}
-                fill
-                className="object-cover"
-                priority
-                sizes="100vw"
-                style={{
-                  filter: "brightness(0.7) contrast(1.2) saturate(1.1)"
-                }}
-              />
-            )}
+        {/* Responsive Hero Section - Both Mobile and Desktop show "WE ARE EXCURSIONS" */}
+        <div className="block lg:hidden">
+          <MobileOptimizedHeroSection />
+        </div>
 
-            {/* Enhanced Multi-Layer Gradient Overlay for Mobile Readability */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `
-                  linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(255,29,206,0.2) 50%, rgba(0,0,0,0.6) 100%),
-                  linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%)
-                `
-              }}
-            />
-          </div>
-
-          {/* Mobile-First Content Layout */}
-          <div className="relative z-20 flex min-h-[100svh] items-center justify-center px-3 sm:px-4 lg:px-6">
-            <div className="mx-auto w-full max-w-7xl">
-              <div className="grid items-center gap-8 lg:grid-cols-2">
-                {/* Left side - Main Content - MOBILE OPTIMIZED */}
-                <div className="order-2 text-center lg:order-1 lg:text-left">
-                  <Badge
-                    className="mb-4 inline-flex border px-3 py-2 text-xs font-semibold text-black shadow-xl ring-1 backdrop-blur-lg transition-all duration-300 hover:shadow-2xl sm:mb-6 sm:px-4 sm:py-2 sm:text-sm lg:mb-8 lg:px-6 lg:py-3 lg:text-base"
-                    style={{
-                      willChange: "transform",
-                      transform: "translateZ(0)",
-                      borderColor: "rgba(255, 29, 206, 0.2)",
-                      backgroundColor: "rgba(255, 29, 206, 0.1)"
-                    }}
-                  >
-                    <Sparkles
-                      className="mr-1 size-3 drop-shadow-lg sm:mr-2 sm:size-4 lg:mr-3 lg:size-5"
-                      style={{ color: "#fff546" }}
-                    />
-                    <span className="font-semibold text-white drop-shadow-sm">
-                      #1 Activity Platform in Mallorca
-                    </span>
-                  </Badge>
-
-                  {/* Mobile-Optimized Heading */}
-                  <h1 className="mb-4 text-3xl font-bold leading-tight sm:mb-5 sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl xl:text-7xl">
-                    <span className="block font-black tracking-wide text-black drop-shadow-lg">
-                      Discover
-                    </span>
-                    <span className="block text-yellow-400 drop-shadow-sm">
-                      Mallorca's
-                    </span>
-                    <span className="block text-white drop-shadow-md">
-                      Best Activities
-                    </span>
-                  </h1>
-
-                  {/* Mobile-Optimized Description */}
-                  <p className="mx-auto mb-6 max-w-xl text-base leading-relaxed text-white/95 drop-shadow-sm sm:mb-8 sm:text-lg lg:mx-0 lg:mb-10 lg:max-w-2xl lg:text-xl">
-                    From thrilling water sports to cultural experiences. Book
-                    authentic local activities with instant confirmation.
-                  </p>
-
-                  {/* Stats - Single Line Layout */}
-                  <div className="mb-10 flex justify-center gap-2 text-sm text-white/95 sm:gap-4 sm:text-base lg:justify-start">
-                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
-                      <Star className="size-4 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
-                      <span className="whitespace-nowrap font-medium">
-                        4.8/5 rating
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
-                      <Users
-                        className="size-4 drop-shadow-sm"
-                        style={{ color: "#fa057c" }}
-                      />
-                      <span className="whitespace-nowrap font-medium">
-                        50k+ customers
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1 rounded-lg bg-black/20 p-2 backdrop-blur-sm sm:gap-2 sm:px-3">
-                      <MapPin
-                        className="size-4 drop-shadow-sm"
-                        style={{ color: "#fa057c" }}
-                      />
-                      <span className="whitespace-nowrap font-medium">
-                        Island-wide
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right side - Enhanced Search - MOBILE OPTIMIZED */}
-                <div className="order-1 lg:order-2 lg:pl-8">
-                  <EnhancedSearchComponent />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Desktop Hero Section - Same branding as mobile but optimized for desktop */}
+        <div className="hidden lg:block">
+          <DesktopHeroSection />
+        </div>
 
         {/* Enhanced Activity Categories Section - Horizontal Scroll */}
         <EnhancedCategoriesSection />
