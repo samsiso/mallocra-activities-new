@@ -3,6 +3,8 @@ Performance utilities for Mallorca Activities platform
 Provides optimized scroll handling and animation utilities
 */
 
+import { useEffect } from "react"
+
 // Throttle function optimized for scroll events
 export const throttle = (func: (...args: any[]) => void, delay: number) => {
   let timeoutId: NodeJS.Timeout | null = null
@@ -59,15 +61,17 @@ export const useOptimizedScroll = (
   callback: (scrollY: number) => void,
   dependency: any[] = []
 ) => {
-  const throttledCallback = throttle(callback, 16) // 60fps
+  useEffect(() => {
+    const throttledCallback = throttle(callback, 16) // 60fps
 
-  if (typeof window !== "undefined") {
-    window.addEventListener(
-      "scroll",
-      () => {
-        throttledCallback(window.scrollY)
-      },
-      { passive: true }
-    )
-  }
+    const handleScroll = () => {
+      throttledCallback(window.scrollY)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, dependency)
 }

@@ -3,8 +3,12 @@ import { getFeaturedActivitiesAction } from "@/actions/db/activities-actions"
 
 export async function GET() {
   try {
+    console.log("[Featured Activities API] Starting request...")
+
     // Get real featured activities from database
     const result = await getFeaturedActivitiesAction(6)
+
+    console.log("[Featured Activities API] Database result:", result)
 
     if (result.isSuccess && result.data) {
       return NextResponse.json({

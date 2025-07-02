@@ -246,18 +246,7 @@ export default function EnhancedCategoriesSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-150 hover:bg-white/10"
-              style={
-                {
-                  "--hover-border-color": "rgba(255, 29, 206, 0.6)"
-                } as React.CSSProperties
-              }
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 29, 206, 0.6)"
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)"
-              }}
+              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-150 hover:border-pink-500/60 hover:bg-white/10"
               onClick={() => {
                 const container = document.getElementById("categories-carousel")
                 if (container)
@@ -281,18 +270,7 @@ export default function EnhancedCategoriesSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-150 hover:bg-white/10"
-              style={
-                {
-                  "--hover-border-color": "rgba(255, 29, 206, 0.6)"
-                } as React.CSSProperties
-              }
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 29, 206, 0.6)"
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)"
-              }}
+              className="flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-150 hover:border-pink-500/60 hover:bg-white/10"
               onClick={() => {
                 const container = document.getElementById("categories-carousel")
                 if (container)
