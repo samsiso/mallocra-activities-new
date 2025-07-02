@@ -140,10 +140,17 @@ if (typeof window !== "undefined" && !CLOUDINARY_CLOUD_NAME) {
 // Enhanced Activity Card Component
 function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
   const [isWishlisted, setIsWishlisted] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
     e.preventDefault()
-    setIsWishlisted(!isWishlisted)
+    if (isMounted) {
+      setIsWishlisted(!isWishlisted)
+    }
   }
 
   // Get primary image with better fallback handling
@@ -187,21 +194,23 @@ function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
             {/* Only Wishlist button - no badges */}
-            <div className="absolute right-4 top-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="size-10 border-none bg-black/30 p-0 shadow-lg backdrop-blur-sm hover:bg-black/50 sm:size-9"
-                onClick={handleWishlistToggle}
-                aria-label={
-                  isWishlisted ? "Remove from wishlist" : "Add to wishlist"
-                }
-              >
-                <Heart
-                  className={`size-5 transition-colors duration-150 sm:size-4 ${isWishlisted ? "fill-rose-400 text-rose-400" : "text-white"}`}
-                />
-              </Button>
-            </div>
+            {isMounted && (
+              <div className="absolute right-4 top-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="size-10 border-none bg-black/30 p-0 shadow-lg backdrop-blur-sm hover:bg-black/50 sm:size-9"
+                  onClick={handleWishlistToggle}
+                  aria-label={
+                    isWishlisted ? "Remove from wishlist" : "Add to wishlist"
+                  }
+                >
+                  <Heart
+                    className={`size-5 transition-colors duration-150 sm:size-4 ${isWishlisted ? "fill-rose-400 text-rose-400" : "text-white"}`}
+                  />
+                </Button>
+              </div>
+            )}
 
             {/* Bottom info overlay */}
             <div className="absolute inset-x-4 bottom-4">
@@ -539,18 +548,7 @@ function EnhancedSearchComponent() {
                   <button
                     key={activity.id}
                     onClick={() => handleSuggestionClick(activity)}
-                    className="group relative w-full overflow-hidden rounded-lg border border-white/10 bg-white/5 text-left transition-all duration-100 hover:scale-[1.02] hover:bg-white/10 active:scale-[0.98]"
-                    style={{
-                      "--hover-border-color": "#fa057c"
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.borderColor =
-                        "rgba(250, 5, 124, 0.5)"
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.borderColor =
-                        "rgba(255, 255, 255, 0.1)"
-                    }}
+                    className="group relative w-full overflow-hidden rounded-lg border border-white/10 bg-white/5 text-left transition-all duration-100 hover:scale-[1.02] hover:border-pink-500/50 hover:bg-white/10 active:scale-[0.98]"
                   >
                     <div className="flex gap-4 p-4">
                       {/* Enhanced Image */}
@@ -577,16 +575,7 @@ function EnhancedSearchComponent() {
                       <div className="min-w-0 flex-1 space-y-2">
                         {/* Title and Category */}
                         <div className="space-y-1">
-                          <h4
-                            className="font-semibold text-white transition-colors"
-                            style={{ "--hover-color": "#fff546" }}
-                            onMouseEnter={e => {
-                              e.currentTarget.style.color = "#fff546"
-                            }}
-                            onMouseLeave={e => {
-                              e.currentTarget.style.color = "white"
-                            }}
-                          >
+                          <h4 className="font-semibold text-white transition-colors hover:text-yellow-400">
                             {activity.title}
                           </h4>
                           <div className="flex items-center gap-2">

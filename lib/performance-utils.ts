@@ -19,7 +19,7 @@ export const throttle = (func: (...args: any[]) => void, delay: number) => {
           func(...args)
           lastExecTime = Date.now()
         },
-        delay - (currentTime - lastExecTime)
+        Math.max(0, delay - (currentTime - lastExecTime))
       )
     }
   }
