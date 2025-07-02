@@ -38,6 +38,8 @@ import {
   getActivitiesSupabaseAction
 } from "@/actions/db/activities-actions"
 import ActivityCard from "./activity-card"
+import MobileActivityCard from "./mobile-activity-card"
+import MobileFilters from "./mobile-filters"
 import GlassmorphismCard from "./glassmorphism-card"
 import dynamic from "next/dynamic"
 
@@ -239,10 +241,10 @@ export default function ActivitiesPageClient({
         <section className="relative pb-16 pt-32 sm:pt-36 lg:pt-40 xl:pt-44">
           {/* Enhanced Background Effects */}
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -left-40 -top-40 size-80 animate-pulse rounded-full bg-gradient-to-r from-yellow-400/25 to-amber-500/25 blur-3xl" />
+            <div className="absolute -left-40 -top-40 size-80 animate-pulse rounded-full bg-gradient-to-r from-pink-400/25 to-pink-500/25 blur-3xl" />
             <div className="absolute -bottom-40 -right-40 size-80 rounded-full bg-gradient-to-l from-white/15 to-transparent blur-3xl" />
             <div className="bg-gradient-radial absolute left-1/2 top-1/2 size-96 -translate-x-1/2 -translate-y-1/2 rounded-full from-rose-500/15 to-transparent blur-2xl" />
-            <div className="absolute right-1/4 top-1/4 size-64 rounded-full bg-gradient-to-br from-orange-400/10 to-yellow-500/10 blur-2xl" />
+            <div className="absolute right-1/4 top-1/4 size-64 rounded-full bg-gradient-to-br from-pink-400/10 to-pink-500/10 blur-2xl" />
           </div>
 
           <div className="relative mx-auto max-w-7xl px-4">
@@ -256,7 +258,7 @@ export default function ActivitiesPageClient({
               {/* Enhanced Main Title */}
               <h1 className="animate-in slide-in-from-bottom-6 fade-in mb-8 text-4xl font-bold leading-tight text-white delay-300 duration-700 sm:text-5xl lg:text-6xl xl:text-7xl">
                 Explore{" "}
-                <span className="bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 bg-clip-text text-transparent drop-shadow-lg">
+                <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-pink-500 bg-clip-text text-transparent drop-shadow-lg">
                   Mallorca's
                 </span>{" "}
                 Best
@@ -269,8 +271,43 @@ export default function ActivitiesPageClient({
                 like never before.
               </p>
 
-              {/* Enhanced Glass Search Form */}
-              <div className="animate-in slide-in-from-bottom-8 fade-in delay-700 duration-1000">
+              {/* Mobile Search Bar - Visible on small screens */}
+              <div className="animate-in slide-in-from-bottom-6 fade-in mb-4 delay-500 duration-700 lg:hidden">
+                <form onSubmit={handleSearch} className="relative">
+                  <Search className="absolute left-4 top-1/2 size-5 -translate-y-1/2 text-white/70" />
+                  <Input
+                    type="text"
+                    placeholder="Search activities..."
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className="h-12 w-full border-white/40 bg-white/20 pl-12 pr-24 text-base text-white backdrop-blur-xl transition-all duration-300 placeholder:text-white/70 focus:border-pink-400 focus:bg-white/30"
+                  />
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    size="sm"
+                    className="absolute right-2 top-1/2 h-8 -translate-y-1/2 bg-pink-500 px-4 text-sm font-medium text-white"
+                  >
+                    Search
+                  </Button>
+                </form>
+              </div>
+
+              {/* Mobile Filters - Visible on small screens */}
+              <div className="animate-in slide-in-from-bottom-6 fade-in delay-600 mb-6 duration-700 lg:hidden">
+                <MobileFilters
+                  selectedCategory={selectedCategory}
+                  selectedLocation={selectedLocation}
+                  sortBy={sortBy}
+                  onCategoryChange={handleCategoryChange}
+                  onLocationChange={handleLocationChange}
+                  onSortChange={handleSortChange}
+                  onReset={handleResetFilters}
+                />
+              </div>
+
+              {/* Enhanced Glass Search Form - Hidden on mobile */}
+              <div className="animate-in slide-in-from-bottom-8 fade-in hidden delay-700 duration-1000 lg:block">
                 <GlassmorphismCard className="relative mx-auto max-w-6xl overflow-hidden border-white/50 bg-white/20 shadow-2xl shadow-black/20 backdrop-blur-2xl transition-all duration-500 hover:bg-white/25 hover:shadow-black/30">
                   {/* Subtle inner glow effect */}
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
@@ -343,7 +380,7 @@ export default function ActivitiesPageClient({
                       <Button
                         type="submit"
                         disabled={loading}
-                        className="h-14 bg-gradient-to-r from-yellow-400 to-amber-500 px-8 font-bold text-black shadow-xl transition-all duration-300 hover:scale-105 hover:from-yellow-500 hover:to-amber-600 hover:shadow-2xl disabled:opacity-50 disabled:hover:scale-100"
+                        className="h-14 bg-gradient-to-r from-pink-500 to-pink-600 px-8 font-bold text-white shadow-xl transition-all duration-300 hover:scale-105 hover:from-pink-600 hover:to-pink-700 hover:shadow-2xl disabled:opacity-50 disabled:hover:scale-100"
                       >
                         <Search className="mr-2 size-5" />
                         {loading ? "Searching..." : "Search"}
@@ -399,20 +436,20 @@ export default function ActivitiesPageClient({
           <div className="mx-auto max-w-7xl px-4">
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               {/* Section Header */}
-              <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-6">
+              <div className="mb-6 flex flex-col gap-4 border-b border-white/10 pb-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between sm:pb-6">
                 <div>
-                  <h2 className="mb-2 text-3xl font-bold text-white">
+                  <h2 className="mb-1 text-2xl font-bold text-white sm:mb-2 sm:text-3xl">
                     {activities.length > 0 ? (
                       <>
                         Found{" "}
-                        <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
                           {activities.length}
                         </span>{" "}
                         Activities
                       </>
                     ) : loading ? (
                       <>
-                        <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
                           Discovering
                         </span>{" "}
                         Activities...
@@ -428,8 +465,8 @@ export default function ActivitiesPageClient({
                   )}
                 </div>
 
-                <div className="flex items-center gap-3">
-                  {/* View Toggle */}
+                <div className="hidden items-center gap-3 sm:flex">
+                  {/* View Toggle - Hidden on Mobile */}
                   <div className="flex overflow-hidden rounded-lg border border-white/30 bg-white/10 backdrop-blur-sm">
                     <Button
                       variant={viewMode === "grid" ? "default" : "ghost"}
@@ -437,7 +474,7 @@ export default function ActivitiesPageClient({
                       onClick={() => setViewMode("grid")}
                       className={`border-0 px-3 py-2 transition-all hover:scale-105 active:scale-95 ${
                         viewMode === "grid"
-                          ? "bg-gradient-to-r from-yellow-400 to-amber-500 text-black"
+                          ? "bg-gradient-to-r from-pink-500 to-pink-600 text-white"
                           : "text-white hover:bg-white/20"
                       }`}
                     >
@@ -450,7 +487,7 @@ export default function ActivitiesPageClient({
                       onClick={() => setViewMode("map")}
                       className={`border-0 px-3 py-2 transition-all hover:scale-105 active:scale-95 ${
                         viewMode === "map"
-                          ? "bg-gradient-to-r from-yellow-400 to-amber-500 text-black"
+                          ? "bg-gradient-to-r from-pink-500 to-pink-600 text-white"
                           : "text-white hover:bg-white/20"
                       }`}
                     >
@@ -495,7 +532,21 @@ export default function ActivitiesPageClient({
                 <>
                   {viewMode === "grid" ? (
                     <>
-                      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:gap-12">
+                      {/* Mobile Grid - Single Column with Mobile Cards */}
+                      <div className="grid gap-4 sm:hidden">
+                        {activities.map((activity, index) => (
+                          <div
+                            key={activity.id}
+                            className="animate-in fade-in slide-in-from-bottom-8 duration-500"
+                            style={{ animationDelay: `${index * 50}ms` }}
+                          >
+                            <MobileActivityCard activity={activity} />
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Desktop Grid - Multi Column with Regular Cards */}
+                      <div className="hidden grid-cols-1 gap-6 sm:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 xl:gap-8 2xl:gap-12">
                         {activities.map((activity, index) => (
                           <div
                             key={activity.id}

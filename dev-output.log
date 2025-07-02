@@ -1,0 +1,13 @@
+npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm.
+
+> mckays-app-template@0.1.0 dev
+> next dev --turbo
+
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.204:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Compiled middleware in 139ms
+ ✓ Ready in 833ms

@@ -132,7 +132,7 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
       land_adventures: "from-green-400 to-emerald-500",
       cultural: "from-purple-400 to-violet-500",
       nightlife: "from-pink-400 to-rose-500",
-      family_fun: "from-orange-400 to-amber-500"
+      family_fun: "from-pink-400 to-rose-500"
     }
     return colors[category as keyof typeof colors] || colors.land_adventures
   }
@@ -143,7 +143,7 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
       land_adventures: "bg-gradient-to-br from-green-500/30 to-emerald-600/30",
       cultural: "bg-gradient-to-br from-purple-500/30 to-violet-600/30",
       nightlife: "bg-gradient-to-br from-pink-500/30 to-rose-600/30",
-      family_fun: "bg-gradient-to-br from-orange-500/30 to-amber-600/30"
+      family_fun: "bg-gradient-to-br from-pink-500/30 to-rose-600/30"
     }
     return overlays[cat as keyof typeof overlays] || overlays.land_adventures
   }
@@ -175,7 +175,7 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
       badges.push({
         text: "Popular",
         class:
-          "bg-gradient-to-r from-yellow-500 to-orange-600 text-white activity-badge-pulse"
+          "bg-gradient-to-r from-yellow-500 to-pink-600 text-white activity-badge-pulse"
       })
     }
 
@@ -399,7 +399,7 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
 
             <Button
               size="sm"
-              className="bg-gradient-to-r from-yellow-400 to-amber-500 font-bold text-black shadow-lg transition-all duration-300 hover:scale-105 hover:from-yellow-500 hover:to-amber-600 hover:shadow-xl active:scale-95"
+              className="bg-gradient-to-r from-pink-500 to-pink-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-pink-600 hover:to-pink-700 hover:shadow-xl active:scale-95"
             >
               <span>Book</span>
               <ArrowRight className="ml-1 size-3 transition-all group-hover:translate-x-1" />

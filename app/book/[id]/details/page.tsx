@@ -5,7 +5,7 @@
 Booking Details Page - Step 2 of booking flow
 User enters customer information and contact details.
 Loads booking data from localStorage and saves combined data for payment step.
-Dark glassmorphism theme with form validation.
+Pink glassmorphism theme with form validation and progress indicator.
 </ai_context>
 */
 
@@ -14,7 +14,77 @@ import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { ArrowRight, ArrowLeft } from "lucide-react"
+import { ArrowRight, ArrowLeft, Calendar, Clock, Users } from "lucide-react"
+import { cn } from "@/lib/utils"
+
+// Glassmorphism card component
+function GlassCard({
+  children,
+  className = ""
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      className={`rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-sm ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
+
+// Progress indicator component
+function BookingProgress({ currentStep = 2 }: { currentStep?: number }) {
+  const steps = [
+    { number: 1, label: "Select", icon: Calendar },
+    { number: 2, label: "Details", icon: Users },
+    { number: 3, label: "Payment", icon: Clock }
+  ]
+
+  return (
+    <div className="mb-8 flex items-center justify-center">
+      {steps.map((step, index) => {
+        const Icon = step.icon
+        const isActive = step.number === currentStep
+        const isCompleted = step.number < currentStep
+
+        return (
+          <div key={step.number} className="flex items-center">
+            <div
+              className={cn(
+                "flex size-10 items-center justify-center rounded-full border-2 transition-all",
+                isActive
+                  ? "border-yellow-400 bg-yellow-400 text-black"
+                  : isCompleted
+                    ? "border-pink-400 bg-pink-400 text-white"
+                    : "border-white/30 bg-white/10 text-white/70"
+              )}
+            >
+              <Icon className="size-4" />
+            </div>
+            <span
+              className={cn(
+                "ml-2 text-sm font-medium",
+                isActive ? "text-yellow-400" : "text-white/70"
+              )}
+            >
+              {step.label}
+            </span>
+            {index < steps.length - 1 && (
+              <div
+                className={cn(
+                  "mx-4 h-px w-12 transition-all",
+                  isCompleted ? "bg-pink-400" : "bg-white/20"
+                )}
+              />
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function BookingDetailsPage() {
   const params = useParams()
@@ -172,7 +242,7 @@ export default function BookingDetailsPage() {
                 </div>
               </div>
 
-              <div className="mt-8 flex justify-between">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-between">
                 <Button
                   variant="outline"
                   className="border-white/30 bg-white/10 text-white hover:bg-white/20"
@@ -185,7 +255,7 @@ export default function BookingDetailsPage() {
                 <Button
                   onClick={handleContinue}
                   disabled={!canProceed}
-                  className="bg-gradient-to-r from-yellow-400 to-amber-500 font-bold text-black hover:from-yellow-500 hover:to-amber-600 disabled:opacity-50"
+                  className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 font-bold text-black hover:from-yellow-500 hover:to-amber-600 disabled:opacity-50 sm:w-auto"
                 >
                   Continue to Payment
                   <ArrowRight className="ml-2 size-4" />

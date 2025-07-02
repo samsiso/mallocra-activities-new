@@ -171,25 +171,28 @@ async function ActivityDetailContent({
 
   return (
     <div className="pb-20">
-      {/* Enhanced Navigation Bar */}
-      <nav className="relative z-20 border-b border-white/10 bg-black/20 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl p-4">
+      {/* Mobile-Optimized Navigation Bar */}
+      <nav className="sticky top-0 z-40 border-b border-white/10 bg-pink-500/90 backdrop-blur-md">
+        <div className="mx-auto max-w-7xl p-3 sm:p-4">
           <div className="flex items-center justify-between">
             <Link
               href="/activities"
-              className="group flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/20"
+              className="group flex items-center gap-1 rounded-full bg-white/20 px-3 py-2 text-sm text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/30 sm:gap-2 sm:px-4 sm:text-base"
             >
               <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
-              Back to Activities
+              <span className="hidden sm:inline">Back to Activities</span>
+              <span className="sm:hidden">Back</span>
             </Link>
 
-            <div className="flex items-center gap-3">
-              <CurrencySelector />
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="hidden sm:block">
+                <CurrencySelector />
+              </div>
 
               <Button
                 variant="ghost"
                 size="sm"
-                className="rounded-full bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+                className="size-9 rounded-full bg-white/20 p-0 text-white backdrop-blur-sm hover:bg-white/30 sm:size-10"
               >
                 <Share2 className="size-4" />
               </Button>
@@ -197,7 +200,7 @@ async function ActivityDetailContent({
               <Button
                 variant="ghost"
                 size="sm"
-                className="rounded-full bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+                className="size-9 rounded-full bg-white/20 p-0 text-white backdrop-blur-sm hover:bg-white/30 sm:size-10"
               >
                 <Heart className="size-4" />
               </Button>
@@ -206,22 +209,23 @@ async function ActivityDetailContent({
         </div>
       </nav>
 
-      {/* Enhanced Hero Section */}
+      {/* Mobile-Optimized Hero Section */}
       <section className="relative">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -left-40 -top-40 size-96 rounded-full bg-yellow-400/20 blur-3xl" />
-          <div className="absolute -bottom-40 -right-40 size-96 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute -left-20 -top-20 size-40 rounded-full bg-yellow-400/30 blur-3xl sm:-left-40 sm:-top-40 sm:size-96" />
+          <div className="absolute -bottom-20 -right-20 size-40 rounded-full bg-white/20 blur-3xl sm:-bottom-40 sm:-right-40 sm:size-96" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 py-12">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-            {/* Left Column - Activity Details */}
+        <div className="relative mx-auto max-w-7xl px-4 py-6 sm:py-12">
+          {/* Mobile-First Layout */}
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            {/* Main Content */}
             <div className="lg:col-span-2">
-              {/* Activity Title & Quick Info */}
-              <div className="mb-8">
-                <div className="mb-4 flex flex-wrap items-center gap-3">
+              {/* Activity Title & Quick Info - Mobile Optimized */}
+              <div className="mb-6 sm:mb-8">
+                <div className="mb-3 flex flex-wrap items-center gap-2 sm:mb-4 sm:gap-3">
                   {activity.category && (
-                    <Badge className="bg-gradient-to-r from-rose-500 to-pink-500 font-bold text-white">
+                    <Badge className="bg-gradient-to-r from-pink-600 to-pink-500 text-xs font-bold text-white sm:text-sm">
                       {activity.category}
                     </Badge>
                   )}
@@ -229,44 +233,62 @@ async function ActivityDetailContent({
                   {activity.difficulty && (
                     <Badge
                       variant="outline"
-                      className="border-white/30 bg-white/10 font-medium text-white"
+                      className="border-white/30 bg-white/10 text-xs font-medium text-white sm:text-sm"
                     >
-                      {activity.difficulty} Difficulty
+                      {activity.difficulty}
                     </Badge>
                   )}
 
                   <div className="flex items-center gap-1 text-yellow-400">
-                    <Star className="size-4 fill-current" />
-                    <span className="font-medium">
+                    <Star className="size-3 fill-current sm:size-4" />
+                    <span className="text-sm font-medium sm:text-base">
                       {activity.averageRating || "4.8"}
                     </span>
-                    <span className="text-white/60">
-                      ({activity.totalReviews || "234"} reviews)
+                    <span className="text-xs text-white/60 sm:text-sm">
+                      ({activity.totalReviews || "234"})
                     </span>
                   </div>
                 </div>
 
-                <h1 className="mb-4 text-4xl font-bold leading-tight text-white lg:text-5xl">
+                <h1 className="mb-3 text-2xl font-bold leading-tight text-white sm:mb-4 sm:text-4xl lg:text-5xl">
                   {activity.title}
                 </h1>
 
-                <div className="flex flex-wrap items-center gap-6 text-white/80">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-white/80 sm:gap-6 sm:text-base">
                   {activity.location && (
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-5 text-rose-400" />
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <MapPin className="size-4 text-pink-300 sm:size-5" />
                       <span>{activity.location}</span>
                     </div>
                   )}
 
-                  <div className="flex items-center gap-2">
-                    <Clock className="size-5 text-amber-400" />
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <Clock className="size-4 text-yellow-400 sm:size-5" />
                     <span>{formatDuration(activity.duration)}</span>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <Users className="size-5 text-blue-400" />
-                    <span>Max {activity.maxParticipants || "N/A"} people</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <Users className="size-4 text-white sm:size-5" />
+                    <span>Max {activity.maxParticipants || "N/A"}</span>
                   </div>
+                </div>
+              </div>
+
+              {/* Mobile Booking CTA - Visible only on mobile */}
+              <div className="mb-6 lg:hidden">
+                <div className="rounded-xl bg-white/10 p-4 backdrop-blur-sm">
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-sm text-white/80">From</span>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-white">
+                        {formatPrice(activity.priceAdult)}
+                      </div>
+                      <div className="text-xs text-white/60">per person</div>
+                    </div>
+                  </div>
+                  <Button className="w-full bg-gradient-to-r from-pink-600 to-pink-500 font-bold text-white shadow-lg hover:from-pink-700 hover:to-pink-600">
+                    Book Now
+                  </Button>
                 </div>
               </div>
 
@@ -277,8 +299,8 @@ async function ActivityDetailContent({
               <ActivityDescription activity={activity} />
             </div>
 
-            {/* Right Column - Booking Widget */}
-            <div className="lg:col-span-1">
+            {/* Desktop Booking Widget - Hidden on mobile */}
+            <div className="hidden lg:col-span-1 lg:block">
               <div className="sticky top-24">
                 <BookingWidget
                   activity={{
@@ -369,7 +391,7 @@ export default async function ActivityDetailPage({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800">
+    <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400">
       <Suspense fallback={<ActivityDetailSkeleton />}>
         <ActivityDetailContent
           activityId={id}
@@ -378,6 +400,9 @@ export default async function ActivityDetailPage({
           userBookingInfo={userBookingInfo}
         />
       </Suspense>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }
@@ -385,7 +410,7 @@ export default async function ActivityDetailPage({
 // Loading skeleton component
 function ActivityDetailSkeleton() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800">
+    <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400">
       <div className="mx-auto max-w-7xl px-4 py-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">

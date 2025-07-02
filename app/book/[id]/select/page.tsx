@@ -4,13 +4,15 @@
 <ai_context>
 Booking Select Page - Step 1 of booking flow
 User selects date, time, and number of participants for the activity.
-Dark glassmorphism theme with progress indicator.
+Pink glassmorphism theme with progress indicator.
+Fetches real activity data from Supabase.
 Saves selections to localStorage and redirects to details page.
 </ai_context>
 */
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
+import { getActivityByIdOrSlugAction } from "@/actions/db/activities-actions"
 import {
   Calendar,
   Clock,
@@ -65,7 +67,7 @@ function BookingProgress({ currentStep = 1 }: { currentStep?: number }) {
                 isActive
                   ? "border-yellow-400 bg-yellow-400 text-black"
                   : isCompleted
-                    ? "border-green-400 bg-green-400 text-black"
+                    ? "border-pink-400 bg-pink-400 text-white"
                     : "border-white/30 bg-white/10 text-white/70"
               )}
             >
@@ -83,7 +85,7 @@ function BookingProgress({ currentStep = 1 }: { currentStep?: number }) {
               <div
                 className={cn(
                   "mx-4 h-px w-12 transition-all",
-                  isCompleted ? "bg-green-400" : "bg-white/20"
+                  isCompleted ? "bg-pink-400" : "bg-white/20"
                 )}
               />
             )}
@@ -112,18 +114,48 @@ export default function BookingSelectPage() {
   const [children, setChildren] = useState(
     parseInt(searchParams.get("children") || "0")
   )
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  // Mock activity data - in real app would fetch from API
-  const [activity, setActivity] = useState({
-    id: activityId,
-    title: "Scenic Mallorca Helicopter Tour",
-    location: "Palma de Mallorca",
-    duration: "45 minutes",
-    maxParticipants: 6,
-    adultPrice: 179,
-    childPrice: 139,
-    spotsLeft: 3
-  })
+  // Fetch real activity data from Supabase
+  const [activity, setActivity] = useState<any>(null)
+
+  useEffect(() => {
+    const fetchActivity = async () => {
+      try {
+        setLoading(true)
+        const result = await getActivityByIdOrSlugAction(activityId)
+        if (result.isSuccess && result.data) {
+          setActivity({
+            id: result.data.id,
+            title: result.data.title,
+            location: result.data.location,
+            duration: result.data.duration,
+            maxParticipants: result.data.maxParticipants,
+            adultPrice:
+              result.data.priceAdult ||
+              result.data.pricing?.[0]?.base_price ||
+              99,
+            childPrice:
+              result.data.priceChild ||
+              (result.data.priceAdult ||
+                result.data.pricing?.[0]?.base_price ||
+                99) * 0.8,
+            spotsLeft: result.data.spotsLeft || 10
+          })
+        } else {
+          setError("Activity not found")
+        }
+      } catch (err) {
+        setError("Failed to load activity")
+        console.error("Error fetching activity:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchActivity()
+  }, [activityId])
 
   const availableDates = Array.from({ length: 7 }, (_, i) => {
     const date = new Date()
@@ -145,7 +177,9 @@ export default function BookingSelectPage() {
   })
 
   const availableTimes = ["09:00", "10:30", "12:00", "14:00", "15:30", "17:00"]
-  const totalPrice = 179 * adults + 139 * children
+  const totalPrice = activity
+    ? activity.adultPrice * adults + activity.childPrice * children
+    : 0
 
   const handleProceed = () => {
     const bookingData = {
@@ -160,19 +194,59 @@ export default function BookingSelectPage() {
     router.push(`/book/${activityId}/details`)
   }
 
-  const canProceed = selectedDate && selectedTime && adults + children > 0
+  const canProceed =
+    selectedDate && selectedTime && adults + children > 0 && activity
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 p-4 sm:p-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex h-[60vh] items-center justify-center">
+            <div className="text-center">
+              <div className="mx-auto mb-4 size-12 animate-spin rounded-full border-4 border-white/20 border-t-white" />
+              <p className="text-white/80">Loading activity details...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error || !activity) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 p-4 sm:p-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex h-[60vh] items-center justify-center">
+            <div className="text-center">
+              <AlertCircle className="mx-auto mb-4 size-12 text-white/80" />
+              <p className="mb-4 text-white">{error || "Activity not found"}</p>
+              <Button
+                onClick={() => router.push("/activities")}
+                className="bg-white text-pink-600 hover:bg-white/90"
+              >
+                Back to Activities
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 p-4 sm:p-8">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-8 text-center text-4xl font-bold text-white">
+        {/* Progress Indicator */}
+        <BookingProgress currentStep={1} />
+
+        <h1 className="mb-6 text-center text-3xl font-bold text-white sm:mb-8 sm:text-4xl">
           Select Your Experience
         </h1>
 
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
             {/* Date Selection */}
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-sm">
+            <GlassCard>
               <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-white">
                 <Calendar className="size-5 text-yellow-400" />
                 Choose Date
@@ -193,11 +267,11 @@ export default function BookingSelectPage() {
                   </button>
                 ))}
               </div>
-            </div>
+            </GlassCard>
 
             {/* Time Selection */}
             {selectedDate && (
-              <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-sm">
+              <GlassCard>
                 <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-white">
                   <Clock className="size-5 text-yellow-400" />
                   Select Time
@@ -218,11 +292,11 @@ export default function BookingSelectPage() {
                     </button>
                   ))}
                 </div>
-              </div>
+              </GlassCard>
             )}
 
             {/* Participants */}
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-sm">
+            <GlassCard>
               <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-white">
                 <Users className="size-5 text-yellow-400" />
                 Participants
@@ -231,7 +305,9 @@ export default function BookingSelectPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="font-medium text-white">Adults</div>
-                    <div className="text-sm text-white/70">€179 each</div>
+                    <div className="text-sm text-white/70">
+                      €{activity.adultPrice} each
+                    </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Button
@@ -257,7 +333,9 @@ export default function BookingSelectPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="font-medium text-white">Children</div>
-                    <div className="text-sm text-white/70">€139 each</div>
+                    <div className="text-sm text-white/70">
+                      €{Math.round(activity.childPrice)} each
+                    </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Button
@@ -282,14 +360,17 @@ export default function BookingSelectPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </GlassCard>
           </div>
 
           {/* Summary */}
-          <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-sm">
+          <GlassCard className="lg:sticky lg:top-4">
             <h3 className="mb-4 text-xl font-bold text-white">
-              Booking Summary
+              {activity.title}
             </h3>
+            <p className="mb-4 text-sm text-white/80">
+              {activity.location} • {activity.duration}
+            </p>
             <div className="space-y-3 text-sm">
               {selectedDate && (
                 <div className="flex justify-between">
@@ -337,7 +418,7 @@ export default function BookingSelectPage() {
                 Back to Activity
               </Button>
             </div>
-          </div>
+          </GlassCard>
         </div>
       </div>
     </div>

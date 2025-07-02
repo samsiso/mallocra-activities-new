@@ -15,8 +15,88 @@ import {
   MultiChannelBookingData
 } from "@/actions/notifications/multi-channel-notifications"
 import { sendTelegramAdminBookingAlertAction } from "@/actions/notifications/telegram-notifications"
-import { AlertCircle, Loader2, CreditCard, User, Mail } from "lucide-react"
+import {
+  AlertCircle,
+  Loader2,
+  CreditCard,
+  User,
+  Mail,
+  Calendar,
+  Clock,
+  Users,
+  CheckCircle
+} from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
+
+// Glassmorphism card component
+function GlassCard({
+  children,
+  className = ""
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      className={`rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-sm ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
+
+// Progress indicator component
+function BookingProgress({ currentStep = 3 }: { currentStep?: number }) {
+  const steps = [
+    { number: 1, label: "Select", icon: Calendar },
+    { number: 2, label: "Details", icon: Users },
+    { number: 3, label: "Payment", icon: CreditCard }
+  ]
+
+  return (
+    <div className="mb-8 flex items-center justify-center">
+      {steps.map((step, index) => {
+        const Icon = step.icon
+        const isActive = step.number === currentStep
+        const isCompleted = step.number < currentStep
+
+        return (
+          <div key={step.number} className="flex items-center">
+            <div
+              className={cn(
+                "flex size-10 items-center justify-center rounded-full border-2 transition-all",
+                isActive
+                  ? "border-yellow-400 bg-yellow-400 text-black"
+                  : isCompleted
+                    ? "border-pink-400 bg-pink-400 text-white"
+                    : "border-white/30 bg-white/10 text-white/70"
+              )}
+            >
+              <Icon className="size-4" />
+            </div>
+            <span
+              className={cn(
+                "ml-2 text-sm font-medium",
+                isActive ? "text-yellow-400" : "text-white/70"
+              )}
+            >
+              {step.label}
+            </span>
+            {index < steps.length - 1 && (
+              <div
+                className={cn(
+                  "mx-4 h-px w-12 transition-all",
+                  isCompleted ? "bg-pink-400" : "bg-white/20"
+                )}
+              />
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function BookingPaymentPage() {
   const params = useParams()
@@ -207,7 +287,7 @@ export default function BookingPaymentPage() {
   // Show loading while user authentication is being determined
   if (!userLoaded || !bookingData) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400">
         <div className="text-center text-white">
           <Loader2 className="mx-auto mb-4 size-8 animate-spin" />
           <p>Loading booking...</p>
@@ -217,17 +297,20 @@ export default function BookingPaymentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 p-4 sm:p-8">
       <div className="mx-auto max-w-2xl">
-        <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-sm">
-          <h1 className="mb-6 text-3xl font-bold text-white">
+        {/* Progress Indicator */}
+        <BookingProgress currentStep={3} />
+
+        <GlassCard>
+          <h1 className="mb-6 text-2xl font-bold text-white sm:text-3xl">
             Complete Your Booking
           </h1>
 
           {/* User Status Badge */}
           <div className="mb-6 flex justify-center">
             {user ? (
-              <Badge className="border-green-500/30 bg-green-500/20 text-green-400">
+              <Badge className="border-pink-500/30 bg-pink-500/20 text-pink-300">
                 <User className="mr-2 size-4" />
                 Booking as{" "}
                 {user.firstName || user.emailAddresses?.[0]?.emailAddress}
@@ -321,7 +404,7 @@ export default function BookingPaymentPage() {
               Back to Details
             </Button>
           </div>
-        </div>
+        </GlassCard>
       </div>
     </div>
   )

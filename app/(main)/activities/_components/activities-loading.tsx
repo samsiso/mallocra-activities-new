@@ -15,7 +15,7 @@ export default function ActivitiesLoading() {
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       {/* Background matching main page */}
-      <div className="activities-red-background bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800"></div>
+      <div className="activities-pink-background bg-gradient-to-br from-pink-900 via-pink-800 to-rose-900"></div>
 
       <div className="relative z-10">
         {/* Hero Section Loading */}

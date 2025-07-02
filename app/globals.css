@@ -8,6 +8,20 @@ Global styles for the app.
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent mobile scroll locking issues */
+html {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+/* Ensure body doesn't have scroll restrictions */
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -680,6 +694,8 @@ html {
   scrollbar-width: none;
   /* Safari and Chrome */
   -ms-overflow-style: none;
+  /* Ensure touch scrolling works on mobile */
+  -webkit-overflow-scrolling: touch;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -835,6 +851,8 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  /* Ensure touch scrolling works on mobile */
+  -webkit-overflow-scrolling: touch;
 }
 
 .scrollbar-hide::-webkit-scrollbar {

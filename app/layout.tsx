@@ -44,18 +44,12 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const content = (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className="dark"
-      style={{ background: "transparent", margin: 0, padding: 0 }}
-    >
+    <html lang="en" suppressHydrationWarning className="dark">
       <body
         className={cn(
           "mx-auto min-h-screen w-full scroll-smooth antialiased",
           inter.className
         )}
-        style={{ background: "transparent", margin: 0, padding: 0 }}
       >
         <Providers
           attribute="class"

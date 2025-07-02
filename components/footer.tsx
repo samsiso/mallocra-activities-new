@@ -18,54 +18,67 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800">
+    <footer className="relative bg-gradient-to-br from-pink-700 via-pink-600 to-pink-500">
       {/* Background overlay */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/20" />
 
       <div className="relative">
-        {/* Main Footer Content */}
-        <div className="border-t border-white/10 py-16">
+        {/* Main Footer Content - Mobile Optimized */}
+        <div className="border-t border-white/20 py-8 sm:py-12 lg:py-16">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-              {/* Company Info */}
-              <div className="space-y-4">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {/* Company Info - Mobile First */}
+              <div className="space-y-4 sm:col-span-2 lg:col-span-1">
                 <div className="mb-4 flex items-center gap-2">
-                  <div className="flex size-8 items-center justify-center rounded-full bg-gradient-to-r from-yellow-400 to-amber-500">
+                  <div className="flex size-8 items-center justify-center rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 shadow-lg">
                     <Sparkles className="size-4 text-black" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">
+                  <h3 className="text-xl font-bold text-white sm:text-2xl">
                     Mallorca Activities
                   </h3>
                 </div>
-                <p className="leading-relaxed text-white/80">
+                <p className="text-sm leading-relaxed text-white/90 sm:text-base">
                   Discover the best experiences Mallorca has to offer. From
                   cultural tours to thrilling adventures, we've got your perfect
                   holiday covered.
                 </p>
                 <div className="space-y-3">
-                  <div className="flex items-center text-white/70">
-                    <MapPin className="mr-3 size-4 text-yellow-400" />
+                  <a
+                    href="https://maps.google.com"
+                    className="flex items-center text-sm text-white/80 transition-colors hover:text-yellow-400 sm:text-base"
+                  >
+                    <MapPin className="mr-3 size-4 shrink-0 text-yellow-400" />
                     <span>Palma de Mallorca, Spain</span>
-                  </div>
-                  <div className="flex items-center text-white/70">
-                    <Phone className="mr-3 size-4 text-yellow-400" />
+                  </a>
+                  <a
+                    href="tel:+34971123456"
+                    className="flex items-center text-sm text-white/80 transition-colors hover:text-yellow-400 sm:text-base"
+                  >
+                    <Phone className="mr-3 size-4 shrink-0 text-yellow-400" />
                     <span>+34 971 123 456</span>
-                  </div>
-                  <div className="flex items-center text-white/70">
-                    <Mail className="mr-3 size-4 text-yellow-400" />
-                    <span>info@mallorca-activities.com</span>
-                  </div>
+                  </a>
+                  <a
+                    href="mailto:info@mallorca-activities.com"
+                    className="flex items-center text-sm text-white/80 transition-colors hover:text-yellow-400 sm:text-base"
+                  >
+                    <Mail className="mr-3 size-4 shrink-0 text-yellow-400" />
+                    <span className="break-all">
+                      info@mallorca-activities.com
+                    </span>
+                  </a>
                 </div>
               </div>
 
-              {/* Quick Links */}
+              {/* Quick Links - Mobile Optimized */}
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-white">Quick Links</h3>
-                <ul className="space-y-3">
+                <h3 className="text-lg font-bold text-white sm:text-xl">
+                  Quick Links
+                </h3>
+                <ul className="space-y-2 sm:space-y-3">
                   <li>
                     <Link
                       href="/"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Home
                     </Link>
@@ -73,7 +86,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/activities"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       All Activities
                     </Link>
@@ -81,7 +94,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/about"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       About Us
                     </Link>
@@ -89,7 +102,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/contact"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Contact
                     </Link>
@@ -97,7 +110,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/bookings"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       My Bookings
                     </Link>
@@ -105,7 +118,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/wishlist"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Wishlist
                     </Link>
@@ -113,16 +126,16 @@ export default function Footer() {
                 </ul>
               </div>
 
-              {/* Activity Categories */}
+              {/* Activity Categories - Mobile Optimized */}
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-white">
-                  Activity Categories
+                <h3 className="text-lg font-bold text-white sm:text-xl">
+                  Categories
                 </h3>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   <li>
                     <Link
                       href="/activities?category=water_sports"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Water Sports
                     </Link>
@@ -130,7 +143,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/activities?category=land_adventures"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Land Adventures
                     </Link>
@@ -138,7 +151,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/activities?category=cultural"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Cultural Tours
                     </Link>
@@ -146,7 +159,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/activities?category=food_wine"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Food & Wine
                     </Link>
@@ -154,7 +167,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/activities?category=nightlife"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Nightlife
                     </Link>
@@ -162,7 +175,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href="/activities?category=day_trips"
-                      className="text-white/70 transition duration-300 hover:pl-2 hover:text-yellow-400"
+                      className="inline-block py-1 text-sm text-white/80 transition duration-300 hover:pl-2 hover:text-yellow-400 sm:text-base"
                     >
                       Day Trips
                     </Link>
@@ -170,56 +183,68 @@ export default function Footer() {
                 </ul>
               </div>
 
-              {/* Newsletter & Social */}
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-white">Stay Connected</h3>
+              {/* Newsletter & Social - Mobile Optimized */}
+              <div className="space-y-4 sm:col-span-2 lg:col-span-1">
+                <h3 className="text-lg font-bold text-white sm:text-xl">
+                  Stay Connected
+                </h3>
 
-                {/* Social Media */}
-                <div className="space-y-4">
-                  <p className="text-white/70">Follow us for updates</p>
+                {/* Social Media - Touch Friendly */}
+                <div className="space-y-3">
+                  <p className="text-sm text-white/80 sm:text-base">
+                    Follow us for updates
+                  </p>
                   <div className="flex space-x-3">
-                    <Button
-                      size="icon"
-                      className="border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:border-yellow-400 hover:bg-yellow-400 hover:text-black"
+                    <a
+                      href="https://facebook.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:border-yellow-400 hover:bg-yellow-400 hover:text-black sm:size-11"
                     >
-                      <Facebook className="size-4" />
-                    </Button>
-                    <Button
-                      size="icon"
-                      className="border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:border-yellow-400 hover:bg-yellow-400 hover:text-black"
+                      <Facebook className="size-5" />
+                    </a>
+                    <a
+                      href="https://twitter.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:border-yellow-400 hover:bg-yellow-400 hover:text-black sm:size-11"
                     >
-                      <Twitter className="size-4" />
-                    </Button>
-                    <Button
-                      size="icon"
-                      className="border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:border-yellow-400 hover:bg-yellow-400 hover:text-black"
+                      <Twitter className="size-5" />
+                    </a>
+                    <a
+                      href="https://instagram.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:border-yellow-400 hover:bg-yellow-400 hover:text-black sm:size-11"
                     >
-                      <Instagram className="size-4" />
-                    </Button>
+                      <Instagram className="size-5" />
+                    </a>
                   </div>
                 </div>
 
-                {/* Newsletter */}
+                {/* Newsletter - Mobile Optimized */}
                 <div className="space-y-3">
-                  <p className="text-white/70">Get exclusive deals</p>
-                  <div className="flex">
+                  <p className="text-sm text-white/80 sm:text-base">
+                    Get exclusive deals
+                  </p>
+                  <div className="flex flex-col gap-2 sm:flex-row">
                     <input
                       type="email"
                       placeholder="Your email"
-                      className="flex-1 rounded-l-lg border border-white/20 bg-white/10 px-4 py-2 text-white backdrop-blur-sm placeholder:text-white/50 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                      className="flex-1 rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-white backdrop-blur-sm placeholder:text-white/50 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 sm:rounded-r-none sm:py-2 sm:text-base"
                     />
-                    <Button className="rounded-l-none bg-gradient-to-r from-yellow-400 to-amber-500 font-medium text-black hover:from-yellow-500 hover:to-amber-600">
+                    <Button className="w-full rounded-lg bg-gradient-to-r from-yellow-400 to-amber-500 py-3 font-medium text-black hover:from-yellow-500 hover:to-amber-600 sm:w-auto sm:rounded-l-none sm:py-2">
                       Subscribe
                     </Button>
                   </div>
                 </div>
 
-                {/* Trust Badges */}
+                {/* Trust Badges - Mobile Friendly */}
                 <div className="flex flex-wrap gap-2 pt-2">
-                  <Badge className="border-green-500/30 bg-green-500/20 text-green-400">
-                    Trusted by 10k+ travelers
+                  <Badge className="border-green-500/30 bg-green-500/20 text-xs text-green-400 sm:text-sm">
+                    10k+ travelers
                   </Badge>
-                  <Badge className="border-blue-500/30 bg-blue-500/20 text-blue-400">
+                  <Badge className="border-blue-500/30 bg-blue-500/20 text-xs text-blue-400 sm:text-sm">
                     24/7 Support
                   </Badge>
                 </div>
@@ -228,39 +253,39 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-white/10 py-6">
+        {/* Bottom Section - Mobile Centered */}
+        <div className="border-t border-white/20 py-6">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <div className="flex items-center gap-2 text-white/60">
-                <span>© {currentYear} Mallorca Activities. Made with</span>
-                <Heart className="size-4 fill-red-400 text-red-400" />
-                <span>in Mallorca</span>
+            <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+              <div className="flex items-center gap-2 text-sm text-white/70 sm:text-base">
+                <span>© {currentYear} Mallorca Activities</span>
+                <Heart className="size-4 fill-pink-300 text-pink-300" />
+                <span>Mallorca</span>
               </div>
-              <div className="flex flex-wrap gap-6">
+              <div className="flex flex-wrap justify-center gap-4 text-xs sm:gap-6 sm:text-sm">
                 <Link
                   href="/privacy"
-                  className="text-sm text-white/60 transition-colors hover:text-yellow-400"
+                  className="text-white/70 transition-colors hover:text-yellow-400"
                 >
-                  Privacy Policy
+                  Privacy
                 </Link>
                 <Link
                   href="/terms"
-                  className="text-sm text-white/60 transition-colors hover:text-yellow-400"
+                  className="text-white/70 transition-colors hover:text-yellow-400"
                 >
-                  Terms of Service
+                  Terms
                 </Link>
                 <Link
                   href="/cookies"
-                  className="text-sm text-white/60 transition-colors hover:text-yellow-400"
+                  className="text-white/70 transition-colors hover:text-yellow-400"
                 >
-                  Cookie Policy
+                  Cookies
                 </Link>
                 <Link
                   href="/help"
-                  className="text-sm text-white/60 transition-colors hover:text-yellow-400"
+                  className="text-white/70 transition-colors hover:text-yellow-400"
                 >
-                  Help Center
+                  Help
                 </Link>
               </div>
             </div>

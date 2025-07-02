@@ -1206,14 +1206,12 @@ export default function LandingPage() {
     <div
       className="relative"
       style={{
-        scrollBehavior: "smooth",
-        contain: "layout"
+        scrollBehavior: "smooth"
       }}
     >
       <main
         style={{
-          willChange: "scroll-position",
-          overflowAnchor: "none"
+          WebkitOverflowScrolling: "touch"
         }}
       >
         {/* Responsive Hero Section - Both Mobile and Desktop show "WE ARE EXCURSIONS" */}
@@ -1233,8 +1231,7 @@ export default function LandingPage() {
         <section
           className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-black py-12 sm:py-16 lg:py-24"
           style={{
-            contain: "layout style paint",
-            willChange: "transform"
+            WebkitOverflowScrolling: "touch"
           }}
         >
           {/* Ambient background effects */}
@@ -1310,9 +1307,7 @@ export default function LandingPage() {
                   scrollSnapType: "x mandatory",
                   scrollBehavior: "smooth",
                   scrollPadding: "0",
-                  willChange: "scroll-position",
-                  transform: "translate3d(0, 0, 0)",
-                  contain: "layout style paint"
+                  WebkitOverflowScrolling: "touch"
                 }}
               >
                 {featuredActivities.length > 0

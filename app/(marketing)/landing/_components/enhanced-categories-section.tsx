@@ -302,9 +302,7 @@ export default function EnhancedCategoriesSection() {
               scrollSnapType: "x mandatory",
               scrollBehavior: "smooth",
               scrollPadding: "0",
-              willChange: "scroll-position",
-              transform: "translate3d(0, 0, 0)",
-              contain: "layout style paint"
+              WebkitOverflowScrolling: "touch"
             }}
           >
             {/* Show skeleton while loading, then actual category cards */}

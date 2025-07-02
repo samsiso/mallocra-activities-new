@@ -64,7 +64,7 @@ export default function BookingConfirmationPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400">
         <div className="text-center text-white">
           <Loader2 className="mx-auto mb-4 size-12 animate-spin" />
           <p className="text-xl">Loading booking confirmation...</p>
@@ -75,7 +75,7 @@ export default function BookingConfirmationPage() {
 
   if (error || !booking) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-4">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 p-4">
         <div className="w-full max-w-md rounded-xl border border-red-500/20 bg-red-500/10 p-8 text-center shadow-xl backdrop-blur-sm">
           <AlertCircle className="mx-auto mb-4 size-16 text-red-400" />
           <h1 className="mb-2 text-2xl font-bold text-white">
@@ -98,7 +98,7 @@ export default function BookingConfirmationPage() {
   const isGuestBooking = booking.customerId.startsWith("guest-")
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 p-4">
       <div className="mx-auto max-w-2xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -113,7 +113,7 @@ export default function BookingConfirmationPage() {
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
             >
-              <CheckCircle className="mx-auto mb-4 size-20 text-green-400" />
+              <CheckCircle className="mx-auto mb-4 size-20 text-yellow-400" />
             </motion.div>
 
             <h1 className="mb-2 text-4xl font-bold text-white">
