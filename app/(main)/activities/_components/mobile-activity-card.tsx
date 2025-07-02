@@ -9,6 +9,7 @@ larger touch targets, and swipe gestures for better mobile UX
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { MapPin, Star, Heart, Clock, Users } from "lucide-react"
@@ -22,11 +23,20 @@ export default function MobileActivityCard({
 }: MobileActivityCardProps) {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [imageError, setImageError] = useState(false)
+  const router = useRouter()
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     setIsWishlisted(!isWishlisted)
+  }
+
+  const handleBookNow = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    // Navigate directly to booking flow with the activity
+    const activitySlug = activity.slug || activity.id
+    router.push(`/book/${activitySlug}/select`)
   }
 
   // Extract data
@@ -49,52 +59,54 @@ export default function MobileActivityCard({
   }
 
   return (
-    <Link
-      href={`/activities/${activity.slug || activity.id}`}
-      className="group block w-full"
-    >
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg transition-all duration-300 active:scale-[0.98]">
+    <div className="group block w-full">
+      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg transition-all duration-300">
         {/* Compact Image Section - 200px height for mobile */}
-        <div className="relative h-[200px] w-full overflow-hidden">
-          <Image
-            src={getImageUrl()}
-            alt={activity.title}
-            fill
-            className="object-cover transition-transform duration-500 group-active:scale-110"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            onError={() => setImageError(true)}
-          />
-
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-          {/* Price Badge - Top Left */}
-          <div className="absolute left-3 top-3 z-10">
-            <Badge className="border-0 bg-pink-500/90 px-3 py-1 text-sm font-bold text-white backdrop-blur-sm">
-              €{basePrice}
-            </Badge>
-          </div>
-
-          {/* Wishlist Button - Top Right, Larger Touch Target */}
-          <button
-            onClick={handleWishlistToggle}
-            className="absolute right-3 top-3 z-10 size-10 rounded-full bg-black/40 backdrop-blur-sm transition-all active:scale-90"
-            aria-label="Add to wishlist"
-          >
-            <Heart
-              className={`mx-auto size-5 transition-colors ${
-                isWishlisted ? "fill-pink-500 text-pink-500" : "text-white"
-              }`}
+        <Link
+          href={`/activities/${activity.slug || activity.id}`}
+          className="block"
+        >
+          <div className="relative h-[200px] w-full overflow-hidden">
+            <Image
+              src={getImageUrl()}
+              alt={activity.title}
+              fill
+              className="object-cover transition-transform duration-500 group-active:scale-110"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              onError={() => setImageError(true)}
             />
-          </button>
 
-          {/* Title Overlay - Bottom of Image */}
-          <div className="absolute inset-x-0 bottom-0 z-10 p-4">
-            <h3 className="line-clamp-2 text-lg font-bold text-white">
-              {activity.title}
-            </h3>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+            {/* Price Badge - Top Left */}
+            <div className="absolute left-3 top-3 z-10">
+              <Badge className="border-0 bg-pink-500/90 px-3 py-1 text-sm font-bold text-white backdrop-blur-sm">
+                €{basePrice}
+              </Badge>
+            </div>
+
+            {/* Wishlist Button - Top Right, Larger Touch Target */}
+            <button
+              onClick={handleWishlistToggle}
+              className="absolute right-3 top-3 z-10 size-10 rounded-full bg-black/40 backdrop-blur-sm transition-all active:scale-90"
+              aria-label="Add to wishlist"
+            >
+              <Heart
+                className={`mx-auto size-5 transition-colors ${
+                  isWishlisted ? "fill-pink-500 text-pink-500" : "text-white"
+                }`}
+              />
+            </button>
+
+            {/* Title Overlay - Bottom of Image */}
+            <div className="absolute inset-x-0 bottom-0 z-10 p-4">
+              <h3 className="line-clamp-2 text-lg font-bold text-white">
+                {activity.title}
+              </h3>
+            </div>
           </div>
-        </div>
+        </Link>
 
         {/* Simplified Content Section */}
         <div className="space-y-3 p-4">
@@ -125,6 +137,7 @@ export default function MobileActivityCard({
 
           {/* Book Button - Full Width for Easy Tapping */}
           <Button
+            onClick={handleBookNow}
             className="h-12 w-full bg-gradient-to-r from-pink-500 to-pink-600 font-bold text-white shadow-lg transition-all active:scale-95"
             size="lg"
           >
@@ -132,6 +145,6 @@ export default function MobileActivityCard({
           </Button>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
