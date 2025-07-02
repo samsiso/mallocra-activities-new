@@ -301,16 +301,19 @@ async function ActivityDetailContent({
 
             {/* Desktop Booking Widget - Hidden on mobile */}
             <div className="hidden lg:col-span-1 lg:block">
-              <div className="sticky top-24">
+              <div className="sticky top-24 h-fit">
                 <BookingWidget
                   activity={{
                     id: activity.id,
                     title: activity.title,
-                    priceAdult: activity.priceAdult,
-                    priceChild: activity.priceChild,
-                    maxParticipants: activity.maxParticipants,
-                    duration: activity.duration,
-                    category: activity.category
+                    maxParticipants: activity.maxParticipants || 10,
+                    durationMinutes:
+                      activity.durationMinutes || activity.duration || 60,
+                    category: activity.category || "general",
+                    weatherDependent: activity.weatherDependent || false,
+                    location: activity.location || "Mallorca",
+                    pricing: activity.pricing || [],
+                    spotsLeft: activity.spotsLeft
                   }}
                 />
               </div>
@@ -322,13 +325,20 @@ async function ActivityDetailContent({
       {/* Enhanced Reviews Section with Authentication */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4">
-          <EnhancedReviewsSection
-            activityId={activity.id}
-            userId={userId}
-            userProfile={userProfile}
-            userBookingInfo={userBookingInfo}
-            activityTitle={activity.title}
-          />
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            <div className="lg:col-span-2">
+              <EnhancedReviewsSection
+                activityId={activity.id}
+                userId={userId}
+                userProfile={userProfile}
+                userBookingInfo={userBookingInfo}
+                activityTitle={activity.title}
+              />
+            </div>
+            <div className="hidden lg:col-span-1 lg:block">
+              {/* Empty space to maintain layout consistency */}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -336,12 +346,19 @@ async function ActivityDetailContent({
       {activity.latitude && activity.longitude && (
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4">
-            <ActivityLocationMap
-              latitude={activity.latitude}
-              longitude={activity.longitude}
-              title={activity.title}
-              address={activity.location}
-            />
+            <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+              <div className="lg:col-span-2">
+                <ActivityLocationMap
+                  latitude={activity.latitude}
+                  longitude={activity.longitude}
+                  title={activity.title}
+                  address={activity.location}
+                />
+              </div>
+              <div className="hidden lg:col-span-1 lg:block">
+                {/* Empty space to maintain layout consistency */}
+              </div>
+            </div>
           </div>
         </section>
       )}
@@ -349,10 +366,17 @@ async function ActivityDetailContent({
       {/* Similar Activities */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4">
-          <SimilarActivities
-            currentActivityId={activity.id}
-            category={activity.category}
-          />
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            <div className="lg:col-span-2">
+              <SimilarActivities
+                currentActivityId={activity.id}
+                category={activity.category}
+              />
+            </div>
+            <div className="hidden lg:col-span-1 lg:block">
+              {/* Empty space to maintain layout consistency */}
+            </div>
+          </div>
         </div>
       </section>
     </div>

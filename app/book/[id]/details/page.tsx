@@ -122,15 +122,17 @@ export default function BookingDetailsPage() {
 
   if (!bookingData) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400">
         <div className="text-center text-white">Loading...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 p-8">
       <div className="mx-auto max-w-4xl">
+        <BookingProgress currentStep={2} />
+
         <h1 className="mb-8 text-center text-4xl font-bold text-white">
           Your Details
         </h1>

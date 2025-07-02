@@ -414,9 +414,10 @@ export async function createBookingAction(booking: InsertBooking): Promise<Actio
     }
   } catch (error) {
     console.error("Error creating booking:", error)
+    const errorMessage = error instanceof Error ? error.message : "Unknown error"
     return {
       isSuccess: false,
-      message: "⚠️ Database unavailable - booking creation failed"
+      message: `Database error: ${errorMessage}`
     }
   }
 }

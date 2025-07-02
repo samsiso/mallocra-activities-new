@@ -1,6 +1,6 @@
 "use server"
 
-import { createClient } from "@/lib/supabase-server"
+import { supabaseAdminClient } from "@/lib/supabase-server"
 import { revalidatePath } from "next/cache"
 
 interface ActivityData {
@@ -140,7 +140,7 @@ const realActivities: ActivityData[] = [
 
 export async function populateRealActivitiesAction() {
   try {
-    const supabase = await createClient()
+    const supabase = supabaseAdminClient
     
     // First, deactivate all existing activities
     const { error: deactivateError } = await supabase

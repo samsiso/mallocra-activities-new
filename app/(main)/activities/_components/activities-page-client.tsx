@@ -234,7 +234,7 @@ export default function ActivitiesPageClient({
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       {/* Background */}
-      <div className="activities-red-background bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800"></div>
+      <div className="activities-red-background bg-gradient-to-br from-pink-600 via-pink-700 to-pink-800"></div>
 
       <div className="relative z-10">
         {/* Hero Section */}

@@ -96,7 +96,6 @@ export default function BookingWidget({ activity }: BookingWidgetProps) {
   const [adults, setAdults] = useState(2)
   const [children, setChildren] = useState(0)
   const [isWishlisted, setIsWishlisted] = useState(false)
-  const [isSticky, setIsSticky] = useState(false)
   const [availableDates, setAvailableDates] = useState<AvailableDate[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -164,32 +163,14 @@ export default function BookingWidget({ activity }: BookingWidgetProps) {
     totalParticipants > 0 &&
     totalParticipants <= activity.maxParticipants
 
-  // Sticky scroll detection
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      setIsSticky(scrollY > 600)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
   return (
-    <div
-      className={`transition-all duration-300 ${isSticky ? "fixed right-4 top-4 z-50 w-96 max-w-[90vw]" : "relative"}`}
-    >
+    <div className="w-full">
       <GlassmorphismCard
         variant="elevated"
-        className={`relative overflow-hidden p-6 ${isSticky ? "border-yellow-400/20 shadow-2xl" : ""}`}
+        className="relative overflow-hidden p-6"
       >
         {/* Background gradient overlay */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-rose-500/5 via-transparent to-yellow-500/5" />
-
-        {/* Sticky indicator */}
-        {isSticky && (
-          <div className="absolute -top-2 left-1/2 h-1 w-16 -translate-x-1/2 rounded-full bg-gradient-to-r from-yellow-400 to-amber-500"></div>
-        )}
 
         {/* Premium header with enhanced pricing */}
         <div className="relative mb-6">

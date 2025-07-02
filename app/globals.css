@@ -717,7 +717,6 @@ html {
 html, body {
   margin: 0 !important;
   padding: 0 !important;
-  background: transparent !important;
 }
 
 /* Force transparent background for all potential dark mode elements */
@@ -765,13 +764,15 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
 }
 
 /* Ensure viewport fills screen completely */
-html, body {
-  height: 100%;
-  overflow-x: hidden;
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
 }
 
 /* Remove any potential safe area or notch styling */
@@ -804,9 +805,9 @@ html {
 /* Ensure no browser chrome interference */
 @supports (-webkit-touch-callout: none) {
   /* iOS Safari specific */
-  html, body {
-    min-height: 100vh !important;
-    min-height: -webkit-fill-available !important;
+  body {
+    position: relative;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -830,19 +831,13 @@ html {
 /* Scroll Performance Optimizations */
 html {
   scroll-behavior: smooth;
-}
-
-* {
-  /* Enable hardware acceleration for smoother scrolling */
-  will-change: auto;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Optimize scrolling for main content */
 body {
   overflow-x: hidden;
+  overflow-y: auto;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
@@ -866,7 +861,7 @@ body {
   transform: translateZ(0);
 }
 
-/* Performance optimizations for animations */
+/* Performance optimizations for animations - only applied to specific elements */
 .gpu-accelerated {
   transform: translateZ(0);
   will-change: transform;

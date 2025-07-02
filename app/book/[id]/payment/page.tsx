@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { useUser } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
-import { createBookingAction } from "@/actions/db/bookings-actions"
+import { createBookingServerAction } from "@/actions/create-booking-action"
 import { syncClerkUserAction } from "@/actions/db/users-actions"
 import {
   sendBookingConfirmationEmailAction,
@@ -154,15 +154,22 @@ export default function BookingPaymentPage() {
       if (user && userProfile) {
         customerId = userProfile.id
       } else if (isGuest) {
-        // For guest bookings, we'll use a special guest identifier
-        customerId = `guest-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`
+        // For guest bookings, generate a UUID format
+        customerId = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+          /[xy]/g,
+          function (c) {
+            const r = (Math.random() * 16) | 0
+            const v = c == "x" ? r : (r & 0x3) | 0x8
+            return v.toString(16)
+          }
+        )
       }
 
       // Generate booking reference
       const bookingReference = `MAL-${Date.now().toString().slice(-6)}-${Math.random().toString(36).substring(2, 5).toUpperCase()}`
 
-      // Create booking in database
-      const result = await createBookingAction({
+      // Create booking with all required fields
+      const bookingPayload = {
         bookingReference,
         activityId: bookingData.activityId,
         customerId: customerId,
@@ -170,21 +177,33 @@ export default function BookingPaymentPage() {
         bookingTime: bookingData.selectedTime,
         adults: bookingData.adults,
         children: bookingData.children,
+        seniors: 0,
         totalParticipants: bookingData.adults + bookingData.children,
-        totalAmount: bookingData.totalPrice.toString(),
         subtotal: bookingData.totalPrice.toString(),
+        totalAmount: bookingData.totalPrice.toString(),
+        currency: "EUR",
         leadCustomerName: `${bookingData.customerDetails.firstName} ${bookingData.customerDetails.lastName}`,
         leadCustomerEmail: bookingData.customerDetails.email,
         leadCustomerPhone: bookingData.customerDetails.phone,
-        specialRequirements: bookingData.customerDetails.specialRequirements
-      })
+        specialRequirements:
+          bookingData.customerDetails.specialRequirements || null
+      }
+
+      // Log the booking data we're sending
+      console.log("Sending booking data:", bookingPayload)
+
+      // Create booking using server action
+      const result = await createBookingServerAction(bookingPayload)
+
+      console.log("Booking result:", result)
 
       if (result.isSuccess) {
+        console.log("✅ Booking created successfully!")
         // Send confirmation notifications (email + SMS + WhatsApp + Telegram)
         try {
           // Email data (keep existing email system)
           const emailData: BookingEmailData = {
-            bookingReference: result.data.bookingReference,
+            bookingReference: result.data?.bookingReference || bookingReference,
             activityTitle: bookingData.activity?.title || "Mallorca Activity",
             bookingDate: bookingData.selectedDate,
             bookingTime: bookingData.selectedTime,
@@ -207,7 +226,7 @@ export default function BookingPaymentPage() {
             activityTitle: bookingData.activity?.title || "Mallorca Activity",
             bookingDate: bookingData.selectedDate,
             bookingTime: bookingData.selectedTime,
-            bookingReference: result.data.bookingReference,
+            bookingReference: result.data?.bookingReference || bookingReference,
             totalAmount: Number(bookingData.totalPrice),
             participantCount: bookingData.adults + bookingData.children
           }
@@ -229,7 +248,8 @@ export default function BookingPaymentPage() {
               activityTitle: bookingData.activity?.title || "Mallorca Activity",
               bookingDate: bookingData.selectedDate,
               bookingTime: bookingData.selectedTime,
-              bookingReference: result.data.bookingReference,
+              bookingReference:
+                result.data?.bookingReference || bookingReference,
               totalAmount: Number(bookingData.totalPrice),
               participantCount: bookingData.adults + bookingData.children
             })
@@ -272,8 +292,11 @@ export default function BookingPaymentPage() {
 
         // Clear localStorage and redirect to confirmation
         localStorage.removeItem("booking-data")
-        router.push(`/booking-confirmation/${result.data.id}`)
+        router.push(
+          `/booking-confirmation/${result.data?.id || bookingReference}`
+        )
       } else {
+        console.error("Booking failed:", result)
         alert("Booking failed: " + result.message)
       }
     } catch (error) {

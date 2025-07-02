@@ -109,131 +109,144 @@ export default function SimilarActivities({
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-3">
-      {similarActivities.map(similarActivity => {
-        const primaryImage =
-          similarActivity.images?.find(img => img.isPrimary) ||
-          similarActivity.images?.[0]
-        const adultPricing = similarActivity.pricing?.find(
-          p => p.priceType === "adult"
-        )
-        const price = adultPricing ? parseFloat(adultPricing.basePrice) : 0
+    <div className="space-y-6">
+      {/* Section Heading */}
+      <div className="text-center">
+        <h2 className="text-3xl font-bold text-white sm:text-4xl">
+          Related Activities
+        </h2>
+        <p className="mt-2 text-lg text-white/80">
+          Discover more amazing experiences in Mallorca
+        </p>
+      </div>
 
-        return (
-          <Link
-            key={similarActivity.id}
-            href={`/activities/${similarActivity.slug}`}
-            className="group block"
-          >
-            <GlassmorphismCard className="group overflow-hidden p-0 transition-all duration-300 hover:bg-white/15">
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={
-                    primaryImage?.imageUrl ||
-                    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&crop=center&q=85"
-                  }
-                  alt={primaryImage?.altText || similarActivity.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-110"
-                />
+      {/* Activities Grid */}
+      <div className="grid gap-6 md:grid-cols-3">
+        {similarActivities.map(similarActivity => {
+          const primaryImage =
+            similarActivity.images?.find(img => img.isPrimary) ||
+            similarActivity.images?.[0]
+          const adultPricing = similarActivity.pricing?.find(
+            p => p.priceType === "adult"
+          )
+          const price = adultPricing ? parseFloat(adultPricing.basePrice) : 0
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          return (
+            <Link
+              key={similarActivity.id}
+              href={`/activities/${similarActivity.slug}`}
+              className="group block"
+            >
+              <GlassmorphismCard className="group overflow-hidden p-0 transition-all duration-300 hover:bg-white/15">
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={
+                      primaryImage?.imageUrl ||
+                      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&crop=center&q=85"
+                    }
+                    alt={primaryImage?.altText || similarActivity.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
 
-                {/* Category Badge */}
-                <div className="absolute left-3 top-3">
-                  <Badge className="border-white/30 bg-white/20 text-white backdrop-blur-sm">
-                    {similarActivity.category
-                      .replace("_", " ")
-                      .replace(/\b\w/g, l => l.toUpperCase())}
-                  </Badge>
-                </div>
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                {/* Featured Badge */}
-                {similarActivity.featured && (
-                  <div className="absolute right-3 top-3">
-                    <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 font-bold text-black">
-                      Featured
+                  {/* Category Badge */}
+                  <div className="absolute left-3 top-3">
+                    <Badge className="border-white/30 bg-white/20 text-white backdrop-blur-sm">
+                      {similarActivity.category
+                        .replace("_", " ")
+                        .replace(/\b\w/g, l => l.toUpperCase())}
                     </Badge>
                   </div>
-                )}
 
-                {/* Wishlist Button */}
-                <Button
-                  size="icon"
-                  className="absolute bottom-3 right-3 border-white/30 bg-black/40 backdrop-blur-sm hover:bg-black/60"
-                  onClick={e => {
-                    e.preventDefault()
-                    // Handle wishlist toggle
-                  }}
-                >
-                  <Heart className="size-4 text-white" />
-                </Button>
-              </div>
+                  {/* Featured Badge */}
+                  {similarActivity.featured && (
+                    <div className="absolute right-3 top-3">
+                      <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 font-bold text-black">
+                        Featured
+                      </Badge>
+                    </div>
+                  )}
 
-              {/* Content */}
-              <div className="space-y-3 p-4">
-                {/* Title */}
-                <h3 className="line-clamp-2 font-semibold leading-tight text-white transition-colors group-hover:text-yellow-400">
-                  {similarActivity.title}
-                </h3>
-
-                {/* Quick Info */}
-                <div className="flex flex-wrap items-center gap-3 text-sm text-white/70">
-                  <div className="flex items-center gap-1">
-                    <MapPin className="size-3" />
-                    <span>{similarActivity.location}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="size-3" />
-                    <span>
-                      {Math.floor(similarActivity.durationMinutes / 60)}h
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Users className="size-3" />
-                    <span>Max {similarActivity.maxParticipants}</span>
-                  </div>
-                </div>
-
-                {/* Rating & Price */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-medium text-white">
-                      {similarActivity.avgRating}
-                    </span>
-                    <span className="text-sm text-white/60">
-                      ({similarActivity.totalReviews})
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-lg font-bold text-yellow-400">
-                      €{price}
-                    </span>
-                    <span className="ml-1 text-sm text-white/60">
-                      per person
-                    </span>
-                  </div>
-                </div>
-
-                {/* Short Description */}
-                <p className="line-clamp-2 text-sm leading-relaxed text-white/70">
-                  {similarActivity.shortDescription}
-                </p>
-
-                {/* CTA */}
-                <div className="pt-2">
-                  <Button className="w-full border border-yellow-400/30 bg-gradient-to-r from-yellow-400/20 to-amber-500/20 text-white transition-all hover:from-yellow-400/30 hover:to-amber-500/30">
-                    View Details
+                  {/* Wishlist Button */}
+                  <Button
+                    size="icon"
+                    className="absolute bottom-3 right-3 border-white/30 bg-black/40 backdrop-blur-sm hover:bg-black/60"
+                    onClick={e => {
+                      e.preventDefault()
+                      // Handle wishlist toggle
+                    }}
+                  >
+                    <Heart className="size-4 text-white" />
                   </Button>
                 </div>
-              </div>
-            </GlassmorphismCard>
-          </Link>
-        )
-      })}
+
+                {/* Content */}
+                <div className="space-y-3 p-4">
+                  {/* Title */}
+                  <h3 className="line-clamp-2 font-semibold leading-tight text-white transition-colors group-hover:text-yellow-400">
+                    {similarActivity.title}
+                  </h3>
+
+                  {/* Quick Info */}
+                  <div className="flex flex-wrap items-center gap-3 text-sm text-white/70">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="size-3" />
+                      <span>{similarActivity.location}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="size-3" />
+                      <span>
+                        {Math.floor(similarActivity.durationMinutes / 60)}h
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Users className="size-3" />
+                      <span>Max {similarActivity.maxParticipants}</span>
+                    </div>
+                  </div>
+
+                  {/* Rating & Price */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1">
+                      <Star className="size-4 fill-yellow-400 text-yellow-400" />
+                      <span className="font-medium text-white">
+                        {similarActivity.avgRating}
+                      </span>
+                      <span className="text-sm text-white/60">
+                        ({similarActivity.totalReviews})
+                      </span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-lg font-bold text-yellow-400">
+                        €{price}
+                      </span>
+                      <span className="ml-1 text-sm text-white/60">
+                        per person
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Short Description */}
+                  <p className="line-clamp-2 text-sm leading-relaxed text-white/70">
+                    {similarActivity.shortDescription}
+                  </p>
+
+                  {/* CTA */}
+                  <div className="pt-2">
+                    <Button className="w-full border border-yellow-400/30 bg-gradient-to-r from-yellow-400 to-amber-500 font-semibold text-black transition-all hover:from-yellow-500 hover:to-amber-600 hover:shadow-lg">
+                      View Details
+                    </Button>
+                  </div>
+                </div>
+              </GlassmorphismCard>
+            </Link>
+          )
+        })}
+      </div>
     </div>
   )
 }

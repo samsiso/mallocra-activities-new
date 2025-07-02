@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { getBookingByIdAction } from "@/actions/db/bookings-actions"
+import { getBookingByIdServerAction } from "@/actions/get-booking-action"
 import { motion } from "framer-motion"
 
 export default function BookingConfirmationPage() {
@@ -34,7 +34,7 @@ export default function BookingConfirmationPage() {
   useEffect(() => {
     const fetchBooking = async () => {
       try {
-        const result = await getBookingByIdAction(bookingId)
+        const result = await getBookingByIdServerAction(bookingId)
         if (result.isSuccess) {
           setBooking(result.data)
         } else {
