@@ -10,6 +10,44 @@
 4. **`docs/GITHUB-AUTOMATION-WORKFLOW.md`** - Git automation
 5. **`docs/templates/AUTONOMOUS-DEVELOPMENT-TEMPLATES.md`** - Code templates
 
+## 🚨 **CRITICAL PRE-FLIGHT CHECKLIST**
+**ALWAYS CHECK THESE FIRST when debugging issues:**
+
+### 1. **Database Issues**
+```bash
+# FIRST: Check ALL required env vars exist
+cat .env.local | grep -E "(SUPABASE|DATABASE)"
+
+# Required for database operations:
+DATABASE_URL=                    # PostgreSQL connection string
+NEXT_PUBLIC_SUPABASE_URL=       # Supabase project URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY=  # Public anon key
+SUPABASE_SERVICE_ROLE_KEY=      # Admin key for server operations (CRITICAL!)
+```
+
+### 2. **Common Booking Flow Issues**
+- **"Database unavailable"** → Missing `SUPABASE_SERVICE_ROLE_KEY`
+- **"Invalid API key"** → Using client component instead of server action
+- **"RLS policy violation"** → Need admin client with service role key
+- **Foreign key errors** → Create guest user profiles first
+
+### 3. **Debugging Order**
+1. Check environment variables FIRST
+2. Check if it needs server-side execution (99% of database ops do)
+3. Create server action with admin client
+4. Check Supabase logs via MCP
+5. Test with automated tests: `npm run test:e2e:console`
+
+### 4. **Quick Fixes**
+```typescript
+// ❌ WRONG: Client-side database call
+const { data } = await supabase.from('bookings').insert(...)
+
+// ✅ RIGHT: Server action with admin client
+import { supabaseAdminClient } from '@/lib/supabase-admin'
+const { data } = await supabaseAdminClient.from('bookings').insert(...)
+```
+
 ## Project Overview
 A comprehensive tourism platform for Mallorca activities built with Next.js, focusing on activity discovery, booking, and management.
 
