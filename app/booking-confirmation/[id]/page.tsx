@@ -95,7 +95,10 @@ export default function BookingConfirmationPage() {
     )
   }
 
-  const isGuestBooking = booking.customerId.startsWith("guest-")
+  const isGuestBooking =
+    booking.customer_id &&
+    typeof booking.customer_id === "string" &&
+    booking.customer_id.startsWith("guest-")
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-600 via-pink-500 to-pink-400 p-4">
@@ -161,7 +164,7 @@ export default function BookingConfirmationPage() {
           >
             <p className="mb-1 text-sm text-white/70">Booking Reference</p>
             <p className="text-2xl font-bold text-yellow-400">
-              {booking.bookingReference}
+              {booking.booking_reference}
             </p>
             <p className="mt-2 text-xs text-white/50">
               Save this reference number for your records
@@ -183,7 +186,7 @@ export default function BookingConfirmationPage() {
                 <div>
                   <p className="text-sm text-white/70">Date</p>
                   <p className="font-bold text-white">
-                    {formatDate(booking.bookingDate)}
+                    {formatDate(booking.booking_date)}
                   </p>
                 </div>
               </div>
@@ -192,7 +195,7 @@ export default function BookingConfirmationPage() {
                 <Clock className="size-5 text-green-400" />
                 <div>
                   <p className="text-sm text-white/70">Time</p>
-                  <p className="font-bold text-white">{booking.bookingTime}</p>
+                  <p className="font-bold text-white">{booking.booking_time}</p>
                 </div>
               </div>
 
@@ -201,7 +204,7 @@ export default function BookingConfirmationPage() {
                 <div>
                   <p className="text-sm text-white/70">Participants</p>
                   <p className="font-bold text-white">
-                    {booking.totalParticipants} people
+                    {booking.total_participants} people
                   </p>
                 </div>
               </div>
@@ -211,7 +214,7 @@ export default function BookingConfirmationPage() {
                 <div>
                   <p className="text-sm text-white/70">Total Amount</p>
                   <p className="font-bold text-yellow-400">
-                    €{booking.totalAmount}
+                    €{booking.total_amount}
                   </p>
                 </div>
               </div>
@@ -219,23 +222,25 @@ export default function BookingConfirmationPage() {
 
             <div className="rounded-lg bg-white/5 p-4">
               <p className="mb-2 text-sm text-white/70">Lead Customer</p>
-              <p className="font-bold text-white">{booking.leadCustomerName}</p>
-              <p className="text-sm text-white/70">
-                {booking.leadCustomerEmail}
+              <p className="font-bold text-white">
+                {booking.lead_customer_name}
               </p>
-              {booking.leadCustomerPhone && (
+              <p className="text-sm text-white/70">
+                {booking.lead_customer_email}
+              </p>
+              {booking.lead_customer_phone && (
                 <p className="text-sm text-white/70">
-                  {booking.leadCustomerPhone}
+                  {booking.lead_customer_phone}
                 </p>
               )}
             </div>
 
-            {booking.specialRequirements && (
+            {booking.special_requirements && (
               <div className="rounded-lg bg-white/5 p-4">
                 <p className="mb-2 text-sm text-white/70">
                   Special Requirements
                 </p>
-                <p className="text-white">{booking.specialRequirements}</p>
+                <p className="text-white">{booking.special_requirements}</p>
               </div>
             )}
           </motion.div>
@@ -279,7 +284,7 @@ export default function BookingConfirmationPage() {
                 onClick={() => {
                   navigator.share?.({
                     title: "Booking Confirmation",
-                    text: `My booking is confirmed! Reference: ${booking.bookingReference}`,
+                    text: `My booking is confirmed! Reference: ${booking.booking_reference}`,
                     url: window.location.href
                   }) || navigator.clipboard.writeText(window.location.href)
                 }}
