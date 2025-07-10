@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Loader2, CheckCircle, Boat, Image as ImageIcon } from "lucide-react"
+import { Loader2, CheckCircle, Ship, Image as ImageIcon } from "lucide-react"
 import { updateBoatActivitiesWithRealImages } from "@/actions/db/update-boat-activities-images"
 
 export default function UpdateImagesPage() {
@@ -46,7 +46,7 @@ export default function UpdateImagesPage() {
         {/* Boat Activities Update */}
         <Card className="p-6">
           <div className="mb-4 flex items-center gap-3">
-            <Boat className="size-6 text-blue-500" />
+            <Ship className="size-6 text-blue-500" />
             <h2 className="text-xl font-semibold">Boat Activities</h2>
           </div>
 
