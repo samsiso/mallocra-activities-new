@@ -20,7 +20,8 @@ import {
   LogOut,
   Search,
   Bell,
-  AlertCircle
+  AlertCircle,
+  Shield
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -109,6 +110,12 @@ const navigationGroups = [
         href: "/admin/settings",
         icon: Settings,
         ariaLabel: "Configure system settings"
+      },
+      {
+        name: "Audit Logs",
+        href: "/admin/audit-logs",
+        icon: Shield,
+        ariaLabel: "View system audit logs"
       }
     ]
   }

@@ -5,27 +5,27 @@ All data objects extracted from the main landing page for better maintainability
 </ai_context>
 */
 
-// Background images for the hero slider
+// Background images for the hero slider - Beautiful Mallorca coastal themes
 export const heroImages = [
   {
-    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop",
-    alt: "Beautiful Mallorca coastline with crystal clear waters"
+    url: "https://images.unsplash.com/photo-1578530332818-6ba472e67b9f?q=80&w=2070&auto=format&fit=crop",
+    alt: "Turquoise waters and sandy beach at Cala Mondragó, Mallorca"
   },
   {
-    url: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2070&auto=format&fit=crop",
-    alt: "Serra de Tramuntana mountain landscapes"
+    url: "https://images.unsplash.com/photo-1570135460345-26da4177b7f6?q=80&w=2070&auto=format&fit=crop",
+    alt: "Luxury yachts and sailboats in Port de Sóller marina at sunset"
   },
   {
-    url: "https://images.unsplash.com/photo-1564594985645-4427056e22e2?q=80&w=2070&auto=format&fit=crop",
-    alt: "Palma Cathedral and historic old town"
+    url: "https://images.unsplash.com/photo-1601389004506-dcf7e42de4d8?q=80&w=2070&auto=format&fit=crop",
+    alt: "Crystal clear Mediterranean waters at Es Trenc beach with white sand"
   },
   {
-    url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop",
-    alt: "Magical sunset over Mallorca waters"
+    url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070&auto=format&fit=crop",
+    alt: "Traditional fishing boats in a picturesque Mallorca cove"
   },
   {
-    url: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070&auto=format&fit=crop",
-    alt: "Adventure activities and sailing in Mallorca"
+    url: "https://images.unsplash.com/photo-1519452575417-564c1401ecc0?q=80&w=2070&auto=format&fit=crop",
+    alt: "Aerial view of Cap de Formentor with dramatic cliffs and blue sea"
   }
 ]
 

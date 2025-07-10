@@ -48,6 +48,62 @@ import { supabaseAdminClient } from '@/lib/supabase-admin'
 const { data } = await supabaseAdminClient.from('bookings').insert(...)
 ```
 
+### 5. **Supabase MCP Setup**
+**CRITICAL**: Ensure Supabase MCP is always available for database operations:
+
+**CORRECT MCP CONFIGURATION FORMAT** (as of April 2025):
+Use environment variables with project-scoped access token, NOT command-line arguments.
+
+```json
+// .cursor/mcp.json, .mcp.json, .claude.json
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--read-only",
+        "--project-ref=tskawjnjmiltzoypdnsl"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "sbp_0b12301cb9ef04c534aab1175757221efa3b2763"
+      }
+    }
+  }
+}
+```
+
+**SETUP COMMANDS**:
+```bash
+# Quick setup (if MCP not working):
+./scripts/setup-supabase-mcp.sh
+
+# Manual check:
+claude mcp list | grep supabase
+
+# Option 1: Local MCP Server (Recommended)
+claude mcp remove supabase -s local
+claude mcp remove supabase -s project
+claude mcp add supabase '{"command": "npx", "args": ["-y", "@supabase/mcp-server-supabase@latest", "--read-only", "--project-ref=tskawjnjmiltzoypdnsl"], "env": {"SUPABASE_ACCESS_TOKEN": "sbp_0b12301cb9ef04c534aab1175757221efa3b2763"}}'
+
+# Option 2: HTTP MCP Server via Smithery (Alternative)
+claude mcp add --transport http supabase-mcp-server "https://server.smithery.ai/@supabase-community/supabase-mcp/mcp?api_key=fc116b13-27b7-41a5-875b-b9673902c194&profile=uptight-shrimp-cihkh2"
+```
+
+**COMMON ISSUES**:
+- ❌ **OLD FORMAT**: Using `--url`, `--anon-key`, `--service-role-key` (causes failures)
+- ❌ **WRONG FORMAT**: Using `--access-token` in args (not supported)
+- ✅ **CORRECT FORMAT**: Using `env.SUPABASE_ACCESS_TOKEN` with `--project-ref` (official format)
+- Multiple config files can cause conflicts - ensure all use same format
+- Use `--read-only` flag for security (recommended)
+
+**MCP Tools Available:**
+- `mcp__supabase__execute_sql` - Run any SQL query
+- `mcp__supabase__list_tables` - Show database schema  
+- `mcp__supabase__get_project` - Get project details
+- Full CRUD operations on all tables
+
 ## Project Overview
 A comprehensive tourism platform for Mallorca activities built with Next.js, focusing on activity discovery, booking, and management.
 

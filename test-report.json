@@ -1,0 +1,697 @@
+{
+  "totalPages": 13,
+  "passedPages": 3,
+  "failedPages": 7,
+  "warnings": 3,
+  "errors": [
+    "Test Error: Navigation timeout of 30000 ms exceeded"
+  ],
+  "pageResults": [
+    {
+      "name": "Homepage",
+      "path": "/",
+      "status": "failed",
+      "loadTime": 3090,
+      "errors": [],
+      "warnings": [
+        "Failed Request: https://images.unsplash.com/photo-1494790108755-2616b612b47c?q=80&w=150&auto=format&fit=crop - net::ERR_BLOCKED_BY_ORB",
+        "Failed Request: http://localhost:3000/ - net::ERR_ABORTED",
+        "Failed Request: http://localhost:3000/ - net::ERR_ABORTED",
+        "Failed Request: http://localhost:3000/ - net::ERR_ABORTED",
+        "Failed Request: http://localhost:3000/ - net::ERR_ABORTED",
+        "Failed Request: http://localhost:3000/ - net::ERR_ABORTED",
+        "Failed Request: http://localhost:3000/ - net::ERR_ABORTED",
+        "Failed Request: http://localhost:3000/ - net::ERR_ABORTED",
+        "No hero section found on homepage"
+      ],
+      "images": {
+        "total": 25,
+        "loaded": 20,
+        "failed": 5,
+        "details": [
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544551763-46a013bb70d5%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=3840&q=90",
+            "alt": "Jet ski adventure in crystal clear Mallorca waters",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1559827260-dc66d52bef19%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=3840&q=90",
+            "alt": "Luxury yacht sailing in Mallorca bay",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1519452575417-564c1401ecc0%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=3840&q=90",
+            "alt": "Beautiful beach and turquoise waters in Mallorca",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544551763-46a013bb70d5%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Water Sports",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1571055107559-3e67626fa8be%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Land Adventures",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1558618666-fcd25c85cd64%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Cultural & Culinary",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1506905925346-21bda4d32df4%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Nightlife & Entertainment",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1502086223501-7ea6ecd79368%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Family Adventures",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1556469559-7c67fdc47b81%3Fw%3D1200%26h%3D800%26fit%3Dcrop%26crop%3Dcenter%26q%3D85&w=3840&q=75",
+            "alt": "Palma Cathedral",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544551763-46a013bb70d5%3Fw%3D1200%26h%3D800%26fit%3Dcrop%26crop%3Dcenter%26q%3D85&w=3840&q=75",
+            "alt": "Luxury sailing catamaran",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544551763-46a013bb70d5%3Fw%3D1200%26h%3D800%26fit%3Dcrop%26crop%3Dcenter%26q%3D85&w=3840&q=75",
+            "alt": "Luxury catamaran at sunset",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "https://b.basemaps.cartocdn.com/dark_all/10/519/388.png",
+            "alt": "No alt text",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://c.basemaps.cartocdn.com/dark_all/10/520/388.png",
+            "alt": "No alt text",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://c.basemaps.cartocdn.com/dark_all/10/519/389.png",
+            "alt": "No alt text",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://a.basemaps.cartocdn.com/dark_all/10/520/389.png",
+            "alt": "No alt text",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://a.basemaps.cartocdn.com/dark_all/10/518/388.png",
+            "alt": "No alt text",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://a.basemaps.cartocdn.com/dark_all/10/521/388.png",
+            "alt": "No alt text",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://b.basemaps.cartocdn.com/dark_all/10/518/389.png",
+            "alt": "No alt text",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://b.basemaps.cartocdn.com/dark_all/10/521/389.png",
+            "alt": "No alt text",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1494790108755-2616b612b47c?q=80&w=150&auto=format&fit=crop",
+            "alt": "Sarah Johnson",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
+            "alt": "Michael Weber",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop",
+            "alt": "Emma Thompson",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop",
+            "alt": "Lucas Martin",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop",
+            "alt": "Sofia Rodriguez",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
+            "alt": "James Wilson",
+            "loaded": true,
+            "visible": true
+          }
+        ]
+      },
+      "consoleErrors": [
+        "🚨 CRITICAL: Missing environment variables!",
+        "Missing: JSHandle@array",
+        "Failed to load resource: the server responded with a status of 401 ()",
+        "Failed to load resource: the server responded with a status of 401 ()",
+        "Failed to load resource: the server responded with a status of 401 ()",
+        "Failed to load resource: the server responded with a status of 401 ()",
+        "Failed to load resource: the server responded with a status of 401 ()",
+        "🚨 CRITICAL: Missing environment variables!",
+        "Missing: JSHandle@array",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "totalLoadTime": 744.2000000476837
+      },
+      "screenshot": "test-screenshots/homepage.png"
+    },
+    {
+      "name": "Activities List",
+      "path": "/activities",
+      "status": "failed",
+      "loadTime": 1739,
+      "errors": [],
+      "warnings": [
+        "No activity cards found on activities page"
+      ],
+      "images": {
+        "total": 14,
+        "loaded": 10,
+        "failed": 4,
+        "details": [
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FQuad1.webp&w=3840&q=75",
+            "alt": "Quad Bikes Magaluf",
+            "loaded": true,
+            "visible": false
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FWhatsApp%2520Image%25202025-06-15%2520at%252021.17.51.jpeg%3FupdatedAt%3D1751645631722&w=3840&q=75",
+            "alt": "Boat Tour Mallorca",
+            "loaded": true,
+            "visible": false
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FWhatsApp%2520Image%25202025-06-15%2520at%252021.17.51.jpeg%3FupdatedAt%3D1751645631722&w=3840&q=75",
+            "alt": "White Party Boat",
+            "loaded": true,
+            "visible": false
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1595965742915-2ce1bbe9bc6e%3Fq%3D80%26w%3D2000&w=3840&q=75",
+            "alt": "Quad Biking Mountain Adventure",
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2Fformula-racing-mallorca.jpg&w=3840&q=75",
+            "alt": "Formula Racing Experience",
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FWhatsApp%2520Image%25202025-06-15%2520at%252021.17.51.jpeg%3FupdatedAt%3D1751645631722&w=3840&q=75",
+            "alt": "Jet Ski Adventure Tour",
+            "loaded": true,
+            "visible": false
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FWhatsApp%2520Image%25202025-06-15%2520at%252021.17.51.jpeg%3FupdatedAt%3D1751645631722&w=3840&q=75",
+            "alt": "Private Boat Rental",
+            "loaded": true,
+            "visible": false
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FQuad1.webp&w=3840&q=75",
+            "alt": "Quad Bikes Adventure in Magaluf",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FWhatsApp%2520Image%25202025-06-15%2520at%252021.17.51.jpeg%3FupdatedAt%3D1751645631722&w=3840&q=75",
+            "alt": "SUNCHASERS Boat Rental - Mallorca",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FWhatsApp%2520Image%25202025-06-15%2520at%252021.17.51.jpeg%3FupdatedAt%3D1751645631722&w=3840&q=75",
+            "alt": "SUNCHASERS Boat Rental - Mallorca",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1595965742915-2ce1bbe9bc6e%3Fixlib%3Drb-4.0.3%26ixid%3DM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%253D%253D%26auto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D80&w=3840&q=75",
+            "alt": "Quad Biking Adventure in Mallorca",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2Fformula-racing-mallorca.jpg&w=3840&q=75",
+            "alt": "Formula Racing Experience in Mallorca",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FWhatsApp%2520Image%25202025-06-15%2520at%252021.17.51.jpeg%3FupdatedAt%3D1751645631722&w=3840&q=75",
+            "alt": "Jet Ski Adventure Tour in Mallorca",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fs8hw8aygd%2FActivites%2FWhatsApp%2520Image%25202025-06-15%2520at%252021.17.51.jpeg%3FupdatedAt%3D1751645631722&w=3840&q=75",
+            "alt": "SUNCHASERS Boat Rental - Mallorca",
+            "loaded": true,
+            "visible": true
+          }
+        ]
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "totalLoadTime": 750.1000000238419
+      },
+      "screenshot": "test-screenshots/activities-list.png"
+    },
+    {
+      "name": "About Page",
+      "path": "/about",
+      "status": "failed",
+      "loadTime": 1489,
+      "errors": [],
+      "warnings": [
+        "Failed Request: http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1516491266871-56c62e8e2e4f%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=640&q=75 - net::ERR_ABORTED"
+      ],
+      "images": {
+        "total": 4,
+        "loaded": 1,
+        "failed": 3,
+        "details": [
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1516491266871-56c62e8e2e4f%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Beautiful Mallorca coastline",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1570197788417-0e82375c9371%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Mallorca old town streets",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544551763-46a013bb70d5%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Crystal clear Mallorca waters",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1494790108755-2616b612b786%3Fq%3D80%26w%3D150%26auto%3Dformat%26fit%3Dcrop&w=128&q=75",
+            "alt": "Sarah Chen",
+            "loaded": false,
+            "visible": true
+          }
+        ]
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "totalLoadTime": 259.6999999284744
+      },
+      "screenshot": "test-screenshots/about-page.png"
+    },
+    {
+      "name": "Blog Page",
+      "path": "/blog",
+      "status": "failed",
+      "loadTime": 1526,
+      "errors": [],
+      "warnings": [],
+      "images": {
+        "total": 0,
+        "loaded": 0,
+        "failed": 0,
+        "details": []
+      },
+      "consoleErrors": [
+        "%c%s%c Error getting blogs: background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   JSHandle@error",
+        "%c%s%c Error getting blogs: background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   JSHandle@error",
+        "%c%s%c Error getting tags: background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   JSHandle@error"
+      ],
+      "performanceMetrics": {
+        "domContentLoaded": 0.5,
+        "loadComplete": 0,
+        "totalLoadTime": 689.6000000238419
+      },
+      "screenshot": "test-screenshots/blog-page.png"
+    },
+    {
+      "name": "Contact Page",
+      "path": "/contact",
+      "status": "passed",
+      "loadTime": 966,
+      "errors": [],
+      "warnings": [],
+      "images": {
+        "total": 0,
+        "loaded": 0,
+        "failed": 0,
+        "details": []
+      },
+      "consoleErrors": [],
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "totalLoadTime": 219.60000002384186
+      },
+      "screenshot": "test-screenshots/contact-page.png"
+    },
+    {
+      "name": "My Bookings",
+      "path": "/bookings",
+      "status": "passed",
+      "loadTime": 925,
+      "errors": [],
+      "warnings": [],
+      "images": {
+        "total": 0,
+        "loaded": 0,
+        "failed": 0,
+        "details": []
+      },
+      "consoleErrors": [],
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "totalLoadTime": 195.39999997615814
+      },
+      "screenshot": "test-screenshots/my-bookings.png"
+    },
+    {
+      "name": "Wishlist",
+      "path": "/wishlist",
+      "status": "passed",
+      "loadTime": 1066,
+      "errors": [],
+      "warnings": [],
+      "images": {
+        "total": 4,
+        "loaded": 4,
+        "failed": 0,
+        "details": [
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544551763-46a013bb70d5%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Private Yacht Charter Experience",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1506905925346-21bda4d32df4%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Serra de Tramuntana Hiking Tour",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1414235077428-338989a2e8c0%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Mallorca Wine & Olive Oil Tasting",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1506197603052-3cc9c3a201bd%3Fq%3D80%26w%3D800%26auto%3Dformat%26fit%3Dcrop&w=3840&q=75",
+            "alt": "Formentor Lighthouse Sunset Tour",
+            "loaded": true,
+            "visible": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "totalLoadTime": 283.60000002384186
+      },
+      "screenshot": "test-screenshots/wishlist.png"
+    },
+    {
+      "name": "User Profile",
+      "path": "/profile",
+      "status": "failed",
+      "loadTime": 0,
+      "errors": [
+        "Test Error: Navigation timeout of 30000 ms exceeded"
+      ],
+      "warnings": [],
+      "images": {
+        "total": 0,
+        "loaded": 0,
+        "failed": 0
+      },
+      "consoleErrors": [],
+      "performanceMetrics": {},
+      "screenshot": null
+    },
+    {
+      "name": "Admin Dashboard",
+      "path": "/admin/dashboard",
+      "status": "warning",
+      "loadTime": 1371,
+      "errors": [],
+      "warnings": [
+        "Failed Request: http://localhost:3000/admin/dashboard - net::ERR_ABORTED",
+        "Failed Request: http://localhost:3000/admin/dashboard - net::ERR_ABORTED",
+        "Failed Request: http://localhost:3000/admin/dashboard - net::ERR_ABORTED",
+        "No footer found",
+        "No main content area found"
+      ],
+      "images": {
+        "total": 0,
+        "loaded": 0,
+        "failed": 0,
+        "details": []
+      },
+      "consoleErrors": [],
+      "performanceMetrics": {
+        "domContentLoaded": 7.100000023841858,
+        "loadComplete": 0,
+        "totalLoadTime": 500.5
+      },
+      "screenshot": "test-screenshots/admin-dashboard.png"
+    },
+    {
+      "name": "Admin Activities",
+      "path": "/admin/activities",
+      "status": "failed",
+      "loadTime": 1462,
+      "errors": [],
+      "warnings": [
+        "Failed Request: https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?q=80&w=2000 - net::ERR_BLOCKED_BY_ORB",
+        "No footer found",
+        "No main content area found"
+      ],
+      "images": {
+        "total": 7,
+        "loaded": 5,
+        "failed": 2,
+        "details": [
+          {
+            "src": "https://ik.imagekit.io/s8hw8aygd/Activites/WhatsApp%20Image%202025-06-15%20at%2021.17.51.jpeg?updatedAt=1751645631722",
+            "alt": "Private Boat Rental",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg",
+            "alt": "Formula Racing Experience",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "https://ik.imagekit.io/s8hw8aygd/Activites/WhatsApp%20Image%202025-06-15%20at%2021.17.51.jpeg?updatedAt=1751645631722",
+            "alt": "Jet Ski Adventure Tour",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?q=80&w=2000",
+            "alt": "Quad Biking Mountain Adventure",
+            "loaded": false,
+            "visible": true
+          },
+          {
+            "src": "https://ik.imagekit.io/s8hw8aygd/Activites/WhatsApp%20Image%202025-06-15%20at%2021.17.51.jpeg?updatedAt=1751645631722",
+            "alt": "Boat Tour Mallorca",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://ik.imagekit.io/s8hw8aygd/Activites/WhatsApp%20Image%202025-06-15%20at%2021.17.51.jpeg?updatedAt=1751645631722",
+            "alt": "White Party Boat",
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "src": "https://ik.imagekit.io/s8hw8aygd/Activites/Quad1.webp",
+            "alt": "Quad Bikes Magaluf",
+            "loaded": true,
+            "visible": true
+          }
+        ]
+      },
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "performanceMetrics": {
+        "domContentLoaded": 0.30000007152557373,
+        "loadComplete": 0,
+        "totalLoadTime": 904.8999999761581
+      },
+      "screenshot": "test-screenshots/admin-activities.png"
+    },
+    {
+      "name": "Admin Bookings",
+      "path": "/admin/bookings",
+      "status": "failed",
+      "loadTime": 1572,
+      "errors": [],
+      "warnings": [
+        "No footer found",
+        "No main content area found"
+      ],
+      "images": {
+        "total": 0,
+        "loaded": 0,
+        "failed": 0,
+        "details": []
+      },
+      "consoleErrors": [
+        "%c%s%c ❌ Database error - using fallback data: background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   JSHandle@error",
+        "%c%s%c ❌ Database error - using fallback data: background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   JSHandle@error"
+      ],
+      "performanceMetrics": {
+        "domContentLoaded": 0.6000000238418579,
+        "loadComplete": 0,
+        "totalLoadTime": 930.3999999761581
+      },
+      "screenshot": "test-screenshots/admin-bookings.png"
+    },
+    {
+      "name": "Debug Page",
+      "path": "/debug",
+      "status": "warning",
+      "loadTime": 928,
+      "errors": [],
+      "warnings": [
+        "No header/navigation found",
+        "No footer found",
+        "No main content area found"
+      ],
+      "images": {
+        "total": 0,
+        "loaded": 0,
+        "failed": 0,
+        "details": []
+      },
+      "consoleErrors": [],
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "totalLoadTime": 172.19999992847443
+      },
+      "screenshot": "test-screenshots/debug-page.png"
+    },
+    {
+      "name": "Populate Activities",
+      "path": "/populate-activities",
+      "status": "warning",
+      "loadTime": 991,
+      "errors": [],
+      "warnings": [
+        "No header/navigation found",
+        "No footer found",
+        "No main content area found"
+      ],
+      "images": {
+        "total": 0,
+        "loaded": 0,
+        "failed": 0,
+        "details": []
+      },
+      "consoleErrors": [],
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "totalLoadTime": 195.79999995231628
+      },
+      "screenshot": "test-screenshots/populate-activities.png"
+    }
+  ],
+  "imageErrors": [
+    {
+      "page": "Homepage",
+      "failedImages": 5,
+      "totalImages": 25
+    },
+    {
+      "page": "Activities List",
+      "failedImages": 4,
+      "totalImages": 14
+    },
+    {
+      "page": "About Page",
+      "failedImages": 3,
+      "totalImages": 4
+    },
+    {
+      "page": "Admin Activities",
+      "failedImages": 2,
+      "totalImages": 7
+    }
+  ],
+  "performanceIssues": [],
+  "startTime": "2025-07-04T18:05:28.351Z"
+}

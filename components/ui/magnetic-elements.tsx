@@ -142,8 +142,8 @@ export function MagneticButton({
                 className="absolute"
                 initial={{
                   scale: 0,
-                  x: Math.random() * 100 + "%",
-                  y: Math.random() * 100 + "%"
+                  x: ((i * 23) % 100) + "%",
+                  y: ((i * 17) % 100) + "%"
                 }}
                 animate={{
                   scale: [0, 1, 0],
@@ -347,8 +347,8 @@ export function ProgressCelebration({
                   scale: 0
                 }}
                 animate={{
-                  x: Math.random() * 300 - 150,
-                  y: Math.random() * 300 - 150,
+                  x: ((i * 47) % 300) - 150,
+                  y: ((i * 31) % 300) - 150,
                   scale: [0, 1, 0],
                   rotate: 360
                 }}

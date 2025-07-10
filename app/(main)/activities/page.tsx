@@ -13,7 +13,7 @@ import { Suspense } from "react"
 import {
   ActivitySearchParams,
   getActivitiesSupabaseAction
-} from "@/actions/db/activities-actions"
+} from "@/actions/supabase-activities-actions"
 import ActivitiesPageClient from "./_components/activities-page-client"
 import ActivitiesLoading from "./_components/activities-loading"
 

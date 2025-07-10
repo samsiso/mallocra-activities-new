@@ -148,8 +148,8 @@ export function StorytellingSection() {
             key={i}
             className="absolute size-2 rounded-full bg-white/30"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`
+              left: `${(i * 13) % 100}%`,
+              top: `${(i * 7) % 100}%`
             }}
             animate={{
               y: [-20, 20, -20],
@@ -157,9 +157,9 @@ export function StorytellingSection() {
               scale: [1, 1.2, 1]
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 3 + (i % 3),
               repeat: Infinity,
-              delay: Math.random() * 2
+              delay: i * 0.1
             }}
           />
         ))}

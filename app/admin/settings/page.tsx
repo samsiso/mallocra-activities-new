@@ -1,12 +1,68 @@
-"use client"
-
 import { Suspense } from "react"
 import SettingsHeader from "./_components/settings-header"
 import SettingsManagement from "./_components/settings-management"
 import { Skeleton } from "@/components/ui/skeleton"
 import AdminSidebar from "../dashboard/_components/admin-sidebar"
+import {
+  getSystemSettingsAction,
+  getSettingsStatsAction,
+  getFeatureFlagsAction,
+  getEmailTemplatesAction
+} from "@/actions/db/settings-server-actions"
+import { supabaseAdminClient } from "@/lib/supabase-server"
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  // Fetch real data from database
+  const [statsResult, settingsResult, flagsResult, templatesResult] =
+    await Promise.all([
+      getSettingsStatsAction(),
+      getSystemSettingsAction(),
+      getFeatureFlagsAction(),
+      getEmailTemplatesAction()
+    ])
+
+  // Get total users count
+  const { count: totalUsers } = await supabaseAdminClient
+    .from("users_profiles")
+    .select("*", { count: "exact", head: true })
+
+  // Transform stats data for the header component
+  const systemStats =
+    statsResult.isSuccess && statsResult.data
+      ? {
+          activeSettings: statsResult.data.totalSettings,
+          recentChanges: statsResult.data.recentChanges,
+          systemHealth: 98.5, // TODO: Calculate based on monitoring data
+          lastBackup: new Date().toISOString(), // TODO: Get from backup system
+          totalUsers: totalUsers || 0,
+          storageUsed: 45.2 // TODO: Calculate from actual storage metrics
+        }
+      : {
+          activeSettings: 0,
+          recentChanges: 0,
+          systemHealth: 100,
+          lastBackup: new Date().toISOString(),
+          totalUsers: 0,
+          storageUsed: 0
+        }
+
+  // Transform settings data for the management component
+  const systemSettings =
+    settingsResult.isSuccess && settingsResult.data
+      ? settingsResult.data.map(setting => ({
+          id: setting.key,
+          category:
+            setting.category.charAt(0).toUpperCase() +
+            setting.category.slice(1),
+          name: setting.label,
+          value: setting.value,
+          type: mapSettingType(setting.type),
+          description: setting.description || "",
+          lastModified: setting.updatedAt,
+          modifiedBy: setting.updatedBy || "System"
+        }))
+      : []
+
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <div className="flex">
@@ -28,17 +84,21 @@ export default function SettingsPage() {
 
             {/* Page Content */}
             <div className="space-y-6">
-              <Suspense
-                fallback={<Skeleton className="h-32 w-full bg-gray-800" />}
-              >
-                <SettingsHeaderFetcher />
-              </Suspense>
+              <div className="rounded-lg bg-gray-800 p-6">
+                <Suspense
+                  fallback={<Skeleton className="h-32 w-full bg-gray-700" />}
+                >
+                  <SettingsHeader stats={systemStats} />
+                </Suspense>
+              </div>
 
-              <Suspense
-                fallback={<Skeleton className="h-96 w-full bg-gray-800" />}
-              >
-                <SettingsManagementFetcher />
-              </Suspense>
+              <div className="rounded-lg bg-gray-800 p-6">
+                <Suspense
+                  fallback={<Skeleton className="h-96 w-full bg-gray-700" />}
+                >
+                  <SettingsManagement initialData={systemSettings} />
+                </Suspense>
+              </div>
             </div>
           </div>
         </div>
@@ -47,74 +107,26 @@ export default function SettingsPage() {
   )
 }
 
-function SettingsHeaderFetcher() {
-  // In a real app, fetch system stats from API
-  const stats = {
-    activeSettings: 47,
-    recentChanges: 8,
-    systemHealth: 98.5,
-    lastBackup: "2024-01-20T10:30:00Z",
-    totalUsers: 1247,
-    storageUsed: 68.2
+// Helper function to map database types to UI types
+function mapSettingType(
+  dbType: string
+): "text" | "number" | "boolean" | "file" | "password" {
+  switch (dbType) {
+    case "text":
+    case "select":
+    case "multiselect":
+      return "text"
+    case "number":
+      return "number"
+    case "boolean":
+      return "boolean"
+    case "color":
+    case "date":
+    case "time":
+      return "text"
+    case "json":
+      return "text" // Could be handled specially if needed
+    default:
+      return "text"
   }
-
-  return <SettingsHeader stats={stats} />
-}
-
-function SettingsManagementFetcher() {
-  // In a real app, fetch settings from API
-  const settings = [
-    {
-      id: "site_name",
-      category: "General",
-      name: "Site Name",
-      value: "Mallocra Activities",
-      type: "text" as const,
-      description: "The name of your website displayed in headers and titles",
-      lastModified: "2024-01-15T09:30:00Z",
-      modifiedBy: "Admin User"
-    },
-    {
-      id: "site_logo",
-      category: "General",
-      name: "Site Logo",
-      value: "/logo.png",
-      type: "file" as const,
-      description: "Main logo displayed in the navigation bar",
-      lastModified: "2024-01-10T14:20:00Z",
-      modifiedBy: "Sarah O'Connor"
-    },
-    {
-      id: "email_notifications",
-      category: "Notifications",
-      name: "Email Notifications",
-      value: "true",
-      type: "boolean" as const,
-      description: "Enable or disable email notifications for bookings",
-      lastModified: "2024-01-18T11:45:00Z",
-      modifiedBy: "Mike Johnson"
-    },
-    {
-      id: "max_booking_days",
-      category: "Bookings",
-      name: "Max Booking Days Ahead",
-      value: "90",
-      type: "number" as const,
-      description: "Maximum number of days in advance customers can book",
-      lastModified: "2024-01-12T16:15:00Z",
-      modifiedBy: "Admin User"
-    },
-    {
-      id: "stripe_public_key",
-      category: "Payments",
-      name: "Stripe Public Key",
-      value: "pk_test_***",
-      type: "password" as const,
-      description: "Stripe publishable key for payment processing",
-      lastModified: "2024-01-05T08:30:00Z",
-      modifiedBy: "Admin User"
-    }
-  ]
-
-  return <SettingsManagement initialData={settings} />
 }

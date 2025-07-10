@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { getActivitiesSupabaseAction } from "@/actions/db/activities-actions"
+import { getActivitiesSupabaseAction } from "@/actions/supabase-activities-actions"
 
 export default function DebugPage() {
   const [result, setResult] = useState<any>(null)

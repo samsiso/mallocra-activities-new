@@ -202,7 +202,7 @@ export default function PremiumCategoryCard({
               </div>
               <span className="text-sm font-semibold text-gray-700">4.8</span>
               <span className="text-sm text-gray-500">
-                ({Math.floor(Math.random() * 200) + 100} reviews)
+                ({category.activityCount || 150} reviews)
               </span>
             </motion.div>
 

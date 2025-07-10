@@ -1,0 +1,1946 @@
+npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm.
+
+> mckays-app-template@0.1.0 dev
+> next dev --turbo
+
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.204:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Compiled middleware in 265ms
+ ✓ Ready in 1102ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.6s
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 81,
+  categoriesCount: 6,
+  hasActivityCounts: true
+}
+Image with src "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1571055107559-3e67626fa8be?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+ GET / 200 in 3026ms
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 72,
+  categoriesCount: 6,
+  hasActivityCounts: true
+}
+ GET / 200 in 294ms
+ ○ Compiling /api/featured-activities ...
+ POST / 200 in 333ms
+[DEBUG 1751651243443] Supabase returned 6 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 1, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Jet Ski Adventure Tour',
+  'Formula Racing Experience',
+  'Private Boat Rental'
+]
+ POST / 200 in 124ms
+ POST / 200 in 111ms
+ ✓ Compiled /api/featured-activities in 933ms
+[Featured Activities API] Starting request...
+ POST / 200 in 150ms
+ POST / 200 in 62ms
+Error fetching activities: {
+  code: '22P02',
+  details: null,
+  hint: null,
+  message: 'invalid input value for enum activity_category: "food_wine"'
+}
+ POST / 200 in 70ms
+ POST / 200 in 59ms
+ POST / 200 in 85ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 1664ms
+[Featured Activities API] Starting request...
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 664ms
+ ○ Compiling /activities ...
+ ✓ Compiled /activities in 1152ms
+🔥 Header component is rendering!
+ GET /activities 200 in 1431ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 74,
+  categoriesCount: 6,
+  hasActivityCounts: true
+}
+Image with src "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1571055107559-3e67626fa8be?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+ GET / 200 in 552ms
+[Featured Activities API] Starting request...
+ POST / 200 in 187ms
+[DEBUG 1751651275020] Supabase returned 6 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 1, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Jet Ski Adventure Tour',
+  'Formula Racing Experience',
+  'Private Boat Rental'
+]
+ POST / 200 in 81ms
+ POST / 200 in 85ms
+ POST / 200 in 71ms
+ POST / 200 in 80ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 710ms
+[Featured Activities API] Starting request...
+Error fetching activities: {
+  code: '22P02',
+  details: null,
+  hint: null,
+  message: 'invalid input value for enum activity_category: "food_wine"'
+}
+ POST / 200 in 102ms
+ POST / 200 in 145ms
+ POST / 200 in 84ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 667ms
+🔥 Header component is rendering!
+ GET /activities 200 in 318ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 63,
+  categoriesCount: 6,
+  hasActivityCounts: true
+}
+ HEAD / 200 in 234ms
+ ○ Compiling /activities/[id] ...
+ ✓ Compiled /activities/[id] in 939ms
+🔍 Looking up activity with identifier: "quad-bike-adventure"
+📦 Database query failed for slug "quad-bike-adventure", using hardcoded fallback data
+Supabase error: {
+  code: '22P02',
+  details: null,
+  hint: null,
+  message: 'invalid input syntax for type uuid: "quad-bike-adventure"'
+}
+📦 Using hardcoded fallback data for "quad-bike-adventure"
+✅ Found hardcoded activity: "Quad Bike Adventure Tour"
+ GET /activities/quad-bike-adventure 200 in 1620ms
+🔥 Header component is rendering!
+ GET /activities 200 in 175ms
+🔍 Looking up activity with identifier: "quad-bike-adventure"
+📦 Database query failed for slug "quad-bike-adventure", using hardcoded fallback data
+Supabase error: {
+  code: '22P02',
+  details: null,
+  hint: null,
+  message: 'invalid input syntax for type uuid: "quad-bike-adventure"'
+}
+📦 Using hardcoded fallback data for "quad-bike-adventure"
+✅ Found hardcoded activity: "Quad Bike Adventure Tour"
+ GET /activities/quad-bike-adventure 200 in 329ms
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 60,
+  categoriesCount: 6,
+  hasActivityCounts: true
+}
+Image with src "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1571055107559-3e67626fa8be?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+ GET / 200 in 602ms
+[Featured Activities API] Starting request...
+ POST / 200 in 383ms
+[DEBUG 1751651358816] Supabase returned 6 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 1, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Jet Ski Adventure Tour',
+  'Formula Racing Experience',
+  'Private Boat Rental'
+]
+ POST / 200 in 100ms
+ POST / 200 in 78ms
+ POST / 200 in 94ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 849ms
+ POST / 200 in 202ms
+Error fetching activities: {
+  code: '22P02',
+  details: null,
+  hint: null,
+  message: 'invalid input value for enum activity_category: "food_wine"'
+}
+ POST / 200 in 74ms
+ POST / 200 in 172ms
+ POST / 200 in 83ms
+🔥 Header component is rendering!
+ GET /activities 200 in 262ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 60,
+  categoriesCount: 6,
+  hasActivityCounts: true
+}
+ GET / 200 in 310ms
+[Featured Activities API] Starting request...
+ POST / 200 in 159ms
+[DEBUG 1751651379350] Supabase returned 6 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 1, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Jet Ski Adventure Tour',
+  'Formula Racing Experience',
+  'Private Boat Rental'
+]
+ POST / 200 in 77ms
+ POST / 200 in 78ms
+ POST / 200 in 65ms
+ POST / 200 in 77ms
+Error fetching activities: {
+  code: '22P02',
+  details: null,
+  hint: null,
+  message: 'invalid input value for enum activity_category: "food_wine"'
+}
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 691ms
+ POST / 200 in 83ms
+ POST / 200 in 84ms
+ POST / 200 in 54ms
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 218ms
+🔥 Header component is rendering!
+ GET /activities 200 in 180ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?q=80&w=2000 404
+ ⚠ Cross origin request detected from 192.168.0.204 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ○ Compiling /about ...
+ POST /api/weather/current 200 in 473ms
+ ✓ Compiled /about in 1068ms
+🔥 Header component is rendering!
+ GET /about 200 in 1309ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/quad-bikes-magaluf 200 in 682ms
+ ✓ Compiled /api/weather/suitability in 284ms
+ POST /api/weather/current 200 in 22ms
+ POST /api/weather/suitability 200 in 333ms
+ POST /activities/quad-bikes-magaluf 200 in 223ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+ POST /activities/quad-bikes-magaluf 200 in 118ms
+[DEBUG 1751651389095] Supabase returned 6 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 1, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Jet Ski Adventure Tour',
+  'Formula Racing Experience',
+  'Private Boat Rental'
+]
+ POST /activities/quad-bikes-magaluf 200 in 77ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/quad-bikes-magaluf 200 in 621ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+ ○ Compiling /blog ...
+ ✓ Compiled /blog in 1094ms
+🔥 Header component is rendering!
+Error getting tags: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+Error getting blogs: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+Error getting blogs: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ GET /blog 200 in 1762ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 937ms
+🔥 Header component is rendering!
+ GET /contact 200 in 1078ms
+ ○ Compiling /bookings ...
+ ✓ Compiled /bookings in 1333ms
+🔥 Header component is rendering!
+ GET /bookings 200 in 1449ms
+ ○ Compiling /wishlist ...
+ ✓ Compiled /wishlist in 1106ms
+🔥 Header component is rendering!
+ GET /wishlist 200 in 1297ms
+ ○ Compiling /login/[[...login]] ...
+ ✓ Compiled /login/[[...login]] in 934ms
+ GET /login?redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fprofile 200 in 1355ms
+ GET /login/SignIn_clerk_catchall_check_1751651412290 200 in 162ms
+ ○ Compiling /admin/dashboard ...
+ ✓ Compiled /admin/dashboard in 1345ms
+ ○ Compiling /api/supabase-query ...
+ ✓ Compiled /api/supabase-query in 554ms
+ POST /api/supabase-query 200 in 616ms
+ POST /api/supabase-query 200 in 614ms
+ POST /api/supabase-query 200 in 620ms
+ POST /api/supabase-query 200 in 626ms
+ POST /api/supabase-query 200 in 616ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as today_revenue,
+        COUNT(*) as today_bookings
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-04' 
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 252ms
+ POST /api/supabase-query 200 in 619ms
+ POST /api/supabase-query 200 in 636ms
+ POST /api/supabase-query 200 in 24ms
+Unhandled query: 
+      SELECT COALESCE(SUM(total_amount), 0) as yesterday_revenue
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-03' 
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 24ms
+ POST /api/supabase-query 200 in 27ms
+ POST /api/supabase-query 200 in 24ms
+ POST /api/supabase-query 200 in 44ms
+Unhandled query: 
+      SELECT 
+        COUNT(*) as total,
+        COUNT(CASE WHEN status = 'confirmed' THEN 1 END) as confirmed,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-04';
+    
+ POST /api/supabase-query 200 in 46ms
+ GET /admin/dashboard 200 in 2382ms
+Unhandled query: 
+      SELECT 
+        COUNT(DISTINCT up.id) as total_customers,
+        (SELECT COUNT(*) FROM operators WHERE status = 'active') as total_operators
+      FROM users_profiles up
+      WHERE up.updated_at >= NOW() - INTERVAL '24 hours';
+    
+ POST /api/supabase-query 200 in 20ms
+Unhandled query: 
+      SELECT 
+        (SELECT COUNT(*) FROM bookings WHERE status = 'pending') as pending_bookings,
+        (SELECT COUNT(*) FROM reviews WHERE status = 'pending') as pending_reviews,
+        (SELECT COUNT(*) FROM activities WHERE status = 'draft') as draft_activities
+    
+ POST /api/supabase-query 200 in 16ms
+ POST /admin/dashboard 200 in 502ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as current_month_revenue
+      FROM bookings 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE)
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 13ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as last_month_revenue
+      FROM bookings 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 15ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(platform_commission_amount), 0) as platform_commission,
+        COALESCE(SUM(operator_amount), 0) as operator_amount,
+        COALESCE(SUM(salesperson_commission_amount), 0) as sales_commission
+      FROM commissions 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE);
+    
+ POST /api/supabase-query 200 in 13ms
+Unhandled query: 
+      SELECT 
+        COUNT(*) as total_payments,
+        COUNT(CASE WHEN status = 'paid' THEN 1 END) as successful_payments
+      FROM payments 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE);
+    
+ POST /api/supabase-query 200 in 15ms
+Unhandled query: 
+      SELECT 
+        TO_CHAR(DATE(created_at), 'Mon DD') as day,
+        COALESCE(SUM(total_amount), 0) as revenue
+      FROM bookings 
+      WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'
+      AND status IN ('confirmed', 'completed')
+      GROUP BY DATE(created_at)
+      ORDER BY DATE(created_at);
+    
+ POST /api/supabase-query 200 in 18ms
+ POST /admin/dashboard 200 in 119ms
+Unhandled query: 
+      SELECT 
+        b.id,
+        a.title as activity_title,
+        b.lead_customer_name as customer_name,
+        b.booking_time,
+        b.total_participants,
+        b.status,
+        b.special_requirements
+      FROM bookings b
+      JOIN activities a ON b.activity_id = a.id
+      WHERE b.booking_date = CURRENT_DATE + INTERVAL '1 day'
+      AND b.status IN ('confirmed', 'pending')
+      ORDER BY b.booking_time
+      LIMIT 10;
+    
+ POST /api/supabase-query 200 in 14ms
+Unhandled query: 
+      SELECT 
+        a.id,
+        a.title as activity_title,
+        a.max_participants,
+        COALESCE(AVG(r.rating), 0) as avg_rating,
+        COUNT(r.id) as review_count,
+        (SELECT COUNT(*) FROM bookings WHERE activity_id = a.id AND booking_date >= CURRENT_DATE) as upcoming_bookings
+      FROM activities a
+      LEFT JOIN reviews r ON a.id = r.activity_id
+      WHERE a.status = 'published'
+      GROUP BY a.id, a.title, a.max_participants
+      HAVING AVG(r.rating) < 3.5 OR COUNT(r.id) = 0
+      ORDER BY avg_rating ASC
+      LIMIT 5;
+    
+ POST /api/supabase-query 200 in 20ms
+Unhandled query: 
+      SELECT 
+        b.id,
+        a.title as activity_title,
+        b.lead_customer_name as customer_name,
+        b.cancellation_reason as reason,
+        b.total_amount,
+        b.cancelled_at
+      FROM bookings b
+      JOIN activities a ON b.activity_id = a.id
+      WHERE b.status = 'cancelled'
+      AND b.cancelled_at >= CURRENT_DATE - INTERVAL '7 days'
+      ORDER BY b.cancelled_at DESC
+      LIMIT 5;
+    
+ POST /api/supabase-query 200 in 35ms
+ POST /admin/dashboard 200 in 110ms
+ ○ Compiling /admin/activities ...
+ ✓ Compiled /admin/activities in 1070ms
+ GET /admin/activities 200 in 1488ms
+ ✓ Compiled middleware in 2ms
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 452ms
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+ GET /admin/activities 200 in 535ms
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 215ms
+ GET /admin/activities 200 in 287ms
+ ○ Compiling /admin/bookings ...
+ ✓ Compiled /admin/bookings in 1125ms
+📊 Calculating booking statistics...
+🔍 Attempting to fetch bookings from database...
+🔍 Attempting to fetch bookings from database...
+❌ Database error - using fallback data: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+❌ Database error - using fallback data: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+✅ Statistics calculated successfully
+ GET /admin/bookings 200 in 2070ms
+ ○ Compiling /debug ...
+ ✓ Compiled /debug in 1238ms
+ GET /debug 200 in 1329ms
+ ○ Compiling /populate-activities ...
+ ✓ Compiled /populate-activities in 1072ms
+ GET /populate-activities 200 in 1206ms
+ ✓ Compiled /activities/[id] in 11ms
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 420ms
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 181ms
+✅ Found activity by slug: "quad-bikes-magaluf"
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 295ms
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 142ms
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 117ms
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 338ms
+ ✓ Compiled / in 17ms
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 50,
+  categoriesCount: 5,
+  hasActivityCounts: true
+}
+Image with src "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1571055107559-3e67626fa8be?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+ GET / 200 in 525ms
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 50,
+  categoriesCount: 5,
+  hasActivityCounts: true
+}
+Image with src "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1571055107559-3e67626fa8be?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+Image with src "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=800&auto=format&fit=crop" is using deprecated "onLoadingComplete" property. Please use the "onLoad" property instead.
+ GET / 200 in 570ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop 404
+[Featured Activities API] Starting request...
+ POST / 200 in 425ms
+[DEBUG 1751651801460] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 1, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST / 200 in 105ms
+ POST / 200 in 97ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 844ms
+ POST / 200 in 90ms
+ POST / 200 in 79ms
+ POST / 200 in 86ms
+ POST / 200 in 90ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop 404
+🔥 Header component is rendering!
+ GET /activities 200 in 439ms
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/WhatsApp%20Image%202025-06-15%20at%2020.45.52.jpeg 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/WhatsApp%20Image%202025-06-15%20at%2020.45.52.jpeg 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+🔥 Header component is rendering!
+ GET /about 200 in 193ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+ ✓ Compiled /blog in 24ms
+🔥 Header component is rendering!
+Error getting tags: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+Error getting blogs: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+Error getting blogs: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ GET /blog 200 in 787ms
+🔥 Header component is rendering!
+ GET /contact 200 in 163ms
+ ✓ Compiled /bookings in 23ms
+🔥 Header component is rendering!
+ GET /bookings 200 in 292ms
+🔥 Header component is rendering!
+ GET /wishlist 200 in 172ms
+ GET /login?redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fprofile 200 in 65ms
+ GET /login/SignIn_clerk_catchall_check_1751651828415 200 in 48ms
+ POST /api/supabase-query 200 in 122ms
+ POST /api/supabase-query 200 in 129ms
+ POST /api/supabase-query 200 in 131ms
+ POST /api/supabase-query 200 in 130ms
+ POST /api/supabase-query 200 in 130ms
+ POST /api/supabase-query 200 in 128ms
+ POST /api/supabase-query 200 in 129ms
+ POST /api/supabase-query 200 in 21ms
+ POST /api/supabase-query 200 in 23ms
+ POST /api/supabase-query 200 in 29ms
+ POST /api/supabase-query 200 in 30ms
+ GET /admin/dashboard 200 in 458ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as today_revenue,
+        COUNT(*) as today_bookings
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-04' 
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 17ms
+Unhandled query: 
+      SELECT COALESCE(SUM(total_amount), 0) as yesterday_revenue
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-03' 
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 16ms
+Unhandled query: 
+      SELECT 
+        COUNT(*) as total,
+        COUNT(CASE WHEN status = 'confirmed' THEN 1 END) as confirmed,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-04';
+    
+ POST /api/supabase-query 200 in 17ms
+Unhandled query: 
+      SELECT 
+        COUNT(DISTINCT up.id) as total_customers,
+        (SELECT COUNT(*) FROM operators WHERE status = 'active') as total_operators
+      FROM users_profiles up
+      WHERE up.updated_at >= NOW() - INTERVAL '24 hours';
+    
+ POST /api/supabase-query 200 in 20ms
+Unhandled query: 
+      SELECT 
+        (SELECT COUNT(*) FROM bookings WHERE status = 'pending') as pending_bookings,
+        (SELECT COUNT(*) FROM reviews WHERE status = 'pending') as pending_reviews,
+        (SELECT COUNT(*) FROM activities WHERE status = 'draft') as draft_activities
+    
+ POST /api/supabase-query 200 in 19ms
+ POST /admin/dashboard 200 in 137ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as current_month_revenue
+      FROM bookings 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE)
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 34ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as last_month_revenue
+      FROM bookings 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 14ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(platform_commission_amount), 0) as platform_commission,
+        COALESCE(SUM(operator_amount), 0) as operator_amount,
+        COALESCE(SUM(salesperson_commission_amount), 0) as sales_commission
+      FROM commissions 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE);
+    
+ POST /api/supabase-query 200 in 12ms
+Unhandled query: 
+      SELECT 
+        COUNT(*) as total_payments,
+        COUNT(CASE WHEN status = 'paid' THEN 1 END) as successful_payments
+      FROM payments 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE);
+    
+ POST /api/supabase-query 200 in 16ms
+Unhandled query: 
+      SELECT 
+        TO_CHAR(DATE(created_at), 'Mon DD') as day,
+        COALESCE(SUM(total_amount), 0) as revenue
+      FROM bookings 
+      WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'
+      AND status IN ('confirmed', 'completed')
+      GROUP BY DATE(created_at)
+      ORDER BY DATE(created_at);
+    
+ POST /api/supabase-query 200 in 13ms
+ POST /admin/dashboard 200 in 158ms
+Unhandled query: 
+      SELECT 
+        b.id,
+        a.title as activity_title,
+        b.lead_customer_name as customer_name,
+        b.booking_time,
+        b.total_participants,
+        b.status,
+        b.special_requirements
+      FROM bookings b
+      JOIN activities a ON b.activity_id = a.id
+      WHERE b.booking_date = CURRENT_DATE + INTERVAL '1 day'
+      AND b.status IN ('confirmed', 'pending')
+      ORDER BY b.booking_time
+      LIMIT 10;
+    
+ POST /api/supabase-query 200 in 14ms
+Unhandled query: 
+      SELECT 
+        a.id,
+        a.title as activity_title,
+        a.max_participants,
+        COALESCE(AVG(r.rating), 0) as avg_rating,
+        COUNT(r.id) as review_count,
+        (SELECT COUNT(*) FROM bookings WHERE activity_id = a.id AND booking_date >= CURRENT_DATE) as upcoming_bookings
+      FROM activities a
+      LEFT JOIN reviews r ON a.id = r.activity_id
+      WHERE a.status = 'published'
+      GROUP BY a.id, a.title, a.max_participants
+      HAVING AVG(r.rating) < 3.5 OR COUNT(r.id) = 0
+      ORDER BY avg_rating ASC
+      LIMIT 5;
+    
+ POST /api/supabase-query 200 in 18ms
+Unhandled query: 
+      SELECT 
+        b.id,
+        a.title as activity_title,
+        b.lead_customer_name as customer_name,
+        b.cancellation_reason as reason,
+        b.total_amount,
+        b.cancelled_at
+      FROM bookings b
+      JOIN activities a ON b.activity_id = a.id
+      WHERE b.status = 'cancelled'
+      AND b.cancelled_at >= CURRENT_DATE - INTERVAL '7 days'
+      ORDER BY b.cancelled_at DESC
+      LIMIT 5;
+    
+ POST /api/supabase-query 200 in 14ms
+ POST /admin/dashboard 200 in 69ms
+ ✓ Compiled /admin/activities in 12ms
+ GET /admin/activities 200 in 491ms
+ ✓ Compiled /admin/bookings in 12ms
+📊 Calculating booking statistics...
+🔍 Attempting to fetch bookings from database...
+🔍 Attempting to fetch bookings from database...
+❌ Database error - using fallback data: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+✅ Statistics calculated successfully
+❌ Database error - using fallback data: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ GET /admin/bookings 200 in 716ms
+ GET /debug 200 in 43ms
+ GET /populate-activities 200 in 42ms
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 50,
+  categoriesCount: 5,
+  hasActivityCounts: true
+}
+ GET / 200 in 350ms
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 355ms
+ POST /api/weather/current 200 in 224ms
+ POST /api/weather/current 200 in 24ms
+ POST /api/weather/suitability 200 in 157ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/quad-bikes-magaluf 200 in 673ms
+ POST /activities/quad-bikes-magaluf 200 in 204ms
+ POST /activities/quad-bikes-magaluf 200 in 115ms
+[DEBUG 1751652276805] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 1, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/quad-bikes-magaluf 200 in 73ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/quad-bikes-magaluf 200 in 566ms
+🔥 Header component is rendering!
+🎯 Current featuredActivities state: 0 []
+🎯 Component render state: {
+  isUpdating: false,
+  totalActivities: 50,
+  categoriesCount: 5,
+  hasActivityCounts: true
+}
+ GET / 200 in 297ms
+[Featured Activities API] Starting request...
+ POST / 200 in 208ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop 404
+[DEBUG 1751652331359] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 1, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST / 200 in 107ms
+ POST / 200 in 97ms
+ POST / 200 in 97ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 767ms
+ POST / 200 in 195ms
+ POST / 200 in 81ms
+ POST / 200 in 75ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop 404
+🔥 Header component is rendering!
+ GET /activities 200 in 454ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+🔥 Header component is rendering!
+ GET /about 200 in 128ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1516491266871-56c62e8e2e4f?q=80&w=800&auto=format&fit=crop 404
+🔥 Header component is rendering!
+Error getting blogs: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+Error getting blogs: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+Error getting tags: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ GET /blog 200 in 680ms
+🔥 Header component is rendering!
+ GET /contact 200 in 107ms
+🔥 Header component is rendering!
+ GET /bookings 200 in 89ms
+🔥 Header component is rendering!
+ GET /wishlist 200 in 122ms
+ GET /login?redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fprofile 200 in 57ms
+ GET /login/SignIn_clerk_catchall_check_1751652357914 200 in 63ms
+ ✓ Compiled in 270ms
+ ✓ Compiled in 183ms
+ POST /api/supabase-query 200 in 110ms
+ POST /api/supabase-query 200 in 107ms
+ POST /api/supabase-query 200 in 116ms
+ POST /api/supabase-query 200 in 112ms
+ POST /api/supabase-query 200 in 111ms
+ POST /api/supabase-query 200 in 116ms
+ POST /api/supabase-query 200 in 114ms
+ POST /api/supabase-query 200 in 26ms
+ POST /api/supabase-query 200 in 27ms
+ POST /api/supabase-query 200 in 39ms
+ POST /api/supabase-query 200 in 67ms
+ GET /admin/dashboard 200 in 422ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as today_revenue,
+        COUNT(*) as today_bookings
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-04' 
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 28ms
+Unhandled query: 
+      SELECT COALESCE(SUM(total_amount), 0) as yesterday_revenue
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-03' 
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 29ms
+Unhandled query: 
+      SELECT 
+        COUNT(*) as total,
+        COUNT(CASE WHEN status = 'confirmed' THEN 1 END) as confirmed,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending
+      FROM bookings 
+      WHERE DATE(created_at) = '2025-07-04';
+    
+ POST /api/supabase-query 200 in 15ms
+Unhandled query: 
+      SELECT 
+        COUNT(DISTINCT up.id) as total_customers,
+        (SELECT COUNT(*) FROM operators WHERE status = 'active') as total_operators
+      FROM users_profiles up
+      WHERE up.updated_at >= NOW() - INTERVAL '24 hours';
+    
+ POST /api/supabase-query 200 in 13ms
+Unhandled query: 
+      SELECT 
+        (SELECT COUNT(*) FROM bookings WHERE status = 'pending') as pending_bookings,
+        (SELECT COUNT(*) FROM reviews WHERE status = 'pending') as pending_reviews,
+        (SELECT COUNT(*) FROM activities WHERE status = 'draft') as draft_activities
+    
+ POST /api/supabase-query 200 in 14ms
+ POST /admin/dashboard 200 in 141ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as current_month_revenue
+      FROM bookings 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE)
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 22ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(total_amount), 0) as last_month_revenue
+      FROM bookings 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')
+      AND status IN ('confirmed', 'completed');
+    
+ POST /api/supabase-query 200 in 19ms
+Unhandled query: 
+      SELECT 
+        COALESCE(SUM(platform_commission_amount), 0) as platform_commission,
+        COALESCE(SUM(operator_amount), 0) as operator_amount,
+        COALESCE(SUM(salesperson_commission_amount), 0) as sales_commission
+      FROM commissions 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE);
+    
+ POST /api/supabase-query 200 in 13ms
+Unhandled query: 
+      SELECT 
+        COUNT(*) as total_payments,
+        COUNT(CASE WHEN status = 'paid' THEN 1 END) as successful_payments
+      FROM payments 
+      WHERE DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE);
+    
+ POST /api/supabase-query 200 in 15ms
+Unhandled query: 
+      SELECT 
+        TO_CHAR(DATE(created_at), 'Mon DD') as day,
+        COALESCE(SUM(total_amount), 0) as revenue
+      FROM bookings 
+      WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'
+      AND status IN ('confirmed', 'completed')
+      GROUP BY DATE(created_at)
+      ORDER BY DATE(created_at);
+    
+ POST /api/supabase-query 200 in 28ms
+ POST /admin/dashboard 200 in 136ms
+Unhandled query: 
+      SELECT 
+        b.id,
+        a.title as activity_title,
+        b.lead_customer_name as customer_name,
+        b.booking_time,
+        b.total_participants,
+        b.status,
+        b.special_requirements
+      FROM bookings b
+      JOIN activities a ON b.activity_id = a.id
+      WHERE b.booking_date = CURRENT_DATE + INTERVAL '1 day'
+      AND b.status IN ('confirmed', 'pending')
+      ORDER BY b.booking_time
+      LIMIT 10;
+    
+ POST /api/supabase-query 200 in 20ms
+Unhandled query: 
+      SELECT 
+        a.id,
+        a.title as activity_title,
+        a.max_participants,
+        COALESCE(AVG(r.rating), 0) as avg_rating,
+        COUNT(r.id) as review_count,
+        (SELECT COUNT(*) FROM bookings WHERE activity_id = a.id AND booking_date >= CURRENT_DATE) as upcoming_bookings
+      FROM activities a
+      LEFT JOIN reviews r ON a.id = r.activity_id
+      WHERE a.status = 'published'
+      GROUP BY a.id, a.title, a.max_participants
+      HAVING AVG(r.rating) < 3.5 OR COUNT(r.id) = 0
+      ORDER BY avg_rating ASC
+      LIMIT 5;
+    
+ POST /api/supabase-query 200 in 13ms
+Unhandled query: 
+      SELECT 
+        b.id,
+        a.title as activity_title,
+        b.lead_customer_name as customer_name,
+        b.cancellation_reason as reason,
+        b.total_amount,
+        b.cancelled_at
+      FROM bookings b
+      JOIN activities a ON b.activity_id = a.id
+      WHERE b.status = 'cancelled'
+      AND b.cancelled_at >= CURRENT_DATE - INTERVAL '7 days'
+      ORDER BY b.cancelled_at DESC
+      LIMIT 5;
+    
+ POST /api/supabase-query 200 in 13ms
+ POST /admin/dashboard 200 in 73ms
+ GET /admin/activities 200 in 536ms
+📊 Calculating booking statistics...
+🔍 Attempting to fetch bookings from database...
+🔍 Attempting to fetch bookings from database...
+❌ Database error - using fallback data: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+❌ Database error - using fallback data: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+✅ Statistics calculated successfully
+ GET /admin/bookings 200 in 928ms
+ ✓ Compiled in 105ms
+ GET /debug 200 in 54ms
+ GET /populate-activities 200 in 81ms
+ ✓ Compiled in 89ms
+🔍 Looking up activity with identifier: "quad-bikes-magaluf"
+✅ Found activity by slug: "quad-bikes-magaluf"
+ GET /activities/quad-bikes-magaluf 200 in 650ms
+ GET /activities 200 in 400ms
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+🔍 Looking up activity with identifier: "formula-racing-experience"
+✅ Found activity by slug: "formula-racing-experience"
+ GET /activities/formula-racing-experience 200 in 194ms
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/formula-racing-experience 200 in 1008ms
+ POST /activities/formula-racing-experience 200 in 132ms
+ POST /activities/formula-racing-experience 200 in 198ms
+[DEBUG 1751655388440] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/formula-racing-experience 200 in 117ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/formula-racing-experience 200 in 642ms
+ POST /activities/formula-racing-experience 200 in 115ms
+ POST /activities/formula-racing-experience 200 in 121ms
+[DEBUG 1751655389452] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/formula-racing-experience 200 in 63ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/formula-racing-experience 200 in 611ms
+ GET /activities 200 in 82ms
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+🔍 Looking up activity with identifier: "formula-racing-experience"
+✅ Found activity by slug: "formula-racing-experience"
+ GET /activities/formula-racing-experience 200 in 204ms
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/formula-racing-experience 200 in 625ms
+ POST /activities/formula-racing-experience 200 in 142ms
+ POST /activities/formula-racing-experience 200 in 123ms
+[DEBUG 1751655431091] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/formula-racing-experience 200 in 82ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/formula-racing-experience 200 in 601ms
+ POST /activities/formula-racing-experience 200 in 129ms
+ POST /activities/formula-racing-experience 200 in 125ms
+[DEBUG 1751655432207] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/formula-racing-experience 200 in 92ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/formula-racing-experience 200 in 613ms
+ GET /activities 200 in 94ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+🔍 Looking up activity with identifier: "jet-ski-adventure-tour"
+✅ Found activity by slug: "jet-ski-adventure-tour"
+ GET /activities/jet-ski-adventure-tour 200 in 162ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/jet-ski-adventure-tour 200 in 613ms
+ POST /activities/jet-ski-adventure-tour 200 in 115ms
+ POST /activities/jet-ski-adventure-tour 200 in 123ms
+[DEBUG 1751655440353] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/jet-ski-adventure-tour 200 in 80ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/jet-ski-adventure-tour 200 in 631ms
+ POST /activities/jet-ski-adventure-tour 200 in 172ms
+ POST /activities/jet-ski-adventure-tour 200 in 205ms
+[DEBUG 1751655441633] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/jet-ski-adventure-tour 200 in 147ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/jet-ski-adventure-tour 200 in 656ms
+ GET /activities 200 in 141ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+🔍 Looking up activity with identifier: "white-party-boat"
+✅ Found activity by slug: "white-party-boat"
+ GET /activities/white-party-boat 200 in 107ms
+ POST /api/weather/current 200 in 162ms
+ POST /api/weather/current 200 in 160ms
+ POST /api/weather/current 200 in 15ms
+ POST /api/weather/current 200 in 16ms
+ POST /api/weather/suitability 200 in 42ms
+ POST /api/weather/suitability 200 in 42ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/white-party-boat 200 in 609ms
+ POST /activities/white-party-boat 200 in 108ms
+ POST /activities/white-party-boat 200 in 115ms
+[DEBUG 1751655447735] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/white-party-boat 200 in 209ms
+(node:38889) TimeoutNegativeWarning: -59848.97335802391 is a negative number.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/white-party-boat 200 in 625ms
+ POST /activities/white-party-boat 200 in 174ms
+ POST /activities/white-party-boat 200 in 198ms
+[DEBUG 1751655448936] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Private Boat Rental',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour'
+]
+ POST /activities/white-party-boat 200 in 126ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/white-party-boat 200 in 671ms
+ GET /activities 200 in 124ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+🔍 Looking up activity with identifier: "boat-tour-mallorca"
+✅ Found activity by slug: "boat-tour-mallorca"
+ GET /activities/boat-tour-mallorca 200 in 111ms
+ POST /api/weather/current 200 in 18ms
+ POST /api/weather/current 200 in 19ms
+ POST /api/weather/current 200 in 13ms
+ POST /api/weather/suitability 200 in 35ms
+ POST /api/weather/current 200 in 18ms
+ POST /api/weather/suitability 200 in 38ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/boat-tour-mallorca 200 in 623ms
+ POST /activities/boat-tour-mallorca 200 in 131ms
+ GET /activities 200 in 128ms
+ POST /activities/boat-tour-mallorca 200 in 130ms
+[DEBUG 1751655455180] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Private Boat Rental',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour'
+]
+ POST /activities/boat-tour-mallorca 200 in 126ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/boat-tour-mallorca 200 in 722ms
+ POST /activities/[id] 200 in 129ms
+ POST /activities 200 in 149ms
+ POST /activities/[id] 200 in 123ms
+ POST /activities 200 in 171ms
+[DEBUG 1751655456391] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Private Boat Rental',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour'
+]
+ POST / 200 in 111ms
+ POST /activities 200 in 134ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/[id] 200 in 606ms
+ POST /activities 200 in 624ms
+ GET /activities 200 in 86ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+🔍 Looking up activity with identifier: "boat-tour-mallorca"
+✅ Found activity by slug: "boat-tour-mallorca"
+ GET /activities/boat-tour-mallorca 200 in 373ms
+ POST /api/weather/current 200 in 146ms
+ POST /api/weather/current 200 in 109ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/boat-tour-mallorca 200 in 660ms
+ POST /api/weather/current 200 in 13ms
+ POST /api/weather/suitability 200 in 32ms
+ POST /api/weather/current 200 in 17ms
+ POST /api/weather/suitability 200 in 35ms
+ POST /activities/boat-tour-mallorca 200 in 132ms
+ POST /activities/boat-tour-mallorca 200 in 107ms
+[DEBUG 1751655782344] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/boat-tour-mallorca 200 in 65ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/boat-tour-mallorca 200 in 606ms
+ POST /activities/boat-tour-mallorca 200 in 101ms
+ POST /activities/boat-tour-mallorca 200 in 151ms
+[DEBUG 1751655783504] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST /activities/boat-tour-mallorca 200 in 82ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/boat-tour-mallorca 200 in 606ms
+Error getting activity availability: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+ POST /activities/boat-tour-mallorca 200 in 671ms
+ ○ Compiling /book/[id]/select ...
+ ✓ Compiled /book/[id]/select in 3.4s
+ GET /book/4173c14f-5db8-49a9-830f-a1a32d5d471d/select?adults=4&children=0&date=2025-07-07&time=12%3A00 200 in 1220ms
+🔍 Looking up activity with identifier: "4173c14f-5db8-49a9-830f-a1a32d5d471d"
+📦 Database query failed for slug "4173c14f-5db8-49a9-830f-a1a32d5d471d", using hardcoded fallback data
+✅ Found activity by ID: "4173c14f-5db8-49a9-830f-a1a32d5d471d"
+ POST /book/4173c14f-5db8-49a9-830f-a1a32d5d471d/select?adults=4&children=0&date=2025-07-07&time=12%3A00 200 in 234ms
+ ○ Compiling /book/[id]/details ...
+ ✓ Compiled /book/[id]/details in 1117ms
+ GET /book/4173c14f-5db8-49a9-830f-a1a32d5d471d/details 200 in 1355ms
+ ○ Compiling /book/[id]/payment ...
+ ✓ Compiled /book/[id]/payment in 1620ms
+RESEND_API_KEY not found - email functionality will be disabled
+RESEND_API_KEY not found - email functionality will be disabled
+ GET /book/4173c14f-5db8-49a9-830f-a1a32d5d471d/payment 200 in 2176ms
+ POST /book/4173c14f-5db8-49a9-830f-a1a32d5d471d/payment 200 in 285ms
+RESEND_API_KEY not found - email functionality will be disabled
+Email functionality is disabled - booking will proceed without email confirmation
+ POST /book/4173c14f-5db8-49a9-830f-a1a32d5d471d/payment 200 in 16ms
+SMS notification error: Error: Twilio credentials not configured
+    at sendSMSNotificationAction (actions/notifications/sms-notifications.ts:17:12)
+    at sendSMSBookingConfirmationAction (actions/notifications/sms-notifications.ts:51:15)
+    at sendMultiChannelBookingConfirmationAction (actions/notifications/multi-channel-notifications.ts:46:61)
+  15 |   try {
+  16 |     if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN || !process.env.TWILIO_PHONE_NUMBER) {
+> 17 |       throw new Error("Twilio credentials not configured")
+     |            ^
+  18 |     }
+  19 |
+  20 |     const result = await client.messages.create({
+SMS notification result: Failed to send SMS: Twilio credentials not configured
+WhatsApp notification error: Error: Twilio WhatsApp credentials not configured
+    at sendWhatsAppNotificationAction (actions/notifications/whatsapp-notifications.ts:17:12)
+    at sendWhatsAppBookingConfirmationAction (actions/notifications/whatsapp-notifications.ts:64:15)
+    at sendMultiChannelBookingConfirmationAction (actions/notifications/multi-channel-notifications.ts:60:71)
+  15 |   try {
+  16 |     if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN || !process.env.TWILIO_WHATSAPP_SANDBOX) {
+> 17 |       throw new Error("Twilio WhatsApp credentials not configured")
+     |            ^
+  18 |     }
+  19 |
+  20 |     const result = await client.messages.create({
+WhatsApp notification result: Failed to send WhatsApp message: Twilio WhatsApp credentials not configured
+RESEND_API_KEY not found - email functionality will be disabled
+ POST /book/4173c14f-5db8-49a9-830f-a1a32d5d471d/payment 200 in 295ms
+Telegram notification error: Error: Not Found
+    at sendTelegramNotificationAction (actions/notifications/telegram-notifications.ts:31:12)
+    at async sendTelegramAdminBookingAlertAction (actions/notifications/telegram-notifications.ts:82:11)
+  29 |
+  30 |     if (!data.ok) {
+> 31 |       throw new Error(data.description || 'Telegram API error')
+     |            ^
+  32 |     }
+  33 |
+  34 |     return {
+ POST /book/4173c14f-5db8-49a9-830f-a1a32d5d471d/payment 200 in 205ms
+RESEND_API_KEY not found - email functionality will be disabled
+ ○ Compiling /booking-confirmation/[id] ...
+ ✓ Compiled /booking-confirmation/[id] in 1180ms
+ GET /booking-confirmation/ed455b70-fadf-4fd7-bc98-1d35288fbe92 200 in 1483ms
+ GET /booking-confirmation/ed455b70-fadf-4fd7-bc98-1d35288fbe92 200 in 28ms
+ POST /booking-confirmation/ed455b70-fadf-4fd7-bc98-1d35288fbe92 200 in 84ms
+ POST /booking-confirmation/ed455b70-fadf-4fd7-bc98-1d35288fbe92 200 in 83ms
+ ○ Compiling /signup/[[...signup]] ...
+ ✓ Compiled /signup/[[...signup]] in 1097ms
+ GET /signup 200 in 1414ms
+ GET /signup/SignUp_clerk_catchall_check_1751655861490 200 in 67ms
+ GET /signup/sso-callback 200 in 103ms
+ GET /signup/sso-callback/SignUp_clerk_catchall_check_1751655884065 200 in 67ms
+ POST /signup/sso-callback 200 in 25ms
+ GET / 200 in 39ms
+[Featured Activities API] Starting request...
+ GET / 200 in 31ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 663ms
+[Featured Activities API] Starting request...
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop 404
+ POST / 200 in 311ms
+[DEBUG 1751655888416] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST / 200 in 96ms
+ POST / 200 in 89ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 596ms
+ POST / 200 in 85ms
+ POST / 200 in 77ms
+ POST / 200 in 90ms
+ POST / 200 in 91ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1556469559-7c67fdc47b81?w=1200&h=800&fit=crop&crop=center&q=85 404
+ GET /bookings 200 in 104ms
+Syncing Clerk user: user_2yLIroNKVOWAlIwJ9mAFFLWzCbj
+Email addresses received: [
+  null
+]
+Existing user check: {
+  existingUser: {
+    id: '9317da8f-c122-4549-9e57-42229ef6c4cb',
+    clerk_user_id: 'user_2yLIroNKVOWAlIwJ9mAFFLWzCbj',
+    user_type: 'customer',
+    first_name: 'shaan',
+    last_name: 'sisodia',
+    email: 'fuzeheritage@gmail.com',
+    phone: '',
+    preferred_language: 'en',
+    status: 'active',
+    created_at: '2025-06-11T02:08:30.97149',
+    updated_at: '2025-06-11T02:08:30.97149'
+  },
+  selectError: null
+}
+Error syncing Clerk user: Error: Cannot access emailAddress on the server. You cannot dot into a temporary client reference from a server component. You can only pass the value through to the client.
+    at syncClerkUserAction (actions/db/users-actions.ts:128:32)
+  126 |     if (clerkUser.emailAddresses && clerkUser.emailAddresses.length > 0) {
+  127 |       const emailObj = clerkUser.emailAddresses[0]
+> 128 |       extractedEmail = emailObj.emailAddress || 
+      |                                ^
+  129 |                       emailObj.email_address || 
+  130 |                       ""
+  131 |       console.log("Email extraction - emailObj:", emailObj, "extracted:", extractedEmail)
+ POST /bookings 200 in 263ms
+Syncing Clerk user: user_2yLIroNKVOWAlIwJ9mAFFLWzCbj
+Email addresses received: [
+  null
+]
+Existing user check: {
+  existingUser: {
+    id: '9317da8f-c122-4549-9e57-42229ef6c4cb',
+    clerk_user_id: 'user_2yLIroNKVOWAlIwJ9mAFFLWzCbj',
+    user_type: 'customer',
+    first_name: 'shaan',
+    last_name: 'sisodia',
+    email: 'fuzeheritage@gmail.com',
+    phone: '',
+    preferred_language: 'en',
+    status: 'active',
+    created_at: '2025-06-11T02:08:30.97149',
+    updated_at: '2025-06-11T02:08:30.97149'
+  },
+  selectError: null
+}
+Error syncing Clerk user: Error: Cannot access emailAddress on the server. You cannot dot into a temporary client reference from a server component. You can only pass the value through to the client.
+    at syncClerkUserAction (actions/db/users-actions.ts:128:32)
+  126 |     if (clerkUser.emailAddresses && clerkUser.emailAddresses.length > 0) {
+  127 |       const emailObj = clerkUser.emailAddresses[0]
+> 128 |       extractedEmail = emailObj.emailAddress || 
+      |                                ^
+  129 |                       emailObj.email_address || 
+  130 |                       ""
+  131 |       console.log("Email extraction - emailObj:", emailObj, "extracted:", extractedEmail)
+ POST /bookings 200 in 197ms
+ GET / 200 in 44ms
+[Featured Activities API] Starting request...
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop 404
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 637ms
+[Featured Activities API] Starting request...
+ POST / 200 in 153ms
+Error getting activities: [Error [PostgresError]: Tenant or user not found] {
+  severity_local: 'FATAL',
+  severity: 'FATAL',
+  code: 'XX000'
+}
+[Featured Activities API] Database result: { isSuccess: false, message: 'Failed to get activities' }
+ GET /api/featured-activities 200 in 607ms
+[DEBUG 1751655947064] Supabase returned 7 activities
+[DEBUG] First activity sample: { title: 'Quad Bikes Magaluf', images: 4, pricing: 1 }
+[DEBUG] Activity titles: [
+  'Quad Bikes Magaluf',
+  'Boat Tour Mallorca',
+  'White Party Boat',
+  'Quad Biking Mountain Adventure',
+  'Formula Racing Experience',
+  'Jet Ski Adventure Tour',
+  'Private Boat Rental'
+]
+ POST / 200 in 79ms
+ POST / 200 in 76ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1556469559-7c67fdc47b81?w=1200&h=800&fit=crop&crop=center&q=85 404
+ POST / 200 in 111ms
+ POST / 200 in 69ms
+ POST / 200 in 72ms
+ POST / 200 in 78ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?q=80&w=800&auto=format&fit=crop 404
+ GET /activities?category=land_adventures 200 in 87ms
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ✓ Compiled in 432ms
+ GET /activities?category=land_adventures 200 in 167ms
+ GET /activities?category=land_adventures 200 in 445ms
+ GET /activities?category=land_adventures 200 in 143ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 285ms
+ GET /activities?category=land_adventures 200 in 232ms
+ GET /activities?category=land_adventures 200 in 140ms
+ GET /activities?category=land_adventures 200 in 81ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 366ms
+ GET /activities?category=land_adventures 200 in 342ms
+ GET /activities?category=land_adventures 200 in 124ms
+ GET /activities?category=land_adventures 200 in 99ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 279ms
+ GET /activities?category=land_adventures 200 in 223ms
+ GET /activities?category=land_adventures 200 in 127ms
+ GET /activities?category=land_adventures 200 in 67ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ GET /activities?category=land_adventures 200 in 180ms
+ ✓ Compiled in 311ms
+ GET /activities?category=land_adventures 200 in 69ms
+ GET /activities?category=land_adventures 200 in 69ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 266ms
+ GET /activities?category=land_adventures 200 in 257ms
+ GET /activities?category=land_adventures 200 in 132ms
+ GET /activities?category=land_adventures 200 in 86ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 117ms
+ GET /activities?category=land_adventures 200 in 156ms
+ GET /activities?category=land_adventures 200 in 64ms
+ GET /activities?category=land_adventures 200 in 75ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ GET /activities?category=land_adventures 200 in 183ms
+ ✓ Compiled in 237ms
+ GET /activities?category=land_adventures 200 in 109ms
+ GET /activities?category=land_adventures 200 in 83ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 267ms
+ GET /activities?category=land_adventures 200 in 164ms
+ GET /activities?category=land_adventures 200 in 98ms
+ GET /activities?category=land_adventures 200 in 119ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 255ms
+ GET /activities?category=land_adventures 200 in 196ms
+ GET /activities?category=land_adventures 200 in 125ms
+ GET /activities?category=land_adventures 200 in 76ms
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ✓ Compiled in 250ms
+ GET /activities?category=land_adventures 200 in 236ms
+ GET /activities?category=land_adventures 200 in 137ms
+ GET /activities?category=land_adventures 200 in 103ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 248ms
+ GET /activities?category=land_adventures 200 in 265ms
+ GET /activities?category=land_adventures 200 in 116ms
+ GET /activities?category=land_adventures 200 in 88ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 154ms
+ GET /activities?category=land_adventures 200 in 131ms
+ GET /activities?category=land_adventures 200 in 328ms
+ GET /activities?category=land_adventures 200 in 83ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ GET /activities?category=land_adventures 200 in 258ms
+ ✓ Compiled in 341ms
+ GET /activities?category=land_adventures 200 in 85ms
+ GET /activities?category=land_adventures 200 in 161ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 180ms
+ GET /activities?category=land_adventures 200 in 147ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled in 275ms
+ GET /activities?category=land_adventures 200 in 165ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1595965742915-2ce1bbe9bc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://ik.imagekit.io/s8hw8aygd/Activites/formula-racing-mallorca.jpg 404
+ ✓ Compiled /bookings in 40ms
+ GET /bookings 200 in 392ms
+Syncing Clerk user: user_2yLIroNKVOWAlIwJ9mAFFLWzCbj
+Email addresses received: [
+  null
+]
+Existing user check: {
+  existingUser: null,
+  selectError: {
+    code: '42703',
+    details: null,
+    hint: null,
+    message: 'column users_profiles.clerkUserId does not exist'
+  }
+}
+Error syncing Clerk user: Error: Cannot access emailAddress on the server. You cannot dot into a temporary client reference from a server component. You can only pass the value through to the client.
+    at syncClerkUserAction (actions/db/users-actions.ts:128:32)
+  126 |     if (clerkUser.emailAddresses && clerkUser.emailAddresses.length > 0) {
+  127 |       const emailObj = clerkUser.emailAddresses[0]
+> 128 |       extractedEmail = emailObj.emailAddress || 
+      |                                ^
+  129 |                       emailObj.email_address || 
+  130 |                       ""
+  131 |       console.log("Email extraction - emailObj:", emailObj, "extracted:", extractedEmail)
+ POST /bookings 200 in 450ms
+Syncing Clerk user: user_2yLIroNKVOWAlIwJ9mAFFLWzCbj
+Email addresses received: [
+  null
+]
+Existing user check: {
+  existingUser: null,
+  selectError: {
+    code: '42703',
+    details: null,
+    hint: null,
+    message: 'column users_profiles.clerkUserId does not exist'
+  }
+}
+Error syncing Clerk user: Error: Cannot access emailAddress on the server. You cannot dot into a temporary client reference from a server component. You can only pass the value through to the client.
+    at syncClerkUserAction (actions/db/users-actions.ts:128:32)
+  126 |     if (clerkUser.emailAddresses && clerkUser.emailAddresses.length > 0) {
+  127 |       const emailObj = clerkUser.emailAddresses[0]
+> 128 |       extractedEmail = emailObj.emailAddress || 
+      |                                ^
+  129 |                       emailObj.email_address || 
+  130 |                       ""
+  131 |       console.log("Email extraction - emailObj:", emailObj, "extracted:", extractedEmail)
+ POST /bookings 200 in 187ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 545ms
+ GET /bookings 200 in 147ms
+ GET /bookings 200 in 41ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 178ms
+ ✓ Compiled in 194ms
+ GET /bookings 200 in 190ms
+ GET /bookings 200 in 21ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 215ms
+ GET /bookings 200 in 238ms
+ GET /bookings 200 in 30ms
+ ✓ Compiled in 254ms
+ ✓ Compiled /bookings in 5ms
+ GET /bookings 200 in 342ms
+ GET /bookings 200 in 76ms
+ GET /bookings 200 in 25ms
+ ✓ Compiled /bookings in 5ms
+ GET /bookings 200 in 298ms
+ GET /bookings 200 in 46ms
+ GET /bookings 200 in 22ms
+ ✓ Compiled /bookings in 7ms
+ GET /bookings 200 in 307ms
+ GET /bookings 200 in 51ms
+ GET /bookings 200 in 25ms
+ ✓ Compiled /bookings in 5ms
+ GET /bookings 200 in 260ms
+ GET /bookings 200 in 27ms
+ GET /bookings 200 in 29ms
+ ✓ Compiled /bookings in 6ms
+ GET /bookings 200 in 319ms
+ GET /bookings 200 in 25ms
+ GET /bookings 200 in 38ms
+ ✓ Compiled /bookings in 5ms
+ GET /bookings 200 in 281ms
+ GET /bookings 200 in 39ms
+ GET /bookings 200 in 25ms
+ ✓ Compiled /bookings in 28ms
+ GET /bookings 200 in 600ms
+ GET /bookings 200 in 24ms
+ GET /bookings 200 in 22ms
+ ✓ Compiled /bookings in 6ms
+ ✓ Compiled in 429ms
+ GET /bookings 200 in 431ms
+ GET /bookings 200 in 57ms
+ GET /bookings 200 in 56ms
+ ✓ Compiled /bookings in 6ms
+ GET /bookings 200 in 415ms
+ GET /bookings 200 in 26ms
+ GET /bookings 200 in 26ms
+ ✓ Compiled /bookings in 5ms
+ GET /bookings 200 in 294ms
+ GET /bookings 200 in 25ms
+ GET /bookings 200 in 48ms
+ ✓ Compiled /bookings in 6ms
+ GET /bookings 200 in 262ms
+ GET /bookings 200 in 20ms
+ GET /bookings 200 in 26ms
+ GET /bookings 200 in 38ms
+ ✓ Compiled in 197ms
+ ✓ Compiled in 239ms
+ GET /bookings 200 in 22ms
+ ✓ Compiled middleware in 2ms
+ ✓ Compiled in 208ms
+ GET /bookings 200 in 175ms
+ GET /bookings 200 in 57ms
+ GET /bookings 200 in 21ms
+ ✓ Compiled in 126ms
+ ✓ Compiled in 171ms
+ ✓ Compiled in 177ms
+ ✓ Compiled in 164ms
+ ✓ Compiled in 222ms
+ ✓ Compiled in 144ms
+ ✓ Compiled in 157ms
+ ✓ Compiled in 156ms
+ ✓ Compiled in 130ms
+ ✓ Compiled in 170ms
+ ✓ Compiled in 186ms
+ ✓ Compiled in 146ms
+ ✓ Compiled in 159ms
+ ✓ Compiled middleware in 0ms
+ ✓ Compiled in 178ms
+ ✓ Compiled in 297ms
+ GET /bookings 200 in 246ms
+ GET /bookings 200 in 21ms
+ ✓ Compiled middleware in 10ms
+ ✓ Compiled in 1602ms
+ GET /bookings 200 in 1266ms
+ GET /bookings 200 in 41ms
+ ✓ Compiled middleware in 2ms
+ ✓ Compiled in 513ms
+ GET /bookings 200 in 376ms
+ GET /bookings 200 in 556ms
+ ✓ Compiled middleware in 2ms
+ ✓ Compiled in 461ms
+ GET /bookings 200 in 210ms
+ GET /bookings 200 in 37ms
+ ✓ Compiled middleware in 5ms
+ ✓ Compiled in 377ms
+ GET /bookings 200 in 181ms
+ GET /bookings 200 in 25ms
+ ✓ Compiled in 249ms
+   Reload env: .env.local
+ ✓ Compiled in 1ms
+ GET /bookings 200 in 1005ms
+ ✓ Compiled middleware in 3ms
+ ✓ Compiled in 1082ms
+ GET /bookings 200 in 945ms
+ GET /bookings 200 in 677ms
+ ✓ Compiled in 211ms
+ ✓ Compiled in 321ms
+ ✓ Compiled in 220ms
+ ✓ Compiled in 248ms
+ ✓ Compiled in 253ms
+ ✓ Compiled middleware in 293ms
+ ✓ Compiled in 838ms
+ GET /bookings 200 in 309ms
+ GET /bookings 200 in 53ms
+[?25h

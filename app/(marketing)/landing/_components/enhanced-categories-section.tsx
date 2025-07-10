@@ -9,7 +9,7 @@ import { categoriesData } from "../_data/categories-data"
 import { CategoryData } from "./premium-category-card"
 import PremiumCategoryCard from "./premium-category-card"
 import CategoryCardSkeleton from "./category-card-skeleton"
-import { getActivitiesSupabaseAction } from "@/actions/db/activities-actions"
+import { getActivitiesSupabaseAction } from "@/actions/supabase-activities-actions"
 
 function AnimatedSection({
   children,
@@ -39,7 +39,7 @@ export default function EnhancedCategoriesSection() {
   >(
     categoriesData.map(cat => ({
       ...cat,
-      activityCount: Math.floor(Math.random() * 15) + 5 // Start with fallback data
+      activityCount: 10 // Start with static fallback data to prevent hydration mismatch
     }))
   )
   const [isUpdating, setIsUpdating] = useState(false)

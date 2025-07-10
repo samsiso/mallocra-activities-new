@@ -269,19 +269,19 @@ function EnhancedActivityCard({ activity }: { activity: ActivityWithDetails }) {
                 </div>
               </div>
 
-              <Link
-                href={`/book/${activity.id}/select`}
-                onClick={e => e.stopPropagation()}
+              <Button
+                size="sm"
+                className="h-9 bg-gradient-to-r from-pink-500 to-yellow-500 px-4 text-white transition-all duration-150 hover:from-pink-600 hover:to-yellow-600 sm:h-8 sm:px-3"
+                onClick={e => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  window.location.href = `/book/${activity.id}/select`
+                }}
               >
-                <Button
-                  size="sm"
-                  className="h-9 bg-gradient-to-r from-pink-500 to-yellow-500 px-4 text-white transition-all duration-150 hover:from-pink-600 hover:to-yellow-600 sm:h-8 sm:px-3"
-                >
-                  <span className="hidden sm:inline">Book Now</span>
-                  <span className="sm:hidden">Book</span>
-                  <ArrowRight className="ml-1 size-4 sm:size-3" />
-                </Button>
-              </Link>
+                <span className="hidden sm:inline">Book Now</span>
+                <span className="sm:hidden">Book</span>
+                <ArrowRight className="ml-1 size-4 sm:size-3" />
+              </Button>
             </div>
           </div>
         </div>

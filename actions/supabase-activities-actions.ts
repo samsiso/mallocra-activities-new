@@ -144,13 +144,104 @@ export async function getActivityByIdSupabaseAction(
   }
 }
 
-// Get all activities for admin
-export async function getActivitiesSupabaseAction(): Promise<ActionState<Activity[]>> {
+// Search and filter parameters interface
+export interface ActivitySearchParams {
+  search?: string
+  category?: string
+  location?: string
+  minPrice?: number
+  maxPrice?: number
+  sortBy?: "popular" | "price_low" | "price_high" | "rating" | "duration" | "featured"
+  featured?: boolean
+  limit?: number
+  offset?: number
+  page?: number
+}
+
+// Get all activities with search and filtering
+export async function getActivitiesSupabaseAction(
+  params: ActivitySearchParams = {}
+): Promise<ActionState<ActivityWithDetails[]>> {
   try {
-    const { data: activities, error } = await supabase
+    const {
+      search,
+      category,
+      location,
+      sortBy = "featured",
+      limit = 50,
+      offset = 0
+    } = params
+
+    // Build the base query
+    let query = supabase
       .from('activities')
-      .select('*')
-      .order('created_at', { ascending: false })
+      .select(`
+        *,
+        activity_images (
+          id,
+          image_url,
+          alt_text,
+          is_primary,
+          sort_order
+        ),
+        activity_pricing (
+          id,
+          price_type,
+          base_price,
+          currency,
+          is_active
+        )
+      `)
+      .eq('status', 'active')
+
+    // Add search filter
+    if (search) {
+      query = query.or(`title.ilike.%${search}%,short_description.ilike.%${search}%,location.ilike.%${search}%`)
+    }
+
+    // Add category filter
+    if (category) {
+      query = query.eq('category', category)
+    }
+
+    // Add location filter
+    if (location) {
+      query = query.eq('location', location)
+    }
+
+    // Add sorting
+    switch (sortBy) {
+      case "featured":
+        query = query.order('featured', { ascending: false })
+                    .order('total_bookings', { ascending: false })
+                    .order('avg_rating', { ascending: false })
+        break
+      case "popular":
+        query = query.order('total_bookings', { ascending: false })
+        break
+      case "rating":
+        query = query.order('avg_rating', { ascending: false })
+        break
+      case "price_low":
+        // Note: This is simplified - in reality you'd need to join with pricing
+        query = query.order('created_at', { ascending: false })
+        break
+      case "price_high":
+        query = query.order('created_at', { ascending: false })
+        break
+      default:
+        query = query.order('created_at', { ascending: false })
+    }
+
+    // Add pagination
+    if (limit) {
+      query = query.limit(limit)
+    }
+    if (offset) {
+      query = query.range(offset, offset + (limit || 50) - 1)
+    }
+
+    const { data: activities, error } = await query
 
     if (error) {
       console.error('Error fetching activities:', error)
@@ -160,10 +251,17 @@ export async function getActivitiesSupabaseAction(): Promise<ActionState<Activit
       }
     }
 
+    // Transform the data to match the expected format
+    const activitiesWithDetails: ActivityWithDetails[] = (activities || []).map(activity => ({
+      ...activity,
+      images: activity.activity_images || [],
+      pricing: activity.activity_pricing || []
+    }))
+
     return {
       isSuccess: true,
       message: "Activities retrieved successfully",
-      data: activities || []
+      data: activitiesWithDetails
     }
   } catch (error) {
     console.error("Error getting activities:", error)

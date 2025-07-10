@@ -7,7 +7,7 @@ Based on the actual activities they want to display on their platform.
 </ai_context>
 */
 
-import { supabaseServerClient as supabase } from "@/lib/supabase-server"
+import { supabaseAdminClient as supabase } from "@/lib/supabase-server"
 import { ActionState } from "@/types"
 
 // The 10 confirmed client activities

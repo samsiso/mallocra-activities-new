@@ -109,7 +109,7 @@ const locationCategories = [
     textColor: "text-rose-400"
   },
   {
-    id: "food_wine",
+    id: "cultural",
     title: "Food & Wine",
     emoji: "🍷",
     color: "amber",

@@ -95,14 +95,15 @@ export default function ActivityImageGallery({
       {/* Enhanced Image Grid Layout */}
       <div className="grid gap-4">
         {/* Main featured image */}
-        <div className="group relative h-80 w-full overflow-hidden rounded-xl md:h-96 lg:h-[500px]">
+        <div className="group relative h-80 w-full overflow-hidden rounded-xl md:h-96 lg:h-[500px] xl:h-[600px]">
           <Image
             src={images[currentIndex].url}
             alt={images[currentIndex].alt}
             fill
-            className="object-cover transition-all duration-700 group-hover:scale-110"
+            className="object-cover object-center transition-all duration-700 group-hover:scale-105"
             priority
             onLoad={() => setIsLoading(false)}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
           />
 
           {/* Loading overlay */}
@@ -156,13 +157,22 @@ export default function ActivityImageGallery({
                 {currentIndex + 1} / {images.length}
               </div>
               {/* Progress indicator */}
-              <div className="mt-2 h-1 w-full rounded-full bg-white/20">
+              <div className="mt-2 h-1.5 w-16 rounded-full bg-white/20">
                 <div
-                  className="h-full rounded-full bg-yellow-400 transition-all duration-300"
+                  className="h-full rounded-full bg-pink-400 transition-all duration-300"
                   style={{
                     width: `${((currentIndex + 1) / images.length) * 100}%`
                   }}
                 />
+              </div>
+            </div>
+          )}
+
+          {/* Image caption overlay */}
+          {images[currentIndex]?.caption && (
+            <div className="absolute bottom-4 left-4 max-w-md">
+              <div className="rounded-lg bg-black/70 px-4 py-2 text-sm text-white backdrop-blur-sm">
+                {images[currentIndex].caption}
               </div>
             </div>
           )}
@@ -184,15 +194,15 @@ export default function ActivityImageGallery({
 
         {/* Thumbnail grid - Enhanced layout */}
         {images.length > 1 && (
-          <div className="grid grid-cols-4 gap-3 md:grid-cols-6 lg:grid-cols-8">
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
             {images.map((image, index) => (
               <button
                 key={index}
                 className={cn(
                   "group relative aspect-square overflow-hidden rounded-lg transition-all duration-300",
                   currentIndex === index
-                    ? "scale-110 ring-2 ring-yellow-400 ring-offset-2 ring-offset-gray-900"
-                    : "opacity-70 hover:scale-105 hover:opacity-100 hover:ring-2 hover:ring-gray-400 hover:ring-offset-2 hover:ring-offset-gray-900"
+                    ? "scale-105 shadow-lg ring-2 ring-pink-400 ring-offset-2 ring-offset-transparent"
+                    : "opacity-80 hover:scale-105 hover:opacity-100 hover:shadow-md hover:ring-2 hover:ring-pink-300/50 hover:ring-offset-2 hover:ring-offset-transparent"
                 )}
                 onClick={() => setCurrentIndex(index)}
               >
@@ -200,13 +210,18 @@ export default function ActivityImageGallery({
                   src={image.url}
                   alt={image.alt}
                   fill
-                  className="object-cover transition-all duration-300 group-hover:scale-110"
+                  className="object-cover object-center transition-all duration-300 group-hover:scale-110"
+                  sizes="(max-width: 640px) 25vw, (max-width: 768px) 20vw, (max-width: 1024px) 16vw, 12vw"
                 />
                 {currentIndex !== index && (
-                  <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/20" />
+                  <div className="absolute inset-0 bg-black/30 transition-opacity duration-300 group-hover:bg-black/10" />
                 )}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <ZoomIn className="size-4 text-white" />
+                  <ZoomIn className="size-4 text-white drop-shadow-lg" />
+                </div>
+                {/* Image number indicator */}
+                <div className="absolute bottom-1 right-1 rounded bg-black/60 px-1.5 py-0.5 text-xs font-medium text-white">
+                  {index + 1}
                 </div>
               </button>
             ))}

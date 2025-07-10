@@ -28,7 +28,7 @@ export async function getWeatherForLocationAction(
   location: string
 ): Promise<ActionState<WeatherData>> {
   try {
-    const API_KEY = process.env.OPENWEATHERMAP_API_KEY
+    const API_KEY = process.env.WEATHERAPI_KEY
     if (!API_KEY) {
       return {
         isSuccess: false,
@@ -52,7 +52,7 @@ export async function getWeatherForLocationAction(
     const searchLocation = locationMap[location] || `${location},Mallorca,ES`
     
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${searchLocation}&appid=${API_KEY}&units=metric`,
+      `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${searchLocation}&aqi=no`,
       { next: { revalidate: 300 } } // Cache for 5 minutes
     )
 
@@ -64,10 +64,10 @@ export async function getWeatherForLocationAction(
 
     // Calculate weather condition based on multiple factors
     const getWeatherCondition = (weather: any): WeatherData['condition'] => {
-      const temp = weather.main.temp
-      const windSpeed = weather.wind.speed
-      const visibility = weather.visibility / 1000 // Convert to km
-      const weatherMain = weather.weather[0].main.toLowerCase()
+      const temp = weather.current.temp_c
+      const windSpeed = weather.current.wind_kph / 3.6 // Convert to m/s
+      const visibility = weather.current.vis_km
+      const weatherMain = weather.current.condition.text.toLowerCase()
 
       // Poor conditions
       if (weatherMain.includes('rain') || weatherMain.includes('storm') || 
@@ -106,12 +106,13 @@ export async function getWeatherForLocationAction(
     }
 
     const weatherData: WeatherData = {
-      temperature: Math.round(data.main.temp),
-      description: data.weather[0].description,
-      icon: data.weather[0].icon,
-      humidity: data.main.humidity,
-      windSpeed: Math.round(data.wind.speed * 3.6), // Convert m/s to km/h
-      visibility: Math.round(data.visibility / 1000), // Convert to km
+      temperature: Math.round(data.current.temp_c),
+      description: data.current.condition.text,
+      icon: data.current.condition.icon,
+      humidity: data.current.humidity,
+      windSpeed: Math.round(data.current.wind_kph),
+      uvIndex: data.current.uv,
+      visibility: Math.round(data.current.vis_km),
       condition,
       recommendation: getRecommendation(condition)
     }

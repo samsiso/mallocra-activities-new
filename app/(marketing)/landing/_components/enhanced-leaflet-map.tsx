@@ -103,7 +103,7 @@ const categoryInfo = {
     description: "Family-friendly activities",
     emoji: "👨‍👩‍👧‍👦"
   },
-  food_wine: {
+  cultural_culinary: {
     name: "Food & Wine",
     color: "#F59E0B",
     lightColor: "bg-amber-50",
@@ -284,7 +284,7 @@ function getActivityLocation(activity: ActivityWithDetails): [number, number] {
     cultural: [39.5663, 2.6309], // Historic Palma
     nightlife: [39.5099, 2.5344], // Magaluf
     family_fun: [39.5696, 2.6502], // Palma
-    food_wine: [39.5663, 2.6309] // Palma center
+    cultural_culinary: [39.5663, 2.6309] // Palma center
   }
 
   return categoryLocations[activity.category] || [39.5696, 2.6502]

@@ -1,6 +1,13 @@
 "use server"
 
 import { ActionState } from "@/types"
+import { 
+  calculateAllGrowthMetrics,
+  calculateActivitiesGrowth,
+  calculateUsersGrowth,
+  calculateBookingsGrowth,
+  calculateMonthlyRevenueGrowth
+} from "./growth-calculations"
 
 // Dashboard Analytics Data Types
 export interface DashboardAnalytics {
@@ -134,13 +141,19 @@ export async function getDashboardAnalyticsAction(): Promise<ActionState<Dashboa
     `)
     const bookings = bookingsData[0] || { total_bookings: 0, this_month: 0, pending: 0, confirmed: 0, total_revenue: 0 }
 
-    // Calculate growth percentages (mock for now, but can be calculated with historical data)
+    // Calculate real growth percentages
+    const [usersGrowth, activitiesGrowth, bookingsGrowth] = await Promise.all([
+      calculateUsersGrowth(),
+      calculateActivitiesGrowth(),
+      calculateBookingsGrowth()
+    ])
+
     const analytics: DashboardAnalytics = {
       users: {
         total: parseInt(users.total_users) || 0,
         newThisMonth: parseInt(users.new_this_month) || 0,
         activeUsers: parseInt(users.active_users) || 0,
-        growth: 12.5 // Can be calculated from historical data
+        growth: usersGrowth.growth
       },
       activities: {
         total: parseInt(activities.total_activities) || 0,
@@ -148,7 +161,7 @@ export async function getDashboardAnalyticsAction(): Promise<ActionState<Dashboa
         draft: parseInt(activities.draft) || 0,
         totalViews: parseInt(activities.total_views) || 0,
         avgRating: parseFloat(activities.avg_rating) || 0,
-        growth: 8.3 // Can be calculated from historical data
+        growth: activitiesGrowth.growth
       },
       bookings: {
         total: parseInt(bookings.total_bookings) || 0,
@@ -156,7 +169,7 @@ export async function getDashboardAnalyticsAction(): Promise<ActionState<Dashboa
         pending: parseInt(bookings.pending) || 0,
         confirmed: parseInt(bookings.confirmed) || 0,
         revenue: parseFloat(bookings.total_revenue) || 0,
-        growth: 15.7 // Can be calculated from historical data
+        growth: bookingsGrowth.growth
       },
       performance: {
         responseTime: 245,
@@ -199,37 +212,40 @@ export async function getDashboardStatsAction(): Promise<ActionState<DashboardSt
       `)
     ])
 
+    // Calculate real growth metrics
+    const growthMetrics = await calculateAllGrowthMetrics()
+
     const stats: DashboardStats = {
       totalActivities: {
         count: parseInt(activitiesData[0]?.count) || 0,
-        change: "+5%", // Can be calculated from historical data
-        changeType: "increase"
+        change: `${growthMetrics.activities.growth > 0 ? '+' : ''}${growthMetrics.activities.growth}%`,
+        changeType: growthMetrics.activities.changeType
       },
       totalUsers: {
         count: parseInt(usersData[0]?.count) || 0,
-        change: "+12%", // Can be calculated from historical data
-        changeType: "increase"
+        change: `${growthMetrics.users.growth > 0 ? '+' : ''}${growthMetrics.users.growth}%`,
+        changeType: growthMetrics.users.changeType
       },
       totalReviews: {
         count: parseInt(reviewsData[0]?.count) || 0,
-        change: "+18%", // Can be calculated from historical data
-        changeType: "increase"
+        change: `${growthMetrics.reviews.growth > 0 ? '+' : ''}${growthMetrics.reviews.growth}%`,
+        changeType: growthMetrics.reviews.changeType
       },
       totalBookings: {
         count: parseInt(bookingsData[0]?.count) || 0,
-        change: "+8%", // Can be calculated from historical data
-        changeType: "increase"
+        change: `${growthMetrics.bookings.growth > 0 ? '+' : ''}${growthMetrics.bookings.growth}%`,
+        changeType: growthMetrics.bookings.changeType
       },
       weeklyRevenue: {
         amount: `€${parseFloat(revenueData[0]?.weekly_revenue || 0).toLocaleString()}`,
-        change: "+12.3%", // Can be calculated from historical data
-        changeType: "increase",
+        change: `${growthMetrics.weeklyRevenue.growth > 0 ? '+' : ''}${growthMetrics.weeklyRevenue.growth}%`,
+        changeType: growthMetrics.weeklyRevenue.changeType,
         currency: "EUR"
       },
       monthlyRevenue: {
         amount: `€${parseFloat(revenueData[0]?.monthly_revenue || 0).toLocaleString()}`,
-        change: "+15.7%", // Can be calculated from historical data
-        changeType: "increase",
+        change: `${growthMetrics.monthlyRevenue.growth > 0 ? '+' : ''}${growthMetrics.monthlyRevenue.growth}%`,
+        changeType: growthMetrics.monthlyRevenue.changeType,
         currency: "EUR"
       }
     }
@@ -588,7 +604,9 @@ export async function getFinancialDashboardAction(): Promise<ActionState<{
 
     const currentMonthRevenue = parseFloat(monthlyRevenueData[0]?.current_month_revenue || 0)
     const lastMonthRevenue = parseFloat(lastMonthRevenueData[0]?.last_month_revenue || 0)
-    const revenueGrowth = lastMonthRevenue > 0 ? ((currentMonthRevenue - lastMonthRevenue) / lastMonthRevenue) * 100 : 0
+    // Calculate real revenue growth
+    const monthlyRevenueGrowth = await calculateMonthlyRevenueGrowth()
+    const revenueGrowth = monthlyRevenueGrowth.growth
 
     const commission = commissionData[0] || { platform_commission: 0, operator_amount: 0, sales_commission: 0 }
     const totalCommission = parseFloat(commission.platform_commission) + 

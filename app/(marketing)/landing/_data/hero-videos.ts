@@ -16,15 +16,33 @@ export interface HeroVideo {
 export const FALLBACK_VIDEOS: HeroVideo[] = [
   {
     id: "fallback-1",
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1920&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1578530332818-6ba472e67b9f?q=80&w=1920&auto=format&fit=crop",
     type: "image",
-    alt: "Beautiful Mallorca coastline"
+    alt: "Turquoise waters and sandy beach at Cala Mondragó, Mallorca"
   },
   {
     id: "fallback-2",
-    src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1920&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1570135460345-26da4177b7f6?q=80&w=1920&auto=format&fit=crop",
     type: "image",
-    alt: "Sailing in crystal waters"
+    alt: "Luxury yachts and sailboats in Port de Sóller marina at sunset"
+  },
+  {
+    id: "fallback-3",
+    src: "https://images.unsplash.com/photo-1601389004506-dcf7e42de4d8?q=80&w=1920&auto=format&fit=crop",
+    type: "image",
+    alt: "Crystal clear Mediterranean waters at Es Trenc beach"
+  },
+  {
+    id: "fallback-4",
+    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920&auto=format&fit=crop",
+    type: "image",
+    alt: "Traditional fishing boats in a picturesque Mallorca cove"
+  },
+  {
+    id: "fallback-5",
+    src: "https://images.unsplash.com/photo-1519452575417-564c1401ecc0?q=80&w=1920&auto=format&fit=crop",
+    type: "image",
+    alt: "Aerial view of Cap de Formentor with dramatic cliffs and blue sea"
   }
 ]
 

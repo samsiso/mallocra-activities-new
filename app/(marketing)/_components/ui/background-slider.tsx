@@ -32,6 +32,14 @@ export function BackgroundSlider({
     return () => clearInterval(timer)
   }, [images.length, interval])
 
+  // Preload images for smoother transitions
+  useEffect(() => {
+    images.forEach(image => {
+      const img = new window.Image()
+      img.src = image.url
+    })
+  }, [images])
+
   return (
     <div className="absolute inset-0 size-full">
       {images.map((image, index) => (
@@ -47,11 +55,13 @@ export function BackgroundSlider({
             fill
             className="object-cover"
             priority={index === 0}
+            sizes="100vw"
+            quality={90}
           />
         </div>
       ))}
 
-      {/* Gradient overlay */}
+      {/* Enhanced gradient overlay for better text contrast */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/20" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
     </div>

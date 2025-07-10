@@ -453,10 +453,10 @@ export async function updateUserStatusAction(
     const { data: bookingStats, error: bookingsError } = await supabase
       .from('bookings')
       .select(`
-        total_amount,
-        created_at
+        totalAmount,
+        createdAt
       `)
-      .eq('customer_id', userId)
+      .eq('customerId', userId)
       .eq('status', 'completed')
 
     let totalBookings = 0
@@ -465,35 +465,35 @@ export async function updateUserStatusAction(
 
     if (!bookingsError && bookingStats) {
       totalBookings = bookingStats.length
-      totalSpent = bookingStats.reduce((sum, booking) => sum + parseFloat(booking.total_amount || '0'), 0)
+      totalSpent = bookingStats.reduce((sum, booking) => sum + parseFloat(booking.totalAmount || '0'), 0)
       
       if (bookingStats.length > 0) {
-        const sortedBookings = bookingStats.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-        lastActive = sortedBookings[0].created_at
+        const sortedBookings = bookingStats.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        lastActive = sortedBookings[0].createdAt
       }
     }
 
     // Transform to UserWithDetails format
     const updatedUser: UserWithDetails = {
       id: updatedProfile.id,
-      firstName: updatedProfile.first_name || 'N/A',
-      lastName: updatedProfile.last_name || 'N/A',
+      firstName: updatedProfile.firstName || 'N/A',
+      lastName: updatedProfile.lastName || 'N/A',
       email: updatedProfile.email,
       phone: updatedProfile.phone || undefined,
-      userType: updatedProfile.user_type as "customer" | "operator" | "admin",
+      userType: updatedProfile.userType as "customer" | "operator" | "admin",
       status: updatedProfile.status as "active" | "inactive" | "suspended",
-      joinedAt: updatedProfile.created_at,
+      joinedAt: updatedProfile.createdAt,
       lastActive: lastActive || undefined,
       totalBookings: totalBookings,
       totalSpent: totalSpent,
       averageRating: undefined,
-      preferredLanguage: updatedProfile.preferred_language || 'en',
+      preferredLanguage: updatedProfile.preferredLanguage || 'en',
       location: undefined,
       dateOfBirth: undefined,
       emergencyContact: undefined,
       marketingConsent: false,
-      createdAt: updatedProfile.created_at,
-      updatedAt: updatedProfile.updated_at
+      createdAt: updatedProfile.createdAt,
+      updatedAt: updatedProfile.updatedAt
     }
 
     return {
@@ -517,16 +517,16 @@ export async function getUserByIdAction(userId: string): Promise<ActionState<Use
       .from('users_profiles')
       .select(`
         id,
-        clerk_user_id,
-        user_type,
-        first_name,
-        last_name,
+        clerkUserId,
+        userType,
+        firstName,
+        lastName,
         email,
         phone,
-        preferred_language,
+        preferredLanguage,
         status,
-        created_at,
-        updated_at
+        createdAt,
+        updatedAt
       `)
       .eq('id', userId)
       .single()
@@ -544,10 +544,10 @@ export async function getUserByIdAction(userId: string): Promise<ActionState<Use
     const { data: bookingStats, error: bookingsError } = await supabase
       .from('bookings')
       .select(`
-        total_amount,
-        created_at
+        totalAmount,
+        createdAt
       `)
-      .eq('customer_id', userId)
+      .eq('customerId', userId)
       .eq('status', 'completed')
 
     let totalBookings = 0
@@ -556,35 +556,35 @@ export async function getUserByIdAction(userId: string): Promise<ActionState<Use
 
     if (!bookingsError && bookingStats) {
       totalBookings = bookingStats.length
-      totalSpent = bookingStats.reduce((sum, booking) => sum + parseFloat(booking.total_amount || '0'), 0)
+      totalSpent = bookingStats.reduce((sum, booking) => sum + parseFloat(booking.totalAmount || '0'), 0)
       
       if (bookingStats.length > 0) {
-        const sortedBookings = bookingStats.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-        lastActive = sortedBookings[0].created_at
+        const sortedBookings = bookingStats.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        lastActive = sortedBookings[0].createdAt
       }
     }
 
     // Transform to UserWithDetails format
     const user: UserWithDetails = {
       id: userProfile.id,
-      firstName: userProfile.first_name || 'N/A',
-      lastName: userProfile.last_name || 'N/A',
+      firstName: userProfile.firstName || 'N/A',
+      lastName: userProfile.lastName || 'N/A',
       email: userProfile.email,
       phone: userProfile.phone || undefined,
-      userType: userProfile.user_type as "customer" | "operator" | "admin",
+      userType: userProfile.userType as "customer" | "operator" | "admin",
       status: userProfile.status as "active" | "inactive" | "suspended",
-      joinedAt: userProfile.created_at,
+      joinedAt: userProfile.createdAt,
       lastActive: lastActive || undefined,
       totalBookings: totalBookings,
       totalSpent: totalSpent,
       averageRating: undefined,
-      preferredLanguage: userProfile.preferred_language || 'en',
+      preferredLanguage: userProfile.preferredLanguage || 'en',
       location: undefined,
       dateOfBirth: undefined,
       emergencyContact: undefined,
       marketingConsent: false,
-      createdAt: userProfile.created_at,
-      updatedAt: userProfile.updated_at
+      createdAt: userProfile.createdAt,
+      updatedAt: userProfile.updatedAt
     }
 
     return {

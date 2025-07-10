@@ -24,6 +24,7 @@ export const activityCategoryEnum = pgEnum("activity_category", [
   "water_sports",
   "land_adventures",
   "cultural",
+  "food_wine",
   "nightlife",
   "family_fun"
 ])

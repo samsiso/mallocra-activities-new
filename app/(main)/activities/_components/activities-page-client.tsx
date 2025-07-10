@@ -36,7 +36,7 @@ import {
   ActivityWithDetails,
   ActivitySearchParams,
   getActivitiesSupabaseAction
-} from "@/actions/db/activities-actions"
+} from "@/actions/supabase-activities-actions"
 import ActivityCard from "./activity-card"
 import MobileActivityCard from "./mobile-activity-card"
 import MobileFilters from "./mobile-filters"
@@ -347,9 +347,8 @@ export default function ActivitiesPageClient({
                             Land Adventures
                           </SelectItem>
                           <SelectItem value="cultural">
-                            Cultural Tours
+                            Cultural & Culinary
                           </SelectItem>
-                          <SelectItem value="food_wine">Food & Wine</SelectItem>
                           <SelectItem value="nightlife">Nightlife</SelectItem>
                           <SelectItem value="day_trips">Day Trips</SelectItem>
                           <SelectItem value="family_fun">Family Fun</SelectItem>

@@ -94,14 +94,18 @@ export default function WeatherWidget({
     }
   }
 
-  const getWeatherIcon = (condition: string, iconCode: string) => {
-    if (condition === "excellent" || iconCode.includes("01")) {
+  const getWeatherIcon = (condition: string, iconUrl: string) => {
+    // WeatherAPI provides icon URLs like "//cdn.weatherapi.com/weather/64x64/day/116.png"
+    if (iconUrl && iconUrl.startsWith("//")) {
+      return (
+        <img src={`https:${iconUrl}`} alt="Weather icon" className="size-8" />
+      )
+    }
+
+    // Fallback icons based on condition
+    if (condition === "excellent") {
       return <Sun className="size-8 text-yellow-400" />
-    } else if (
-      condition === "poor" ||
-      iconCode.includes("09") ||
-      iconCode.includes("10")
-    ) {
+    } else if (condition === "poor") {
       return <CloudRain className="size-8 text-blue-400" />
     } else {
       return <Cloud className="size-8 text-gray-400" />

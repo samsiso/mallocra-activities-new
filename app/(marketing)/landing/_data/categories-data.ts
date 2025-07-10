@@ -62,10 +62,10 @@ export const categoriesData: CategoryData[] = [
   },
   {
     id: "cultural",
-    title: "Cultural Experiences",
+    title: "Cultural & Culinary",
     description:
-      "Immerse yourself in Mallorca's rich history and vibrant culture through guided tours of historic sites, museums, and authentic local experiences.",
-    shortDescription: "Authentic cultural immersion with local historians",
+      "Immerse yourself in Mallorca's rich history, vibrant culture, and culinary delights through guided tours, wine tastings, and authentic local experiences.",
+    shortDescription: "Authentic cultural immersion and culinary adventures",
     slug: "cultural",
     icon: Building,
     imageUrl:
@@ -74,37 +74,14 @@ export const categoriesData: CategoryData[] = [
       from: "#a855f7", // purple-500
       to: "#9333ea" // purple-600
     },
-    averagePrice: 35,
+    averagePrice: 60,
     features: [
       "UNESCO World Heritage sites",
       "Local artisan workshops",
-      "Historical storytelling",
-      "Traditional tapas tours"
+      "Wine tastings & culinary tours",
+      "Traditional experiences"
     ],
     href: "/activities?category=cultural"
-  },
-  {
-    id: "food_wine",
-    title: "Food & Wine",
-    description:
-      "Savor Mallorca's culinary delights through wine tastings, cooking classes, and gourmet food tours featuring the island's finest flavors.",
-    shortDescription: "Culinary adventures with award-winning local chefs",
-    slug: "food-wine",
-    icon: Utensils,
-    imageUrl:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop",
-    gradient: {
-      from: "#dc2626", // red-600
-      to: "#b91c1c" // red-700
-    },
-    averagePrice: 85,
-    features: [
-      "Michelin-starred restaurants",
-      "Organic wine estates",
-      "Farm-to-table experiences",
-      "Professional sommelier guidance"
-    ],
-    href: "/activities?category=food_wine"
   },
   {
     id: "nightlife",
@@ -167,8 +144,7 @@ export const getCategoryActivityCount = async (
   const mockCounts: Record<string, number> = {
     water_sports: 24,
     land_adventures: 18,
-    cultural: 15,
-    food_wine: 12,
+    cultural: 27,
     nightlife: 8,
     family_fun: 22
   }
