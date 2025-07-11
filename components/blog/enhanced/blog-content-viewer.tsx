@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { designTokens } from "@/components/design-system/tokens"
+import { designTokens } from "@/components/design-system"
 import {
   Clock,
   Calendar,

@@ -13,7 +13,7 @@ import {
   BlogContentViewer,
   BlogSearchFilter
 } from "@/components/blog/enhanced"
-import { designTokens } from "@/components/design-system/tokens"
+import { designTokens } from "@/components/design-system"
 import { Calendar, Users, CreditCard, CheckCircle } from "lucide-react"
 
 // Sample data for demos
