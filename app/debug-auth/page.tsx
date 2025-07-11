@@ -2,8 +2,10 @@
 
 import { useUser } from "@clerk/nextjs"
 import { useEffect, useState } from "react"
+import dynamic from "next/dynamic"
 
-export default function DebugAuthPage() {
+// Component that uses Clerk hooks
+function DebugAuthContent() {
   const { user, isLoaded, isSignedIn } = useUser()
   const [debugInfo, setDebugInfo] = useState<any>(null)
 
@@ -90,4 +92,23 @@ export default function DebugAuthPage() {
       </div>
     </div>
   )
+}
+
+// Dynamically import the component to prevent SSR
+const DynamicDebugAuth = dynamic(() => Promise.resolve(DebugAuthContent), {
+  ssr: false,
+  loading: () => (
+    <div className="min-h-screen bg-gray-100 p-8">
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-6 text-3xl font-bold">🔍 Auth Debug Page</h1>
+        <div className="mb-6 rounded-lg bg-white p-6 shadow">
+          <p>Loading authentication debug info...</p>
+        </div>
+      </div>
+    </div>
+  )
+})
+
+export default function DebugAuthPage() {
+  return <DynamicDebugAuth />
 }
