@@ -13,7 +13,7 @@ import {
   CheckCircle
 } from "lucide-react"
 
-interface BookingStep {
+export interface BookingStep {
   id: string
   title: string
   description: string

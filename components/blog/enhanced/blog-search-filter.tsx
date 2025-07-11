@@ -33,7 +33,7 @@ interface BlogSearchFilterProps {
   className?: string
 }
 
-interface Category {
+export interface Category {
   id: string
   name: string
   slug: string
@@ -41,15 +41,15 @@ interface Category {
   color?: string
 }
 
-interface Author {
+export interface Author {
   id: string
   name: string
   avatar?: string
   postCount: number
 }
 
-type SortOption = "latest" | "popular" | "trending" | "oldest"
-type ViewMode = "grid" | "list"
+export type SortOption = "latest" | "popular" | "trending" | "oldest"
+export type ViewMode = "grid" | "list"
 
 export function BlogSearchFilter({
   onSearch,

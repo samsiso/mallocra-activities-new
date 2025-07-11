@@ -76,11 +76,14 @@ export async function sendMultiChannelBookingConfirmationAction(
     try {
       const telegramResult = await sendTelegramAdminBookingAlertAction({
         customerName: data.customerName,
+        customerEmail: data.customerEmail || '',
+        customerPhone: data.customerPhone || '',
         activityTitle: data.activityTitle,
         bookingDate: data.bookingDate,
         bookingTime: data.bookingTime,
         bookingReference: data.bookingReference,
-        totalAmount: data.totalAmount
+        totalAmount: data.totalAmount,
+        participantCount: data.participantCount || 1
       })
       results.telegram = telegramResult.isSuccess
       console.log("Telegram notification result:", telegramResult.isSuccess ? "SUCCESS" : telegramResult.message)
@@ -153,7 +156,8 @@ export async function sendMultiChannelPaymentConfirmationAction(
     try {
       const telegramResult = await sendTelegramPaymentFailureAlertAction({
         customerName: data.customerName,
-        paymentAmount: data.paymentAmount,
+        customerEmail: data.customerName,
+        amount: data.totalAmount,
         bookingReference: data.bookingReference,
         activityTitle: data.activityTitle,
         errorMessage: "Payment processing notification"

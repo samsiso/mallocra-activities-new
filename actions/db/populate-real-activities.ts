@@ -261,7 +261,8 @@ export async function populateRealActivitiesAction() {
 // Function to verify the activities were added
 export async function verifyRealActivitiesAction() {
   try {
-    const supabase = await createClient()
+    const { supabaseAdminClient } = await import('@/lib/supabase-admin')
+    const supabase = supabaseAdminClient
     
     const { data, error } = await supabase
       .from("activities")

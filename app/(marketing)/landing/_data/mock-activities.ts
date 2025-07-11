@@ -5,7 +5,7 @@
 
 import { ActivityWithDetails } from "@/actions/db/activities-actions"
 
-export const mockActivities: ActivityWithDetails[] = [
+export const mockActivities: Partial<ActivityWithDetails>[] = [
   {
     id: "activity-1",
     title: "Palma Cathedral & Historic Quarter Tour",
@@ -18,6 +18,9 @@ export const mockActivities: ActivityWithDetails[] = [
     location: "Palma de Mallorca",
     meetingPoint: "Palma Cathedral Main Entrance",
     durationMinutes: 180,
+    latitude: 39.5663,
+    longitude: 2.6501,
+    videoUrl: null,
     maxParticipants: 15,
     minParticipants: 2,
     minAge: 8,

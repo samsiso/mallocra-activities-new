@@ -26,14 +26,14 @@ import {
   startOfToday
 } from "date-fns"
 
-interface TimeSlot {
+export interface TimeSlot {
   time: string
   available: boolean
   spots?: number
   price?: number
 }
 
-interface DayAvailability {
+export interface DayAvailability {
   date: Date
   available: boolean
   spots?: number
@@ -162,7 +162,7 @@ export function AvailabilityCalendar({
 
             <div className="min-w-[140px] rounded-lg bg-white/20 px-4 py-2 text-center">
               <p className="font-medium text-gray-900">
-                {format(currentMonth, "MMMM yyyy", { locale })}
+                {format(currentMonth, "MMMM yyyy")}
               </p>
             </div>
 

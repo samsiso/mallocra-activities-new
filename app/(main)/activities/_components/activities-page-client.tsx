@@ -212,7 +212,15 @@ export default function ActivitiesPageClient({
   }
 
   const handleSortChange = (value: string) => {
-    setSortBy(value)
+    setSortBy(
+      value as
+        | "featured"
+        | "rating"
+        | "duration"
+        | "popular"
+        | "price_low"
+        | "price_high"
+    )
     updateUrlParams({ sort: value })
     fetchActivities(true)
   }
@@ -552,11 +560,7 @@ export default function ActivitiesPageClient({
                             className="animate-in fade-in slide-in-from-right-12 duration-700"
                             style={{ animationDelay: `${index * 100}ms` }}
                           >
-                            <ActivityCard
-                              activity={activity}
-                              variant="default"
-                              index={index}
-                            />
+                            <ActivityCard activity={activity} />
                           </div>
                         ))}
                       </div>

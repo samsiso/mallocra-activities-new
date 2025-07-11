@@ -338,7 +338,8 @@ export async function deleteBlogPostAction(
 
     return {
       isSuccess: true,
-      message: "Blog post deleted successfully"
+      message: "Blog post deleted successfully",
+      data: undefined
     }
   } catch (error) {
     console.error("Error deleting blog post:", error)

@@ -219,7 +219,7 @@ export async function getBlogTagsAction(blogId: string): Promise<ActionState<Sel
     return {
       isSuccess: true,
       message: "Blog tags retrieved successfully",
-      data: blogTags
+      data: blogTags.map(tag => ({ ...tag, slug: tag.name.toLowerCase().replace(/\s+/g, '-') }))
     }
   } catch (error) {
     console.error("Error getting blog tags:", error)
