@@ -1,7 +1,11 @@
 "use client"
 
 import { useUser } from "@clerk/nextjs"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+// Prevent static generation of this page to avoid Clerk context issues
+export const dynamic = "force-dynamic"
+export const runtime = "nodejs"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
@@ -15,6 +19,21 @@ export default function SyncUserTestPage() {
   const [profile, setProfile] = useState<any>(null)
   const [syncResult, setSyncResult] = useState<string>("")
   const [checking, setChecking] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // Prevent hydration mismatches during SSR
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Don't render anything until mounted to prevent SSR issues
+  if (!mounted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-900">
+        <div className="text-xl text-white">🔄 Loading...</div>
+      </div>
+    )
+  }
 
   const handleSyncUser = async () => {
     if (!user) return
