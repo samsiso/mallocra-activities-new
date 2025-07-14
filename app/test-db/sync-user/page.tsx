@@ -18,7 +18,7 @@ const SyncUserContent = dynamic(() => import("./sync-user-content"), {
   ssr: false,
   loading: () => (
     <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <div className="text-xl text-white">🔄 Loading...</div>
+      <div className="text-xl text-white">🔄 Loading Clerk components...</div>
     </div>
   )
 })
