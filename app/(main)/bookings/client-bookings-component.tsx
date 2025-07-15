@@ -1,51 +1,40 @@
 "use client"
 
-/*
-<ai_context>
-My Bookings Page - User Dashboard for Managing Activity Bookings
-Features beautiful gradients, glassmorphism, and professional layouts consistent with the platform design.
-Uses the main layout for consistent header/footer navigation.
-Enhanced with analytics, calendar view, and comprehensive booking management.
-Now integrated with Clerk auth for real user data.
-</ai_context>
-*/
-
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import {
   Calendar,
-  MapPin,
   Users,
   Clock,
-  Star,
   Download,
   MessageSquare,
-  MoreHorizontal,
   CheckCircle,
   XCircle,
   AlertCircle,
   Sparkles,
   BarChart3,
   CalendarIcon,
-  List,
-  Search,
-  Filter,
-  User,
-  LogIn,
-  Loader2
+  List
 } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import {
-  getUserBookingsAction,
-  getBookingByReferenceAction
-} from "@/actions/db/bookings-actions"
-import { syncClerkUserAction } from "@/actions/db/users-actions"
 import BookingAnalytics from "./_components/booking-analytics"
 import BookingCalendar from "./_components/booking-calendar"
+
+interface ClientBookingsComponentProps {
+  userId: string
+  userProfile: any
+  initialBookings: any[]
+  userData: {
+    id: string
+    firstName: string | null
+    lastName: string | null
+    emailAddresses: any[]
+  }
+}
 
 // Enhanced glassmorphism card component
 function GlassmorphismCard({
@@ -214,29 +203,17 @@ function BookingCard({ booking }: { booking: any }) {
   )
 }
 
-interface BookingsContentProps {
-  user: any
-  userLoaded: boolean
-  bookings: any[]
-  userProfile: any
-}
-
-export default function BookingsContent({
-  user,
-  userLoaded,
-  bookings,
-  userProfile
-}: BookingsContentProps) {
-  const [mounted, setMounted] = useState(false)
+export default function ClientBookingsComponent({
+  userId,
+  userProfile,
+  initialBookings,
+  userData
+}: ClientBookingsComponentProps) {
   const [activeTab, setActiveTab] = useState("all")
   const [viewMode, setViewMode] = useState<"list" | "calendar" | "analytics">(
     "list"
   )
-
-  // Initialize component with proper mounting check
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const [bookings] = useState(initialBookings)
 
   const filteredBookings = bookings.filter(booking => {
     if (activeTab === "all") return true
@@ -245,60 +222,6 @@ export default function BookingsContent({
     if (activeTab === "completed") return booking.status === "completed"
     return true
   })
-
-  // Show loading state
-  if (!mounted) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800">
-        <div className="text-center text-white">
-          <Loader2 className="mx-auto mb-4 size-12 animate-spin" />
-          <p className="text-xl">Loading your bookings...</p>
-        </div>
-      </div>
-    )
-  }
-
-  // Show auth required state
-  if (!userLoaded || !user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800">
-        <section className="relative flex min-h-screen items-center justify-center">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -left-40 -top-40 size-80 rounded-full bg-yellow-400/20 blur-3xl" />
-            <div className="absolute -bottom-40 -right-40 size-80 rounded-full bg-white/10 blur-3xl" />
-          </div>
-
-          <div className="relative text-center">
-            <GlassmorphismCard className="mx-auto max-w-md">
-              <User className="mx-auto mb-6 size-16 text-yellow-400" />
-              <h2 className="mb-4 text-3xl font-bold text-white">
-                Sign In Required
-              </h2>
-              <p className="mb-8 text-white/70">
-                Please sign in to view and manage your bookings
-              </p>
-              <div className="space-y-3">
-                <Link href="/login">
-                  <Button className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 font-bold text-black">
-                    <LogIn className="mr-2 size-4" />
-                    Sign In
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button
-                    variant="outline"
-                    className="w-full border-white/30 bg-white/10 text-white hover:bg-white/20"
-                  >
-                    Create Account
-                  </Button>
-                </Link>
-              </div>
-            </GlassmorphismCard>
-          </div>
-        </section>
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-900 via-amber-900 to-rose-800">
@@ -320,7 +243,7 @@ export default function BookingsContent({
             <h1 className="mb-8 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
               Welcome back,{" "}
               <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
-                {user.firstName || "Adventurer"}
+                {userData.firstName || "Adventurer"}
               </span>
             </h1>
 

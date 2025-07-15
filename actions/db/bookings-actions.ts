@@ -469,9 +469,11 @@ export async function getBookingByReferenceAction(
   bookingReference: string
 ): Promise<ActionState<SelectBooking>> {
   try {
-    const booking = await db.query.bookings.findFirst({
-      where: eq(bookingsTable.bookingReference, bookingReference)
-    })
+    const [booking] = await db
+      .select()
+      .from(bookingsTable)
+      .where(eq(bookingsTable.bookingReference, bookingReference))
+      .limit(1)
 
     if (!booking) {
       return {
@@ -499,10 +501,11 @@ export async function getUserBookingsAction(
   customerId: string
 ): Promise<ActionState<SelectBooking[]>> {
   try {
-    const bookings = await db.query.bookings.findMany({
-      where: eq(bookingsTable.customerId, customerId),
-      orderBy: [desc(bookingsTable.createdAt)]
-    })
+    const bookings = await db
+      .select()
+      .from(bookingsTable)
+      .where(eq(bookingsTable.customerId, customerId))
+      .orderBy(desc(bookingsTable.createdAt))
 
     return {
       isSuccess: true,
@@ -524,14 +527,15 @@ export async function getActivityBookingsForDateAction(
   bookingDate: string
 ): Promise<ActionState<SelectBooking[]>> {
   try {
-    const bookings = await db.query.bookings.findMany({
-      where: and(
+    const bookings = await db
+      .select()
+      .from(bookingsTable)
+      .where(and(
         eq(bookingsTable.activityId, activityId),
         eq(bookingsTable.bookingDate, bookingDate),
         // Only confirmed bookings count towards capacity
         eq(bookingsTable.status, "confirmed")
-      )
-    })
+      ))
 
     return {
       isSuccess: true,
@@ -705,10 +709,11 @@ export async function getBookingsAction(
       whereConditions.push(eq(bookingsTable.activityId, filters.activityId))
     }
 
-    const bookings = await db.query.bookings.findMany({
-      where: whereConditions.length > 0 ? and(...whereConditions) : undefined,
-      orderBy: [desc(bookingsTable.createdAt)]
-    })
+    const bookings = await db
+      .select()
+      .from(bookingsTable)
+      .where(whereConditions.length > 0 ? and(...whereConditions) : undefined)
+      .orderBy(desc(bookingsTable.createdAt))
 
     return {
       isSuccess: true,
