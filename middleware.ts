@@ -25,7 +25,7 @@ export default clerkMiddleware(async (auth, req) => {
         return NextResponse.next()
       }
       
-      // Get the auth object
+      // Get the auth object with await (correct v6 syntax)
       const { userId } = await auth()
       
       // If no user is signed in, redirect to sign in
