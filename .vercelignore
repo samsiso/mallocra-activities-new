@@ -18,6 +18,11 @@ __tests__/
 *.spec.ts
 *.spec.tsx
 
+# Debug pages (not needed in production)
+app/debug/
+app/debug-auth/
+app/test-activities/
+
 # Documentation
 docs/
 analysis/
