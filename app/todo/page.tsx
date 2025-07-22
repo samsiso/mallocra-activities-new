@@ -10,6 +10,9 @@ import { TodoList } from "@/app/todo/_components/todo-list"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 
+// Force dynamic rendering to prevent build errors with auth
+export const dynamic = "force-dynamic"
+
 export default async function TodoPage() {
   const { userId } = await auth()
 
