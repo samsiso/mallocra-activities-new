@@ -20,6 +20,8 @@ export default clerkMiddleware(async (auth, req) => {
   try {
     // Skip middleware for MCP routes and OAuth metadata
     if (req.nextUrl.pathname.startsWith('/api/mcp') || 
+        req.nextUrl.pathname.startsWith('/api/sse') ||
+        req.nextUrl.pathname.startsWith('/api/transport') ||
         req.nextUrl.pathname.startsWith('/.well-known/')) {
       return NextResponse.next()
     }
@@ -53,7 +55,9 @@ export const config = {
   matcher: [
     // Skip Next.js internals and all static files, unless found in search params
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
+    // Always run for API routes except MCP and well-known
+    '/(api|trpc)(?!/mcp|/\\[transport\\]|/.well-known)(.*)',
+    // Run for specific protected routes
+    '/(todo|admin|profile|test-db)(.*)',
   ],
 } 
