@@ -7,7 +7,7 @@ import ClientBookingsComponent from "./client-bookings-component"
 export const dynamic = "force-dynamic"
 
 export default async function BookingsPage() {
-  const { userId } = auth()
+  const { userId } = await auth()
   const user = await currentUser()
 
   // Server-side auth check
