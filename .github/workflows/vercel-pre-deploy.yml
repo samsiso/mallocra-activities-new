@@ -1,0 +1,64 @@
+name: Vercel Pre-Deployment Checks
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  # Add your environment variables here for CI testing
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+  CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+  NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+    name: Quality & Build Checks
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Type checking
+        run: npm run type-check
+
+      - name: 🧹 Linting
+        run: npm run lint
+
+      - name: 💅 Format checking
+        run: npm run format:check
+
+      - name: 🔐 Environment validation
+        run: |
+          echo "Checking environment variables..."
+          node scripts/check-build.js
+
+      - name: 🏗️ Test production build
+        run: npm run build
+
+      - name: ✅ Build success notification
+        if: success()
+        run: |
+          echo "✅ All checks passed! Safe to deploy to Vercel."
+          echo "Build completed at: $(date)"
+
+      - name: ❌ Build failure notification
+        if: failure()
+        run: |
+          echo "❌ Pre-deployment checks failed!"
+          echo "Please fix the issues before deploying to Vercel."
+          exit 1

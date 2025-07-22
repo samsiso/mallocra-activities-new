@@ -18,6 +18,16 @@ const isProtectedRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, req) => {
   try {
+    // Explicitly skip MCP routes and .well-known paths
+    const pathname = req.nextUrl.pathname
+    if (pathname.startsWith('/api/mcp') || 
+        pathname.startsWith('/api/sse') ||
+        pathname.startsWith('/api/transport') ||
+        pathname.includes('[transport]') ||
+        pathname.startsWith('/.well-known/')) {
+      return NextResponse.next()
+    }
+    
     // Check if this is a protected route
     if (isProtectedRoute(req)) {
       // TEMPORARY: Allow admin access in development without authentication
@@ -45,6 +55,15 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    '/(todo|admin|profile|test-db)(.*)',
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api/mcp (MCP endpoints)
+     * - api/[transport] (MCP transport endpoints)  
+     * - .well-known (OAuth metadata)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api/mcp|api/\\[transport\\]|\\.well-known|_next/static|_next/image|favicon\\.ico).*)',
   ],
 } 

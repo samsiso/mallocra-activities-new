@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🚀 Running pre-push checks..."
+
+# 1. Check environment variables
+echo "📋 Checking environment setup..."
+node scripts/check-build.js
+if [ $? -ne 0 ]; then
+  echo "❌ Environment check failed! Fix issues before pushing."
+  exit 1
+fi
+
+# 2. Run type checking
+echo "🔍 Type checking..."
+npm run type-check
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript errors found! Fix before pushing."
+  exit 1
+fi
+
+# 3. Run linting
+echo "🧹 Linting..."
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "❌ Linting errors found! Run 'npm run lint:fix' to fix."
+  exit 1
+fi
+
+# 4. Test build
+echo "🏗️ Testing production build..."
+npm run build
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed! Fix errors before pushing."
+  exit 1
+fi
+
+echo "✅ All pre-push checks passed! Safe to deploy."

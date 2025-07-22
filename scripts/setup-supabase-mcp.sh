@@ -19,16 +19,19 @@ echo "🧹 Cleaning up existing configurations..."
 claude mcp remove supabase -s local 2>/dev/null || true
 claude mcp remove supabase-master -s local 2>/dev/null || true
 
-# Add the master Supabase MCP server
+# Add the master Supabase MCP server with correct configuration format
 echo "✅ Adding Supabase MCP server..."
-claude mcp add-json supabase "{
+claude mcp add supabase "{
   \"command\": \"npx\",
   \"args\": [
     \"-y\",
     \"@supabase/mcp-server-supabase@latest\",
-    \"--access-token\",
-    \"$SUPABASE_TOKEN\"
-  ]
+    \"--read-only\",
+    \"--project-ref=tskawjnjmiltzoypdnsl\"
+  ],
+  \"env\": {
+    \"SUPABASE_ACCESS_TOKEN\": \"$SUPABASE_TOKEN\"
+  }
 }"
 
 # Verify installation
