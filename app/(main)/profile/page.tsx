@@ -1,5 +1,3 @@
-"use server"
-
 /*
 <ai_context>
 User Profile Page - Complete profile management dashboard

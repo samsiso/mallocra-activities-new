@@ -1,0 +1,40 @@
+# Vercel ignore file
+# Files and directories to exclude from deployment
+
+# Test scripts that require puppeteer
+scripts/quick-test.js
+scripts/comprehensive-app-tester.js
+scripts/run-e2e-tests.sh
+
+# Development files
+.env.local
+.env.development
+
+# Test directories
+tests/
+__tests__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation
+docs/
+analysis/
+prompts/
+*.md
+
+# Development tools
+.vscode/
+.idea/
+.cursor/
+
+# MCP configuration
+.mcp.json
+.claude.json
+mcp.json
+
+# E2E tests
+e2e/
+playwright-report/
+test-results/
