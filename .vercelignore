@@ -23,6 +23,19 @@ app/debug/
 app/debug-auth/
 app/test-activities/
 
+# Demo pages (not needed in production)
+app/demo/
+
+# Seed and test pages
+app/seed/
+app/populate-activities/
+app/blog-setup/
+app/test-dashboard/
+app/test-email/
+app/test-map/
+app/test-qr/
+app/media-demo/
+
 # Documentation
 docs/
 analysis/
