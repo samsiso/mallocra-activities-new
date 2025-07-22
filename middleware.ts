@@ -18,14 +18,6 @@ const isProtectedRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, req) => {
   try {
-    // Skip middleware for MCP routes and OAuth metadata
-    if (req.nextUrl.pathname.startsWith('/api/mcp') || 
-        req.nextUrl.pathname.startsWith('/api/sse') ||
-        req.nextUrl.pathname.startsWith('/api/transport') ||
-        req.nextUrl.pathname.startsWith('/.well-known/')) {
-      return NextResponse.next()
-    }
-    
     // Check if this is a protected route
     if (isProtectedRoute(req)) {
       // TEMPORARY: Allow admin access in development without authentication
@@ -53,11 +45,6 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes except MCP and well-known
-    '/(api|trpc)(?!/mcp|/\\[transport\\]|/.well-known)(.*)',
-    // Run for specific protected routes
     '/(todo|admin|profile|test-db)(.*)',
   ],
 } 
