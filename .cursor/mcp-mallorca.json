@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "mallorca-activities-local": {
+      "url": "http://localhost:3004/api/mcp",
+      "headers": {
+        "Authorization": "Bearer mcp_dev_key_2025_mallorca_activities"
+      }
+    },
+    "mallorca-activities-prod": {
+      "url": "https://YOUR-VERCEL-APP-NAME.vercel.app/api/mcp",
+      "headers": {
+        "Authorization": "Bearer mcp_dev_key_2025_mallorca_activities"
+      }
+    }
+  }
+}
