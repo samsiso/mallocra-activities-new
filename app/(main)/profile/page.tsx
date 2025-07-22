@@ -15,6 +15,9 @@ import UserProfileManager from "@/components/user-profile-manager"
 import { getCurrentUserProfileAction } from "@/actions/db/users-actions"
 import { Loader2 } from "lucide-react"
 
+// Force dynamic rendering to prevent build errors with auth
+export const dynamic = "force-dynamic"
+
 export default async function ProfilePage() {
   return (
     <div className="min-h-screen bg-gray-900 p-4">

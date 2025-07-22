@@ -8,6 +8,15 @@
 const fs = require('fs');
 const path = require('path');
 
+// Load environment variables from .env.local in development
+if (process.env.NODE_ENV !== 'production') {
+  try {
+    require('dotenv').config({ path: '.env.local' });
+  } catch (e) {
+    // dotenv might not be available in production
+  }
+}
+
 console.log('🔍 Running pre-build checks...\n');
 
 let hasErrors = false;
