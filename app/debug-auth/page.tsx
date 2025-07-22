@@ -4,6 +4,9 @@ import { useUser } from "@clerk/nextjs"
 import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 
+// Force dynamic rendering to prevent static generation errors
+export const dynamic = "force-dynamic"
+
 // Component that uses Clerk hooks
 function DebugAuthContent() {
   const { user, isLoaded, isSignedIn } = useUser()
