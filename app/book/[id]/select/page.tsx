@@ -133,13 +133,22 @@ export default function BookingSelectPage() {
             duration: result.data.duration,
             maxParticipants: result.data.maxParticipants,
             adultPrice:
-              result.data.priceAdult ||
-              result.data.pricing?.[0]?.base_price ||
+              Number(
+                result.data.pricing?.find(p => p.priceType === "adult")
+                  ?.basePrice
+              ) ||
+              Number(result.data.pricing?.[0]?.basePrice) ||
               99,
             childPrice:
-              result.data.priceChild ||
-              (result.data.priceAdult ||
-                result.data.pricing?.[0]?.base_price ||
+              Number(
+                result.data.pricing?.find(p => p.priceType === "child")
+                  ?.basePrice
+              ) ||
+              (Number(
+                result.data.pricing?.find(p => p.priceType === "adult")
+                  ?.basePrice
+              ) ||
+                Number(result.data.pricing?.[0]?.basePrice) ||
                 99) * 0.8,
             spotsLeft: result.data.spotsLeft || 10
           })

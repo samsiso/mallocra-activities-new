@@ -90,9 +90,9 @@ export default function BookingModifyPage() {
         if (result.isSuccess && result.data) {
           setBooking(result.data)
           setSelectedDate(result.data.bookingDate)
-          setSelectedTime(result.data.bookingTime)
-          setAdults(result.data.adults)
-          setChildren(result.data.children)
+          setSelectedTime("10:30") // Default time since BookingWithDetails doesn't have bookingTime
+          setAdults(result.data.participants > 0 ? result.data.participants : 2) // Use participants
+          setChildren(0) // Default to 0 children
         } else {
           // Fallback to mock data
           const mockBooking = {
@@ -146,9 +146,8 @@ New Details:
   const canModify = selectedDate && selectedTime && adults + children > 0
   const hasChanges =
     selectedDate !== booking?.bookingDate ||
-    selectedTime !== booking?.bookingTime ||
-    adults !== booking?.adults ||
-    children !== booking?.children
+    selectedTime !== "10:30" || // Compare with default time
+    adults + children !== booking?.participants // Compare total participants
 
   if (loading) {
     return (

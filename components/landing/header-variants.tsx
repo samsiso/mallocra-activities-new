@@ -53,7 +53,9 @@ export function HeaderVariants() {
     }
   }
 
-  const currentStyle = headerStyles[headerVariant.current]
+  const currentStyle =
+    headerStyles[headerVariant.current as keyof typeof headerStyles] ||
+    headerStyles.glass
 
   // Navigation items
   const navItems = [
@@ -210,7 +212,9 @@ export function HeaderVariants() {
           background:
             headerVariant.current === "gradient"
               ? "linear-gradient(135deg, #ff1dce 0%, #dc2626 50%, #b91c1c 100%)"
-              : currentStyle.style.background ||
+              : (currentStyle.style && "background" in currentStyle.style
+                  ? currentStyle.style.background
+                  : null) ||
                 (headerVariant.current === "glass"
                   ? "rgba(255, 255, 255, 0.1)"
                   : "rgba(17, 24, 39, 0.95)")

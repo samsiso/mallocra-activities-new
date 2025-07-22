@@ -23,7 +23,7 @@ export default async function TestActivitiesPage() {
                 <p>Images: {activity.images?.length || 0}</p>
                 {activity.images?.[0] && (
                   <img
-                    src={activity.images[0].imageUrl}
+                    src={activity.images[0].image_url}
                     alt={activity.title}
                     className="mt-2 h-32 w-48 object-cover"
                   />

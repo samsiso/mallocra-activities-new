@@ -167,7 +167,7 @@ export function BookingSummary({
               >
                 <span className="text-yellow-400">Discount</span>
                 <span className="text-yellow-400">
-                  -€{pricing.discount.toFixed(2)}
+                  -€{(pricing.discount || 0).toFixed(2)}
                 </span>
               </motion.div>
             )}

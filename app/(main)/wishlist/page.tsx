@@ -257,7 +257,7 @@ function WishlistCard({
             </div>
 
             <div className="flex gap-2">
-              <Link href={`/book/${item.activityId}/select`}>
+              <Link href={`/book/${item.activitySlug}/select`}>
                 <Button
                   size="sm"
                   className="bg-gradient-to-r from-pink-500 to-yellow-500 font-bold text-white hover:from-pink-600 hover:to-yellow-600"

@@ -555,6 +555,7 @@ export async function getActivityByIdSupabaseAction(
     // Transform the data to match ActivityWithDetails interface
     const activityWithDetails: ActivityWithDetails = {
       id: activity.id,
+      operatorId: activity.operator_id,
       title: activity.title,
       slug: activity.slug,
       description: activity.description || '',
@@ -571,8 +572,11 @@ export async function getActivityByIdSupabaseAction(
       maxAge: activity.max_age || null,
       includedItems: activity.included_items || [],
       excludedItems: activity.excluded_items || [],
-      // requirements: activity.requirements || [],
+      whatToBring: activity.what_to_bring || [],
       cancellationPolicy: activity.cancellation_policy || '',
+      safetyRequirements: activity.safety_requirements || null,
+      weatherDependent: activity.weather_dependent || false,
+      instantConfirmation: activity.instant_confirmation || true,
       videoUrl: activity.video_url || null,
       status: activity.status,
       featured: activity.featured || false,

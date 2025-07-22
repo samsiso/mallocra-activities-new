@@ -187,7 +187,7 @@ export default function BookingReviewPage() {
         const result = await getBookingByIdAction(bookingId)
         if (result.isSuccess && result.data) {
           setBooking(result.data)
-          setNickname(result.data.leadCustomerName?.split(" ")[0] || "")
+          setNickname(result.data.customerName?.split(" ")[0] || "")
         } else {
           // Fallback to mock data
           setBooking({
@@ -200,7 +200,7 @@ export default function BookingReviewPage() {
               "https://images.unsplash.com/photo-1544717304-a2db4a3d16c6?w=800&h=600&fit=crop",
             bookingDate: "2025-01-20",
             bookingTime: "10:30",
-            leadCustomerName: "John Doe",
+            customerName: "John Doe",
             totalAmount: 358
           })
           setNickname("John")

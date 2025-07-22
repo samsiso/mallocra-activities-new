@@ -67,8 +67,8 @@ export default async function BlogDetailPage({
       <div className="relative h-96 w-full">
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 to-black/30"></div>
         <img
-          src={blog.imageUrl}
-          alt={blog.title}
+          src={blog.imageUrl || ""}
+          alt={blog.title || ""}
           className="size-full object-cover"
         />
 

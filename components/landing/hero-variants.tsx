@@ -148,7 +148,9 @@ export function HeroVariants({ heroVideos, onSearch }: HeroVariantsProps) {
     }
   }
 
-  const currentConfig = variantConfigs[heroVariant.current]
+  const currentConfig =
+    variantConfigs[heroVariant.current as keyof typeof variantConfigs] ||
+    variantConfigs.video
 
   return (
     <motion.section

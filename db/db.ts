@@ -65,12 +65,7 @@ const client = postgres(
     onnotice: () => {}, // Suppress notices in development
 
     // Connection parameters for better stability
-    prepare: false, // Disable prepared statements for Supabase compatibility
-
-    // Additional connection options for Supabase
-    options: {
-      application_name: "mallocra-activities-app"
-    }
+    prepare: false // Disable prepared statements for Supabase compatibility
   }
 )
 

@@ -158,7 +158,7 @@ export default function ReviewSubmissionModal({
         customerId: userId,
         activityId,
         rating,
-        title: title.trim() || null,
+        title: title.trim() || "",
         content: comment.trim(),
         reviewerName: "Anonymous User",
         reviewerEmail: "user@example.com",

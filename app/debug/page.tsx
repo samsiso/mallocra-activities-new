@@ -17,7 +17,9 @@ export default function DebugPage() {
       console.log("Debug result:", result)
     } catch (error) {
       console.error("Debug error:", error)
-      setResult({ error: error.message })
+      setResult({
+        error: error instanceof Error ? error.message : "Unknown error"
+      })
     } finally {
       setLoading(false)
     }
@@ -34,7 +36,9 @@ export default function DebugPage() {
       console.log(`Debug result for category ${category}:`, result)
     } catch (error) {
       console.error("Debug error:", error)
-      setResult({ error: error.message })
+      setResult({
+        error: error instanceof Error ? error.message : "Unknown error"
+      })
     } finally {
       setLoading(false)
     }

@@ -245,8 +245,45 @@ describe("EnhancedCategoriesSection", () => {
       mockGetActivities.mockResolvedValue({
         isSuccess: true,
         data: [
-          { id: "1", title: "Activity 1" },
-          { id: "2", title: "Activity 2" }
+          Array(2)
+            .fill(null)
+            .map((_, i) => ({
+              id: `${i + 1}`,
+              operatorId: "op1",
+              title: `Activity ${i + 1}`,
+              slug: `activity-${i + 1}`,
+              description: "Test activity",
+              shortDescription: "Short desc",
+              category: "water_sports" as const,
+              location: "Palma",
+              meetingPoint: "Port",
+              latitude: "39.5696",
+              longitude: "2.6502",
+              durationMinutes: 120,
+              maxParticipants: 10,
+              minParticipants: 2,
+              minAge: 12,
+              maxAge: 65,
+              includedItems: ["Equipment"],
+              excludedItems: ["Food"],
+              whatToBring: ["Swimsuit"],
+              cancellationPolicy: "24 hours",
+              safetyRequirements: "Know how to swim",
+              weatherDependent: true,
+              instantConfirmation: true,
+              status: "active" as const,
+              featured: false,
+              avgRating: "4.5",
+              totalReviews: 10,
+              totalBookings: 50,
+              videoUrl: null,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              images: [],
+              pricing: [],
+              availableToday: true,
+              spotsLeft: 5
+            }))
         ],
         message: "Success"
       })
@@ -335,7 +372,9 @@ describe("EnhancedCategoriesSection", () => {
     })
 
     it("should display total activities count when data is loaded", async () => {
-      mockGetActivities.mockImplementation(async ({ category, limit }) => {
+      mockGetActivities.mockImplementation(async params => {
+        const category = params?.category
+        const limit = params?.limit
         // Mock test query returns data
         if (limit === 10 && !category) {
           return {
@@ -475,27 +514,29 @@ describe("EnhancedCategoriesSection", () => {
       } as any)
 
       // Mock useTransform to return calculated values
-      vi.mocked(useTransform).mockImplementation((progress, input, output) => {
-        if (
-          JSON.stringify(input) === "[0.7,1]" &&
-          JSON.stringify(output) === "[1,0.9]"
-        ) {
-          return { value: 0.95 } // exitScale
+      vi.mocked(useTransform).mockImplementation(
+        (progress: any, input: any, output: any) => {
+          if (
+            JSON.stringify(input) === "[0.7,1]" &&
+            JSON.stringify(output) === "[1,0.9]"
+          ) {
+            return { value: 0.95 } // exitScale
+          }
+          if (
+            JSON.stringify(input) === "[0.8,1]" &&
+            JSON.stringify(output) === "[1,0]"
+          ) {
+            return { value: 0.5 } // exitOpacity
+          }
+          if (
+            JSON.stringify(input) === "[0.7,1]" &&
+            JSON.stringify(output) === "[0,-50]"
+          ) {
+            return { value: -25 } // exitY
+          }
+          return { value: output[0] }
         }
-        if (
-          JSON.stringify(input) === "[0.8,1]" &&
-          JSON.stringify(output) === "[1,0]"
-        ) {
-          return { value: 0.5 } // exitOpacity
-        }
-        if (
-          JSON.stringify(input) === "[0.7,1]" &&
-          JSON.stringify(output) === "[0,-50]"
-        ) {
-          return { value: -25 } // exitY
-        }
-        return { value: output[0] }
-      })
+      )
 
       render(<EnhancedCategoriesSection />)
 

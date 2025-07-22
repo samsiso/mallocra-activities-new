@@ -170,7 +170,7 @@ export function DateTimePicker({
                   isToday(date) && !isSelected && "ring-1 ring-yellow-400"
                 )}
                 aria-label={`${format(date, "EEEE, MMMM d, yyyy")}${isDisabled ? " (unavailable)" : ""}`}
-                aria-pressed={isSelected}
+                aria-pressed={isSelected ? "true" : "false"}
               >
                 {format(date, "d")}
                 {hasAvailability && !isSelected && (
@@ -218,7 +218,7 @@ export function DateTimePicker({
                         "cursor-not-allowed bg-white/5 text-white/30"
                     )}
                     aria-label={`${slot.time}${!slot.available ? " (unavailable)" : ""}${slot.price ? ` - €${slot.price}` : ""}`}
-                    aria-pressed={isSelected}
+                    aria-pressed={isSelected ? "true" : "false"}
                   >
                     {slot.time}
                     {slot.price && (

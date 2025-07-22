@@ -18,8 +18,8 @@ export const mockActivities: Partial<ActivityWithDetails>[] = [
     location: "Palma de Mallorca",
     meetingPoint: "Palma Cathedral Main Entrance",
     durationMinutes: 180,
-    latitude: 39.5663,
-    longitude: 2.6501,
+    latitude: "39.5663",
+    longitude: "2.6501",
     videoUrl: null,
     maxParticipants: 15,
     minParticipants: 2,
@@ -274,9 +274,9 @@ export const searchMockActivities = (query: string) => {
   const lowerQuery = query.toLowerCase()
   return mockActivities.filter(
     activity =>
-      activity.title.toLowerCase().includes(lowerQuery) ||
-      activity.shortDescription.toLowerCase().includes(lowerQuery) ||
-      activity.category.toLowerCase().includes(lowerQuery) ||
-      activity.location.toLowerCase().includes(lowerQuery)
+      activity.title?.toLowerCase().includes(lowerQuery) ||
+      activity.shortDescription?.toLowerCase().includes(lowerQuery) ||
+      activity.category?.toLowerCase().includes(lowerQuery) ||
+      activity.location?.toLowerCase().includes(lowerQuery)
   )
 }

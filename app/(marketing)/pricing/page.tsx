@@ -5,6 +5,8 @@ Safe version that works without Clerk environment variables.
 </ai_context>
 */
 
+export const dynamic = "force-dynamic"
+
 import { Button } from "@/components/ui/button"
 import PreferredFooter from "@/components/preferred-footer"
 import {

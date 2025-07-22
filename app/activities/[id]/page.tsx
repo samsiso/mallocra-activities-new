@@ -1,5 +1,7 @@
 "use server"
 
+export const dynamic = "force-dynamic"
+
 // Force dynamic rendering to avoid build-time Supabase dependency
 // Note: These exports are moved to avoid server directive conflicts
 
@@ -264,7 +266,7 @@ async function ActivityDetailContent({
 
                   <div className="flex items-center gap-1.5 sm:gap-2">
                     <Clock className="size-4 text-yellow-400 sm:size-5" />
-                    <span>{formatDuration(activity.duration)}</span>
+                    <span>{formatDuration(activity.durationMinutes)}</span>
                   </div>
 
                   <div className="flex items-center gap-1.5 sm:gap-2">
@@ -307,8 +309,7 @@ async function ActivityDetailContent({
                     id: activity.id,
                     title: activity.title,
                     maxParticipants: activity.maxParticipants || 10,
-                    durationMinutes:
-                      activity.durationMinutes || activity.duration || 60,
+                    durationMinutes: activity.durationMinutes || 60,
                     category: activity.category || "general",
                     weatherDependent: activity.weatherDependent || false,
                     location: activity.location || "Mallorca",
@@ -349,8 +350,12 @@ async function ActivityDetailContent({
             <div className="lg:grid lg:grid-cols-3 lg:gap-8">
               <div className="lg:col-span-2">
                 <ActivityLocationMap
-                  latitude={activity.latitude}
-                  longitude={activity.longitude}
+                  latitude={
+                    activity.latitude ? parseFloat(activity.latitude) : 39.5696
+                  }
+                  longitude={
+                    activity.longitude ? parseFloat(activity.longitude) : 2.6502
+                  }
                   title={activity.title}
                   address={activity.location}
                 />

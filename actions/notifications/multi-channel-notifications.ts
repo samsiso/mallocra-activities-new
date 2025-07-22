@@ -157,7 +157,7 @@ export async function sendMultiChannelPaymentConfirmationAction(
       const telegramResult = await sendTelegramPaymentFailureAlertAction({
         customerName: data.customerName,
         customerEmail: data.customerName,
-        amount: data.totalAmount,
+        amount: data.paymentAmount,
         bookingReference: data.bookingReference,
         activityTitle: data.activityTitle,
         errorMessage: "Payment processing notification"

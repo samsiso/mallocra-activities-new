@@ -134,7 +134,7 @@ export default function BookingComponentsDemo() {
         <div className="space-y-6">
           <GuestDetailsForm
             details={guestDetails}
-            onChange={setGuestDetails}
+            onChange={details => setGuestDetails(details)}
             participantCount={
               participants.adults + participants.children + participants.seniors
             }
