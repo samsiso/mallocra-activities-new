@@ -1,9 +1,5 @@
-"use server"
-
-export const dynamic = "force-dynamic"
-
 // Force dynamic rendering to avoid build-time Supabase dependency
-// Note: These exports are moved to avoid server directive conflicts
+export const dynamic = "force-dynamic"
 
 /*
 <ai_context>
