@@ -1,4 +1,4 @@
-"use server"
+export const dynamic = "force-dynamic"
 
 import { Suspense } from "react"
 import UsersHeader from "./_components/users-header"

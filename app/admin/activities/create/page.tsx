@@ -1,4 +1,4 @@
-"use server"
+export const dynamic = "force-dynamic"
 
 import AdminSidebar from "@/app/admin/dashboard/_components/admin-sidebar"
 import AdminBreadcrumb from "@/components/ui/admin-breadcrumb"

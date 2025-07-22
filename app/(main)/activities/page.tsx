@@ -1,5 +1,3 @@
-"use server"
-
 /*
 <ai_context>
 Activities Page - Server Component Refactor
@@ -8,6 +6,8 @@ with proper data fetching and component separation for optimal performance.
 Implements streaming, suspense boundaries, and modular architecture.
 </ai_context>
 */
+
+export const dynamic = "force-dynamic"
 
 import { Suspense } from "react"
 import {
