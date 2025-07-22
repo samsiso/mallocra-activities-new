@@ -38,8 +38,41 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+
+  // If no Clerk key is found, render without ClerkProvider
+  if (!clerkPublishableKey) {
+    return (
+      <html lang="en" suppressHydrationWarning className="dark">
+        <body
+          className={cn(
+            "mx-auto min-h-screen w-full scroll-smooth antialiased",
+            inter.className
+          )}
+        >
+          <Providers
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            <PostHogPageview />
+
+            {children}
+
+            <TailwindIndicator />
+
+            <WhatsAppButton />
+
+            <Toaster />
+          </Providers>
+        </body>
+      </html>
+    )
+  }
+
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={clerkPublishableKey}>
       <html lang="en" suppressHydrationWarning className="dark">
         <body
           className={cn(
