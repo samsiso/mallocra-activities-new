@@ -18,6 +18,12 @@ const isProtectedRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, req) => {
   try {
+    // Skip middleware for MCP routes and OAuth metadata
+    if (req.nextUrl.pathname.startsWith('/api/mcp') || 
+        req.nextUrl.pathname.startsWith('/.well-known/')) {
+      return NextResponse.next()
+    }
+    
     // Check if this is a protected route
     if (isProtectedRoute(req)) {
       // TEMPORARY: Allow admin access in development without authentication

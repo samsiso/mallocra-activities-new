@@ -7,7 +7,7 @@
       }
     },
     "mallorca-activities-prod": {
-      "url": "https://YOUR-VERCEL-APP-NAME.vercel.app/api/mcp",
+      "url": "https://mallocra-activities-main.vercel.app/api/mcp",
       "headers": {
         "Authorization": "Bearer mcp_dev_key_2025_mallorca_activities"
       }

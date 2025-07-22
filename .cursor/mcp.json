@@ -11,6 +11,12 @@
       "env": {
         "SUPABASE_ACCESS_TOKEN": "sbp_0b12301cb9ef04c534aab1175757221efa3b2763"
       }
+    },
+    "mallorca-activities": {
+      "url": "https://mallocra-activities-main.vercel.app/api/mcp",
+      "headers": {
+        "Authorization": "Bearer mcp_dev_key_2025_mallorca_activities"
+      }
     }
   }
 }
